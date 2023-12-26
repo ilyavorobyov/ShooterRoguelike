@@ -66,8 +66,8 @@ public class BulletSpawner : MonoBehaviour
 
     private IEnumerator SpawnBullets()
     {
-        float minSpawnTime = 2;
-        float maxSpawnTime = 4;
+        float minSpawnTime = 1;
+        float maxSpawnTime = 3;
         float spawnTime = Random.Range(minSpawnTime, maxSpawnTime);
         var waitForSeconds = new WaitForSeconds(spawnTime);
         bool isSpawning = true;
@@ -76,8 +76,6 @@ public class BulletSpawner : MonoBehaviour
         {
             if (TryGetNewSpawnPosition())
             {
-                yield return waitForSeconds;
-
                 foreach(LiftableBullet liftableBullet in _pool)
                 {
                     if(!liftableBullet.gameObject.activeSelf)
@@ -88,6 +86,8 @@ public class BulletSpawner : MonoBehaviour
                         break;
                     }
                 }
+
+                yield return waitForSeconds;
             }
         }
     }

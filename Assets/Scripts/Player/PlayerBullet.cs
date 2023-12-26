@@ -1,20 +1,23 @@
 using UnityEngine;
+using static UnityEngine.GraphicsBuffer;
 
 public class PlayerBullet : MonoBehaviour
 {
     private Vector3 _moveDirection;
-    private float _speed = 8;
+    private float _speed = 4;
+    private Transform _target;
 
     public int Damage { get; private set; }
 
-    public void Init(int damage, Vector3 moveDirection)
+    public void Init(int damage, Transform target)
     {
         Damage = damage;
-        _moveDirection = moveDirection;
+        _target = target;
     }
 
     private void Update()
     {
-        transform.Translate(_moveDirection * _speed * Time.deltaTime);
+        transform.position = Vector3.MoveTowards(transform.position, 
+            _target.position, _speed * Time.deltaTime);
     }
 }

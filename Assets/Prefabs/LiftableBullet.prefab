@@ -121,8 +121,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 35876669ebd313f42af8c5ecf66abd65, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _idleDuration: 4
-  _missingWarningDuration: 3
+  _idleDuration: 5
+  _missingWarningDuration: 4
 --- !u!95 &7866979818359706230
 Animator:
   serializedVersion: 5
