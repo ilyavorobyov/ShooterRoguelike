@@ -7,10 +7,11 @@ public class BulletClip : MonoBehaviour
     [SerializeField] private TMP_Text _bulletsInfoText;
 
     private const string MaxBulletsText = "Максимум";
-    private const string NoBulletsText = "Нет патронов";
 
     private int _currentBulletsNumber;
     private int _maxBulletsNumber = 5;
+
+    public bool IsMaxBullets {  get; private set; }
 
     public void TryAdd()
     {
@@ -41,15 +42,12 @@ public class BulletClip : MonoBehaviour
         {
             _bulletsInfoText.gameObject.SetActive(true);
             _bulletsInfoText.text = MaxBulletsText;
-        }
-        else if(_currentBulletsNumber == 0)
-        {
-            _bulletsInfoText.gameObject.SetActive(true);
-            _bulletsInfoText.text = NoBulletsText;
+            IsMaxBullets = true;
         }
         else
         {
             _bulletsInfoText.gameObject.SetActive(false);
+            IsMaxBullets = false;
         }
     }
 }

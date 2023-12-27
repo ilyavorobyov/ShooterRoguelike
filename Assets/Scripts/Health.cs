@@ -1,35 +1,48 @@
 using UnityEngine;
 
-public class Health : MonoBehaviour
+public abstract class Health : MonoBehaviour
 {
     [SerializeField] private int _health;
 
     private float _minHealth = 0;
+    private float _currentHealth;
 
-    public float MaxHealth => _health;
-    public float CurrentHealth { get; private set; }
 
     private void Awake()
     {
-        CurrentHealth = MaxHealth;
+        _currentHealth = _health;
+    }
+
+    private void OnEnable()
+    {
+        GameUI.GameStateReset += OnReset;
+    }
+
+    private void OnDisable()
+    {
+        GameUI.GameStateReset -= OnReset;
     }
 
     public void TakeDamage(int damage)
     {
-        CurrentHealth -= damage;
-        Debug.Log(CurrentHealth);
+        _currentHealth -= damage;
 
-        if (CurrentHealth <= _minHealth)
-        {
-            gameObject.SetActive(false);
-        }
+        if (_currentHealth <= _minHealth)
+            Die();
     }
 
     public void AddHealth(int addingHealth)
     {
-        if (CurrentHealth + addingHealth <= MaxHealth)
+        if (_currentHealth + addingHealth <= _health)
         {
-            CurrentHealth += addingHealth;
+            _currentHealth += addingHealth;
         }
     }
+
+    private void OnReset()
+    {
+        _currentHealth = _health;
+    }
+
+    public abstract void Die();
 }

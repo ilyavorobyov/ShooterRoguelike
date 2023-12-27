@@ -9,7 +9,7 @@ public class Scanner : MonoBehaviour
 {
     private Weapon _weapon;
     private Mover _mover;
-    private float _range = 4;
+    private float _range = 3;
     private Coroutine _searchEnemy;
 
     private void Awake()

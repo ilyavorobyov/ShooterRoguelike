@@ -1,13 +1,13 @@
 using UnityEngine;
 
-[RequireComponent(typeof(Health))]
+[RequireComponent(typeof(EnemyHealth))]
 public class EnemyCollisionHandler : MonoBehaviour
 {
-    private Health _health;
+    private EnemyHealth _health;
 
     private void Awake()
     {
-        _health = GetComponent<Health>();
+        _health = GetComponent<EnemyHealth>();
     }
 
     private void OnTriggerEnter(Collider collision)
@@ -16,7 +16,6 @@ public class EnemyCollisionHandler : MonoBehaviour
         {
             _health.TakeDamage(playerBullet.Damage);
             Destroy(playerBullet.gameObject);
-            Debug.Log(_health.ToString());
         }
     }
 }
