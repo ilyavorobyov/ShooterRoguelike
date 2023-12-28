@@ -6,7 +6,7 @@ public class HardEnemy : Enemy
     [SerializeField] private EnemyBullet _enemyBullet;
 
     private EnemyHealth _enemyHealth;
-    private int _healthRecoveryDivisor = 2;
+    private int _healthRecoveryDivisor = 3;
 
     private void Awake()
     {

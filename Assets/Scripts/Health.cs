@@ -1,21 +1,27 @@
 using UnityEngine;
 
+[RequireComponent (typeof(HealthView))]
 public abstract class Health : MonoBehaviour
 {
-    [SerializeField] private int _health;
+    [SerializeField] private int _maxHealth;
 
-    private float _minHealth = 0;
+    private HealthView _healthView;
     private float _currentHealth;
+    private float _minHealth = 0;
 
+    public float MaxHealth => _maxHealth;
+    public float CurrentHealth => _currentHealth;
 
     private void Awake()
     {
-        _currentHealth = _health;
+        _healthView = GetComponent<HealthView>();
+        _currentHealth = _maxHealth;
     }
 
     private void OnEnable()
     {
         GameUI.GameStateReset += OnReset;
+        _currentHealth = _maxHealth;
     }
 
     private void OnDisable()
@@ -25,23 +31,29 @@ public abstract class Health : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
-        _currentHealth -= damage;
+        if(damage > 0)
+        {
+            _currentHealth -= damage;
+            _healthView.SetInfo();
 
-        if (_currentHealth <= _minHealth)
-            Die();
+            if (_currentHealth <= _minHealth)
+                Die();
+        }
     }
 
     public void AddHealth(int addingHealth)
     {
-        if (_currentHealth + addingHealth <= _health)
+        if (_currentHealth + addingHealth <= _maxHealth)
         {
             _currentHealth += addingHealth;
+            _healthView.SetInfo();
         }
     }
 
     private void OnReset()
     {
-        _currentHealth = _health;
+        _currentHealth = _maxHealth;
+        _healthView.SetInfo();
     }
 
     public abstract void Die();

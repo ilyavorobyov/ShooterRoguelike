@@ -20,6 +20,7 @@ public class GameUI : MonoBehaviour
 
     public static Action GameBegun;
     public static Action GameStateReset;
+    public static Action GoneMenu;
 
     private void Awake()
     {
@@ -69,13 +70,13 @@ public class GameUI : MonoBehaviour
 
     private void OnMenuButtonClick()
     {
+        GoneMenu?.Invoke();
         GameStateReset?.Invoke();
         _uiElementsAnimation.Appear(_startButton.gameObject);
         _uiElementsAnimation.Disappear(_pauseButton.gameObject);
         _uiElementsAnimation.Appear(_soundSwitchButton.gameObject);
         _gameOverScreen.gameObject.SetActive(false);
         _canvasJoystick.gameObject.SetActive(false);
-        GameStateReset?.Invoke();
     }
 
     private void OnPauseButtonClick()

@@ -14,9 +14,11 @@ public abstract class Enemy : MonoBehaviour
     private float _currentDistance;
     private Coroutine _trackPlayer;
 
-    private void OnEnable()
+    private void Start()
     {
         StartTrackPlayer();
+        PlayerHealth = Player.GetComponent<PlayerHealth>();
+
     }
 
     private void OnDisable()
