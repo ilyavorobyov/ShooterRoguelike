@@ -1,94 +1,46 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class BulletSpawner : MonoBehaviour
+public class BulletSpawner : Spawner
 {
-    [SerializeField] private int _capacity;
-    [SerializeField] private Ground _ground;
-    [SerializeField] private Player _player;
-    [SerializeField] private LiftableBullet _liftableBullet;
-
-    private List<LiftableBullet> _pool = new List<LiftableBullet>();
-    private float _spawnPositionY = 1;
-    private float _minDistance = 3;
-    private float _minDistanceFromPlayer = -4f;
-    private float _maxDistanceFromPlayer = 4f;
-    private Vector3 _spawnPosition;
     private Coroutine _spawnBullets;
 
-    private void Start()
+    private void OnEnable()
     {
-        for (int i = 0; i < _capacity; i++)
-        {
-            LiftableBullet liftableBullet = Instantiate(_liftableBullet,
-                gameObject.transform);
-            liftableBullet.Hide();
-            _pool.Add(liftableBullet);
-        }
-
-        Begin();
+        GameUI.GameBegun += OnBegin;
     }
 
-    private void Begin()
+    private void OnDisable()
     {
-        Stop();
+        GameUI.GameBegun -= OnBegin;
+    }
+
+    public void OnBegin()
+    {
         _spawnBullets = StartCoroutine(SpawnBullets());
     }
 
-    private void Stop()
+    public void Stop()
     {
         if (_spawnBullets != null)
             StopCoroutine(_spawnBullets);
-    }
 
-    private bool TryGetNewSpawnPosition()
-    {
-        _spawnPosition = new Vector3(_player.transform.position.x + Random.Range
-            (_minDistanceFromPlayer, _maxDistanceFromPlayer), _spawnPositionY,
-            _player.transform.position.z + Random.Range(_minDistanceFromPlayer,
-            _maxDistanceFromPlayer));
-        Ray ray = new Ray(_spawnPosition, Vector3.down);
-
-        if (Physics.Raycast(ray, out RaycastHit hit))
+        foreach(var bullet in Pool)
         {
-            if (hit.transform.TryGetComponent(out Ground ground))
-            {
-                if (Vector3.Distance(_spawnPosition, _player.transform.position) > _minDistance)
-                {
-                    return true;
-                }
-            }
+            bullet.Hide();
         }
-
-        return false;
     }
 
     private IEnumerator SpawnBullets()
     {
-        float minSpawnTime = 1;
-        float maxSpawnTime = 3;
-        float spawnTime = Random.Range(minSpawnTime, maxSpawnTime);
+        float spawnTime = 2.5f;
         var waitForSeconds = new WaitForSeconds(spawnTime);
         bool isSpawning = true;
 
         while (isSpawning)
         {
-            if (TryGetNewSpawnPosition())
-            {
-                foreach(LiftableBullet liftableBullet in _pool)
-                {
-                    if(!liftableBullet.gameObject.activeSelf)
-                    {
-                        liftableBullet.transform.position = _spawnPosition;
-                        liftableBullet.gameObject.SetActive(true);
-                        spawnTime = Random.Range(minSpawnTime, maxSpawnTime);
-                        break;
-                    }
-                }
-
-                yield return waitForSeconds;
-            }
+            yield return waitForSeconds;
+            Show();
         }
     }
 }

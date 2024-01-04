@@ -17,13 +17,14 @@ GameObject:
   - component: {fileID: 8026328297052643656}
   - component: {fileID: 1885356220935812614}
   - component: {fileID: 7315203656929104766}
+  - component: {fileID: -76884510346658909}
   m_Layer: 0
   m_Name: MediumEnemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &6188547880483164037
 Transform:
   m_ObjectHideFlags: 0
@@ -164,7 +165,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49ddb60904c372b44988ce30b0d2904c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Player: {fileID: 0}
   Damage: 1
   _speed: 2
   _pursuitDistance: 4
@@ -184,6 +184,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _maxHealth: 2
+  _healer: {fileID: 4099209221665869466, guid: 1ce250b4170cacd44a336ebc66a2270a, type: 3}
+  _healerDropChance: 15
 --- !u!114 &7315203656929104766
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -198,6 +200,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _bar: {fileID: 4048146176507206218}
   _health: {fileID: 1885356220935812614}
+--- !u!114 &-76884510346658909
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1048194012231394713}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 012a2600b7380b34983d289ae6d64510, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2306840174852096008
 GameObject:
   m_ObjectHideFlags: 0

@@ -15,13 +15,13 @@ public abstract class Health : MonoBehaviour
     private void Awake()
     {
         _healthView = GetComponent<HealthView>();
-        _currentHealth = _maxHealth;
     }
 
     private void OnEnable()
     {
         GameUI.GameStateReset += OnReset;
         _currentHealth = _maxHealth;
+        _healthView.SetInfo();
     }
 
     private void OnDisable()
@@ -29,7 +29,7 @@ public abstract class Health : MonoBehaviour
         GameUI.GameStateReset -= OnReset;
     }
 
-    public void TakeDamage(int damage)
+    public virtual void TakeDamage(int damage)
     {
         if(damage > 0)
         {
@@ -41,16 +41,22 @@ public abstract class Health : MonoBehaviour
         }
     }
 
-    public void AddHealth(int addingHealth)
+    public virtual void AddHealth(int addingHealth)
     {
         if (_currentHealth + addingHealth <= _maxHealth)
         {
             _currentHealth += addingHealth;
             _healthView.SetInfo();
         }
+        else
+        {
+            _currentHealth = _maxHealth;
+        }
+
+        _healthView.SetInfo();
     }
 
-    private void OnReset()
+    public virtual void OnReset()
     {
         _currentHealth = _maxHealth;
         _healthView.SetInfo();

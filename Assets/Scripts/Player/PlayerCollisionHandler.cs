@@ -24,6 +24,12 @@ public class PlayerCollisionHandler : MonoBehaviour
             }
         }
 
+        if(collision.TryGetComponent(out Healer healer))
+        {
+            _playerHealth.AddHealth(healer.HealValue);
+            healer.Hide();
+        }
+
         if (collision.TryGetComponent(out Token token))
         {
             _backpack.AddToken();

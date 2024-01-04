@@ -323,13 +323,14 @@ GameObject:
   - component: {fileID: 3803859403791147961}
   - component: {fileID: 4471674506606062135}
   - component: {fileID: 4703897288755338190}
+  - component: {fileID: -3917706743025708230}
   m_Layer: 0
   m_Name: EasyEnemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &5103964811592087600
 Transform:
   m_ObjectHideFlags: 0
@@ -470,7 +471,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d90477cb4aaa0984ea1717ea294d5a17, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Player: {fileID: 0}
   Damage: 1
   _speed: 2
   _pursuitDistance: 4
@@ -489,6 +489,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _maxHealth: 1
+  _healer: {fileID: 4099209221665869466, guid: 1ce250b4170cacd44a336ebc66a2270a, type: 3}
+  _healerDropChance: 20
 --- !u!114 &4703897288755338190
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -503,3 +505,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _bar: {fileID: 4329646302757531432}
   _health: {fileID: 4471674506606062135}
+--- !u!114 &-3917706743025708230
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7048494143455523083}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 012a2600b7380b34983d289ae6d64510, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

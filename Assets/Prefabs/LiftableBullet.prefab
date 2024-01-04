@@ -12,8 +12,9 @@ GameObject:
   - component: {fileID: 329553943191891554}
   - component: {fileID: 447157652420610225}
   - component: {fileID: 5848001633570114124}
-  - component: {fileID: 2098195058651609342}
   - component: {fileID: 7866979818359706230}
+  - component: {fileID: 4568580324665894867}
+  - component: {fileID: 1575033876460652916}
   m_Layer: 0
   m_Name: LiftableBullet
   m_TagString: Untagged
@@ -109,20 +110,6 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &2098195058651609342
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 613267296833597395}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 35876669ebd313f42af8c5ecf66abd65, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _idleDuration: 5
-  _missingWarningDuration: 4
 --- !u!95 &7866979818359706230
 Animator:
   serializedVersion: 5
@@ -144,3 +131,29 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &4568580324665894867
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 613267296833597395}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c01bc4bdf0542846bd93630d1688a01, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _idleDuration: 3
+  _missingWarningDuration: 2
+--- !u!114 &1575033876460652916
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 613267296833597395}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 012a2600b7380b34983d289ae6d64510, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

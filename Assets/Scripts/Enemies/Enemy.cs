@@ -3,22 +3,25 @@ using UnityEngine;
 
 public abstract class Enemy : MonoBehaviour
 {
-    [SerializeField] protected Player Player;
     [SerializeField] protected int Damage;
     [SerializeField] private float _speed;
     [SerializeField] private float _pursuitDistance;
     [SerializeField] private float _attackDistance;
     [SerializeField] private float _rechargeTime;
 
+    protected Player Player;
     protected PlayerHealth PlayerHealth;
     private float _currentDistance;
     private Coroutine _trackPlayer;
 
     private void Start()
     {
-        StartTrackPlayer();
         PlayerHealth = Player.GetComponent<PlayerHealth>();
+    }
 
+    private void OnEnable()
+    {
+        StartTrackPlayer();
     }
 
     private void OnDisable()
@@ -64,7 +67,7 @@ public abstract class Enemy : MonoBehaviour
             if (_currentDistance <= _pursuitDistance)
             {
                 transform.LookAt(Player.transform);
-                transform.position = Vector3.MoveTowards(transform.position, 
+                transform.position = Vector3.MoveTowards(transform.position,
                     Player.transform.position, _speed * Time.deltaTime);
                 yield return waitForFixedUpdate;
             }

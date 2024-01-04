@@ -29,6 +29,10 @@ public class Scanner : MonoBehaviour
         StopSearchEnemy();
     }
 
+    private void Update()
+    {
+        var actualForward = Vector3.ProjectOnPlane(transform.forward, Vector3.forward);
+    }
     private void StopSearchEnemy()
     {
         if( _searchEnemy != null )
@@ -37,7 +41,7 @@ public class Scanner : MonoBehaviour
 
     private IEnumerator TrySearchEnemy()
     {
-        float iterationTime = 1f;
+        float iterationTime = 0.5f;
         var waitForSeconds = new WaitForSeconds(iterationTime);
         bool isScanning = true;
         Enemy enemy;
