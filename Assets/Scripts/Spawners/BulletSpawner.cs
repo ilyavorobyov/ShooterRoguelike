@@ -4,6 +4,7 @@ using UnityEngine;
 public class BulletSpawner : Spawner
 {
     private Coroutine _spawnBullets;
+    private bool _isSpawning;
 
     private void OnEnable()
     {
@@ -17,15 +18,18 @@ public class BulletSpawner : Spawner
 
     public void OnBegin()
     {
+        _isSpawning = true;
         _spawnBullets = StartCoroutine(SpawnBullets());
     }
 
     public void Stop()
     {
+        _isSpawning = false;
+
         if (_spawnBullets != null)
             StopCoroutine(_spawnBullets);
 
-        foreach(var bullet in Pool)
+        foreach (var bullet in Pool)
         {
             bullet.Hide();
         }
@@ -35,12 +39,11 @@ public class BulletSpawner : Spawner
     {
         float spawnTime = 2.5f;
         var waitForSeconds = new WaitForSeconds(spawnTime);
-        bool isSpawning = true;
 
-        while (isSpawning)
+        while (_isSpawning)
         {
-            yield return waitForSeconds;
             Show();
+            yield return waitForSeconds;
         }
     }
 }

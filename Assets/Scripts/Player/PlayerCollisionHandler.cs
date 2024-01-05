@@ -1,12 +1,17 @@
+using System;
 using UnityEngine;
+using UnityEngine.Events;
 
 [RequireComponent (typeof(PlayerHealth))]
 public class PlayerCollisionHandler : MonoBehaviour
 {
     [SerializeField] private BulletClip _bulletClip;
     [SerializeField] private Backpack _backpack;
+    [SerializeField] private WavesMaker _waveMaker;
 
     private PlayerHealth _playerHealth;
+
+    public static Action TokenTaken;
 
     private void Awake()
     {
@@ -33,6 +38,7 @@ public class PlayerCollisionHandler : MonoBehaviour
         if (collision.TryGetComponent(out Token token))
         {
             _backpack.AddToken();
+            TokenTaken?.Invoke();
             token.Hide();
         }
 

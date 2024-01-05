@@ -4,7 +4,7 @@ public class CameraMover : MonoBehaviour
 {
     [SerializeField] private Player _player;
 
-    private Vector3 _offSetPosition = new Vector3 (4, 9f, 7f);
+    private Vector3 _offSetPosition = new Vector3 (4, 11f, 7f);
 
     private void Update()
     {

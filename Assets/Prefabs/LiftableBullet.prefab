@@ -143,7 +143,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c01bc4bdf0542846bd93630d1688a01, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _idleDuration: 3
+  _idleDuration: 4
   _missingWarningDuration: 2
 --- !u!114 &1575033876460652916
 MonoBehaviour:

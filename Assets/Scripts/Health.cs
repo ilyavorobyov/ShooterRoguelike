@@ -3,10 +3,10 @@ using UnityEngine;
 [RequireComponent (typeof(HealthView))]
 public abstract class Health : MonoBehaviour
 {
-    [SerializeField] private int _maxHealth;
+    [SerializeField] protected int _maxHealth;
 
     private HealthView _healthView;
-    private float _currentHealth;
+    protected float _currentHealth;
     private float _minHealth = 0;
 
     public float MaxHealth => _maxHealth;

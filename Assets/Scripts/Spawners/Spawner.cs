@@ -4,22 +4,27 @@ using UnityEngine;
 public abstract class Spawner : MonoBehaviour
 {
     [SerializeField] protected SpawnableObject SpawnableObject;
+    [SerializeField] private Player _player;
     [SerializeField] private float _minDistance;
     protected List<SpawnableObject> Pool = new List<SpawnableObject>();
 
     protected Vector3 _spawnPosition;
-    private Player _player;
     private int _capacity = 6;
     private float _spawnPositionY = 1;
     private float _minAdditionToPosition = 6;
     private float _maxAdditionToPosition = -6;
 
-    public void Init(Player player)
+    private void OnEnable()
     {
-        _player = player;
+        GameUI.GameStateReset += OnReset;
     }
 
-    public void CreateObjects()
+    private void OnDisable()
+    {
+        GameUI.GameStateReset -= OnReset;
+    }
+
+    private void Awake()
     {
         for (int i = 0; i < _capacity; i++)
         {
@@ -68,5 +73,13 @@ public abstract class Spawner : MonoBehaviour
         }
 
         return false;
+    }
+
+    private void OnReset()
+    {
+        foreach(SpawnableObject spawnableObject in Pool)
+        {
+            spawnableObject.Hide();
+        }
     }
 }

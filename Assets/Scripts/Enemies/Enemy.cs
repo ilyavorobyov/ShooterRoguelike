@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 
@@ -14,6 +15,9 @@ public abstract class Enemy : MonoBehaviour
     private float _currentDistance;
     private Coroutine _trackPlayer;
 
+    public static Action Spawned;
+    public static Action Dead;
+
     private void Start()
     {
         PlayerHealth = Player.GetComponent<PlayerHealth>();
@@ -22,11 +26,13 @@ public abstract class Enemy : MonoBehaviour
     private void OnEnable()
     {
         StartTrackPlayer();
+        Spawned?.Invoke();
     }
 
     private void OnDisable()
     {
         StopTrackPlayer();
+        Dead?.Invoke();
     }
 
     public void Init(Player player)

@@ -3,18 +3,18 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-[RequireComponent(typeof(Weapon))]
+//[RequireComponent(typeof(PlayerWeapon))]
 [RequireComponent (typeof(Mover))]
 public class Scanner : MonoBehaviour
 {
-    private Weapon _weapon;
+    [SerializeField] private PlayerWeapon _weapon;
+
     private Mover _mover;
     private float _range = 3;
     private Coroutine _searchEnemy;
 
     private void Awake()
     {
-        _weapon = GetComponent<Weapon>();
         _mover = GetComponent<Mover>();
     }
 
@@ -63,7 +63,7 @@ public class Scanner : MonoBehaviour
             {
                 enemy = enemiesWithinAbilityRange.OrderBy(enemy =>
                 Vector3.Distance(enemy.transform.position, transform.position)).FirstOrDefault();
-                _weapon.Shoot(enemy.transform);
+                _weapon.TryShoot(enemy.transform);
                 _mover.SetRotationTarget(enemy.transform);
             }
             else

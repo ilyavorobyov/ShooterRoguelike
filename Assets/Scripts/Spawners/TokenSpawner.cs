@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class TokenSpawner : Spawner
@@ -12,7 +10,7 @@ public class TokenSpawner : Spawner
         {
             if (!spawnableObject.gameObject.activeSelf)
             {
-                spawnableObject.transform.position = _tokenSpawnPoint.position;
+                spawnableObject.transform.position = _tokenSpawnPoint.transform.position;
                 spawnableObject.gameObject.SetActive(true);
                 break;
             }

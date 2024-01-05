@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -11,7 +12,9 @@ public class Backpack : MonoBehaviour
     private Vector3 _additionPosition = new Vector3(0f, 0.28f, 0f);
     private Vector3 _addedObjectsRotation = new Vector3(0f, 0f, 90f);
     private Token _currentToken;
-    private bool _isHaveToken; 
+    private bool _isHaveToken;
+
+    public static Action TokenUsed;
 
     public void AddBullet()
     {
@@ -50,6 +53,7 @@ public class Backpack : MonoBehaviour
             Destroy(_currentToken.gameObject);
             _currentPosition -= _additionPosition;
             _isHaveToken = false;
+            TokenUsed?.Invoke();
         }
     }
 }
