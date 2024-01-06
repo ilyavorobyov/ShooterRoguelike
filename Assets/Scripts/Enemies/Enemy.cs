@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using UnityEngine;
 
+[RequireComponent(typeof(EnemyPointer))]
 public abstract class Enemy : MonoBehaviour
 {
     [SerializeField] protected int Damage;
@@ -12,6 +13,9 @@ public abstract class Enemy : MonoBehaviour
 
     protected Player Player;
     protected PlayerHealth PlayerHealth;
+
+    private MeshRenderer _meshRenderer;
+    private EnemyPointer _enemyPointer;
     private float _currentDistance;
     private Coroutine _trackPlayer;
 
@@ -21,12 +25,16 @@ public abstract class Enemy : MonoBehaviour
     private void Start()
     {
         PlayerHealth = Player.GetComponent<PlayerHealth>();
+        _meshRenderer = GetComponent<MeshRenderer>();
     }
 
     private void OnEnable()
     {
-        StartTrackPlayer();
-        Spawned?.Invoke();
+        if(Player != null)
+        {
+            StartTrackPlayer();
+            Spawned?.Invoke();
+        }
     }
 
     private void OnDisable()
@@ -39,6 +47,9 @@ public abstract class Enemy : MonoBehaviour
     {
         Player = player;
         PlayerHealth = Player.GetComponent<PlayerHealth>();
+        _enemyPointer = GetComponent<EnemyPointer>();
+
+        _enemyPointer.Init(Player);
     }
 
     private void StartTrackPlayer()

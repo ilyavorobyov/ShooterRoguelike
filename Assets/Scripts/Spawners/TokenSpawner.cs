@@ -8,7 +8,7 @@ public class TokenSpawner : Spawner
     {
         foreach (SpawnableObject spawnableObject in Pool)
         {
-            if (!spawnableObject.gameObject.activeSelf)
+            if (!spawnableObject.gameObject.activeSelf && _tokenSpawnPoint != null)
             {
                 spawnableObject.transform.position = _tokenSpawnPoint.transform.position;
                 spawnableObject.gameObject.SetActive(true);
