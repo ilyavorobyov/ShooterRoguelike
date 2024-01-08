@@ -3,41 +3,54 @@ using UnityEngine;
 
 public class EnemyPointer : MonoBehaviour
 {
-    [SerializeField] private PointerIcon _pointIconTransformSample;
+    [SerializeField] private PointerIcon _pointIconSample;
     [SerializeField] private Canvas _canvasPointerIcon;
+
+    const int LeftSideIndex = 0;
+    const int RightSideIndex = 1;
+    const int DownSideIndex = 2;
+    const int UpSideIndex = 3;
 
     private Player _player;
     private Camera _camera;
-    private Vector3 _directionFromPlayer;
-    private bool _isRenderIcon;
-    private Coroutine _renderIcon;
-    private PointerIcon _pointIconTransform;
+    private Coroutine _pointArrow;
+    private PointerIcon _pointIcon;
+    private Vector3 _leftSideRotation = new Vector3(0, 0, 90);
+    private Vector3 _rightSideRotation = new Vector3(0, 0, -90);
+    private Vector3 _downSideRotation = new Vector3(0, 0, 180);
+    private Vector3 _upSideRotation = new Vector3(0, 0, 0);
 
     private void Awake()
     {
         _camera = Camera.main;
-        _pointIconTransform = Instantiate(_pointIconTransformSample, _canvasPointerIcon.transform);
+        _pointIcon = Instantiate(_pointIconSample, _canvasPointerIcon.transform);
     }
 
     private void OnEnable()
     {
-        _isRenderIcon = true;
-
         if(_player != null)
         {
-            if (_renderIcon != null)
-                StopCoroutine(_renderIcon);
+            if (_pointArrow != null)
+                StopCoroutine(_pointArrow);
 
-            _renderIcon = StartCoroutine(RenderIcon());
+            _pointArrow = StartCoroutine(PointArrow());
         }
     }
 
     private void OnDisable()
     {
-        _isRenderIcon = false;
+        if (_pointArrow != null)
+            StopCoroutine(_pointArrow);
+    }
 
-        if (_renderIcon != null)
-            StopCoroutine(_renderIcon);
+    private void OnBecameInvisible()
+    {
+        _pointIcon.gameObject.SetActive(true);
+    }
+
+    private void OnBecameVisible()
+    {
+        _pointIcon.gameObject.SetActive(false);
     }
 
     public void Init(Player player)
@@ -49,60 +62,56 @@ public class EnemyPointer : MonoBehaviour
     {
         switch (planeIndex)
         {
-            case 0:
-                return Quaternion.Euler(0, 0, 90);
-            case 1:
-                return Quaternion.Euler(0, 0, -90);
-            case 2:
-                return Quaternion.Euler(0, 0, 180);
-            case 3:
-                return Quaternion.Euler(0, 0, 0);
+            case LeftSideIndex:
+                return Quaternion.Euler(_leftSideRotation);
+            case RightSideIndex:
+                return Quaternion.Euler(_rightSideRotation);
+            case DownSideIndex:
+                return Quaternion.Euler(_downSideRotation);
+            case UpSideIndex:
+                return Quaternion.Euler(_upSideRotation);
         }
 
         return Quaternion.identity;
     }
 
-    private IEnumerator RenderIcon()
+    private IEnumerator PointArrow()
     {
         var waitForFixedUpdate = new WaitForFixedUpdate();
-        while(_isRenderIcon)
+        int planeIndex = 0;
+        Vector3 directionFromPlayer;
+        Vector3 worldPosition;
+        Plane[] planes;
+        Ray ray;
+        bool isRenderIcon = true;
+
+        while (isRenderIcon)
         {
-            _directionFromPlayer = transform.position - _player.transform.position;
-            Ray ray = new Ray(_player.transform.position, _directionFromPlayer);
-            Plane[] planes = GeometryUtility.CalculateFrustumPlanes(_camera);
-
-            float minDistance = Mathf.Infinity;
-            int planeIndex = 0;
-
-            for (int i = 0; i < 4; i++)
+            if(_pointIcon.isActiveAndEnabled)
             {
-                if (planes[i].Raycast(ray, out float distance))
+                directionFromPlayer = transform.position - _player.transform.position;
+                ray = new Ray(_player.transform.position, directionFromPlayer);
+                planes = GeometryUtility.CalculateFrustumPlanes(_camera);
+                float minDistance = Mathf.Infinity;
+
+                for (int i = 0; i < 4; i++)
                 {
-                    if (distance < minDistance)
+                    if (planes[i].Raycast(ray, out float distance))
                     {
-                        minDistance = distance;
-                        planeIndex = i;
+                        if (distance < minDistance)
+                        {
+                            minDistance = distance;
+                            planeIndex = i;
+                        }
                     }
                 }
-            }
-            
-            minDistance = Mathf.Clamp(minDistance, 0.0f, _directionFromPlayer.magnitude);
 
-            Vector3 worldPosition = ray.GetPoint(minDistance);
-            _pointIconTransform.transform.position = _camera.WorldToScreenPoint(worldPosition);
-            _pointIconTransform.transform.rotation = GetIconRotation(planeIndex);
+                worldPosition = ray.GetPoint(minDistance);
+                _pointIcon.transform.position = _camera.WorldToScreenPoint(worldPosition);
+                _pointIcon.transform.rotation = GetIconRotation(planeIndex);
+            }
 
             yield return waitForFixedUpdate;
         }
-    }
-
-    private void OnBecameInvisible()
-    {
-        _pointIconTransform.gameObject.SetActive(true);
-    }
-
-    private void OnBecameVisible()
-    {
-        _pointIconTransform.gameObject.SetActive(false);
     }
 }

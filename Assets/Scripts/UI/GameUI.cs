@@ -15,6 +15,9 @@ public class GameUI : MonoBehaviour
     [SerializeField] private Button _pauseScreenContinueButton;
     [SerializeField] private Button _pauseScreenRestartButton;
     [SerializeField] private Button _soundSwitchButton;
+    [SerializeField] private ShootingRangeIndicator _shootingRangeIndicator;
+    [SerializeField] private PlayerHealthbar _playerHealthBar
+        ;
 
     private UIElementsAnimation _uiElementsAnimation;
 
@@ -32,20 +35,21 @@ public class GameUI : MonoBehaviour
     {
         PlayerHealth.GameOver += OnGameOver;
         _startButton.onClick.AddListener(OnStartButtonClick);
-        _gameOverScreenRestartButton.onClick.AddListener(OnRestartButtonClick);
+        _gameOverScreenRestartButton.onClick.AddListener(OnStartButtonClick);
         _gameOverScreenMenuButton.onClick.AddListener(OnMenuButtonClick);
-        _pauseScreenRestartButton.onClick.AddListener(OnRestartButtonClick);
+        _pauseScreenRestartButton.onClick.AddListener(OnStartButtonClick);
         _pauseButton.onClick.AddListener(OnPauseButtonClick);
         _pauseScreenContinueButton.onClick.AddListener(OnContinueButtonClick);
+        _playerHealthBar.gameObject.SetActive(false);
     }
 
     private void OnDisable()
     {
         PlayerHealth.GameOver -= OnGameOver;
         _startButton.onClick.RemoveListener(OnStartButtonClick);
-        _gameOverScreenRestartButton.onClick.RemoveListener(OnRestartButtonClick);
+        _gameOverScreenRestartButton.onClick.RemoveListener(OnStartButtonClick);
         _gameOverScreenMenuButton.onClick.RemoveListener(OnMenuButtonClick);
-        _pauseScreenRestartButton.onClick.RemoveListener(OnRestartButtonClick);
+        _pauseScreenRestartButton.onClick.RemoveListener(OnStartButtonClick);
         _pauseButton.onClick.RemoveListener(OnPauseButtonClick);
         _pauseScreenContinueButton.onClick.RemoveListener(OnContinueButtonClick);
     }
@@ -53,6 +57,7 @@ public class GameUI : MonoBehaviour
     private void OnStartButtonClick()
     {
         GameBegun?.Invoke();
+        GameStateReset?.Invoke();
         Time.timeScale = 1f;
         _uiElementsAnimation.Disappear(_startButton.gameObject);
         _uiElementsAnimation.Appear(_pauseButton.gameObject);
@@ -60,12 +65,8 @@ public class GameUI : MonoBehaviour
         _gameOverScreen.gameObject.SetActive(false);
         _pauseScreen.gameObject.SetActive(false);
         _canvasJoystick.gameObject.SetActive(true);
-    }
-
-    private void OnRestartButtonClick()
-    {
-        GameStateReset?.Invoke();
-        OnStartButtonClick();
+        _shootingRangeIndicator.gameObject.SetActive(true);
+        _playerHealthBar.gameObject.SetActive(true);
     }
 
     private void OnMenuButtonClick()
@@ -77,6 +78,8 @@ public class GameUI : MonoBehaviour
         _uiElementsAnimation.Appear(_soundSwitchButton.gameObject);
         _gameOverScreen.gameObject.SetActive(false);
         _canvasJoystick.gameObject.SetActive(false);
+        _shootingRangeIndicator.gameObject.SetActive(false);
+        _playerHealthBar.gameObject.SetActive(false);
     }
 
     private void OnPauseButtonClick()
@@ -101,5 +104,7 @@ public class GameUI : MonoBehaviour
         _uiElementsAnimation.Appear(_gameOverScreen.gameObject);
         _uiElementsAnimation.Disappear(_pauseButton.gameObject);
         _canvasJoystick.gameObject.SetActive(true);
+        _shootingRangeIndicator.gameObject.SetActive(false);
+        _playerHealthBar.gameObject.SetActive(false);
     }
 }

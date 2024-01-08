@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 public class Player : MonoBehaviour
@@ -7,12 +6,12 @@ public class Player : MonoBehaviour
 
     private void OnEnable()
     {
-        GameUI.GameStateReset += OnReset;
+        GameUI.GameBegun += OnReset;
     }
 
     private void OnDisable()
     {
-        GameUI.GameStateReset -= OnReset;
+        GameUI.GameBegun -= OnReset;
     }
 
     private void OnReset()

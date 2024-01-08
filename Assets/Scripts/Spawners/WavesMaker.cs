@@ -26,30 +26,31 @@ public class WavesMaker : MonoBehaviour
     private int _currentWaveNumber;
     private int _currentWaveEnemiesNumber;
     private int _increaseEnemiesNumber = 2;
-    private int _reducingChanceOfEasyEnemy = 6;
+    private int _reducingChanceOfEasyEnemy = 5;
     private int _increasingChanceOfHardEnemy = 2;
     private Coroutine _makeWaves;
     private int _spawnedEnemiesNumber;              
     private int _killedEnemiesNumber;               
+    private bool _isSpawning = true;
 
     private void OnEnable()
     {
         GameUI.GameBegun += OnStartGame;
-        GameUI.GameStateReset += OnStartGame;
+        GameUI.GoneMenu += OnGameOver;
         PlayerHealth.GameOver += OnGameOver;
         Enemy.Spawned += OnEnemySpawned;
-        Enemy.Dead += OnEnemyDead;
+        EnemyHealth.EnemyDead += OnEnemyDead;
         Backpack.TokenUsed += OnStartNextWave;
     }
 
     private void OnDisable()
     {
         GameUI.GameBegun -= OnStartGame;
-        GameUI.GameStateReset -= OnStartGame;
+        GameUI.GoneMenu -= OnGameOver;
         PlayerHealth.GameOver -= OnGameOver;
         Enemy.Spawned -= OnEnemySpawned;
-        Enemy.Dead -= OnEnemyDead;
-        Backpack.TokenUsed += OnStartNextWave;
+        EnemyHealth.EnemyDead -= OnEnemyDead;
+        Backpack.TokenUsed -= OnStartNextWave;
     }
 
     private void OnEnemyDead()
@@ -60,7 +61,7 @@ public class WavesMaker : MonoBehaviour
         {
             ShowWaveInfoText(WaveWonText);
             _tokenSpawner.Show();
-            _bulletSpawner.Stop();
+            _bulletSpawner.OnStop();
             _pointingArrow.PointTokenSpawn();
         }
     }
@@ -70,14 +71,25 @@ public class WavesMaker : MonoBehaviour
         _spawnedEnemiesNumber++;
     }
 
+    public void OnStartNextWave()
+    {
+        _currentWaveEnemiesNumber += _increaseEnemiesNumber;
+        _currentWaveNumber++;
+        _currentEasyEnemyChance -= _reducingChanceOfEasyEnemy;
+        _currentHardEnemyChance += _increasingChanceOfHardEnemy;
+        _makeWaves = StartCoroutine(MakeWaves());
+        _pointingArrow.OnHide();
+    }
+
     private void OnStartGame()
     {
         _currentWaveNumber = _startWaveNumber;
         _currentEasyEnemyChance = _startEasyEnemyChance;
         _currentWaveEnemiesNumber = _startEnemiesNumber;
         _currentHardEnemyChance = _startHardEnemyChance;
+        _isSpawning = true;
 
-        if(_makeWaves !=  null)
+        if (_makeWaves != null)
         {
             StopCoroutine(_makeWaves);
         }
@@ -93,8 +105,12 @@ public class WavesMaker : MonoBehaviour
 
     private void OnGameOver()
     {
+        _isSpawning = false;
+
         if (_makeWaves != null)
             StopCoroutine(_makeWaves);
+
+        _bulletSpawner.OnStop();
     }
 
     private bool GetChance(float chanceValue)
@@ -106,17 +122,19 @@ public class WavesMaker : MonoBehaviour
 
     private IEnumerator MakeWaves()
     {
+        _bulletSpawner.OnBegin();
         ShowWaveInfoText(NextWaveText);
         _spawnedEnemiesNumber = 0;
         _killedEnemiesNumber = 0;
-        _bulletSpawner.OnBegin();
-        float minSpawnTime = 3;
+        float minSpawnTime = 2;
         float maxSpawnTime = 5;
         float spawnTime = Random.Range(minSpawnTime, maxSpawnTime);
         var waitForSeconds = new WaitForSeconds(spawnTime);
 
-        while (_spawnedEnemiesNumber < _currentWaveEnemiesNumber)
+        while (_spawnedEnemiesNumber < _currentWaveEnemiesNumber && _isSpawning)
         {
+            yield return waitForSeconds;
+
             if (GetChance(_currentEasyEnemyChance))
             {
                 _easyEnemySpawner.Show();
@@ -129,20 +147,8 @@ public class WavesMaker : MonoBehaviour
             {
                 _mediumEnemySpawner.Show();
             }
-
-            yield return waitForSeconds;
         }
 
         StopCoroutine(_makeWaves);
-    }
-
-    public void OnStartNextWave()
-    {
-        _currentWaveEnemiesNumber += _increaseEnemiesNumber;
-        _currentWaveNumber++;
-        _currentEasyEnemyChance -= _reducingChanceOfEasyEnemy;
-        _currentHardEnemyChance += _increasingChanceOfHardEnemy;
-        _pointingArrow.OnHide();
-        _makeWaves = StartCoroutine(MakeWaves());
     }
 }

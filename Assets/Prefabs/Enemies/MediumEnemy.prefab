@@ -226,7 +226,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0647a30728ca44444a0f03b286612c9e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _pointIconTransformSample: {fileID: 2192955739026097409, guid: 0a5ed24f7d6bf2b4388c950a2bd5dbcd, type: 3}
+  _pointIconSample: {fileID: 2192955739026097409, guid: 0a5ed24f7d6bf2b4388c950a2bd5dbcd, type: 3}
   _canvasPointerIcon: {fileID: 4815095311160233102}
 --- !u!1 &2306840174852096008
 GameObject:

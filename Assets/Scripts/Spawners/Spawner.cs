@@ -9,19 +9,23 @@ public abstract class Spawner : MonoBehaviour
     protected List<SpawnableObject> Pool = new List<SpawnableObject>();
 
     protected Vector3 _spawnPosition;
-    private int _capacity = 6;
+    private int _capacity = 4;
     private float _spawnPositionY = 1;
     private float _minAdditionToPosition = 6;
     private float _maxAdditionToPosition = -6;
 
     private void OnEnable()
     {
-        GameUI.GameStateReset += OnReset;
+        GameUI.GameBegun += OnHideAll;
+        GameUI.GoneMenu += OnHideAll;
+        PlayerHealth.GameOver += OnHideAll;
     }
 
     private void OnDisable()
     {
-        GameUI.GameStateReset -= OnReset;
+        GameUI.GameBegun -= OnHideAll;
+        GameUI.GoneMenu -= OnHideAll;
+        PlayerHealth.GameOver -= OnHideAll;
     }
 
     private void Awake()
@@ -75,11 +79,14 @@ public abstract class Spawner : MonoBehaviour
         return false;
     }
 
-    private void OnReset()
+    private void OnHideAll()
     {
         foreach(SpawnableObject spawnableObject in Pool)
         {
-            spawnableObject.Hide();
+            if(spawnableObject.gameObject.activeSelf)
+            {
+                spawnableObject.Hide();
+            }
         }
     }
 }

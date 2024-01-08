@@ -20,6 +20,7 @@ public abstract class Health : MonoBehaviour
     private void OnEnable()
     {
         GameUI.GameStateReset += OnReset;
+        GameUI.GameBegun += OnReset;
         _currentHealth = _maxHealth;
         _healthView.SetInfo();
     }
@@ -27,6 +28,7 @@ public abstract class Health : MonoBehaviour
     private void OnDisable()
     {
         GameUI.GameStateReset -= OnReset;
+        GameUI.GameBegun -= OnReset;
     }
 
     public virtual void TakeDamage(int damage)

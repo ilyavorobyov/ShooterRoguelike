@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -5,6 +6,8 @@ public class EnemyHealth : Health
 {
     [SerializeField] private Healer _healer;
     [SerializeField] private int _healerDropChance;
+
+    public static Action EnemyDead;
 
     public override void Die()
     {
@@ -14,6 +17,7 @@ public class EnemyHealth : Health
         }
         
         gameObject.SetActive(false);
+        EnemyDead?.Invoke();
     }
 
     private bool IsCanDropHealer()

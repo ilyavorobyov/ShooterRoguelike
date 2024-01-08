@@ -20,7 +20,6 @@ public abstract class Enemy : MonoBehaviour
     private Coroutine _trackPlayer;
 
     public static Action Spawned;
-    public static Action Dead;
 
     private void Start()
     {
@@ -40,7 +39,6 @@ public abstract class Enemy : MonoBehaviour
     private void OnDisable()
     {
         StopTrackPlayer();
-        Dead?.Invoke();
     }
 
     public void Init(Player player)
