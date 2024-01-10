@@ -42,7 +42,7 @@ public class PlayerCollisionHandler : MonoBehaviour
             token.Hide();
         }
 
-        if (collision.TryGetComponent(out PerkChoisePlace perkChoisePlace))
+        if (collision.TryGetComponent(out BoosterSelectionLocation boosterSelectionLocation))
         {
             _backpack.RemoveToken();
         }

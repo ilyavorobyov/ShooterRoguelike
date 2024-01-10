@@ -47,6 +47,6 @@ MonoBehaviour:
   _weaponMesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
   _weaponMaterial: {fileID: 2100000, guid: deff1f016057ff545934653277271e05, type: 2}
   _bullet: {fileID: 5260776931905480232, guid: b4bcb74ab8588e946a0b5018dbdd4a66, type: 3}
-  _damage: 2
+  _damage: 20
   _label: "\u0420\u0443\u0436\u044C\u0451"
   _reloadDuration: 1

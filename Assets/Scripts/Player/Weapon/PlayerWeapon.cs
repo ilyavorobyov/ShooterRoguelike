@@ -5,19 +5,31 @@ using UnityEngine;
 [RequireComponent(typeof(MeshRenderer))]
 public class PlayerWeapon : MonoBehaviour
 {
+    [SerializeField] private PlayerHealth _playerHealth;
     [SerializeField] private Weapon _startingWeapon;
     [SerializeField] private BulletClip _bulletClip;
     [SerializeField] private Transform _shootPoint;
     
     private MeshRenderer _weaponMeshRenderer;
     private MeshFilter _weaponMesh;
-    private Material _weaponMaterial;
     private PlayerBullet _bullet;
     private float _reloadDuration;
     private int _damage;
 
     private bool _isCanShoot = true;
     private Coroutine _reload;
+
+    private void OnEnable()
+    {
+        NewWeaponBooster.TakeNewWeapon += OnTakeNewWeapon;
+        GameUI.GameStateReset += OnReset;
+    }
+
+    private void OnDisable()
+    {
+        NewWeaponBooster.TakeNewWeapon -= OnTakeNewWeapon;
+        GameUI.GameStateReset -= OnReset;
+    }
 
     private void Awake()
     {
@@ -51,6 +63,17 @@ public class PlayerWeapon : MonoBehaviour
         bullet.Init(_damage, target);
         _isCanShoot = false;
         _reload = StartCoroutine(Reload());
+        _playerHealth.TryHealWithVampirism(_damage);
+    }
+
+    private void OnTakeNewWeapon(Weapon weapon)
+    {
+        SetWeapon(weapon);
+    }
+
+    private void OnReset()
+    {
+        SetWeapon(_startingWeapon);
     }
 
     private IEnumerator Reload()

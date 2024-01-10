@@ -17,7 +17,7 @@ public class WavesMaker : MonoBehaviour
     private const string NextWaveText = "Волна: ";
     private const string WaveWonText = "Побеждена волна ";
 
-    private int _startEnemiesNumber = 5;
+    private int _startEnemiesNumber = 1;
     private int _startWaveNumber = 1;
     private float _startEasyEnemyChance = 100;
     private float _startHardEnemyChance = 0;
@@ -25,7 +25,7 @@ public class WavesMaker : MonoBehaviour
     private float _currentHardEnemyChance;
     private int _currentWaveNumber;
     private int _currentWaveEnemiesNumber;
-    private int _increaseEnemiesNumber = 2;
+    private int _increaseEnemiesNumber = 0;
     private int _reducingChanceOfEasyEnemy = 5;
     private int _increasingChanceOfHardEnemy = 2;
     private Coroutine _makeWaves;
@@ -40,7 +40,7 @@ public class WavesMaker : MonoBehaviour
         PlayerHealth.GameOver += OnGameOver;
         Enemy.Spawned += OnEnemySpawned;
         EnemyHealth.EnemyDead += OnEnemyDead;
-        Backpack.TokenUsed += OnStartNextWave;
+        Booster.BoosterSelected += OnStartNextWave;
     }
 
     private void OnDisable()
@@ -50,7 +50,7 @@ public class WavesMaker : MonoBehaviour
         PlayerHealth.GameOver -= OnGameOver;
         Enemy.Spawned -= OnEnemySpawned;
         EnemyHealth.EnemyDead -= OnEnemyDead;
-        Backpack.TokenUsed -= OnStartNextWave;
+        Booster.BoosterSelected -= OnStartNextWave;
     }
 
     private void OnEnemyDead()

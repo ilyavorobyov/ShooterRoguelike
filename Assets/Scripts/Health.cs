@@ -1,28 +1,31 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 [RequireComponent (typeof(HealthView))]
 public abstract class Health : MonoBehaviour
 {
-    [SerializeField] protected int _maxHealth;
+    [SerializeField] protected float _startMaxHealth;
 
     private HealthView _healthView;
     protected float _currentHealth;
     private float _minHealth = 0;
+    private float _currentMaxHealth;
 
-    public float MaxHealth => _maxHealth;
+    public float CurrentMaxHealth => _currentMaxHealth;
     public float CurrentHealth => _currentHealth;
 
     private void Awake()
     {
         _healthView = GetComponent<HealthView>();
+        _currentMaxHealth = _startMaxHealth;
     }
 
     private void OnEnable()
     {
+        _currentHealth = _currentMaxHealth;
+        _healthView.SetInfo();
         GameUI.GameStateReset += OnReset;
         GameUI.GameBegun += OnReset;
-        _currentHealth = _maxHealth;
-        _healthView.SetInfo();
     }
 
     private void OnDisable()
@@ -43,16 +46,15 @@ public abstract class Health : MonoBehaviour
         }
     }
 
-    public virtual void AddHealth(int addingHealth)
+    public virtual void AddHealth(float addingHealth)
     {
-        if (_currentHealth + addingHealth <= _maxHealth)
+        if (_currentHealth + addingHealth <= _currentMaxHealth)
         {
             _currentHealth += addingHealth;
-            _healthView.SetInfo();
         }
         else
         {
-            _currentHealth = _maxHealth;
+            _currentHealth = _currentMaxHealth;
         }
 
         _healthView.SetInfo();
@@ -60,9 +62,18 @@ public abstract class Health : MonoBehaviour
 
     public virtual void OnReset()
     {
-        _currentHealth = _maxHealth;
+        _currentMaxHealth = _startMaxHealth;
+        _currentHealth = _startMaxHealth;
         _healthView.SetInfo();
     }
 
     public abstract void Die();
+
+    protected void IncreaseMaxHealth()
+    {
+        float additionalHealth = 10;
+        _currentMaxHealth += additionalHealth;
+        AddHealth(additionalHealth);
+        _healthView.SetInfo();
+    }
 }

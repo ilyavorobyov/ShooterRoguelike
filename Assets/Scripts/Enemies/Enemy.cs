@@ -1,12 +1,13 @@
 using System;
 using System.Collections;
+using UnityEditor.Presets;
 using UnityEngine;
 
 [RequireComponent(typeof(EnemyPointer))]
 public abstract class Enemy : MonoBehaviour
 {
     [SerializeField] protected int Damage;
-    [SerializeField] private float _speed;
+    [SerializeField] private float _startSpeed;
     [SerializeField] private float _pursuitDistance;
     [SerializeField] private float _attackDistance;
     [SerializeField] private float _rechargeTime;
@@ -14,12 +15,20 @@ public abstract class Enemy : MonoBehaviour
     protected Player Player;
     protected PlayerHealth PlayerHealth;
 
+    private float _currentSpeed;
     private MeshRenderer _meshRenderer;
     private EnemyPointer _enemyPointer;
     private float _currentDistance;
     private Coroutine _trackPlayer;
 
     public static Action Spawned;
+
+    private void Awake()
+    {
+        _currentSpeed = _startSpeed;
+        GameUI.GameStateReset += OnReset;
+        SlowDownEnemiesBooster.EnemiesSlowed += OnSlowDown;
+    }
 
     private void Start()
     {
@@ -29,7 +38,7 @@ public abstract class Enemy : MonoBehaviour
 
     private void OnEnable()
     {
-        if(Player != null)
+        if (Player != null)
         {
             StartTrackPlayer();
             Spawned?.Invoke();
@@ -41,18 +50,34 @@ public abstract class Enemy : MonoBehaviour
         StopTrackPlayer();
     }
 
+    private void OnDestroy()
+    {
+        GameUI.GameStateReset -= OnReset;
+        SlowDownEnemiesBooster.EnemiesSlowed -= OnSlowDown;
+    }
+
     public void Init(Player player)
     {
         Player = player;
         PlayerHealth = Player.GetComponent<PlayerHealth>();
         _enemyPointer = GetComponent<EnemyPointer>();
-
         _enemyPointer.Init(Player);
+    }
+
+    public void OnSlowDown()
+    {
+        float reductionFactor = 0.6f;
+        _currentSpeed *= reductionFactor;
     }
 
     private void StartTrackPlayer()
     {
         _trackPlayer = StartCoroutine(TrackPlayer());
+    }
+
+    private void OnReset()
+    {
+        _currentSpeed = _startSpeed;
     }
 
     private void StopTrackPlayer()
@@ -83,7 +108,7 @@ public abstract class Enemy : MonoBehaviour
             {
                 transform.LookAt(Player.transform);
                 transform.position = Vector3.MoveTowards(transform.position,
-                    Player.transform.position, _speed * Time.deltaTime);
+                    Player.transform.position, _currentSpeed * Time.deltaTime);
                 yield return waitForFixedUpdate;
             }
 

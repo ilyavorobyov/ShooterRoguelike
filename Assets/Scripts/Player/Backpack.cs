@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using UnityEditor.Presets;
 using UnityEngine;
 
 public class Backpack : MonoBehaviour
@@ -8,13 +9,29 @@ public class Backpack : MonoBehaviour
     [SerializeField] private Token _displayedTokenSample;
 
     private List<DisplayedBullet> _displayedBullets = new List<DisplayedBullet>();
-    private Vector3 _currentPosition = new Vector3(0f, 0f, 0f);
+    private Vector3 _startCurrentPosition = Vector3.zero;
+    private Vector3 _currentPosition;
     private Vector3 _additionPosition = new Vector3(0f, 0.28f, 0f);
     private Vector3 _addedObjectsRotation = new Vector3(0f, 0f, 90f);
     private Token _currentToken;
     private bool _isHaveToken;
 
-    public static Action TokenUsed;
+    public static Action TokenBrought;
+
+    private void Awake()
+    {
+        _currentPosition = _startCurrentPosition;
+    }
+
+    private void OnEnable()
+    {
+        GameUI.GameStateReset += OnReset;
+    }
+
+    private void OnDisable()
+    {
+        GameUI.GameStateReset -= OnReset;
+    }
 
     public void AddBullet()
     {
@@ -53,7 +70,25 @@ public class Backpack : MonoBehaviour
             Destroy(_currentToken.gameObject);
             _currentPosition -= _additionPosition;
             _isHaveToken = false;
-            TokenUsed?.Invoke();
+            TokenBrought?.Invoke();
+        }
+    }
+
+    private void OnReset()
+    {
+        _currentPosition = _startCurrentPosition;
+
+        foreach(DisplayedBullet displayedBullet in _displayedBullets)
+        {
+            Destroy(displayedBullet.gameObject);
+        }
+
+        _displayedBullets.Clear();
+
+        if(_currentToken != null)
+        {
+            Destroy(_currentToken.gameObject);
+            _isHaveToken = false;
         }
     }
 }

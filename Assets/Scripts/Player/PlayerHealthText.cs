@@ -1,3 +1,4 @@
+using System;
 using TMPro;
 using UnityEngine;
 
@@ -16,6 +17,6 @@ public class PlayerHealthText : MonoBehaviour
 
     public void SetHealthText()
     {
-        _healthViewText.text = _health.CurrentHealth + "\\" + _health.MaxHealth;
+        _healthViewText.text = Math.Round(_health.CurrentHealth, 0) + "\\" + _health.CurrentMaxHealth;
     }
 }

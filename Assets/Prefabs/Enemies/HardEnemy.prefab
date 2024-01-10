@@ -575,8 +575,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88d076bc8d49b7e4e8f718c891f0b93d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Damage: 2
-  _speed: 2.2
+  Damage: 15
+  _startSpeed: 2.2
   _pursuitDistance: 6
   _attackDistance: 3
   _rechargeTime: 1.5
@@ -593,9 +593,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd3e078061e93d34a9687f32707d3b41, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxHealth: 2
+  _startMaxHealth: 20
   _healer: {fileID: 4099209221665869466, guid: 1ce250b4170cacd44a336ebc66a2270a, type: 3}
-  _healerDropChance: 15
+  _healerDropChance: 10
 --- !u!114 &8919533997137692353
 MonoBehaviour:
   m_ObjectHideFlags: 0

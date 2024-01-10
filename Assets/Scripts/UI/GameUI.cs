@@ -16,8 +16,7 @@ public class GameUI : MonoBehaviour
     [SerializeField] private Button _pauseScreenRestartButton;
     [SerializeField] private Button _soundSwitchButton;
     [SerializeField] private ShootingRangeIndicator _shootingRangeIndicator;
-    [SerializeField] private PlayerHealthbar _playerHealthBar
-        ;
+    [SerializeField] private PlayerHealthbar _playerHealthBar;
 
     private UIElementsAnimation _uiElementsAnimation;
 
