@@ -1,7 +1,6 @@
-using Unity.VisualScripting;
 using UnityEngine;
 
-[RequireComponent (typeof(HealthView))]
+[RequireComponent(typeof(HealthView))]
 public abstract class Health : MonoBehaviour
 {
     [SerializeField] protected float _startMaxHealth;
@@ -24,19 +23,19 @@ public abstract class Health : MonoBehaviour
     {
         _currentHealth = _currentMaxHealth;
         _healthView.SetInfo();
-        GameUI.GameStateReset += OnReset;
-        GameUI.GameBegun += OnReset;
+        GameUI.GameReseted += OnReset;
+        GameUI.GameBeguned += OnReset;
     }
 
     private void OnDisable()
     {
-        GameUI.GameStateReset -= OnReset;
-        GameUI.GameBegun -= OnReset;
+        GameUI.GameReseted -= OnReset;
+        GameUI.GameBeguned -= OnReset;
     }
 
     public virtual void TakeDamage(int damage)
     {
-        if(damage > 0)
+        if (damage > 0)
         {
             _currentHealth -= damage;
             _healthView.SetInfo();
@@ -60,20 +59,19 @@ public abstract class Health : MonoBehaviour
         _healthView.SetInfo();
     }
 
+    public abstract void Die();
+
+    protected void IncreaseMaxHealth(int addedHealth)
+    {
+        _currentMaxHealth += addedHealth;
+        AddHealth(addedHealth);
+        _healthView.SetInfo();
+    }
+
     public virtual void OnReset()
     {
         _currentMaxHealth = _startMaxHealth;
         _currentHealth = _startMaxHealth;
-        _healthView.SetInfo();
-    }
-
-    public abstract void Die();
-
-    protected void IncreaseMaxHealth()
-    {
-        float additionalHealth = 10;
-        _currentMaxHealth += additionalHealth;
-        AddHealth(additionalHealth);
         _healthView.SetInfo();
     }
 }

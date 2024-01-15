@@ -1,12 +1,11 @@
 using System;
-using UnityEngine;
 
 public class AddRegenerationBooster : Booster
 {
-    public static Action AddRegeneration;
+    public static event Action RegenerationAdded;
 
     public override void Activate()
     {
-        AddRegeneration?.Invoke();
+        RegenerationAdded?.Invoke();
     }
 }

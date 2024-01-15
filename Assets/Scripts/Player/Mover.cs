@@ -1,5 +1,3 @@
-using System;
-using UnityEditor.Presets;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
@@ -11,7 +9,6 @@ public class Mover : MonoBehaviour
     private float _offSpeed = 0;
     private float _currentSpeed;
     private float _tempSpeed;
-    private bool _isAfterBoosterChoosing;
     private Vector3 _moveDirection;
     private bool _isEnemyVisible;
     private Transform _target;
@@ -22,47 +19,25 @@ public class Mover : MonoBehaviour
         _currentSpeed = _startSpeed;
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         Move();
     }
 
     private void OnEnable()
     {
-        Backpack.TokenBrought += OnTokenBrought;
-        Booster.BoosterSelected += ReturnPreviousSpeed;
-        AddPlayerMoveSpeedBooster.SpeedAdded += OnAddMoveSpeed;
-        GameUI.GameBegun += OnReset;
+        Backpack.TokenBroughted += OnTokenBrought;
+        Booster.BoosterSelected += OnBoosterSelected;
+        AddPlayerMoveSpeedBooster.SpeedAdded += OnSpeedAdded;
+        GameUI.GameBeguned += OnReset;
     }
 
     private void OnDisable()
     {
-        Backpack.TokenBrought -= OnTokenBrought;
-        Booster.BoosterSelected -= ReturnPreviousSpeed;
-        AddPlayerMoveSpeedBooster.SpeedAdded += OnAddMoveSpeed;
-        GameUI.GameBegun -= OnReset;
-    }
-
-    private void OnAddMoveSpeed()
-    {
-        float additionalSpeed = 1f;
-        _tempSpeed += additionalSpeed;
-    }
-
-    private void OnTokenBrought()
-    {
-        _tempSpeed = _currentSpeed;
-        _currentSpeed = _offSpeed;
-    }
-
-    private void OnReset()
-    {
-        _currentSpeed = _startSpeed;
-    }
-
-    private void ReturnPreviousSpeed()
-    {
-        _currentSpeed = _tempSpeed;
+        Backpack.TokenBroughted -= OnTokenBrought;
+        Booster.BoosterSelected -= OnBoosterSelected;
+        AddPlayerMoveSpeedBooster.SpeedAdded += OnSpeedAdded;
+        GameUI.GameBeguned -= OnReset;
     }
 
     private void Move()
@@ -80,14 +55,36 @@ public class Mover : MonoBehaviour
         }
     }
 
-    public void SetRotationTarget(Transform target)
+    public void SetTargetRotation(Transform target)
     {
         _target = target;
         _isEnemyVisible = true;
     }
 
-    public void SetRotationMoveDirection()
+    public void SetMoveDirectionRotation()
     {
         _isEnemyVisible = false;
+    }
+
+    private void OnSpeedAdded(int additionalSpeed)
+    {
+        _tempSpeed += additionalSpeed;
+    }
+
+    private void OnTokenBrought()
+    {
+        _tempSpeed = _currentSpeed;
+        _currentSpeed = _offSpeed;
+    }
+
+    private void OnReset()
+    {
+        transform.position = _startPosition;
+        _currentSpeed = _startSpeed;
+    }
+
+    private void OnBoosterSelected()
+    {
+        _currentSpeed = _tempSpeed;
     }
 }

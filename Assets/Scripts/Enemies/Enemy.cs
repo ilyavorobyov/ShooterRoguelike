@@ -1,6 +1,5 @@
 using System;
 using System.Collections;
-using UnityEditor.Presets;
 using UnityEngine;
 
 [RequireComponent(typeof(EnemyPointer))]
@@ -14,26 +13,20 @@ public abstract class Enemy : MonoBehaviour
 
     protected Player Player;
     protected PlayerHealth PlayerHealth;
-
+    protected EnemyBullet EnemyBullet;
     private float _currentSpeed;
-    private MeshRenderer _meshRenderer;
     private EnemyPointer _enemyPointer;
     private float _currentDistance;
     private Coroutine _trackPlayer;
 
-    public static Action Spawned;
-
-    private void Awake()
-    {
-        _currentSpeed = _startSpeed;
-        GameUI.GameStateReset += OnReset;
-        SlowDownEnemiesBooster.EnemiesSlowed += OnSlowDown;
-    }
+    public static event Action Spawned;
 
     private void Start()
     {
+        _currentSpeed = _startSpeed;
+        GameUI.GameReseted += OnReset;
+        SlowDownEnemiesBooster.EnemiesSlowed += OnSlowed;
         PlayerHealth = Player.GetComponent<PlayerHealth>();
-        _meshRenderer = GetComponent<MeshRenderer>();
     }
 
     private void OnEnable()
@@ -52,11 +45,11 @@ public abstract class Enemy : MonoBehaviour
 
     private void OnDestroy()
     {
-        GameUI.GameStateReset -= OnReset;
-        SlowDownEnemiesBooster.EnemiesSlowed -= OnSlowDown;
+        GameUI.GameReseted -= OnReset;
+        SlowDownEnemiesBooster.EnemiesSlowed -= OnSlowed;
     }
 
-    public void Init(Player player)
+    public virtual void Init(Player player)
     {
         Player = player;
         PlayerHealth = Player.GetComponent<PlayerHealth>();
@@ -64,20 +57,15 @@ public abstract class Enemy : MonoBehaviour
         _enemyPointer.Init(Player);
     }
 
-    public void OnSlowDown()
+    public virtual void Attack()
     {
-        float reductionFactor = 0.6f;
-        _currentSpeed *= reductionFactor;
+        EnemyBullet enemyBullet = Instantiate(EnemyBullet, transform.position, Quaternion.identity);
+        enemyBullet.Init(Damage, Player.transform);
     }
 
     private void StartTrackPlayer()
     {
         _trackPlayer = StartCoroutine(TrackPlayer());
-    }
-
-    private void OnReset()
-    {
-        _currentSpeed = _startSpeed;
     }
 
     private void StopTrackPlayer()
@@ -116,5 +104,13 @@ public abstract class Enemy : MonoBehaviour
         }
     }
 
-    public abstract void Attack();
+    private void OnSlowed(float reductionFactor)
+    {
+        _currentSpeed *= reductionFactor;
+    }
+
+    private void OnReset()
+    {
+        _currentSpeed = _startSpeed;
+    }
 }

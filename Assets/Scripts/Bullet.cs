@@ -2,8 +2,7 @@ using UnityEngine;
 
 public abstract class Bullet : MonoBehaviour
 {
-    private Vector3 _moveDirection;
-    private float _speed = 4;
+    private float _speed = 7;
     private Transform _target;
 
     public int Damage { get; private set; }
@@ -16,7 +15,7 @@ public abstract class Bullet : MonoBehaviour
 
     private void Update()
     {
-        if(_target != null && _target.gameObject.activeSelf)
+        if (_target != null && _target.gameObject.activeSelf)
         {
             transform.position = Vector3.MoveTowards(transform.position,
                 _target.position, _speed * Time.deltaTime);

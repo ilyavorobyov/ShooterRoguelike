@@ -1,6 +1,4 @@
-using System;
 using TMPro;
-using UnityEditor.Presets;
 using UnityEngine;
 
 public class BulletClip : MonoBehaviour
@@ -15,17 +13,17 @@ public class BulletClip : MonoBehaviour
     private int _startMaxBulletsNumber = 5;
     private int _currentMaxBulletsNumber;
 
-    public bool IsMaxBullets {  get; private set; }
+    public bool IsMaxBullets { get; private set; }
 
     private void OnEnable()
     {
-        GameUI.GameStateReset += OnReset;
+        GameUI.GameReseted += OnReset;
         IncreaseMaxBulletsNumberBooster.AdditionalBulletAdded += OnAdditionalBulletAdded;
     }
 
     private void OnDisable()
     {
-        GameUI.GameStateReset -= OnReset;
+        GameUI.GameReseted -= OnReset;
         IncreaseMaxBulletsNumberBooster.AdditionalBulletAdded -= OnAdditionalBulletAdded;
     }
 
@@ -59,7 +57,7 @@ public class BulletClip : MonoBehaviour
 
     private void ShowTextInfo()
     {
-        if(_currentBulletsNumber == _currentMaxBulletsNumber)
+        if (_currentBulletsNumber == _currentMaxBulletsNumber)
         {
             _bulletsInfoText.gameObject.SetActive(true);
             _bulletsInfoText.text = MaxBulletsText;

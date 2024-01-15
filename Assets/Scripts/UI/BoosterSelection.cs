@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -22,16 +21,16 @@ public class BoosterSelection : MonoBehaviour
 
     private void OnEnable()
     {
-        Backpack.TokenBrought += OnTokenBrought;
+        Backpack.TokenBroughted += OnTokenBroughted;
         Booster.BoosterSelected += OnBoosterSelected;
-        GameUI.GameStateReset += OnReset;
+        GameUI.GameReseted += OnReset;
     }
 
     private void OnDisable()
     {
-        Backpack.TokenBrought -= OnTokenBrought;
+        Backpack.TokenBroughted -= OnTokenBroughted;
         Booster.BoosterSelected -= OnBoosterSelected;
-        GameUI.GameStateReset -= OnReset;
+        GameUI.GameReseted -= OnReset;
     }
 
     private void AddBoosters()
@@ -45,29 +44,11 @@ public class BoosterSelection : MonoBehaviour
         }
     }
 
-    private void OnTokenBrought()
-    {
-        _boosterSelectionScreen.gameObject.SetActive(true);
-        _pauseButton.gameObject.SetActive(false);
-        ShowBoosters();
-        Time.timeScale = 0;
-    }
-
-    private void OnBoosterSelected()
-    {
-        _boosterSelectionScreen.gameObject.SetActive(false);
-        _pauseButton.gameObject.SetActive(true);
-        Time.timeScale = 1;
-
-        foreach (Booster booster in _boosters)
-            booster.gameObject.SetActive(false);
-    }
-
     private void ShowBoosters()
     {
         foreach (Booster booster in _boosters)
         {
-            if (!booster.IsCanBeShow())
+            if (!booster.CanBeShow())
             {
                 _boosters.Remove(booster);
                 break;
@@ -88,10 +69,28 @@ public class BoosterSelection : MonoBehaviour
 
     private void OnReset()
     {
-        foreach(Booster booster in _boosters)
+        foreach (Booster booster in _boosters)
             Destroy(booster.gameObject);
 
         _boosters.Clear();
         AddBoosters();
+    }
+
+    private void OnTokenBroughted()
+    {
+        _boosterSelectionScreen.gameObject.SetActive(true);
+        _pauseButton.gameObject.SetActive(false);
+        ShowBoosters();
+        Time.timeScale = 0;
+    }
+
+    private void OnBoosterSelected()
+    {
+        _boosterSelectionScreen.gameObject.SetActive(false);
+        _pauseButton.gameObject.SetActive(true);
+        Time.timeScale = 1;
+
+        foreach (Booster booster in _boosters)
+            booster.gameObject.SetActive(false);
     }
 }

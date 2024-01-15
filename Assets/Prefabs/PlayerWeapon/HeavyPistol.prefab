@@ -1,0 +1,52 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &3173963582213107883
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6376934854712443967}
+  - component: {fileID: 7501755052928097255}
+  m_Layer: 0
+  m_Name: HeavyPistol
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6376934854712443967
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3173963582213107883}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 11.475699, y: 1.2243562, z: 9.8765}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7501755052928097255
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3173963582213107883}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a7b61e5eea1437f44b5cf595d63e1317, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _weaponMesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
+  _weaponMaterial: {fileID: 2100000, guid: deff1f016057ff545934653277271e05, type: 2}
+  _bullet: {fileID: 5260776931905480232, guid: b4bcb74ab8588e946a0b5018dbdd4a66, type: 3}
+  _damage: 20
+  _label: "\u0420\u0443\u0436\u044C\u0451"
+  _reloadDuration: 1

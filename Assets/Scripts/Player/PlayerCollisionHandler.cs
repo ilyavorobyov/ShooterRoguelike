@@ -1,8 +1,7 @@
 using System;
 using UnityEngine;
-using UnityEngine.Events;
 
-[RequireComponent (typeof(PlayerHealth))]
+[RequireComponent(typeof(PlayerHealth))]
 public class PlayerCollisionHandler : MonoBehaviour
 {
     [SerializeField] private BulletClip _bulletClip;
@@ -11,7 +10,7 @@ public class PlayerCollisionHandler : MonoBehaviour
 
     private PlayerHealth _playerHealth;
 
-    public static Action TokenTaken;
+    public static Action TokenTaked;
 
     private void Awake()
     {
@@ -22,24 +21,18 @@ public class PlayerCollisionHandler : MonoBehaviour
     {
         if (collision.TryGetComponent(out LiftableBullet liftableBullet))
         {
-            if(!_bulletClip.IsMaxBullets)
+            if (!_bulletClip.IsMaxBullets)
             {
                 _bulletClip.TryAdd();
                 liftableBullet.Hide();
             }
         }
 
-        if(collision.TryGetComponent(out Healer healer))
-        {
-            _playerHealth.AddHealth(healer.HealValue);
-            healer.Hide();
-        }
-
         if (collision.TryGetComponent(out Token token))
         {
+            Destroy(token.gameObject);
             _backpack.AddToken();
-            TokenTaken?.Invoke();
-            token.Hide();
+            TokenTaked?.Invoke();
         }
 
         if (collision.TryGetComponent(out BoosterSelectionLocation boosterSelectionLocation))

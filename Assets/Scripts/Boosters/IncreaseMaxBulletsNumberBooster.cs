@@ -2,7 +2,7 @@ using System;
 
 public class IncreaseMaxBulletsNumberBooster : Booster
 {
-    public static Action AdditionalBulletAdded;
+    public static event Action AdditionalBulletAdded;
 
     public override void Activate()
     {

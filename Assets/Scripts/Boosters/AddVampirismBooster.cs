@@ -1,12 +1,13 @@
 using System;
-using UnityEngine;
 
 public class AddVampirismBooster : Booster
 {
-    public static Action AddedVampirism;
+    private float _addedVampirismValue = 0.05f;
+
+    public static event Action<float> VampirismAdded;
 
     public override void Activate()
     {
-        AddedVampirism?.Invoke();
+        VampirismAdded?.Invoke(_addedVampirismValue);
     }
 }

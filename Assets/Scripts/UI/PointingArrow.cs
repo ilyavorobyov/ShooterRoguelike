@@ -12,16 +12,16 @@ public class PointingArrow : MonoBehaviour
 
     private void OnEnable()
     {
-        PlayerCollisionHandler.TokenTaken += OnTokenTaken;
-        GameUI.GameStateReset += OnHide;
-        GameUI.GoneMenu += OnHide;
+        PlayerCollisionHandler.TokenTaked += OnTokenTaked;
+        GameUI.GameReseted += OnHide;
+        GameUI.MenuWented += OnHide;
     }
 
     private void OnDisable()
     {
-        PlayerCollisionHandler.TokenTaken -= OnTokenTaken;
-        GameUI.GameStateReset -= OnHide;
-        GameUI.GoneMenu -= OnHide;
+        PlayerCollisionHandler.TokenTaked -= OnTokenTaked;
+        GameUI.GameReseted -= OnHide;
+        GameUI.MenuWented -= OnHide;
     }
 
     private void Awake()
@@ -32,7 +32,7 @@ public class PointingArrow : MonoBehaviour
 
     private void Update()
     {
-        if(_target != null)
+        if (_target != null)
         {
             var targetPosLocal = _camera.transform.InverseTransformPoint(_target.position);
             var targetAngle = -Mathf.Atan2(targetPosLocal.x, targetPosLocal.y) * Mathf.Rad2Deg - 90;
@@ -48,10 +48,10 @@ public class PointingArrow : MonoBehaviour
 
     public void OnHide()
     {
-        gameObject.SetActive(false); 
+        gameObject.SetActive(false);
     }
 
-    private void OnTokenTaken()
+    private void OnTokenTaked()
     {
         _target = _perkChoisePlace;
     }

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-[RequireComponent (typeof(Mover))]
+[RequireComponent(typeof(Mover))]
 public class Scanner : MonoBehaviour
 {
     [SerializeField] private PlayerWeapon _weapon;
@@ -32,10 +32,11 @@ public class Scanner : MonoBehaviour
     {
         var actualForward = Vector3.ProjectOnPlane(transform.forward, Vector3.forward);
     }
+
     private void StopSearchEnemy()
     {
-        if( _searchEnemy != null )
-            StopCoroutine( _searchEnemy );
+        if (_searchEnemy != null)
+            StopCoroutine(_searchEnemy);
     }
 
     private IEnumerator TrySearchEnemy()
@@ -45,7 +46,7 @@ public class Scanner : MonoBehaviour
         bool isScanning = true;
         Enemy enemy;
 
-        while(isScanning)
+        while (isScanning)
         {
             Collider[] hitColliders = Physics.OverlapSphere(transform.position, _range);
             List<Enemy> enemiesWithinAbilityRange = new List<Enemy>();
@@ -63,11 +64,11 @@ public class Scanner : MonoBehaviour
                 enemy = enemiesWithinAbilityRange.OrderBy(enemy =>
                 Vector3.Distance(enemy.transform.position, transform.position)).FirstOrDefault();
                 _weapon.TryShoot(enemy.transform);
-                _mover.SetRotationTarget(enemy.transform);
+                _mover.SetTargetRotation(enemy.transform);
             }
             else
             {
-                _mover.SetRotationMoveDirection();
+                _mover.SetMoveDirectionRotation();
             }
 
             yield return waitForSeconds;

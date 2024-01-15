@@ -28,7 +28,7 @@ public class EnemyPointer : MonoBehaviour
 
     private void OnEnable()
     {
-        if(_player != null)
+        if (_player != null)
         {
             if (_pointArrow != null)
                 StopCoroutine(_pointArrow);
@@ -79,6 +79,7 @@ public class EnemyPointer : MonoBehaviour
     {
         var waitForFixedUpdate = new WaitForFixedUpdate();
         int planeIndex = 0;
+        int sidesNumber = 4;
         Vector3 directionFromPlayer;
         Vector3 worldPosition;
         Plane[] planes;
@@ -87,14 +88,14 @@ public class EnemyPointer : MonoBehaviour
 
         while (isRenderIcon)
         {
-            if(_pointIcon.isActiveAndEnabled)
+            if (_pointIcon.isActiveAndEnabled)
             {
                 directionFromPlayer = transform.position - _player.transform.position;
                 ray = new Ray(_player.transform.position, directionFromPlayer);
                 planes = GeometryUtility.CalculateFrustumPlanes(_camera);
                 float minDistance = Mathf.Infinity;
 
-                for (int i = 0; i < 4; i++)
+                for (int i = 0; i < sidesNumber; i++)
                 {
                     if (planes[i].Raycast(ray, out float distance))
                     {

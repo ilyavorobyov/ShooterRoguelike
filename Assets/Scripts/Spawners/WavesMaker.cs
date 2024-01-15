@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using TMPro;
 using UnityEngine;
@@ -11,8 +10,10 @@ public class WavesMaker : MonoBehaviour
     [SerializeField] private EasyEnemySpawner _easyEnemySpawner;
     [SerializeField] private MediumEnemySpawner _mediumEnemySpawner;
     [SerializeField] private HardEnemySpawner _hardEnemySpawner;
-    [SerializeField] private TokenSpawner _tokenSpawner;
     [SerializeField] private PointingArrow _pointingArrow;
+    [SerializeField] private WaveSlider _waveSlider;
+    [SerializeField] private Token _token;
+    [SerializeField] private Transform _tokenSpawnPoint;
 
     private const string NextWaveText = "Волна: ";
     private const string WaveWonText = "Побеждена волна ";
@@ -26,75 +27,31 @@ public class WavesMaker : MonoBehaviour
     private int _currentWaveNumber;
     private int _currentWaveEnemiesNumber;
     private int _increaseEnemiesNumber = 0;
-    private int _reducingChanceOfEasyEnemy = 5;
-    private int _increasingChanceOfHardEnemy = 2;
-    private Coroutine _makeWaves;
-    private int _spawnedEnemiesNumber;              
-    private int _killedEnemiesNumber;               
+    private int _reducingChanceOfEasyEnemy = 7;
+    private int _increasingChanceOfHardEnemy = 3;
+    private int _spawnedEnemiesNumber;
+    private int _killedEnemiesNumber;
     private bool _isSpawning = true;
+    private Coroutine _makeWaves;
 
     private void OnEnable()
     {
-        GameUI.GameBegun += OnStartGame;
-        GameUI.GoneMenu += OnGameOver;
-        PlayerHealth.GameOver += OnGameOver;
+        GameUI.GameBeguned += OnStartGame;
+        GameUI.MenuWented += OnGameOver;
+        PlayerHealth.GameOvered += OnGameOver;
         Enemy.Spawned += OnEnemySpawned;
-        EnemyHealth.EnemyDead += OnEnemyDead;
+        EnemyHealth.EnemyDied += OnEnemyDied;
         Booster.BoosterSelected += OnStartNextWave;
     }
 
     private void OnDisable()
     {
-        GameUI.GameBegun -= OnStartGame;
-        GameUI.GoneMenu -= OnGameOver;
-        PlayerHealth.GameOver -= OnGameOver;
+        GameUI.GameBeguned -= OnStartGame;
+        GameUI.MenuWented -= OnGameOver;
+        PlayerHealth.GameOvered -= OnGameOver;
         Enemy.Spawned -= OnEnemySpawned;
-        EnemyHealth.EnemyDead -= OnEnemyDead;
+        EnemyHealth.EnemyDied -= OnEnemyDied;
         Booster.BoosterSelected -= OnStartNextWave;
-    }
-
-    private void OnEnemyDead()
-    {
-        _killedEnemiesNumber++;
-
-        if (_killedEnemiesNumber >= _currentWaveEnemiesNumber)
-        {
-            ShowWaveInfoText(WaveWonText);
-            _tokenSpawner.Show();
-            _bulletSpawner.OnStop();
-            _pointingArrow.PointTokenSpawn();
-        }
-    }
-
-    private void OnEnemySpawned()
-    {
-        _spawnedEnemiesNumber++;
-    }
-
-    public void OnStartNextWave()
-    {
-        _currentWaveEnemiesNumber += _increaseEnemiesNumber;
-        _currentWaveNumber++;
-        _currentEasyEnemyChance -= _reducingChanceOfEasyEnemy;
-        _currentHardEnemyChance += _increasingChanceOfHardEnemy;
-        _makeWaves = StartCoroutine(MakeWaves());
-        _pointingArrow.OnHide();
-    }
-
-    private void OnStartGame()
-    {
-        _currentWaveNumber = _startWaveNumber;
-        _currentEasyEnemyChance = _startEasyEnemyChance;
-        _currentWaveEnemiesNumber = _startEnemiesNumber;
-        _currentHardEnemyChance = _startHardEnemyChance;
-        _isSpawning = true;
-
-        if (_makeWaves != null)
-        {
-            StopCoroutine(_makeWaves);
-        }
-
-        _makeWaves = StartCoroutine(MakeWaves());
     }
 
     private void ShowWaveInfoText(string text)
@@ -110,7 +67,7 @@ public class WavesMaker : MonoBehaviour
         if (_makeWaves != null)
             StopCoroutine(_makeWaves);
 
-        _bulletSpawner.OnStop();
+        _bulletSpawner.Stop();
     }
 
     private bool GetChance(float chanceValue)
@@ -122,7 +79,7 @@ public class WavesMaker : MonoBehaviour
 
     private IEnumerator MakeWaves()
     {
-        _bulletSpawner.OnBegin();
+        _bulletSpawner.Begin();
         ShowWaveInfoText(NextWaveText);
         _spawnedEnemiesNumber = 0;
         _killedEnemiesNumber = 0;
@@ -150,5 +107,51 @@ public class WavesMaker : MonoBehaviour
         }
 
         StopCoroutine(_makeWaves);
+    }
+
+    private void OnEnemyDied()
+    {
+        _killedEnemiesNumber++;
+
+        if (_killedEnemiesNumber == _currentWaveEnemiesNumber)
+        {
+            ShowWaveInfoText(WaveWonText);
+            _bulletSpawner.Stop();
+            _pointingArrow.PointTokenSpawn();
+            Instantiate(_token, _tokenSpawnPoint);
+        }
+    }
+
+    private void OnEnemySpawned()
+    {
+        _spawnedEnemiesNumber++;
+    }
+
+    public void OnStartNextWave()
+    {
+        _currentWaveEnemiesNumber += _increaseEnemiesNumber;
+        _currentWaveNumber++;
+        _currentEasyEnemyChance -= _reducingChanceOfEasyEnemy;
+        _currentHardEnemyChance += _increasingChanceOfHardEnemy;
+        _makeWaves = StartCoroutine(MakeWaves());
+        _pointingArrow.OnHide();
+        _waveSlider.SetValues(_currentWaveEnemiesNumber, _currentWaveNumber);
+    }
+
+    private void OnStartGame()
+    {
+        _currentWaveNumber = _startWaveNumber;
+        _currentEasyEnemyChance = _startEasyEnemyChance;
+        _currentWaveEnemiesNumber = _startEnemiesNumber;
+        _currentHardEnemyChance = _startHardEnemyChance;
+        _isSpawning = true;
+
+        if (_makeWaves != null)
+        {
+            StopCoroutine(_makeWaves);
+        }
+
+        _makeWaves = StartCoroutine(MakeWaves());
+        _waveSlider.SetValues(_currentWaveEnemiesNumber, _currentWaveNumber);
     }
 }

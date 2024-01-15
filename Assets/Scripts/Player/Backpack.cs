@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using UnityEditor.Presets;
 using UnityEngine;
 
 public class Backpack : MonoBehaviour
@@ -16,7 +15,7 @@ public class Backpack : MonoBehaviour
     private Token _currentToken;
     private bool _isHaveToken;
 
-    public static Action TokenBrought;
+    public static event Action TokenBroughted;
 
     private void Awake()
     {
@@ -25,12 +24,12 @@ public class Backpack : MonoBehaviour
 
     private void OnEnable()
     {
-        GameUI.GameStateReset += OnReset;
+        GameUI.GameReseted += OnReset;
     }
 
     private void OnDisable()
     {
-        GameUI.GameStateReset -= OnReset;
+        GameUI.GameReseted -= OnReset;
     }
 
     public void AddBullet()
@@ -45,7 +44,7 @@ public class Backpack : MonoBehaviour
 
     public void RemoveBullet()
     {
-        if( _displayedBullets.Count > 0 )
+        if (_displayedBullets.Count > 0)
         {
             DisplayedBullet currentBullet = _displayedBullets[_displayedBullets.Count - 1];
             _displayedBullets.RemoveAt(_displayedBullets.Count - 1);
@@ -56,21 +55,24 @@ public class Backpack : MonoBehaviour
 
     public void AddToken()
     {
-        _isHaveToken = true;
-        _currentToken = Instantiate(_displayedTokenSample, transform.position + 
-            _currentPosition, Quaternion.identity, gameObject.transform);
-        _currentToken.transform.localRotation = Quaternion.Euler(_addedObjectsRotation);
-        _currentPosition += _additionPosition;
+        if (!_isHaveToken)
+        {
+            _isHaveToken = true;
+            _currentToken = Instantiate(_displayedTokenSample, transform.position +
+                _currentPosition, Quaternion.identity, gameObject.transform);
+            _currentToken.transform.localRotation = Quaternion.Euler(_addedObjectsRotation);
+            _currentPosition += _additionPosition;
+        }
     }
 
     public void RemoveToken()
     {
-        if(_isHaveToken)
+        if (_isHaveToken)
         {
+            _isHaveToken = false;
             Destroy(_currentToken.gameObject);
             _currentPosition -= _additionPosition;
-            _isHaveToken = false;
-            TokenBrought?.Invoke();
+            TokenBroughted?.Invoke();
         }
     }
 
@@ -78,14 +80,14 @@ public class Backpack : MonoBehaviour
     {
         _currentPosition = _startCurrentPosition;
 
-        foreach(DisplayedBullet displayedBullet in _displayedBullets)
+        foreach (DisplayedBullet displayedBullet in _displayedBullets)
         {
             Destroy(displayedBullet.gameObject);
         }
 
         _displayedBullets.Clear();
 
-        if(_currentToken != null)
+        if (_currentToken != null)
         {
             Destroy(_currentToken.gameObject);
             _isHaveToken = false;

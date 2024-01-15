@@ -3,10 +3,12 @@ using UnityEngine;
 
 public class AddPlayerMoveSpeedBooster : Booster
 {
-    public static Action SpeedAdded;
+    [SerializeField] private int _additionalSpeed;
+
+    public static event Action<int> SpeedAdded;
 
     public override void Activate()
     {
-        SpeedAdded?.Invoke();
+        SpeedAdded?.Invoke(_additionalSpeed);
     }
 }

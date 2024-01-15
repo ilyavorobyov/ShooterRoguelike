@@ -6,13 +6,13 @@ public class BulletSpawner : Spawner
     private Coroutine _spawnBullets;
     private bool _isSpawning;
 
-    public void OnBegin()
+    public void Begin()
     {
         _isSpawning = true;
         _spawnBullets = StartCoroutine(SpawnBullets());
     }
 
-    public void OnStop()
+    public void Stop()
     {
         foreach (var bullet in Pool)
         {
@@ -22,7 +22,9 @@ public class BulletSpawner : Spawner
         _isSpawning = false;
 
         if (_spawnBullets != null)
+        {
             StopCoroutine(_spawnBullets);
+        }
     }
 
     private IEnumerator SpawnBullets()

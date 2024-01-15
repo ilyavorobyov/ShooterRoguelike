@@ -14,14 +14,14 @@ public class PlayerHealth : Health
     private bool _isVampirismEnabled = false;
     private Coroutine _regenerate;
 
-    public static Action GameOver;
+    public static event Action GameOvered;
 
     private void OnDestroy()
     {
         FullHealthBooster.CompletelyCured -= OnCompletelyCured;
-        AddMaxHealthBooster.AddMaxHealth -= OnAddMaxHealth;
-        AddRegenerationBooster.AddRegeneration -= OnAddRegeneration;
-        AddVampirismBooster.AddedVampirism -= OnAddedVampirism;
+        AddMaxHealthBooster.MaxHealthAdded -= OnAddMaxHealth;
+        AddRegenerationBooster.RegenerationAdded -= OnRegenerationAdded;
+        AddVampirismBooster.VampirismAdded -= OnVampirismAdded;
     }
 
     private void Start()
@@ -30,9 +30,9 @@ public class PlayerHealth : Health
         _currentRegenerationPerSecond = _startRegenerationPerSecond;
         _playerHealthText = GetComponent<PlayerHealthText>();
         FullHealthBooster.CompletelyCured += OnCompletelyCured;
-        AddMaxHealthBooster.AddMaxHealth += OnAddMaxHealth;
-        AddRegenerationBooster.AddRegeneration += OnAddRegeneration;
-        AddVampirismBooster.AddedVampirism += OnAddedVampirism;
+        AddMaxHealthBooster.MaxHealthAdded += OnAddMaxHealth;
+        AddRegenerationBooster.RegenerationAdded += OnRegenerationAdded;
+        AddVampirismBooster.VampirismAdded += OnVampirismAdded;
     }
 
     public override void TakeDamage(int damage)
@@ -59,7 +59,7 @@ public class PlayerHealth : Health
 
     public override void Die()
     {
-        GameOver?.Invoke();
+        GameOvered?.Invoke();
     }
 
     public void TryHealWithVampirism(float damage)
@@ -70,37 +70,12 @@ public class PlayerHealth : Health
         }
     }
 
-    private void OnCompletelyCured()
-    {
-        AddHealth(CurrentMaxHealth);
-    }
-
-    private void OnAddedVampirism()
-    {
-        float addedVampirismValue = 0.05f;
-        _isVampirismEnabled = true;
-        _currentVampirismValue += addedVampirismValue;
-    }
-
-    private void OnAddRegeneration()
-    {
-        _currentRegenerationPerSecond += _increaseRegenerationPerSecond;
-        StopRegenerate();
-        _regenerate = StartCoroutine(Regenerate());
-    }
-
     private void StopRegenerate()
     {
         if (_regenerate != null)
         {
             StopCoroutine(_regenerate);
         }
-    }
-
-    private void OnAddMaxHealth()
-    {
-        IncreaseMaxHealth();
-        _playerHealthText.SetHealthText();
     }
 
     private IEnumerator Regenerate()
@@ -114,5 +89,30 @@ public class PlayerHealth : Health
             AddHealth(_currentRegenerationPerSecond);
             yield return waitForSeconds;
         }
+    }
+
+
+    private void OnCompletelyCured()
+    {
+        AddHealth(CurrentMaxHealth);
+    }
+
+    private void OnVampirismAdded(float addedVampirismValue)
+    {
+        _isVampirismEnabled = true;
+        _currentVampirismValue += addedVampirismValue;
+    }
+
+    private void OnRegenerationAdded()
+    {
+        _currentRegenerationPerSecond += _increaseRegenerationPerSecond;
+        StopRegenerate();
+        _regenerate = StartCoroutine(Regenerate());
+    }
+
+    private void OnAddMaxHealth(int addedHealth)
+    {
+        IncreaseMaxHealth(addedHealth);
+        _playerHealthText.SetHealthText();
     }
 }

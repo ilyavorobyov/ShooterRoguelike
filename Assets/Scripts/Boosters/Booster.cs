@@ -8,16 +8,16 @@ public abstract class Booster : MonoBehaviour, IPointerClickHandler
 
     private bool _isChosenBefore = false;
 
-    public static Action BoosterSelected;
+    public static event Action BoosterSelected;
 
     private void OnEnable()
     {
-        GameUI.GameStateReset += OnReset;
+        GameUI.GameReseted += OnReset;
     }
 
     private void OnDisable()
     {
-        GameUI.GameStateReset -= OnReset;
+        GameUI.GameReseted -= OnReset;
     }
 
     public void OnPointerClick(PointerEventData eventData)
@@ -27,15 +27,15 @@ public abstract class Booster : MonoBehaviour, IPointerClickHandler
         BoosterSelected?.Invoke();
     }
 
-    public abstract void Activate();
-
-    public bool IsCanBeShow()
+    public bool CanBeShow()
     {
         if (_isSelectedOnce && _isChosenBefore)
             return false;
         else
             return true;
     }
+
+    public abstract void Activate();
 
     private void OnReset()
     {

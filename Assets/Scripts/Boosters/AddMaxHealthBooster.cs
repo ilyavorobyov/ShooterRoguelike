@@ -3,10 +3,12 @@ using UnityEngine;
 
 public class AddMaxHealthBooster : Booster
 {
-    public static Action AddMaxHealth;
+    [SerializeField] private int _addedHealth;
+
+    public static event Action<int> MaxHealthAdded;
 
     public override void Activate()
     {
-        AddMaxHealth?.Invoke();
+        MaxHealthAdded?.Invoke(_addedHealth);
     }
 }

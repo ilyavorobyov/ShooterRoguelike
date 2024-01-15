@@ -1,12 +1,13 @@
 using System;
-using UnityEngine;
 
 public class SlowDownEnemiesBooster : Booster
 {
-    public static Action EnemiesSlowed;
+    private float reductionFactor = 0.5f;
+
+    public static event Action<float> EnemiesSlowed;
 
     public override void Activate()
     {
-        EnemiesSlowed?.Invoke();
+        EnemiesSlowed?.Invoke(reductionFactor);
     }
 }

@@ -6,9 +6,10 @@ public abstract class Spawner : MonoBehaviour
     [SerializeField] protected SpawnableObject SpawnableObject;
     [SerializeField] private Player _player;
     [SerializeField] private float _minDistance;
-    protected List<SpawnableObject> Pool = new List<SpawnableObject>();
 
+    protected List<SpawnableObject> Pool = new List<SpawnableObject>();
     protected Vector3 _spawnPosition;
+
     private int _capacity = 4;
     private float _spawnPositionY = 1;
     private float _minAdditionToPosition = 6;
@@ -16,16 +17,16 @@ public abstract class Spawner : MonoBehaviour
 
     private void OnEnable()
     {
-        GameUI.GameBegun += OnHideAll;
-        GameUI.GoneMenu += OnHideAll;
-        PlayerHealth.GameOver += OnHideAll;
+        GameUI.GameBeguned += OnHideAll;
+        GameUI.MenuWented += OnHideAll;
+        PlayerHealth.GameOvered += OnHideAll;
     }
 
     private void OnDisable()
     {
-        GameUI.GameBegun -= OnHideAll;
-        GameUI.GoneMenu -= OnHideAll;
-        PlayerHealth.GameOver -= OnHideAll;
+        GameUI.GameBeguned -= OnHideAll;
+        GameUI.MenuWented -= OnHideAll;
+        PlayerHealth.GameOvered -= OnHideAll;
     }
 
     private void Awake()
@@ -81,9 +82,9 @@ public abstract class Spawner : MonoBehaviour
 
     private void OnHideAll()
     {
-        foreach(SpawnableObject spawnableObject in Pool)
+        foreach (SpawnableObject spawnableObject in Pool)
         {
-            if(spawnableObject.gameObject.activeSelf)
+            if (spawnableObject.gameObject.activeSelf)
             {
                 spawnableObject.Hide();
             }

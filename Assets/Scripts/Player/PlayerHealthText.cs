@@ -8,6 +8,7 @@ public class PlayerHealthText : MonoBehaviour
     [SerializeField] private TMP_Text _healthViewText;
 
     private PlayerHealth _health;
+    private int _digitsNumber = 0;
 
     private void Start()
     {
@@ -17,6 +18,6 @@ public class PlayerHealthText : MonoBehaviour
 
     public void SetHealthText()
     {
-        _healthViewText.text = Math.Round(_health.CurrentHealth, 0) + "\\" + _health.CurrentMaxHealth;
+        _healthViewText.text = Math.Round(_health.CurrentHealth, _digitsNumber) + "\\" + _health.CurrentMaxHealth;
     }
 }

@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 33599775203681636}
   - component: {fileID: 23833103593290186}
   - component: {fileID: 65272823318094660}
+  - component: {fileID: -5508451651998169127}
   m_Layer: 0
   m_Name: Rocks_1
   m_TagString: Untagged
@@ -105,3 +106,16 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 3.9106846, y: 1.5737944, z: 2.1546633}
   m_Center: {x: -0.22412163, y: 0.69594264, z: 0.19213709}
+--- !u!114 &-5508451651998169127
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1106648482223404}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 25cd22eaa987306448a11741fcd68cab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _additionalYPosition: 0.185

@@ -12,7 +12,7 @@ public class SoundSwitch : MonoBehaviour
 
     private void OnEnable()
     {
-        if(AudioListener.volume == _maxVolume)
+        if (AudioListener.volume == _maxVolume)
             _soundStateViewImage.sprite = _soundOnImage;
         else
             _soundStateViewImage.sprite = _soundOffImage;

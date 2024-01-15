@@ -9,26 +9,25 @@ public class PlayerWeapon : MonoBehaviour
     [SerializeField] private Weapon _startingWeapon;
     [SerializeField] private BulletClip _bulletClip;
     [SerializeField] private Transform _shootPoint;
-    
+
     private MeshRenderer _weaponMeshRenderer;
     private MeshFilter _weaponMesh;
     private PlayerBullet _bullet;
     private float _reloadDuration;
     private int _damage;
-
     private bool _isCanShoot = true;
     private Coroutine _reload;
 
     private void OnEnable()
     {
-        NewWeaponBooster.TakeNewWeapon += OnTakeNewWeapon;
-        GameUI.GameStateReset += OnReset;
+        NewWeaponBooster.NewWeaponTaked += OnNewWeaponTaked;
+        GameUI.GameReseted += OnReset;
     }
 
     private void OnDisable()
     {
-        NewWeaponBooster.TakeNewWeapon -= OnTakeNewWeapon;
-        GameUI.GameStateReset -= OnReset;
+        NewWeaponBooster.NewWeaponTaked -= OnNewWeaponTaked;
+        GameUI.GameReseted -= OnReset;
     }
 
     private void Awake()
@@ -49,7 +48,7 @@ public class PlayerWeapon : MonoBehaviour
 
     public void TryShoot(Transform target)
     {
-        if(_isCanShoot && _bulletClip.TryShoot())
+        if (_isCanShoot && _bulletClip.TryShoot())
         {
             {
                 Shoot(target);
@@ -57,7 +56,7 @@ public class PlayerWeapon : MonoBehaviour
         }
     }
 
-    public void Shoot(Transform target)
+    private void Shoot(Transform target)
     {
         var bullet = Instantiate(_bullet, _shootPoint.position, Quaternion.identity);
         bullet.Init(_damage, target);
@@ -66,7 +65,15 @@ public class PlayerWeapon : MonoBehaviour
         _playerHealth.TryHealWithVampirism(_damage);
     }
 
-    private void OnTakeNewWeapon(Weapon weapon)
+    private IEnumerator Reload()
+    {
+        var waitForSeconds = new WaitForSeconds(_reloadDuration);
+        yield return waitForSeconds;
+        _isCanShoot = true;
+        StopCoroutine(_reload);
+    }
+
+    private void OnNewWeaponTaked(Weapon weapon)
     {
         SetWeapon(weapon);
     }
@@ -74,13 +81,5 @@ public class PlayerWeapon : MonoBehaviour
     private void OnReset()
     {
         SetWeapon(_startingWeapon);
-    }
-
-    private IEnumerator Reload()
-    {
-        var waitForSeconds = new WaitForSeconds(_reloadDuration);
-        yield return waitForSeconds;
-        _isCanShoot = true;
-        StopCoroutine(_reload);
     }
 }

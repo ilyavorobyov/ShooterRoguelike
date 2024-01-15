@@ -12,14 +12,14 @@ public class MusicSwitcher : MonoBehaviour
 
     private void OnEnable()
     {
-        GameUI.GameBegun += (delegate { OnMusicSwitch(false); });
-        GameUI.GoneMenu += (delegate { OnMusicSwitch(true); });
+        GameUI.GameBeguned += (delegate { OnMusicSwitch(false); });
+        GameUI.MenuWented += (delegate { OnMusicSwitch(true); });
     }
 
     private void OnDisable()
     {
-        GameUI.GameBegun -= (delegate { OnMusicSwitch(false); });
-        GameUI.GoneMenu -= (delegate { OnMusicSwitch(true); });
+        GameUI.GameBeguned -= (delegate { OnMusicSwitch(false); });
+        GameUI.MenuWented -= (delegate { OnMusicSwitch(true); });
     }
 
     private void OnMusicSwitch(bool onMenu)

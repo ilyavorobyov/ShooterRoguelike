@@ -5,7 +5,6 @@ public class UIElementsAnimation : MonoBehaviour
 {
     [SerializeField] private float _effectDuration;
 
-
     private void OnValidate()
     {
         float minDuration = 0.2f;

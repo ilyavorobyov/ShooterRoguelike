@@ -4,9 +4,8 @@ public class MediumEnemy : Enemy
 {
     [SerializeField] private EnemyBullet _enemyBullet;
 
-    public override void Attack()
+    private void Awake()
     {
-        EnemyBullet enemyBullet = Instantiate(_enemyBullet, transform.position, Quaternion.identity);
-        enemyBullet.Init(Damage, Player.transform);
+        EnemyBullet = _enemyBullet;
     }
 }
