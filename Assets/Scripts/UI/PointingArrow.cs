@@ -5,7 +5,6 @@ public class PointingArrow : MonoBehaviour
 {
     [SerializeField] private Image _arrow;
     [SerializeField] private Transform _perkChoisePlace;
-    [SerializeField] private Transform _tokenSpawnPoint;
 
     private Transform _target;
     private Camera _camera;
@@ -40,10 +39,10 @@ public class PointingArrow : MonoBehaviour
         }
     }
 
-    public void PointTokenSpawn()
+    public void PointTokenSpawn(Transform tokenSpawnPoint)
     {
         gameObject.SetActive(true);
-        _target = _tokenSpawnPoint;
+        _target = tokenSpawnPoint;
     }
 
     public void OnHide()

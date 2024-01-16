@@ -13,12 +13,12 @@ public class WavesMaker : MonoBehaviour
     [SerializeField] private PointingArrow _pointingArrow;
     [SerializeField] private WaveSlider _waveSlider;
     [SerializeField] private Token _token;
-    [SerializeField] private Transform _tokenSpawnPoint;
+    [SerializeField] private Transform[] _tokenSpawnPoints;
 
     private const string NextWaveText = "Волна: ";
     private const string WaveWonText = "Побеждена волна ";
 
-    private int _startEnemiesNumber = 1;
+    private int _startEnemiesNumber = 2;
     private int _startWaveNumber = 1;
     private float _startEasyEnemyChance = 100;
     private float _startHardEnemyChance = 0;
@@ -26,7 +26,7 @@ public class WavesMaker : MonoBehaviour
     private float _currentHardEnemyChance;
     private int _currentWaveNumber;
     private int _currentWaveEnemiesNumber;
-    private int _increaseEnemiesNumber = 0;
+    private int _increaseEnemiesNumber = 1;
     private int _reducingChanceOfEasyEnemy = 7;
     private int _increasingChanceOfHardEnemy = 3;
     private int _spawnedEnemiesNumber;
@@ -77,6 +77,11 @@ public class WavesMaker : MonoBehaviour
         return chanceValue > Random.Range(minNumber, maxNumber);
     }
 
+    private Transform SelectTokenSpawnPoint()
+    {
+        return _tokenSpawnPoints[Random.Range(0, _tokenSpawnPoints.Length)];
+    }
+
     private IEnumerator MakeWaves()
     {
         _bulletSpawner.Begin();
@@ -117,8 +122,9 @@ public class WavesMaker : MonoBehaviour
         {
             ShowWaveInfoText(WaveWonText);
             _bulletSpawner.Stop();
-            _pointingArrow.PointTokenSpawn();
-            Instantiate(_token, _tokenSpawnPoint);
+            Transform tokenSpawnPoint = SelectTokenSpawnPoint();
+            _pointingArrow.PointTokenSpawn(tokenSpawnPoint);
+            Instantiate(_token, tokenSpawnPoint);
         }
     }
 

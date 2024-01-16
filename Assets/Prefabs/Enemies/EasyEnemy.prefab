@@ -475,7 +475,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Damage: 10
   _startSpeed: 2
-  _pursuitDistance: 4
+  _pursuitDistance: 5
   _attackDistance: 1
   _rechargeTime: 2
 --- !u!114 &4471674506606062135
@@ -491,8 +491,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _startMaxHealth: 20
-  _healer: {fileID: 4099209221665869466, guid: 1ce250b4170cacd44a336ebc66a2270a, type: 3}
-  _healerDropChance: 5
 --- !u!114 &4703897288755338190
 MonoBehaviour:
   m_ObjectHideFlags: 0

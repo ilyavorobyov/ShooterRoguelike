@@ -5,14 +5,14 @@ using UnityEngine;
 public class Backpack : MonoBehaviour
 {
     [SerializeField] private DisplayedBullet _displayedBulletSample;
-    [SerializeField] private Token _displayedTokenSample;
+    [SerializeField] private DisplayedToken _displayedTokenSample;
 
     private List<DisplayedBullet> _displayedBullets = new List<DisplayedBullet>();
     private Vector3 _startCurrentPosition = Vector3.zero;
     private Vector3 _currentPosition;
     private Vector3 _additionPosition = new Vector3(0f, 0.28f, 0f);
     private Vector3 _addedObjectsRotation = new Vector3(0f, 0f, 90f);
-    private Token _currentToken;
+    private DisplayedToken _currentToken;
     private bool _isHaveToken;
 
     public static event Action TokenBroughted;

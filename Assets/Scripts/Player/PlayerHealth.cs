@@ -35,7 +35,7 @@ public class PlayerHealth : Health
         AddVampirismBooster.VampirismAdded += OnVampirismAdded;
     }
 
-    public override void TakeDamage(int damage)
+    public override void TakeDamage(float damage)
     {
         base.TakeDamage(damage);
         _playerHealthText.SetHealthText();

@@ -30,6 +30,7 @@ public class Mover : MonoBehaviour
         Booster.BoosterSelected += OnBoosterSelected;
         AddPlayerMoveSpeedBooster.SpeedAdded += OnSpeedAdded;
         GameUI.GameBeguned += OnReset;
+        GameUI.GameReseted += OnReset;
     }
 
     private void OnDisable()
@@ -38,6 +39,7 @@ public class Mover : MonoBehaviour
         Booster.BoosterSelected -= OnBoosterSelected;
         AddPlayerMoveSpeedBooster.SpeedAdded += OnSpeedAdded;
         GameUI.GameBeguned -= OnReset;
+        GameUI.GameReseted -= OnReset;
     }
 
     private void Move()

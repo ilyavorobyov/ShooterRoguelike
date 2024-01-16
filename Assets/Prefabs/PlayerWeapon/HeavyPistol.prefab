@@ -48,5 +48,5 @@ MonoBehaviour:
   _weaponMaterial: {fileID: 2100000, guid: deff1f016057ff545934653277271e05, type: 2}
   _bullet: {fileID: 5260776931905480232, guid: b4bcb74ab8588e946a0b5018dbdd4a66, type: 3}
   _damage: 20
-  _label: "\u0420\u0443\u0436\u044C\u0451"
+  _label: "\u0422\u044F\u0436\u0435\u043B\u044B\u0439 \u043F\u0438\u0441\u0442\u043E\u043B\u0435\u0442"
   _reloadDuration: 1

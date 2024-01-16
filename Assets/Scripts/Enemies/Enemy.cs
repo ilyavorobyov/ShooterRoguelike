@@ -5,7 +5,7 @@ using UnityEngine;
 [RequireComponent(typeof(EnemyPointer))]
 public abstract class Enemy : MonoBehaviour
 {
-    [SerializeField] protected int Damage;
+    [SerializeField] protected float Damage;
     [SerializeField] private float _startSpeed;
     [SerializeField] private float _pursuitDistance;
     [SerializeField] private float _attackDistance;

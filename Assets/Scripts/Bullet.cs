@@ -5,9 +5,9 @@ public abstract class Bullet : MonoBehaviour
     private float _speed = 7;
     private Transform _target;
 
-    public int Damage { get; private set; }
+    public float Damage { get; private set; }
 
-    public void Init(int damage, Transform target)
+    public void Init(float damage, Transform target)
     {
         Damage = damage;
         _target = target;

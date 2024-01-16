@@ -577,7 +577,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Damage: 15
   _startSpeed: 2.2
-  _pursuitDistance: 6
+  _pursuitDistance: 7
   _attackDistance: 3
   _rechargeTime: 1.5
   _enemyBullet: {fileID: 1618001278789467457, guid: 1e90eee0f32c088449f83941e8b558d2, type: 3}
@@ -593,8 +593,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd3e078061e93d34a9687f32707d3b41, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _startMaxHealth: 20
-  _healerDropChance: 10
+  _startMaxHealth: 25
 --- !u!114 &8919533997137692353
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -17,9 +17,9 @@ public class PlayerCollisionHandler : MonoBehaviour
         _playerHealth = GetComponent<PlayerHealth>();
     }
 
-    private void OnTriggerEnter(Collider collision)
+    private void OnTriggerEnter(Collider collider)
     {
-        if (collision.TryGetComponent(out LiftableBullet liftableBullet))
+        if (collider.TryGetComponent(out LiftableBullet liftableBullet))
         {
             if (!_bulletClip.IsMaxBullets)
             {
@@ -28,19 +28,19 @@ public class PlayerCollisionHandler : MonoBehaviour
             }
         }
 
-        if (collision.TryGetComponent(out Token token))
+        if (collider.TryGetComponent(out Token token))
         {
             Destroy(token.gameObject);
             _backpack.AddToken();
             TokenTaked?.Invoke();
         }
 
-        if (collision.TryGetComponent(out BoosterSelectionLocation boosterSelectionLocation))
+        if (collider.TryGetComponent(out BoosterSelectionLocation boosterSelectionLocation))
         {
             _backpack.RemoveToken();
         }
 
-        if (collision.TryGetComponent(out EnemyBullet enemyBullet))
+        if (collider.TryGetComponent(out EnemyBullet enemyBullet))
         {
             _playerHealth.TakeDamage(enemyBullet.Damage);
             Destroy(enemyBullet.gameObject);

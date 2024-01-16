@@ -14,7 +14,7 @@ public class PlayerWeapon : MonoBehaviour
     private MeshFilter _weaponMesh;
     private PlayerBullet _bullet;
     private float _reloadDuration;
-    private int _damage;
+    private float _damage;
     private bool _isCanShoot = true;
     private Coroutine _reload;
 

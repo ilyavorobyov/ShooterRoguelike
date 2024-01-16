@@ -33,7 +33,7 @@ public abstract class Health : MonoBehaviour
         GameUI.GameBeguned -= OnReset;
     }
 
-    public virtual void TakeDamage(int damage)
+    public virtual void TakeDamage(float damage)
     {
         if (damage > 0)
         {
