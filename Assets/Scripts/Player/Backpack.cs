@@ -10,7 +10,7 @@ public class Backpack : MonoBehaviour
     private List<DisplayedBullet> _displayedBullets = new List<DisplayedBullet>();
     private Vector3 _startCurrentPosition = Vector3.zero;
     private Vector3 _currentPosition;
-    private Vector3 _additionPosition = new Vector3(0f, 0.28f, 0f);
+    private Vector3 _additionPosition = new Vector3(0f, 0.2f, 0f);
     private Vector3 _addedObjectsRotation = new Vector3(0f, 0f, 90f);
     private DisplayedToken _currentToken;
     private bool _isHaveToken;

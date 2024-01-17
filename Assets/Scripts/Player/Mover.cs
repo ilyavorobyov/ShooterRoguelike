@@ -13,6 +13,7 @@ public class Mover : MonoBehaviour
     private bool _isEnemyVisible;
     private Transform _target;
     private Vector3 _startPosition = new Vector3(0, 1, 0);
+    private Vector3 _startRotation = Vector3.zero;
 
     private void Awake()
     {
@@ -21,6 +22,7 @@ public class Mover : MonoBehaviour
 
     private void FixedUpdate()
     {
+        TryLookAtTarget();
         Move();
     }
 
@@ -49,15 +51,10 @@ public class Mover : MonoBehaviour
             _moveDirection = new Vector3(-_joystick.Horizontal, 0, -_joystick.Vertical);
             _moveDirection.Normalize();
             transform.Translate(_moveDirection * _currentSpeed * Time.deltaTime, Space.World);
-
-            if (_isEnemyVisible)
-                transform.LookAt(_target);
-            else
-                transform.forward = _moveDirection;
         }
     }
 
-    public void SetTargetRotation(Transform target)
+    public void SetRotationTarget(Transform target)
     {
         _target = target;
         _isEnemyVisible = true;
@@ -66,6 +63,14 @@ public class Mover : MonoBehaviour
     public void SetMoveDirectionRotation()
     {
         _isEnemyVisible = false;
+    }
+
+    private void TryLookAtTarget()
+    {
+        if (_isEnemyVisible)
+            transform.LookAt(_target);
+        else
+            transform.forward = _moveDirection;
     }
 
     private void OnSpeedAdded(int additionalSpeed)
@@ -83,6 +88,7 @@ public class Mover : MonoBehaviour
     {
         transform.position = _startPosition;
         _currentSpeed = _startSpeed;
+        transform.rotation = Quaternion.Euler(_startRotation);
     }
 
     private void OnBoosterSelected()

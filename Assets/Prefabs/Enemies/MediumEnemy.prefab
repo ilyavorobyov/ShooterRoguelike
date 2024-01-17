@@ -172,7 +172,7 @@ MonoBehaviour:
   _pursuitDistance: 6
   _attackDistance: 3
   _rechargeTime: 1.9
-  _enemyBullet: {fileID: 1618001278789467457, guid: 1e90eee0f32c088449f83941e8b558d2, type: 3}
+  _enemyBullet: {fileID: 3397415953168034966, guid: 1e90eee0f32c088449f83941e8b558d2, type: 3}
 --- !u!114 &1885356220935812614
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -7,12 +7,6 @@ public abstract class Bullet : MonoBehaviour
 
     public float Damage { get; private set; }
 
-    public void Init(float damage, Transform target)
-    {
-        Damage = damage;
-        _target = target;
-    }
-
     private void Update()
     {
         if (_target != null && _target.gameObject.activeSelf)
@@ -24,5 +18,11 @@ public abstract class Bullet : MonoBehaviour
         {
             Destroy(gameObject);
         }
+    }
+
+    public void Init(float damage, Transform target)
+    {
+        Damage = damage;
+        _target = target;
     }
 }

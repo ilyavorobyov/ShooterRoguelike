@@ -491,6 +491,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _startMaxHealth: 20
+  _dieParticles: {fileID: 0}
 --- !u!114 &4703897288755338190
 MonoBehaviour:
   m_ObjectHideFlags: 0

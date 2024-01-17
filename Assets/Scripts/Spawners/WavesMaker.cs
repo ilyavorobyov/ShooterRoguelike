@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using TMPro;
 using UnityEngine;
@@ -32,7 +33,10 @@ public class WavesMaker : MonoBehaviour
     private int _spawnedEnemiesNumber;
     private int _killedEnemiesNumber;
     private bool _isSpawning = true;
+    private Token _currentToken;
     private Coroutine _makeWaves;
+
+    public static event Action<int> WavePassed;
 
     private void OnEnable()
     {
@@ -58,16 +62,6 @@ public class WavesMaker : MonoBehaviour
     {
         _waveInfoText.gameObject.SetActive(true);
         _waveInfoText.text = text + _currentWaveNumber;
-    }
-
-    private void OnGameOver()
-    {
-        _isSpawning = false;
-
-        if (_makeWaves != null)
-            StopCoroutine(_makeWaves);
-
-        _bulletSpawner.Stop();
     }
 
     private bool GetChance(float chanceValue)
@@ -124,7 +118,8 @@ public class WavesMaker : MonoBehaviour
             _bulletSpawner.Stop();
             Transform tokenSpawnPoint = SelectTokenSpawnPoint();
             _pointingArrow.PointTokenSpawn(tokenSpawnPoint);
-            Instantiate(_token, tokenSpawnPoint);
+            _currentToken = Instantiate(_token, tokenSpawnPoint);
+            WavePassed?.Invoke(_currentWaveNumber);
         }
     }
 
@@ -159,5 +154,18 @@ public class WavesMaker : MonoBehaviour
 
         _makeWaves = StartCoroutine(MakeWaves());
         _waveSlider.SetValues(_currentWaveEnemiesNumber, _currentWaveNumber);
+    }
+
+    private void OnGameOver()
+    {
+        _isSpawning = false;
+
+        if (_makeWaves != null)
+            StopCoroutine(_makeWaves);
+
+        if(_currentToken != null)
+            Destroy(_currentToken.gameObject);
+
+        _bulletSpawner.Stop();
     }
 }

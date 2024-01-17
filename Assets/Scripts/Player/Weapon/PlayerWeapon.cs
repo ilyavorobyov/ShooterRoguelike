@@ -60,6 +60,7 @@ public class PlayerWeapon : MonoBehaviour
     {
         var bullet = Instantiate(_bullet, _shootPoint.position, Quaternion.identity);
         bullet.Init(_damage, target);
+        bullet.transform.rotation = gameObject.transform.rotation;
         _isCanShoot = false;
         _reload = StartCoroutine(Reload());
         _playerHealth.TryHealWithVampirism(_damage);

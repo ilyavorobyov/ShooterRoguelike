@@ -6,7 +6,7 @@ public class LavaDamage : MonoBehaviour
 {
     [SerializeField] private TMP_Text _lavaInfoText;
 
-    private float _damage = 25;
+    private float _damage = 35;
     private PlayerHealth _playerHealth;
     private Coroutine _hitPlayer;
 
@@ -20,9 +20,9 @@ public class LavaDamage : MonoBehaviour
         GameUI.GameReseted -= OnReset;
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerExit(Collider collider)
     {
-        if (collision.gameObject.TryGetComponent(out PlayerHealth playerHealth))
+        if (collider.gameObject.TryGetComponent(out PlayerHealth playerHealth))
         {
             if (_playerHealth == null)
             {
@@ -34,12 +34,16 @@ public class LavaDamage : MonoBehaviour
         }
     }
 
-    private void OnCollisionExit(Collision collision)
+    private void OnTriggerStay(Collider collider)
     {
-        if (collision.gameObject.TryGetComponent(out PlayerHealth playerHealth))
+        if (collider.gameObject.TryGetComponent(out PlayerHealth playerHealth))
         {
             StopHitPlayer();
-            _lavaInfoText.gameObject.SetActive(false);
+
+            if (_lavaInfoText.isActiveAndEnabled)
+            {
+                _lavaInfoText.gameObject.SetActive(false);
+            }
         }
     }
 

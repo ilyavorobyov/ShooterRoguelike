@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 [RequireComponent(typeof(Animator))]
@@ -13,6 +14,8 @@ public class LiftableBullet : MonoBehaviour
     private LiftableBullet _liftableBullet;
     private Animator _animator;
 
+    public static event Action<Vector3> SpawnPositionSented;
+
     private void Awake()
     {
         _liftableBullet = GetComponent<LiftableBullet>();
@@ -27,6 +30,7 @@ public class LiftableBullet : MonoBehaviour
     private void OnEnable()
     {
         _stateMachine.ChangeState(_idleState);
+        SpawnPositionSented?.Invoke(transform.position);
     }
 
     private void Update()

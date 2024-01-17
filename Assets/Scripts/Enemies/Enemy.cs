@@ -20,6 +20,7 @@ public abstract class Enemy : MonoBehaviour
     private Coroutine _trackPlayer;
 
     public static event Action Spawned;
+    public static event Action<Vector3> SpawnPositionSented;
 
     private void Start()
     {
@@ -35,6 +36,7 @@ public abstract class Enemy : MonoBehaviour
         {
             StartTrackPlayer();
             Spawned?.Invoke();
+            SpawnPositionSented?.Invoke(transform.position);
         }
     }
 

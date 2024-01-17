@@ -63,8 +63,8 @@ public class Scanner : MonoBehaviour
             {
                 enemy = enemiesWithinAbilityRange.OrderBy(enemy =>
                 Vector3.Distance(enemy.transform.position, transform.position)).FirstOrDefault();
+                _mover.SetRotationTarget(enemy.transform);
                 _weapon.TryShoot(enemy.transform);
-                _mover.SetTargetRotation(enemy.transform);
             }
             else
             {
