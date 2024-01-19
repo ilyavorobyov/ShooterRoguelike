@@ -18,6 +18,7 @@ public class GameUI : MonoBehaviour
     [SerializeField] private ShootingRangeIndicator _shootingRangeIndicator;
     [SerializeField] private PlayerHealthbar _playerHealthBar;
     [SerializeField] private WaveSlider _waveSlider;
+    [SerializeField] private AudioSource _lossSound;
 
     private UIElementsAnimation _uiElementsAnimation;
 
@@ -111,5 +112,6 @@ public class GameUI : MonoBehaviour
         _shootingRangeIndicator.gameObject.SetActive(false);
         _playerHealthBar.gameObject.SetActive(false);
         _uiElementsAnimation.Disappear(_waveSlider.gameObject);
+        _lossSound.PlayDelayed(0);
     }
 }

@@ -14,6 +14,7 @@ public class WavesMaker : MonoBehaviour
     [SerializeField] private PointingArrow _pointingArrow;
     [SerializeField] private WaveSlider _waveSlider;
     [SerializeField] private Token _token;
+    [SerializeField] private AudioSource _wavePassedSound;
     [SerializeField] private Transform[] _tokenSpawnPoints;
 
     private const string NextWaveText = "Волна: ";
@@ -27,7 +28,7 @@ public class WavesMaker : MonoBehaviour
     private int _currentWaveNumber;
     private int _currentWaveEnemiesNumber;
     private int _minIncreaseEnemiesNumber = 2;
-    private int _maxIncreaseEnemiesNumber = 5;
+    private int _maxIncreaseEnemiesNumber = 4;
     private int _reducingChanceOfEasyEnemy = 6;
     private int _increasingChanceOfHardEnemy = 2;
     private int _spawnedEnemiesNumber;
@@ -120,6 +121,7 @@ public class WavesMaker : MonoBehaviour
             _pointingArrow.PointTokenSpawn(tokenSpawnPoint);
             _currentToken = Instantiate(_token, tokenSpawnPoint);
             WavePassed?.Invoke(_currentWaveNumber);
+            _wavePassedSound.PlayDelayed(0);
         }
     }
 

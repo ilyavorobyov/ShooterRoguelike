@@ -8,7 +8,7 @@ public abstract class Weapon : MonoBehaviour
     [SerializeField] private float _damage;
     [SerializeField] private float _reloadDuration;
 
-    private float _aimingDuration = 0.2f;
+    private float _aimingDuration = 0.15f;
     private bool _isCanShoot = true;
     private Coroutine _reload;
     private Coroutine _shoot;

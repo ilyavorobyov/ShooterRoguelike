@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class MusicSwitcher : MonoBehaviour
@@ -14,12 +15,14 @@ public class MusicSwitcher : MonoBehaviour
     {
         GameUI.GameBeguned += (delegate { OnMusicSwitch(false); });
         GameUI.MenuWented += (delegate { OnMusicSwitch(true); });
+        PlayerHealth.GameOvered += OnGameOver;
     }
 
     private void OnDisable()
     {
         GameUI.GameBeguned -= (delegate { OnMusicSwitch(false); });
         GameUI.MenuWented -= (delegate { OnMusicSwitch(true); });
+        PlayerHealth.GameOvered -= OnGameOver;
     }
 
     private void OnMusicSwitch(bool onMenu)
@@ -34,5 +37,10 @@ public class MusicSwitcher : MonoBehaviour
             _menuMusic.Stop();
             _gameMusic.PlayDelayed(0);
         }
+    }
+
+    private void OnGameOver()
+    {
+        _gameMusic.Stop();
     }
 }

@@ -4,6 +4,7 @@ using UnityEngine;
 public class HardEnemy : Enemy
 {
     [SerializeField] private EnemyBullet _enemyBullet;
+    [SerializeField] private Transform _shootPoint;
 
     private EnemyHealth _enemyHealth;
     private int _healthRecoveryDivisor = 3;
@@ -11,12 +12,13 @@ public class HardEnemy : Enemy
     private void Awake()
     {
         _enemyHealth = GetComponent<EnemyHealth>();
-        EnemyBullet = _enemyBullet;
+   //     EnemyBullet = _enemyBullet;
     }
 
     public override void Attack()
     {
-        base.Attack();
+        EnemyBullet enemyBullet = Instantiate(_enemyBullet, _shootPoint.transform.position, Quaternion.identity);
+        enemyBullet.Init(Damage, Player.transform); 
         _enemyHealth.AddHealth(Damage / _healthRecoveryDivisor);
     }
 }

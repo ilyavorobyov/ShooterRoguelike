@@ -6,6 +6,7 @@ public class Backpack : MonoBehaviour
 {
     [SerializeField] private DisplayedBullet _displayedBulletSample;
     [SerializeField] private DisplayedToken _displayedTokenSample;
+    [SerializeField] private AudioSource _removeTokenSound;
 
     private List<DisplayedBullet> _displayedBullets = new List<DisplayedBullet>();
     private Vector3 _startCurrentPosition = Vector3.zero;
@@ -73,6 +74,7 @@ public class Backpack : MonoBehaviour
             Destroy(_currentToken.gameObject);
             _currentPosition -= _additionPosition;
             TokenBroughted?.Invoke();
+            _removeTokenSound.PlayDelayed(0);
         }
     }
 

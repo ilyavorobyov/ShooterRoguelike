@@ -3,6 +3,7 @@ using System.Collections;
 using UnityEngine;
 
 [RequireComponent(typeof(EnemyPointer))]
+[RequireComponent(typeof(EnemyAnimator))]
 public abstract class Enemy : MonoBehaviour
 {
     [SerializeField] protected float Damage;
@@ -13,9 +14,10 @@ public abstract class Enemy : MonoBehaviour
 
     protected Player Player;
     protected PlayerHealth PlayerHealth;
-    protected EnemyBullet EnemyBullet;
-    private float _currentSpeed;
+
     private EnemyPointer _enemyPointer;
+    private EnemyAnimator _animationMachine;
+    private float _currentSpeed;
     private float _currentDistance;
     private Coroutine _trackPlayer;
 
@@ -24,6 +26,7 @@ public abstract class Enemy : MonoBehaviour
 
     private void Start()
     {
+        _animationMachine = GetComponent<EnemyAnimator>();
         _currentSpeed = _startSpeed;
         GameUI.GameReseted += OnReset;
         SlowDownEnemiesBooster.EnemiesSlowed += OnSlowed;
@@ -61,8 +64,7 @@ public abstract class Enemy : MonoBehaviour
 
     public virtual void Attack()
     {
-        EnemyBullet enemyBullet = Instantiate(EnemyBullet, transform.position, Quaternion.identity);
-        enemyBullet.Init(Damage, Player.transform);
+        PlayerHealth.TakeDamage(Damage);
     }
 
     private void StartTrackPlayer()
@@ -91,9 +93,10 @@ public abstract class Enemy : MonoBehaviour
             if (_currentDistance < _attackDistance)
             {
                 Attack();
+                _animationMachine.PlayAttackAnimation();
                 yield return waitForSeconds;
             }
-
+            
             if (_currentDistance <= _pursuitDistance)
             {
                 transform.LookAt(Player.transform);
