@@ -29,7 +29,7 @@ public class BulletSpawner : Spawner
 
     private IEnumerator SpawnBullets()
     {
-        float spawnTime = 2f;
+        float spawnTime = 3f;
         var waitForSeconds = new WaitForSeconds(spawnTime);
 
         while (_isSpawning)

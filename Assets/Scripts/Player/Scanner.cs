@@ -4,17 +4,20 @@ using System.Linq;
 using UnityEngine;
 
 [RequireComponent(typeof(Mover))]
+[RequireComponent(typeof(Rotator))]
 public class Scanner : MonoBehaviour
 {
-    [SerializeField] private PlayerWeapon _weapon;
+    [SerializeField] private WeaponPlacement _weaponPlacement;
 
     private Mover _mover;
+    private Rotator _rotator;
     private float _range = 3;
     private Coroutine _searchEnemy;
 
     private void Awake()
     {
         _mover = GetComponent<Mover>();
+        _rotator = GetComponent<Rotator>();
     }
 
     private void Start()
@@ -63,12 +66,12 @@ public class Scanner : MonoBehaviour
             {
                 enemy = enemiesWithinAbilityRange.OrderBy(enemy =>
                 Vector3.Distance(enemy.transform.position, transform.position)).FirstOrDefault();
-                _mover.SetRotationTarget(enemy.transform);
-                _weapon.TryShoot(enemy.transform);
+                _rotator.SetRotationTarget(enemy.transform);
+                _weaponPlacement.TryShoot(enemy.transform);
             }
             else
             {
-                _mover.SetMoveDirectionRotation();
+                _rotator.SetMoveDirectionRotation();
             }
 
             yield return waitForSeconds;

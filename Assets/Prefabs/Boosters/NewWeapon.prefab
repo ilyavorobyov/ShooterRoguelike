@@ -362,4 +362,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _isSelectedOnce: 1
-  _newWeapon: {fileID: 7501755052928097255, guid: 93993470dc7afd847a96fb6f5249891d, type: 3}
+  _newWeapon: {fileID: 1109342983400152991, guid: 7dedaeeff8c390847943a67b24d1f506, type: 3}

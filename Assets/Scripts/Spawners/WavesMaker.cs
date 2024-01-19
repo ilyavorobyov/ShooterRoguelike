@@ -19,7 +19,6 @@ public class WavesMaker : MonoBehaviour
     private const string NextWaveText = "Волна: ";
     private const string WaveWonText = "Побеждена волна ";
 
-    private int _startEnemiesNumber = 2;
     private int _startWaveNumber = 1;
     private float _startEasyEnemyChance = 100;
     private float _startHardEnemyChance = 0;
@@ -27,9 +26,10 @@ public class WavesMaker : MonoBehaviour
     private float _currentHardEnemyChance;
     private int _currentWaveNumber;
     private int _currentWaveEnemiesNumber;
-    private int _increaseEnemiesNumber = 1;
-    private int _reducingChanceOfEasyEnemy = 7;
-    private int _increasingChanceOfHardEnemy = 3;
+    private int _minIncreaseEnemiesNumber = 2;
+    private int _maxIncreaseEnemiesNumber = 5;
+    private int _reducingChanceOfEasyEnemy = 6;
+    private int _increasingChanceOfHardEnemy = 2;
     private int _spawnedEnemiesNumber;
     private int _killedEnemiesNumber;
     private bool _isSpawning = true;
@@ -83,7 +83,7 @@ public class WavesMaker : MonoBehaviour
         _spawnedEnemiesNumber = 0;
         _killedEnemiesNumber = 0;
         float minSpawnTime = 2;
-        float maxSpawnTime = 5;
+        float maxSpawnTime = 4;
         float spawnTime = Random.Range(minSpawnTime, maxSpawnTime);
         var waitForSeconds = new WaitForSeconds(spawnTime);
 
@@ -130,7 +130,7 @@ public class WavesMaker : MonoBehaviour
 
     public void OnStartNextWave()
     {
-        _currentWaveEnemiesNumber += _increaseEnemiesNumber;
+        _currentWaveEnemiesNumber += Random.Range(_minIncreaseEnemiesNumber, _maxIncreaseEnemiesNumber); 
         _currentWaveNumber++;
         _currentEasyEnemyChance -= _reducingChanceOfEasyEnemy;
         _currentHardEnemyChance += _increasingChanceOfHardEnemy;
@@ -141,11 +141,11 @@ public class WavesMaker : MonoBehaviour
 
     private void OnStartGame()
     {
-        _currentWaveNumber = _startWaveNumber;
+        _currentWaveEnemiesNumber = Random.Range(_minIncreaseEnemiesNumber, _maxIncreaseEnemiesNumber); ;
         _currentEasyEnemyChance = _startEasyEnemyChance;
-        _currentWaveEnemiesNumber = _startEnemiesNumber;
         _currentHardEnemyChance = _startHardEnemyChance;
         _isSpawning = true;
+        _currentWaveNumber = _startWaveNumber; 
 
         if (_makeWaves != null)
         {
@@ -154,6 +154,9 @@ public class WavesMaker : MonoBehaviour
 
         _makeWaves = StartCoroutine(MakeWaves());
         _waveSlider.SetValues(_currentWaveEnemiesNumber, _currentWaveNumber);
+
+        if (_currentToken != null)
+            Destroy(_currentToken.gameObject);
     }
 
     private void OnGameOver()
