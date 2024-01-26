@@ -4,6 +4,7 @@ using UnityEngine;
 public abstract class Health : MonoBehaviour
 {
     [SerializeField] protected float _startMaxHealth;
+    [SerializeField] private AudioSource _hitSound;
 
     private HealthView _healthView;
     protected float _currentHealth;
@@ -39,6 +40,7 @@ public abstract class Health : MonoBehaviour
         {
             _currentHealth -= damage;
             _healthView.SetInfo();
+            _hitSound.PlayDelayed(0);
 
             if (_currentHealth <= _minHealth)
                 Die();

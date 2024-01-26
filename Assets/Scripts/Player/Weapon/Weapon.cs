@@ -6,9 +6,11 @@ public abstract class Weapon : MonoBehaviour
     [SerializeField] private PlayerBullet _bullet;
     [SerializeField] private Transform _shootPoint;
     [SerializeField] private float _damage;
-    [SerializeField] private float _reloadDuration;
+    [SerializeField] private float _rechargeDuration;
+    [SerializeField] private AudioSource _shootSound;
+    [SerializeField] private AudioSource _rechargeSound;
 
-    private float _aimingDuration = 0.15f;
+    private float _aimingDuration = 0.1f;
     private bool _isCanShoot = true;
     private Coroutine _reload;
     private Coroutine _shoot;
@@ -27,9 +29,10 @@ public abstract class Weapon : MonoBehaviour
 
     private IEnumerator Reload()
     {
-        var waitForSeconds = new WaitForSeconds(_reloadDuration);
+        var waitForSeconds = new WaitForSeconds(_rechargeDuration);
         yield return waitForSeconds;
         _isCanShoot = true;
+        _rechargeSound.PlayDelayed(0);
         StopCoroutine(_reload);
     }
 
@@ -37,6 +40,7 @@ public abstract class Weapon : MonoBehaviour
     {
         var waitForSeconds = new WaitForSeconds(_aimingDuration);
         yield return waitForSeconds;
+        _shootSound.PlayDelayed(0);
         var bullet = Instantiate(_bullet, _shootPoint.position, Quaternion.identity);
         bullet.Init(_damage, target);
         _isCanShoot = false;

@@ -7,6 +7,8 @@ public class PlayerCollisionHandler : MonoBehaviour
     [SerializeField] private BulletClip _bulletClip;
     [SerializeField] private Backpack _backpack;
     [SerializeField] private WavesMaker _waveMaker;
+    [SerializeField] private AudioSource _tookBulletSound;
+    [SerializeField] private AudioSource _tookTokenSound;
 
     private PlayerHealth _playerHealth;
 
@@ -23,6 +25,7 @@ public class PlayerCollisionHandler : MonoBehaviour
         {
             if (!_bulletClip.IsMaxBullets)
             {
+                _tookBulletSound.PlayDelayed(0);
                 _bulletClip.TryAdd();
                 liftableBullet.Hide();
             }
@@ -30,6 +33,7 @@ public class PlayerCollisionHandler : MonoBehaviour
 
         if (collider.TryGetComponent(out Token token))
         {
+            _tookTokenSound.PlayDelayed(0);
             Destroy(token.gameObject);
             _backpack.AddToken();
             TokenTaked?.Invoke();

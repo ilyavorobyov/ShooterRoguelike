@@ -7,6 +7,8 @@ using UnityEngine;
 public abstract class Enemy : MonoBehaviour
 {
     [SerializeField] protected float Damage;
+    [SerializeField] private AudioSource _appearanceSound;
+    [SerializeField] private AudioSource _attackSound;
     [SerializeField] private float _startSpeed;
     [SerializeField] private float _pursuitDistance;
     [SerializeField] private float _attackDistance;
@@ -40,6 +42,7 @@ public abstract class Enemy : MonoBehaviour
             StartTrackPlayer();
             Spawned?.Invoke();
             SpawnPositionSented?.Invoke(transform.position);
+            _appearanceSound.PlayDelayed(0);
         }
     }
 
@@ -64,7 +67,7 @@ public abstract class Enemy : MonoBehaviour
 
     public virtual void Attack()
     {
-        PlayerHealth.TakeDamage(Damage);
+        _attackSound.PlayDelayed(0);
     }
 
     private void StartTrackPlayer()

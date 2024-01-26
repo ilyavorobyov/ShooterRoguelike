@@ -5,8 +5,9 @@ using UnityEngine;
 public class LavaDamage : MonoBehaviour
 {
     [SerializeField] private TMP_Text _lavaInfoText;
+    [SerializeField] private AudioSource _hitPlayerSound;
 
-    private float _damage = 35;
+    private float _damage = 30;
     private PlayerHealth _playerHealth;
     private Coroutine _hitPlayer;
 
@@ -64,6 +65,7 @@ public class LavaDamage : MonoBehaviour
         while (isHitting)
         {
             _playerHealth.TakeDamage(_damage);
+            _hitPlayerSound.PlayDelayed(0);
             yield return waitForSeconds;
         }
     }

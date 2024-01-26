@@ -5,6 +5,8 @@ using UnityEngine;
 [RequireComponent(typeof(PlayerHealthText))]
 public class PlayerHealth : Health
 {
+    [SerializeField] private AudioSource _healSound;
+
     private PlayerHealthText _playerHealthText;
     private float _startRegenerationPerSecond = 0;
     private float _increaseRegenerationPerSecond = 0.3f;
@@ -95,6 +97,7 @@ public class PlayerHealth : Health
     private void OnCompletelyCured()
     {
         AddHealth(CurrentMaxHealth);
+        _healSound.PlayDelayed(0);
     }
 
     private void OnVampirismAdded(float addedVampirismValue)
@@ -114,5 +117,6 @@ public class PlayerHealth : Health
     {
         IncreaseMaxHealth(addedHealth);
         _playerHealthText.SetHealthText();
+        _healSound.PlayDelayed(0);
     }
 }

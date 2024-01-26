@@ -12,11 +12,11 @@ public class HardEnemy : Enemy
     private void Awake()
     {
         _enemyHealth = GetComponent<EnemyHealth>();
-   //     EnemyBullet = _enemyBullet;
     }
 
     public override void Attack()
     {
+        base.Attack();
         EnemyBullet enemyBullet = Instantiate(_enemyBullet, _shootPoint.transform.position, Quaternion.identity);
         enemyBullet.Init(Damage, Player.transform); 
         _enemyHealth.AddHealth(Damage / _healthRecoveryDivisor);
