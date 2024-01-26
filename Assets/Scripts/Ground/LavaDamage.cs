@@ -35,7 +35,7 @@ public class LavaDamage : MonoBehaviour
         }
     }
 
-    private void OnTriggerStay(Collider collider)
+    private void OnTriggerEnter(Collider collider)
     {
         if (collider.gameObject.TryGetComponent(out PlayerHealth playerHealth))
         {

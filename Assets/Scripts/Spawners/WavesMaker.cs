@@ -21,7 +21,7 @@ public class WavesMaker : MonoBehaviour
     private const string WaveWonText = "Побеждена волна ";
 
     private int _startWaveNumber = 1;
-    private float _startEasyEnemyChance = 100;
+    private float _startEasyEnemyChance = 101;
     private float _startHardEnemyChance = 0;
     private float _currentEasyEnemyChance;
     private float _currentHardEnemyChance;
@@ -29,7 +29,7 @@ public class WavesMaker : MonoBehaviour
     private int _currentWaveEnemiesNumber;
     private int _minIncreaseEnemiesNumber = 2;
     private int _maxIncreaseEnemiesNumber = 4;
-    private int _reducingChanceOfEasyEnemy = 6;
+    private int _reducingChanceOfEasyEnemy = 5;
     private int _increasingChanceOfHardEnemy = 2;
     private int _spawnedEnemiesNumber;
     private int _killedEnemiesNumber;

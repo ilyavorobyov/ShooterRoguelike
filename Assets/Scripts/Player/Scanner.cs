@@ -3,20 +3,17 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-[RequireComponent(typeof(Mover))]
 [RequireComponent(typeof(Rotator))]
 public class Scanner : MonoBehaviour
 {
     [SerializeField] private WeaponPlacement _weaponPlacement;
 
-    private Mover _mover;
     private Rotator _rotator;
     private float _range = 3;
     private Coroutine _searchEnemy;
 
     private void Awake()
     {
-        _mover = GetComponent<Mover>();
         _rotator = GetComponent<Rotator>();
     }
 
@@ -29,11 +26,6 @@ public class Scanner : MonoBehaviour
     private void OnDestroy()
     {
         StopSearchEnemy();
-    }
-
-    private void Update()
-    {
-        var actualForward = Vector3.ProjectOnPlane(transform.forward, Vector3.forward);
     }
 
     private void StopSearchEnemy()

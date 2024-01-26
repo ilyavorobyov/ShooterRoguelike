@@ -1,5 +1,6 @@
 using UnityEngine;
 
+[RequireComponent(typeof(PlayerAnimator))]
 [RequireComponent(typeof(Rigidbody))]
 public class Mover : MonoBehaviour
 {
@@ -11,12 +12,14 @@ public class Mover : MonoBehaviour
     private float _tempSpeed;
     private Vector3 _moveDirection;
     private Vector3 _startPosition = new Vector3(0, 1, 0);
+    private PlayerAnimator _animator;
 
     public Vector3 MoveDirection => _moveDirection;
 
     private void Awake()
     {
         _currentSpeed = _startSpeed;
+        _animator = GetComponent<PlayerAnimator>();
     }
 
     private void FixedUpdate()
@@ -46,9 +49,14 @@ public class Mover : MonoBehaviour
     {
         if (_joystick.Horizontal != 0 || _joystick.Vertical != 0)
         {
+            _animator.PlayRunAnimation();
             _moveDirection = new Vector3(-_joystick.Horizontal, 0, -_joystick.Vertical);
             _moveDirection.Normalize();
             transform.Translate(_moveDirection * _currentSpeed * Time.deltaTime, Space.World);
+        }
+        else
+        {
+            _animator.PlayIdleAnimation();
         }
     }
 
