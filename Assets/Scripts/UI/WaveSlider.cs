@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class WaveSlider : MonoBehaviour
 {
-    [SerializeField] private TMP_Text _currentWaveText;
     [SerializeField] private TMP_Text _nextWaveText;
     [SerializeField] private UnityEngine.UI.Slider _smoothWaveSlider;
     [SerializeField] private float _handleSpeed;
@@ -27,7 +26,6 @@ public class WaveSlider : MonoBehaviour
         _deadEnemies = 0;
         _smoothWaveSlider.maxValue = enemiesNumber;
         _smoothWaveSlider.value = _deadEnemies;
-        _currentWaveText.text = currentWaveNumber.ToString();
         int nextWaveNumber = ++currentWaveNumber;
         _nextWaveText.text = nextWaveNumber.ToString();
     }

@@ -1,115 +1,308 @@
 fileFormatVersion: 2
 guid: 32b98a0373b1e6341bfb46441289dd1c
-timeCreated: 1503851092
-licenseType: Store
 ModelImporter:
-  serializedVersion: 21
-  fileIDToRecycleName:
-    100000: Body1
-    100002: Body_joint
-    100004: Eye_joint
-    100006: joint4
-    100008: L_Hand_joint10
-    100010: L_Hand_joint11
-    100012: L_Hand_joint12
-    100014: L_Hand_joint13
-    100016: L_Hand_joint7
-    100018: L_Hand_joint8
-    100020: L_Hand_joint9
-    100022: Light7
-    100024: Light_joint
-    100026: Mask_Joint
-    100028: R_Hand_joint
-    100030: R_Hand_joint1
-    100032: R_Hand_joint2
-    100034: R_Hand_joint3
-    100036: R_Hand_joint4
-    100038: R_Hand_joint5
-    100040: R_Hand_joint6
-    100042: //RootNode
-    100044: back
-    100046: Body_Joint
-    100048: bottom
-    100050: Hand_joint
-    100052: Hand_joint 1
-    100054: Hand_joint 2
-    100056: Hand_joint 3
-    100058: Hand_joint 4
-    100060: Hand_joint 5
-    100062: Hand_joint 6
-    100064: Hand_joint1
-    100066: Hand_joint2
-    100068: Hand_joint3
-    100070: Hand_joint4
-    100072: Hand_joint5
-    100074: Hand_joint6
-    100076: Hand_joint7
-    100078: left
-    100080: Light4:left
-    100082: Mask_joint
-    100084: Mask_joint 1
-    400000: Body1
-    400002: Body_joint
-    400004: Eye_joint
-    400006: joint4
-    400008: L_Hand_joint10
-    400010: L_Hand_joint11
-    400012: L_Hand_joint12
-    400014: L_Hand_joint13
-    400016: L_Hand_joint7
-    400018: L_Hand_joint8
-    400020: L_Hand_joint9
-    400022: Light7
-    400024: Light_joint
-    400026: Mask_Joint
-    400028: R_Hand_joint
-    400030: R_Hand_joint1
-    400032: R_Hand_joint2
-    400034: R_Hand_joint3
-    400036: R_Hand_joint4
-    400038: R_Hand_joint5
-    400040: R_Hand_joint6
-    400042: //RootNode
-    400044: back
-    400046: Body_Joint
-    400048: bottom
-    400050: Hand_joint
-    400052: Hand_joint 1
-    400054: Hand_joint 2
-    400056: Hand_joint 3
-    400058: Hand_joint 4
-    400060: Hand_joint 5
-    400062: Hand_joint 6
-    400064: Hand_joint1
-    400066: Hand_joint2
-    400068: Hand_joint3
-    400070: Hand_joint4
-    400072: Hand_joint5
-    400074: Hand_joint6
-    400076: Hand_joint7
-    400078: left
-    400080: Light4:left
-    400082: Mask_joint
-    400084: Mask_joint 1
-    2000000: back
-    2000002: bottom
-    2000004: left
-    2000006: Light4:left
-    4300000: Light7
-    4300002: Body1
-    7400000: Take 001
-    9500000: //RootNode
-    13700000: Body1
-    13700002: Light7
+  serializedVersion: 22200
+  internalIDToNameTable:
+  - first:
+      1: 100000
+    second: Body1
+  - first:
+      1: 100002
+    second: Body_joint
+  - first:
+      1: 100004
+    second: Eye_joint
+  - first:
+      1: 100006
+    second: joint4
+  - first:
+      1: 100008
+    second: L_Hand_joint10
+  - first:
+      1: 100010
+    second: L_Hand_joint11
+  - first:
+      1: 100012
+    second: L_Hand_joint12
+  - first:
+      1: 100014
+    second: L_Hand_joint13
+  - first:
+      1: 100016
+    second: L_Hand_joint7
+  - first:
+      1: 100018
+    second: L_Hand_joint8
+  - first:
+      1: 100020
+    second: L_Hand_joint9
+  - first:
+      1: 100022
+    second: Light7
+  - first:
+      1: 100024
+    second: Light_joint
+  - first:
+      1: 100026
+    second: Mask_Joint
+  - first:
+      1: 100028
+    second: R_Hand_joint
+  - first:
+      1: 100030
+    second: R_Hand_joint1
+  - first:
+      1: 100032
+    second: R_Hand_joint2
+  - first:
+      1: 100034
+    second: R_Hand_joint3
+  - first:
+      1: 100036
+    second: R_Hand_joint4
+  - first:
+      1: 100038
+    second: R_Hand_joint5
+  - first:
+      1: 100040
+    second: R_Hand_joint6
+  - first:
+      1: 100042
+    second: //RootNode
+  - first:
+      1: 100044
+    second: back
+  - first:
+      1: 100046
+    second: Body_Joint
+  - first:
+      1: 100048
+    second: bottom
+  - first:
+      1: 100050
+    second: Hand_joint
+  - first:
+      1: 100052
+    second: Hand_joint 1
+  - first:
+      1: 100054
+    second: Hand_joint 2
+  - first:
+      1: 100056
+    second: Hand_joint 3
+  - first:
+      1: 100058
+    second: Hand_joint 4
+  - first:
+      1: 100060
+    second: Hand_joint 5
+  - first:
+      1: 100062
+    second: Hand_joint 6
+  - first:
+      1: 100064
+    second: Hand_joint1
+  - first:
+      1: 100066
+    second: Hand_joint2
+  - first:
+      1: 100068
+    second: Hand_joint3
+  - first:
+      1: 100070
+    second: Hand_joint4
+  - first:
+      1: 100072
+    second: Hand_joint5
+  - first:
+      1: 100074
+    second: Hand_joint6
+  - first:
+      1: 100076
+    second: Hand_joint7
+  - first:
+      1: 100078
+    second: left
+  - first:
+      1: 100080
+    second: Light4:left
+  - first:
+      1: 100082
+    second: Mask_joint
+  - first:
+      1: 100084
+    second: Mask_joint 1
+  - first:
+      4: 400000
+    second: Body1
+  - first:
+      4: 400002
+    second: Body_joint
+  - first:
+      4: 400004
+    second: Eye_joint
+  - first:
+      4: 400006
+    second: joint4
+  - first:
+      4: 400008
+    second: L_Hand_joint10
+  - first:
+      4: 400010
+    second: L_Hand_joint11
+  - first:
+      4: 400012
+    second: L_Hand_joint12
+  - first:
+      4: 400014
+    second: L_Hand_joint13
+  - first:
+      4: 400016
+    second: L_Hand_joint7
+  - first:
+      4: 400018
+    second: L_Hand_joint8
+  - first:
+      4: 400020
+    second: L_Hand_joint9
+  - first:
+      4: 400022
+    second: Light7
+  - first:
+      4: 400024
+    second: Light_joint
+  - first:
+      4: 400026
+    second: Mask_Joint
+  - first:
+      4: 400028
+    second: R_Hand_joint
+  - first:
+      4: 400030
+    second: R_Hand_joint1
+  - first:
+      4: 400032
+    second: R_Hand_joint2
+  - first:
+      4: 400034
+    second: R_Hand_joint3
+  - first:
+      4: 400036
+    second: R_Hand_joint4
+  - first:
+      4: 400038
+    second: R_Hand_joint5
+  - first:
+      4: 400040
+    second: R_Hand_joint6
+  - first:
+      4: 400042
+    second: //RootNode
+  - first:
+      4: 400044
+    second: back
+  - first:
+      4: 400046
+    second: Body_Joint
+  - first:
+      4: 400048
+    second: bottom
+  - first:
+      4: 400050
+    second: Hand_joint
+  - first:
+      4: 400052
+    second: Hand_joint 1
+  - first:
+      4: 400054
+    second: Hand_joint 2
+  - first:
+      4: 400056
+    second: Hand_joint 3
+  - first:
+      4: 400058
+    second: Hand_joint 4
+  - first:
+      4: 400060
+    second: Hand_joint 5
+  - first:
+      4: 400062
+    second: Hand_joint 6
+  - first:
+      4: 400064
+    second: Hand_joint1
+  - first:
+      4: 400066
+    second: Hand_joint2
+  - first:
+      4: 400068
+    second: Hand_joint3
+  - first:
+      4: 400070
+    second: Hand_joint4
+  - first:
+      4: 400072
+    second: Hand_joint5
+  - first:
+      4: 400074
+    second: Hand_joint6
+  - first:
+      4: 400076
+    second: Hand_joint7
+  - first:
+      4: 400078
+    second: left
+  - first:
+      4: 400080
+    second: Light4:left
+  - first:
+      4: 400082
+    second: Mask_joint
+  - first:
+      4: 400084
+    second: Mask_joint 1
+  - first:
+      20: 2000000
+    second: back
+  - first:
+      20: 2000002
+    second: bottom
+  - first:
+      20: 2000004
+    second: left
+  - first:
+      20: 2000006
+    second: Light4:left
+  - first:
+      43: 4300000
+    second: Light7
+  - first:
+      43: 4300002
+    second: Body1
+  - first:
+      74: 7400000
+    second: Take 001
+  - first:
+      95: 9500000
+    second: //RootNode
+  - first:
+      137: 13700000
+    second: Body1
+  - first:
+      137: 13700002
+    second: Light7
+  externalObjects: {}
   materials:
-    importMaterials: 0
+    materialImportMode: 0
     materialName: 0
     materialSearch: 1
+    materialLocation: 0
   animations:
     legacyGenerateAnimations: 4
     bakeSimulation: 0
     resampleCurves: 1
     optimizeGameObjects: 0
+    removeConstantScaleCurves: 0
     motionNodeName: 
     rigImportErrors: 
     rigImportWarnings: 
@@ -117,6 +310,8 @@ ModelImporter:
     animationImportWarnings: 
     animationRetargetingWarnings: 
     animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
     animationCompression: 1
     animationRotationError: 0.5
     animationPositionError: 0.5
@@ -129,32 +324,51 @@ ModelImporter:
   meshes:
     lODScreenPercentages: []
     globalScale: 1
-    meshCompression: 0
+    meshCompression: 3
     addColliders: 0
+    useSRGBMaterialColor: 1
+    sortHierarchyByName: 1
+    importPhysicalCameras: 0
     importVisibility: 1
     importBlendShapes: 1
     importCameras: 1
     importLights: 1
+    nodeNameCollisionStrategy: 0
+    fileIdsGeneration: 1
     swapUVChannels: 0
     generateSecondaryUV: 0
     useFileUnits: 1
-    optimizeMeshForGPU: 1
     keepQuads: 0
     weldVertices: 1
+    bakeAxisConversion: 0
+    preserveHierarchy: 0
+    skinWeightsMode: 0
+    maxBonesPerVertex: 4
+    minBoneWeight: 0.001
+    optimizeBones: 1
+    meshOptimizationFlags: -1
+    indexFormat: 1
     secondaryUVAngleDistortion: 8
     secondaryUVAreaDistortion: 15.000001
     secondaryUVHardAngle: 88
+    secondaryUVMarginMethod: 0
+    secondaryUVMinLightmapResolution: 40
+    secondaryUVMinObjectScale: 1
     secondaryUVPackMargin: 4
     useFileScale: 1
+    strictVertexDataChecks: 0
   tangentSpace:
     normalSmoothAngle: 60
     normalImportMode: 0
     tangentImportMode: 3
     normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 1
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  referencedClips: []
   importAnimation: 1
-  copyAvatar: 0
   humanDescription:
-    serializedVersion: 2
+    serializedVersion: 3
     human: []
     skeleton: []
     armTwist: 0.5
@@ -164,14 +378,19 @@ ModelImporter:
     armStretch: 0.05
     legStretch: 0.05
     feetSpacing: 0
+    globalScale: 1
     rootMotionBoneName: 
-    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
     hasTranslationDoF: 0
     hasExtraRoot: 0
     skeletonHasParents: 1
   lastHumanDescriptionAvatarSource: {instanceID: 0}
+  autoGenerateAvatarMappingIfUnspecified: 1
   animationType: 2
   humanoidOversampling: 1
+  avatarSetup: 1
+  addHumanoidExtraRootOnlyWhenUsingAvatar: 0
+  importBlendShapeDeformPercent: 0
+  remapMaterialsIfMaterialImportModeIsNone: 1
   additionalBone: 0
   userData: 
   assetBundleName: 
