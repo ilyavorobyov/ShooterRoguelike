@@ -3887,8 +3887,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 249ef106c6ee68147a4f839b1a49ed8c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _menuMusic: {fileID: 1789332507}
-  _gameMusic: {fileID: 1789332510}
   _gameUi: {fileID: 2686107634750034430}
 --- !u!4 &1256202800
 Transform:

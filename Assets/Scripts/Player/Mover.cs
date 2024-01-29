@@ -11,7 +11,7 @@ public class Mover : MonoBehaviour
     private float _currentSpeed;
     private float _tempSpeed;
     private Vector3 _moveDirection;
-    private Vector3 _startPosition = new Vector3(0, 1, 0);
+    private Vector3 _startPosition = new Vector3(0, -0.18f, 0);
     private PlayerAnimator _animator;
 
     public Vector3 MoveDirection => _moveDirection;

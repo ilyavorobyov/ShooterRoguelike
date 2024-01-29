@@ -11,7 +11,7 @@ public abstract class Spawner : MonoBehaviour
     protected Vector3 _spawnPosition;
 
     private int _capacity = 4;
-    private float _spawnPositionY = 1;
+    private float _spawnPositionY = -0.18f;
     private float _minAdditionToPosition = 6;
     private float _maxAdditionToPosition = -6;
 
