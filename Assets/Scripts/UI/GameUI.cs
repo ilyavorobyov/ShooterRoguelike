@@ -1,3 +1,4 @@
+using Agava.YandexGames;
 using System;
 using UnityEngine;
 using UnityEngine.UI;
@@ -26,11 +27,8 @@ public class GameUI : MonoBehaviour
     public static event Action GameReseted;
     public static event Action MenuWented;
 
-    public bool IsGameOn { get; private set; } = false;
-
     private void Awake()
     {
-        Time.timeScale = 0f;
         _uiElementsAnimation = GetComponent<UIElementsAnimation>();
     }
 
@@ -64,7 +62,6 @@ public class GameUI : MonoBehaviour
         _uiElementsAnimation.Appear(_pauseScreen.gameObject);
         _canvasJoystick.gameObject.SetActive(false);
         _uiElementsAnimation.Disappear(_waveSlider.gameObject);
-        IsGameOn = false;
     }
 
     private void OnStartButtonClick()
@@ -81,7 +78,6 @@ public class GameUI : MonoBehaviour
         _shootingRangeIndicator.gameObject.SetActive(true);
         _playerHealthBar.gameObject.SetActive(true);
         _uiElementsAnimation.Appear(_waveSlider.gameObject);
-        IsGameOn = true;
     }
 
     private void OnMenuButtonClick()
@@ -96,7 +92,6 @@ public class GameUI : MonoBehaviour
         _shootingRangeIndicator.gameObject.SetActive(false);
         _playerHealthBar.gameObject.SetActive(false);
         _uiElementsAnimation.Disappear(_waveSlider.gameObject);
-        IsGameOn = false;
     }
 
     private void OnContinueButtonClick()
@@ -106,12 +101,10 @@ public class GameUI : MonoBehaviour
         _uiElementsAnimation.Appear(_pauseButton.gameObject);
         _canvasJoystick.gameObject.SetActive(true);
         _uiElementsAnimation.Appear(_waveSlider.gameObject);
-        IsGameOn = true;
     }
 
     private void OnGameOver()
     {
-        Time.timeScale = 0f;
         _uiElementsAnimation.Appear(_gameOverScreen.gameObject);
         _uiElementsAnimation.Disappear(_pauseButton.gameObject);
         _canvasJoystick.gameObject.SetActive(true);
@@ -119,6 +112,6 @@ public class GameUI : MonoBehaviour
         _playerHealthBar.gameObject.SetActive(false);
         _uiElementsAnimation.Disappear(_waveSlider.gameObject);
         _lossSound.PlayDelayed(0);
-        IsGameOn = false;
+        Time.timeScale = 0;
     }
 }

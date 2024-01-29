@@ -2442,6 +2442,56 @@ RectTransform:
   m_AnchoredPosition: {x: 270, y: -128}
   m_SizeDelta: {x: 200, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &855810002
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 855810004}
+  - component: {fileID: 855810003}
+  m_Layer: 0
+  m_Name: SoundSwitcher
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &855810003
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 855810002}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 983cacda06e0e7c42beca65d71b221ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _soundSwitchMenuButton: {fileID: 1055017578}
+  _soundSwitchPausePanelButton: {fileID: 1665519568}
+  _soundStateViewImageMenuButton: {fileID: 1391489708}
+  _soundStateViewImagePausePanelButton: {fileID: 1175054650}
+  _soundOnImage: {fileID: 21300000, guid: 3e856eea54b08314da3863fa6f4fcef1, type: 3}
+  _soundOffImage: {fileID: 21300000, guid: 0e9594f8ac83abe4a97c13393c7fa314, type: 3}
+--- !u!4 &855810004
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 855810002}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.29419357, y: -0.097539485, z: 0.042533875}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &878937864
 GameObject:
   m_ObjectHideFlags: 0
@@ -3184,7 +3234,6 @@ GameObject:
   - component: {fileID: 1055017579}
   - component: {fileID: 1055017578}
   - component: {fileID: 1055017577}
-  - component: {fileID: 1055017576}
   m_Layer: 5
   m_Name: SoundSwitchButton
   m_TagString: Untagged
@@ -3212,21 +3261,6 @@ RectTransform:
   m_AnchoredPosition: {x: 150, y: 120}
   m_SizeDelta: {x: 160, y: 170}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1055017576
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1055017574}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 983cacda06e0e7c42beca65d71b221ec, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _soundStateViewImage: {fileID: 1391489708}
-  _soundOnImage: {fileID: 21300000, guid: 3e856eea54b08314da3863fa6f4fcef1, type: 3}
-  _soundOffImage: {fileID: 21300000, guid: 0e9594f8ac83abe4a97c13393c7fa314, type: 3}
 --- !u!114 &1055017577
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3283,7 +3317,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1055017576}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: SoundSwitch, Assembly-CSharp
         m_MethodName: ChangeSoundState
         m_Mode: 1
@@ -3853,6 +3887,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 249ef106c6ee68147a4f839b1a49ed8c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _menuMusic: {fileID: 1789332507}
+  _gameMusic: {fileID: 1789332510}
   _gameUi: {fileID: 2686107634750034430}
 --- !u!4 &1256202800
 Transform:
@@ -5094,7 +5130,7 @@ ParticleSystem:
         m_RotationOrder: 4
     randomizeRotationDirection: 0
     gravitySource: 0
-    maxNumParticles: 4
+    maxNumParticles: 5
     customEmitterVelocity: {x: 0, y: 0, z: 0}
     size3D: 0
     rotation3D: 0
@@ -5360,7 +5396,7 @@ ParticleSystem:
     rateOverTime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 35
+      scalar: 5
       minScalar: 10
       maxCurve:
         serializedVersion: 2
@@ -9734,7 +9770,6 @@ GameObject:
   - component: {fileID: 1665519569}
   - component: {fileID: 1665519568}
   - component: {fileID: 1665519567}
-  - component: {fileID: 1665519566}
   m_Layer: 5
   m_Name: PauseSoundSwitchButton
   m_TagString: Untagged
@@ -9762,21 +9797,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: -350}
   m_SizeDelta: {x: 100, y: 110}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1665519566
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1665519564}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 983cacda06e0e7c42beca65d71b221ec, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _soundStateViewImage: {fileID: 1175054650}
-  _soundOnImage: {fileID: 21300000, guid: 3e856eea54b08314da3863fa6f4fcef1, type: 3}
-  _soundOffImage: {fileID: 21300000, guid: 0e9594f8ac83abe4a97c13393c7fa314, type: 3}
 --- !u!114 &1665519567
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9833,7 +9853,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1665519566}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: SoundSwitch, Assembly-CSharp
         m_MethodName: ChangeSoundState
         m_Mode: 1
@@ -10077,7 +10097,7 @@ GameObject:
   - component: {fileID: 1789332509}
   - component: {fileID: 1789332508}
   - component: {fileID: 1789332507}
-  - component: {fileID: 1789332506}
+  - component: {fileID: 1789332510}
   m_Layer: 0
   m_Name: MusicSwitcher
   m_TagString: Untagged
@@ -10085,102 +10105,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!82 &1789332506
-AudioSource:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1789332505}
-  m_Enabled: 1
-  serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 98e4bc9bf5135df478bede56832e42b2, type: 3}
-  m_PlayOnAwake: 0
-  m_Volume: 0.2
-  m_Pitch: 1
-  Loop: 1
-  Mute: 0
-  Spatialize: 0
-  SpatializePostEffects: 0
-  Priority: 128
-  DopplerLevel: 1
-  MinDistance: 1
-  MaxDistance: 500
-  Pan2D: 0
-  rolloffMode: 0
-  BypassEffects: 0
-  BypassListenerEffects: 0
-  BypassReverbZones: 0
-  rolloffCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 1
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  panLevelCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  spreadCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  reverbZoneMixCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
 --- !u!82 &1789332507
 AudioSource:
   m_ObjectHideFlags: 0
@@ -10289,7 +10213,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76f8d00abfd23d044bdbe1dd448cbb09, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _gameMusic: {fileID: 1789332506}
+  _gameMusic: {fileID: 1789332510}
   _menuMusic: {fileID: 1789332507}
 --- !u!4 &1789332509
 Transform:
@@ -10306,6 +10230,102 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!82 &1789332510
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1789332505}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 98e4bc9bf5135df478bede56832e42b2, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 1
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &1790923820
 GameObject:
   m_ObjectHideFlags: 0
@@ -14546,7 +14566,7 @@ ParticleSystem:
         m_RotationOrder: 4
     randomizeRotationDirection: 0
     gravitySource: 0
-    maxNumParticles: 5
+    maxNumParticles: 3
     customEmitterVelocity: {x: 0, y: 0, z: 0}
     size3D: 0
     rotation3D: 0
@@ -14812,7 +14832,7 @@ ParticleSystem:
     rateOverTime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 35
+      scalar: 3
       minScalar: 10
       maxCurve:
         serializedVersion: 2
@@ -19730,7 +19750,7 @@ ParticleSystem:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2686257140193684121}
   serializedVersion: 8
-  lengthInSec: 0.3
+  lengthInSec: 0.5
   simulationSpeed: 1
   stopAction: 0
   cullingMode: 3
@@ -19805,8 +19825,8 @@ ParticleSystem:
     startLifetime:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 0.3
-      minScalar: 0.1
+      scalar: 0.5
+      minScalar: 0.3
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -20275,14 +20295,14 @@ ParticleSystem:
         m_RotationOrder: 4
     randomizeRotationDirection: 0
     gravitySource: 0
-    maxNumParticles: 10
+    maxNumParticles: 4
     customEmitterVelocity: {x: 0, y: 0, z: 0}
     size3D: 0
     rotation3D: 0
     gravityModifier:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 1
+      scalar: -2
       minScalar: 0
       maxCurve:
         serializedVersion: 2
@@ -20541,7 +20561,7 @@ ParticleSystem:
     rateOverTime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0
+      scalar: 4
       minScalar: 10
       maxCurve:
         serializedVersion: 2
@@ -20651,7 +20671,7 @@ ParticleSystem:
       countCurve:
         serializedVersion: 2
         minMaxState: 0
-        scalar: 150
+        scalar: 3
         minScalar: 150
         maxCurve:
           serializedVersion: 2
@@ -24914,10 +24934,11 @@ SceneRoots:
   - {fileID: 2578826879613240603}
   - {fileID: 2981183530712636334}
   - {fileID: 660336940}
-  - {fileID: 1789332509}
   - {fileID: 2453232451767691441}
   - {fileID: 1293714246}
   - {fileID: 1016832303}
   - {fileID: 31830226}
   - {fileID: 878937865}
   - {fileID: 1256202800}
+  - {fileID: 1789332509}
+  - {fileID: 855810004}

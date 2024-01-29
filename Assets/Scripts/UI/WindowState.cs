@@ -1,3 +1,4 @@
+using Agava.WebUtility;
 using UnityEngine;
 
 public class WindowState : MonoBehaviour
@@ -7,29 +8,34 @@ public class WindowState : MonoBehaviour
     private void OnEnable()
     {
         Application.focusChanged += OnInBackgroundChangeApp;
+        WebApplication.InBackgroundChangeEvent += OnInBackgroundChangeWeb;
     }
 
     private void OnDisable()
     {
-        Application.focusChanged -= OnInBackgroundChangeApp;
+        Application.focusChanged += OnInBackgroundChangeApp;
+        WebApplication.InBackgroundChangeEvent += OnInBackgroundChangeWeb;
+    }
+
+    private void MuteAudio(bool value)
+    {
+        AudioListener.pause = value;
+    }
+
+    private void PauseGame(bool value)
+    {
+        Time.timeScale = !value ? 1 : 0;
+    }
+
+    private void OnInBackgroundChangeWeb(bool isBackGround)
+    {
+        MuteAudio(isBackGround);
+        PauseGame(isBackGround);
     }
 
     private void OnInBackgroundChangeApp(bool inApp)
     {
         MuteAudio(!inApp);
         PauseGame(!inApp);
-    }
-
-    private void PauseGame(bool value)
-    {
-        if (_gameUi.IsGameOn && value)
-        {
-            _gameUi.OnPauseButtonClick();
-        }
-    }
-
-    private void MuteAudio(bool value)
-    {
-        AudioListener.volume = value ? 0 : 1;
     }
 }

@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "com.agava.webutility": "file:C:/Users/ilyav/Desktop/Новая папка/web util/com.agava.webutility-master",
     "com.agava.yandexgames": "file:C:/Users/ilyav/Desktop/Новая папка/com.agava.yandexgames-master",
     "com.unity.2d.sprite": "1.0.0",
     "com.unity.collab-proxy": "2.2.0",
