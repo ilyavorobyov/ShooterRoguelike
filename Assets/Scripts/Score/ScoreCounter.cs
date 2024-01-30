@@ -1,8 +1,8 @@
 using UnityEngine;
 
-[RequireComponent (typeof(ScoreView))]
-[RequireComponent (typeof(ScoreSaver))]
-public class Counter : MonoBehaviour
+[RequireComponent(typeof(ScoreView))]
+[RequireComponent(typeof(ScoreSaver))]
+public class ScoreCounter : MonoBehaviour
 {
     private const string RecordKeyName = "MaxScore";
 
@@ -57,7 +57,7 @@ public class Counter : MonoBehaviour
 
     private void OnGameOver()
     {
-        if(_currentScore > _bestScore)
+        if (_currentScore > _bestScore)
         {
             _saver.SaveNewBestResult(RecordKeyName, _currentScore);
             _scoreView.SetRecordText(_currentScore);

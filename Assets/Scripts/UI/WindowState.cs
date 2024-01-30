@@ -3,7 +3,9 @@ using UnityEngine;
 
 public class WindowState : MonoBehaviour
 {
-    [SerializeField] private GameUI _gameUi;
+    [SerializeField] private PauseScreen _pauseScreen;
+    [SerializeField] private GameOverScreen _gameOverScreen;
+    [SerializeField] private AdShowFullScreen _adShowFullScreen;
 
     private void OnEnable()
     {
@@ -24,7 +26,11 @@ public class WindowState : MonoBehaviour
 
     private void PauseGame(bool value)
     {
-        Time.timeScale = !value ? 1 : 0;
+        if (!_pauseScreen.isActiveAndEnabled && !_gameOverScreen.isActiveAndEnabled 
+            && !_adShowFullScreen.isActiveAndEnabled)
+        {
+            Time.timeScale = !value ? 1 : 0;
+        }
     }
 
     private void OnInBackgroundChangeWeb(bool isBackGround)

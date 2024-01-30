@@ -1,4 +1,3 @@
-using Agava.YandexGames;
 using System;
 using UnityEngine;
 using UnityEngine.UI;
@@ -92,6 +91,7 @@ public class GameUI : MonoBehaviour
         _shootingRangeIndicator.gameObject.SetActive(false);
         _playerHealthBar.gameObject.SetActive(false);
         _uiElementsAnimation.Disappear(_waveSlider.gameObject);
+        Time.timeScale = 1f;
     }
 
     private void OnContinueButtonClick()
