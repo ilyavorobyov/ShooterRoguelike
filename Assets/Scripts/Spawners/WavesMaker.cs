@@ -6,7 +6,9 @@ using Random = UnityEngine.Random;
 
 public class WavesMaker : MonoBehaviour
 {
-    [SerializeField] private TMP_Text _waveInfoText;
+    [SerializeField] private TMP_Text _currentWaveText;
+    [SerializeField] private TMP_Text _waveDefeatedText;
+    [SerializeField] private TMP_Text _currentWaveNumberText;
     [SerializeField] private BulletSpawner _bulletSpawner;
     [SerializeField] private EasyEnemySpawner _easyEnemySpawner;
     [SerializeField] private MediumEnemySpawner _mediumEnemySpawner;
@@ -17,11 +19,8 @@ public class WavesMaker : MonoBehaviour
     [SerializeField] private AudioSource _wavePassedSound;
     [SerializeField] private Transform[] _tokenSpawnPoints;
 
-    private const string NextWaveText = "Волна: ";
-    private const string WaveWonText = "Побеждена волна ";
-
     private int _startWaveNumber = 1;
-    private float _startEasyEnemyChance = 95;
+    private float _startEasyEnemyChance = 90;
     private float _startHardEnemyChance = 0;
     private float _currentEasyEnemyChance;
     private float _currentHardEnemyChance;
@@ -29,8 +28,8 @@ public class WavesMaker : MonoBehaviour
     private int _currentWaveEnemiesNumber;
     private int _minIncreaseEnemiesNumber = 2;
     private int _maxIncreaseEnemiesNumber = 4;
-    private int _reducingChanceOfEasyEnemy = 5;
-    private int _increasingChanceOfHardEnemy = 2;
+    private int _reducingChanceOfEasyEnemy = 6;
+    private int _increasingChanceOfHardEnemy = 3;
     private int _spawnedEnemiesNumber;
     private int _killedEnemiesNumber;
     private bool _isSpawning = true;
@@ -59,10 +58,11 @@ public class WavesMaker : MonoBehaviour
         Booster.BoosterSelected -= OnStartNextWave;
     }
 
-    private void ShowWaveInfoText(string text)
+    private void ShowWaveText()
     {
-        _waveInfoText.gameObject.SetActive(true);
-        _waveInfoText.text = text + _currentWaveNumber;
+        _currentWaveText.gameObject.SetActive(true);
+        _currentWaveNumberText.gameObject.SetActive(true);
+        _currentWaveNumberText.text = _currentWaveNumber.ToString();
     }
 
     private bool GetChance(float chanceValue)
@@ -80,7 +80,7 @@ public class WavesMaker : MonoBehaviour
     private IEnumerator MakeWaves()
     {
         _bulletSpawner.Begin();
-        ShowWaveInfoText(NextWaveText);
+        ShowWaveText();
         _spawnedEnemiesNumber = 0;
         _killedEnemiesNumber = 0;
         float minSpawnTime = 2;
@@ -115,7 +115,7 @@ public class WavesMaker : MonoBehaviour
 
         if (_killedEnemiesNumber == _currentWaveEnemiesNumber)
         {
-            ShowWaveInfoText(WaveWonText);
+            _waveDefeatedText.gameObject.SetActive(true);
             _bulletSpawner.Stop();
             Transform tokenSpawnPoint = SelectTokenSpawnPoint();
             _pointingArrow.PointTokenSpawn(tokenSpawnPoint);

@@ -7,6 +7,8 @@ public class GameUI : MonoBehaviour
 {
     [SerializeField] private Canvas _canvasJoystick;
     [SerializeField] private Button _startButton;
+    [SerializeField] private Button _startWithFullClipButton;
+    [SerializeField] private Button _leaderboardButton;
     [SerializeField] private Button _gameOverScreenRestartButton;
     [SerializeField] private Button _gameOverScreenMenuButton;
     [SerializeField] private GameOverScreen _gameOverScreen;
@@ -69,6 +71,8 @@ public class GameUI : MonoBehaviour
         GameReseted?.Invoke();
         Time.timeScale = 1f;
         _uiElementsAnimation.Disappear(_startButton.gameObject);
+        _uiElementsAnimation.Disappear(_startWithFullClipButton.gameObject);
+        _uiElementsAnimation.Disappear(_leaderboardButton.gameObject);
         _uiElementsAnimation.Appear(_pauseButton.gameObject);
         _uiElementsAnimation.Disappear(_soundSwitchButton.gameObject);
         _gameOverScreen.gameObject.SetActive(false);
@@ -84,6 +88,8 @@ public class GameUI : MonoBehaviour
         MenuWented?.Invoke();
         GameReseted?.Invoke();
         _uiElementsAnimation.Appear(_startButton.gameObject);
+        _uiElementsAnimation.Appear(_startWithFullClipButton.gameObject);
+        _uiElementsAnimation.Appear(_leaderboardButton.gameObject);
         _uiElementsAnimation.Disappear(_pauseButton.gameObject);
         _uiElementsAnimation.Appear(_soundSwitchButton.gameObject);
         _gameOverScreen.gameObject.SetActive(false);

@@ -9,7 +9,7 @@ public class PlayerHealth : Health
 
     private PlayerHealthText _playerHealthText;
     private float _startRegenerationPerSecond = 0;
-    private float _increaseRegenerationPerSecond = 0.3f;
+    private float _increaseRegenerationPerSecond = 0.16f;
     private float _currentRegenerationPerSecond;
     private float _startVampirismValue = 0;
     private float _currentVampirismValue;

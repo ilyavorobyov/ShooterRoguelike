@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 5194590061234326088}
   - component: {fileID: 3634529917735080286}
   - component: {fileID: 4221077514446631648}
+  - component: {fileID: 2319062306850006417}
   m_Layer: 5
   m_Name: BoosterDescription
   m_TagString: Untagged
@@ -31,7 +32,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1700163511181629707}
-  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -66,8 +66,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\u0414\u043E\u0431\u0430\u0432\u0438\u0442\u044C \u0441\u043A\u043E\u0440\u043E\u0441\u0442\u044C
-    \u0438\u0433\u0440\u043E\u043A\u0443"
+  m_text: "Oynat\u0131c\u0131ya h\u0131z ekleyin"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 02351707c874c794282a7debbabe2a5a, type: 2}
   m_sharedMaterial: {fileID: 8684974295476352858, guid: 02351707c874c794282a7debbabe2a5a, type: 2}
@@ -100,7 +99,7 @@ MonoBehaviour:
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 1
+  m_fontStyle: 0
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
@@ -136,6 +135,20 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &2319062306850006417
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6554293967690260643}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dbf51be86e70d7941bd40914206e4ddc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  translationName: AddPlayerMoveSpeedBooster
+  FallbackText: 
 --- !u!1 &8325074738014316067
 GameObject:
   m_ObjectHideFlags: 0
@@ -167,7 +180,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1700163511181629707}
-  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -248,7 +260,6 @@ RectTransform:
   - {fileID: 5194590061234326088}
   - {fileID: 2845452292212291913}
   m_Father: {fileID: 0}
-  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}

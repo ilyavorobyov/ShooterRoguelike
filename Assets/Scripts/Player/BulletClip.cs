@@ -6,8 +6,6 @@ public class BulletClip : MonoBehaviour
     [SerializeField] private Backpack _backpack;
     [SerializeField] private TMP_Text _bulletsInfoText;
 
-    private const string MaxBulletsText = "Максимум";
-
     private int _startCurrentBulletsNumber = 0;
     private int _currentBulletsNumber;
     private int _startMaxBulletsNumber = 5;
@@ -60,7 +58,6 @@ public class BulletClip : MonoBehaviour
         if (_currentBulletsNumber == _currentMaxBulletsNumber)
         {
             _bulletsInfoText.gameObject.SetActive(true);
-            _bulletsInfoText.text = MaxBulletsText;
             IsMaxBullets = true;
         }
         else

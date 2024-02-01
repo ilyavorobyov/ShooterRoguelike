@@ -7,7 +7,7 @@ public class GameOverScreen : MonoBehaviour
     [SerializeField] private Button[] _buttons;
     [SerializeField] private UIElementsAnimation _uiElementsAnimation;
 
-    private float _showButtonsDelay = 1f;
+    private float _showButtonsDelay = 0.6f;
     private Coroutine _showButtons;
 
     private void OnEnable()
