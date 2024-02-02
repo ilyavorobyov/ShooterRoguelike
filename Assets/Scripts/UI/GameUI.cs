@@ -36,6 +36,7 @@ public class GameUI : MonoBehaviour
     private void OnEnable()
     {
         PlayerHealth.GameOvered += OnGameOver;
+        RewardedVideoAd.RewardAdFullClipViewed += OnStartButtonClick;
         _startButton.onClick.AddListener(OnStartButtonClick);
         _gameOverScreenRestartButton.onClick.AddListener(OnStartButtonClick);
         _gameOverScreenMenuButton.onClick.AddListener(OnMenuButtonClick);
@@ -48,6 +49,7 @@ public class GameUI : MonoBehaviour
     private void OnDisable()
     {
         PlayerHealth.GameOvered -= OnGameOver;
+        RewardedVideoAd.RewardAdFullClipViewed += OnStartButtonClick;
         _startButton.onClick.RemoveListener(OnStartButtonClick);
         _gameOverScreenRestartButton.onClick.RemoveListener(OnStartButtonClick);
         _gameOverScreenMenuButton.onClick.RemoveListener(OnMenuButtonClick);

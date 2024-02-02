@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class GameOverPanelNewRecord : MonoBehaviour
+public class GameOverPanelText : MonoBehaviour
 {
     private void OnDisable()
     {

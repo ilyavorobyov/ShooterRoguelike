@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 [RequireComponent(typeof(ScoreView))]
@@ -11,9 +12,11 @@ public class ScoreCounter : MonoBehaviour
     private int _bestScore;
     private int _currentScore = 0;
     private int _dischargeScoreValue = 0;
+    private int _scoreMultiplier = 2;
 
     private void OnEnable()
     {
+        RewardedVideoAd.RewardAdDoubleResultViewed += OnDoubleResult;
         EnemyHealth.EnemyDied += OnEnemyDied;
         PlayerHealth.GameOvered += OnGameOver;
         GameUI.GameReseted += OnTryGetBestScore;
@@ -21,6 +24,7 @@ public class ScoreCounter : MonoBehaviour
 
     private void OnDisable()
     {
+        RewardedVideoAd.RewardAdDoubleResultViewed -= OnDoubleResult;
         EnemyHealth.EnemyDied -= OnEnemyDied;
         PlayerHealth.GameOvered -= OnGameOver;
         GameUI.GameReseted -= OnTryGetBestScore;
@@ -57,11 +61,24 @@ public class ScoreCounter : MonoBehaviour
 
     private void OnGameOver()
     {
-        if (_currentScore > _bestScore)
+        bool isBestScore = _currentScore > _bestScore;
+
+        if (isBestScore)
         {
             _saver.SaveNewBestResult(RecordKeyName, _currentScore);
             _scoreView.SetRecordText(_currentScore);
-            _scoreView.SetGameOverPanelText(_currentScore);
+            _scoreView.SetGameOverPanelText(_currentScore, isBestScore);
         }
+        else
+        {
+            _scoreView.SetGameOverPanelText(_currentScore, isBestScore);
+        }
+    }
+
+    private void OnDoubleResult()
+    {
+        _scoreView.HideTexts();
+        _currentScore *= _scoreMultiplier;
+        OnGameOver();
     }
 }

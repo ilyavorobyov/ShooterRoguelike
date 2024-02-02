@@ -1,3 +1,4 @@
+using Agava.YandexGames;
 using TMPro;
 using UnityEngine;
 
@@ -6,8 +7,10 @@ public class ScoreView : MonoBehaviour
     [SerializeField] private ScorePlate _scorePlate;
     [SerializeField] private TMP_Text _recordText;
     [SerializeField] private TMP_Text _currentScoreText;
-    [SerializeField] private TMP_Text _gameOverPanelNewRecordText;
-    [SerializeField] private GameOverPanelNewRecord _gameOverPanelNewRecord;
+
+    [SerializeField] private TMP_Text _gameOverPanelScoreValueText;
+    [SerializeField] private GameOverPanelText _gameOverNewRecord;
+    [SerializeField] private GameOverPanelText _gameOverResult;
 
     public void ShowPlate(int score)
     {
@@ -25,9 +28,23 @@ public class ScoreView : MonoBehaviour
         _currentScoreText.text = currentScore.ToString();
     }
 
-    public void SetGameOverPanelText(int score)
+    public void SetGameOverPanelText(int score, bool isBestScore)
     {
-        _gameOverPanelNewRecord.gameObject.SetActive(true);
-        _gameOverPanelNewRecordText.text = score.ToString();
+        if(isBestScore)
+        {
+            _gameOverNewRecord.gameObject.SetActive(true);
+        }
+        else
+        {
+            _gameOverResult.gameObject.SetActive(true);
+        }
+
+        _gameOverPanelScoreValueText.text = score.ToString();
+    }
+
+    public void HideTexts()
+    {
+        _gameOverNewRecord.gameObject.SetActive(false);
+        _gameOverResult.gameObject.SetActive(false);
     }
 }

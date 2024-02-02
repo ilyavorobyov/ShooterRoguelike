@@ -1,3 +1,4 @@
+using System;
 using TMPro;
 using UnityEngine;
 
@@ -17,12 +18,14 @@ public class BulletClip : MonoBehaviour
     {
         GameUI.GameReseted += OnReset;
         IncreaseMaxBulletsNumberBooster.AdditionalBulletAdded += OnAdditionalBulletAdded;
+        RewardedVideoAd.RewardAdFullClipViewed += OnStartFillingClip;
     }
 
     private void OnDisable()
     {
         GameUI.GameReseted -= OnReset;
         IncreaseMaxBulletsNumberBooster.AdditionalBulletAdded -= OnAdditionalBulletAdded;
+        RewardedVideoAd.RewardAdFullClipViewed -= OnStartFillingClip;
     }
 
     private void Awake()
@@ -67,9 +70,23 @@ public class BulletClip : MonoBehaviour
         }
     }
 
+    private void FillClip()
+    {
+        for (int i = 0; i < _currentMaxBulletsNumber; i++)
+        {
+            TryAdd();
+        }
+    }
+
     private void OnAdditionalBulletAdded()
     {
         _currentMaxBulletsNumber++;
+    }
+
+    private void OnStartFillingClip()
+    {
+        float delay = 0.1f;
+        Invoke(nameof(FillClip), delay);
     }
 
     private void OnReset()
