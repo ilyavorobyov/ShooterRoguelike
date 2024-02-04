@@ -3,7 +3,7 @@ using UnityEngine;
 public class ScreenOrientationTracker : MonoBehaviour
 {
     private Camera _camera;
-    private float _landscapeFiedOfViewValue = 33;
+    private float _landscapeFiedOfViewValue = 40;
     private float _portraitFiedOfViewValue = 50;
 
     private void Awake()

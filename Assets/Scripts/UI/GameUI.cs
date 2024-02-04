@@ -99,7 +99,7 @@ public class GameUI : MonoBehaviour
         _shootingRangeIndicator.gameObject.SetActive(false);
         _playerHealthBar.gameObject.SetActive(false);
         _uiElementsAnimation.Disappear(_waveSlider.gameObject);
-        Time.timeScale = 1f;
+        Time.timeScale = 1;
     }
 
     private void OnContinueButtonClick()

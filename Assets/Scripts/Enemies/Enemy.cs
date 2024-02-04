@@ -3,7 +3,7 @@ using System.Collections;
 using UnityEngine;
 
 [RequireComponent(typeof(EnemyPointer))]
-[RequireComponent(typeof(EnemyAnimator))]
+[RequireComponent(typeof(EnemyAnimatorStateMachine))]
 public abstract class Enemy : MonoBehaviour
 {
     [SerializeField] protected float Damage;
@@ -18,7 +18,7 @@ public abstract class Enemy : MonoBehaviour
     protected PlayerHealth PlayerHealth;
 
     private EnemyPointer _enemyPointer;
-    private EnemyAnimator _animationMachine;
+    private EnemyAnimatorStateMachine _animationMachine;
     private float _currentSpeed;
     private float _currentDistance;
     private Coroutine _trackPlayer;
@@ -28,7 +28,7 @@ public abstract class Enemy : MonoBehaviour
 
     private void Start()
     {
-        _animationMachine = GetComponent<EnemyAnimator>();
+        _animationMachine = GetComponent<EnemyAnimatorStateMachine>();
         _currentSpeed = _startSpeed;
         GameUI.GameReseted += OnReset;
         SlowDownEnemiesBooster.EnemiesSlowed += OnSlowed;

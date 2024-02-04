@@ -6,6 +6,7 @@ public class WindowState : MonoBehaviour
     [SerializeField] private PauseScreen _pauseScreen;
     [SerializeField] private GameOverScreen _gameOverScreen;
     [SerializeField] private AdShowFullScreen _adShowFullScreen;
+    [SerializeField] private TrainingPanel _trainingPanel;
 
     private void OnEnable()
     {
@@ -26,8 +27,10 @@ public class WindowState : MonoBehaviour
 
     private void PauseGame(bool value)
     {
-        if (!_pauseScreen.isActiveAndEnabled && !_gameOverScreen.isActiveAndEnabled
-            && !_adShowFullScreen.isActiveAndEnabled)
+        if (_pauseScreen != null && !_pauseScreen.isActiveAndEnabled 
+            && !_gameOverScreen.isActiveAndEnabled
+            && !_adShowFullScreen.isActiveAndEnabled 
+            && !_trainingPanel.isActiveAndEnabled)
         {
             Time.timeScale = !value ? 1 : 0;
         }
