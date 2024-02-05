@@ -1,11 +1,12 @@
 using System;
 using UnityEngine;
 using UnityEngine.UI;
+using Agava.WebUtility;
 
 [RequireComponent(typeof(UIElementsAnimation))]
 public class GameUI : MonoBehaviour
 {
-    [SerializeField] private Canvas _canvasJoystick;
+    [SerializeField] private DynamicJoystick _joystick;
     [SerializeField] private Button _startButton;
     [SerializeField] private Button _startWithFullClipButton;
     [SerializeField] private Button _leaderboardButton;
@@ -63,8 +64,12 @@ public class GameUI : MonoBehaviour
         Time.timeScale = 0f;
         _uiElementsAnimation.Disappear(_pauseButton.gameObject);
         _uiElementsAnimation.Appear(_pauseScreen.gameObject);
-        _canvasJoystick.gameObject.SetActive(false);
         _uiElementsAnimation.Disappear(_waveSlider.gameObject);
+
+        if(_joystick.gameObject.activeSelf)
+        {
+            _joystick.gameObject.SetActive(false);
+        }
     }
 
     private void OnStartButtonClick()
@@ -79,7 +84,6 @@ public class GameUI : MonoBehaviour
         _uiElementsAnimation.Disappear(_soundSwitchButton.gameObject);
         _gameOverScreen.gameObject.SetActive(false);
         _pauseScreen.gameObject.SetActive(false);
-        _canvasJoystick.gameObject.SetActive(true);
         _shootingRangeIndicator.gameObject.SetActive(true);
         _playerHealthBar.gameObject.SetActive(true);
         _uiElementsAnimation.Appear(_waveSlider.gameObject);
@@ -95,7 +99,6 @@ public class GameUI : MonoBehaviour
         _uiElementsAnimation.Disappear(_pauseButton.gameObject);
         _uiElementsAnimation.Appear(_soundSwitchButton.gameObject);
         _gameOverScreen.gameObject.SetActive(false);
-        _canvasJoystick.gameObject.SetActive(false);
         _shootingRangeIndicator.gameObject.SetActive(false);
         _playerHealthBar.gameObject.SetActive(false);
         _uiElementsAnimation.Disappear(_waveSlider.gameObject);
@@ -107,15 +110,18 @@ public class GameUI : MonoBehaviour
         Time.timeScale = 1f;
         _uiElementsAnimation.Disappear(_pauseScreen.gameObject);
         _uiElementsAnimation.Appear(_pauseButton.gameObject);
-        _canvasJoystick.gameObject.SetActive(true);
         _uiElementsAnimation.Appear(_waveSlider.gameObject);
+
+        if (Device.IsMobile)
+        {
+            _joystick.gameObject.SetActive(true);
+        }
     }
 
     private void OnGameOver()
     {
         _uiElementsAnimation.Appear(_gameOverScreen.gameObject);
         _uiElementsAnimation.Disappear(_pauseButton.gameObject);
-        _canvasJoystick.gameObject.SetActive(true);
         _shootingRangeIndicator.gameObject.SetActive(false);
         _playerHealthBar.gameObject.SetActive(false);
         _uiElementsAnimation.Disappear(_waveSlider.gameObject);

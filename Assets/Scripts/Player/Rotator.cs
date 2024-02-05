@@ -1,9 +1,9 @@
 using UnityEngine;
 
-[RequireComponent(typeof(Mover))]
+[RequireComponent(typeof(PlayerMover))]
 public class Rotator : MonoBehaviour
 {
-    private Mover _mover;
+    private PlayerMover _mover;
     private Transform _target;
     private bool _isEnemyVisible;
     private Vector3 _moveDirection;
@@ -11,7 +11,7 @@ public class Rotator : MonoBehaviour
 
     private void Awake()
     {
-        _mover = GetComponent<Mover>();
+        _mover = GetComponent<PlayerMover>();
     }
 
     private void OnEnable()
