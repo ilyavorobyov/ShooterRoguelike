@@ -4,17 +4,17 @@ using UnityEngine.UI;
 
 public class GameMechanicsTraining : MonoBehaviour
 {
-    [SerializeField] private Canvas _canvasJoystick;
     [SerializeField] private Button _gameMechanicsTrainingButton;
-    [SerializeField] private PauseScreen _pauseScreen;
     [SerializeField] private UIElementsAnimation _uiElementsAnimation;
     [SerializeField] private TrainingPanel _trainingPanel;
     [SerializeField] private Training[] _trainings;
+    [SerializeField] private RectTransform[] _menuUiElements;
+    [SerializeField] private RectTransform[] _gameUiElements;
 
     private const string AlreadyPlayedKeyName = "AlreadyPlayed";
 
+    private bool _isPlaying = false;
     private float _readingDuration = 2.8f;
-    private float _delayBeforeStart = 0.01f;
     private Coroutine _teachGame;
 
     private void OnEnable()
@@ -36,13 +36,37 @@ public class GameMechanicsTraining : MonoBehaviour
         OnMenuWented();
     }
 
+    private void ShowUiElements(RectTransform[] uiElements)
+    {
+        foreach (var element in uiElements)
+        {
+            _uiElementsAnimation.Appear(element.gameObject);
+        }
+    }
+
+    private void HideUiElements(RectTransform[] uiElements)
+    {
+        foreach (var element in uiElements)
+        {
+            if (element.gameObject.activeSelf)
+                _uiElementsAnimation.Disappear(element.gameObject);
+        }
+    }
+
     private IEnumerator TeachGame()
     {
-        var waitForSecondsBeforeStart = new WaitForSeconds(_delayBeforeStart);
         var waitForSecondsRealtime = new WaitForSecondsRealtime(_readingDuration);
-        yield return waitForSecondsBeforeStart;
-        _canvasJoystick.gameObject.SetActive(false);
         _uiElementsAnimation.Appear(_trainingPanel.gameObject);
+
+        if (_isPlaying)
+        {
+            HideUiElements(_gameUiElements);
+        }
+        else
+        {
+            HideUiElements(_menuUiElements);
+        }
+
         Time.timeScale = 0;
 
         foreach (var training in _trainings)
@@ -52,17 +76,17 @@ public class GameMechanicsTraining : MonoBehaviour
             _uiElementsAnimation.Disappear(training.gameObject);
         }
 
-        _uiElementsAnimation.Disappear(_trainingPanel.gameObject);
-        _canvasJoystick.gameObject.SetActive(true);
-
-        if (_pauseScreen.gameObject.activeSelf)
+        if (_isPlaying)
         {
-            Time.timeScale = 0;
+            ShowUiElements(_gameUiElements);
         }
         else
         {
-            Time.timeScale = 1;
+            ShowUiElements(_menuUiElements);
         }
+
+        _uiElementsAnimation.Disappear(_trainingPanel.gameObject);
+        Time.timeScale = 1;
     }
 
     private void OnShowTraining()
@@ -77,6 +101,8 @@ public class GameMechanicsTraining : MonoBehaviour
 
     private void OnGameBeguned()
     {
+        _isPlaying = true;
+
         if (!PlayerPrefs.HasKey(AlreadyPlayedKeyName))
         {
             OnShowTraining();
@@ -90,9 +116,15 @@ public class GameMechanicsTraining : MonoBehaviour
 
     private void OnMenuWented()
     {
-        if (!PlayerPrefs.HasKey(AlreadyPlayedKeyName))
-            _gameMechanicsTrainingButton.gameObject.SetActive(false);
-        else
+        _isPlaying = false;
+
+        if (PlayerPrefs.HasKey(AlreadyPlayedKeyName))
+        {
             _uiElementsAnimation.Appear(_gameMechanicsTrainingButton.gameObject);
+        }
+        else
+        {
+            _gameMechanicsTrainingButton.gameObject.SetActive(false);
+        }
     }
 }

@@ -768,7 +768,6 @@ GameObject:
   - component: {fileID: 2836158918341243630}
   - component: {fileID: 7375937545452623022}
   - component: {fileID: 9143623100627126821}
-  - component: {fileID: 7279276419422244543}
   - component: {fileID: 4523360941548848027}
   - component: {fileID: 4173429616501252966}
   - component: {fileID: 1454824370409081393}
@@ -955,18 +954,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _startMaxHealth: 25
   _hitSound: {fileID: 2505589993910987985}
---- !u!114 &7279276419422244543
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7692372330539004469}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7070ae4e0174ac349b5945ddbe900885, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &4523360941548848027
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1008,8 +995,9 @@ MonoBehaviour:
   Damage: 15
   _appearanceSound: {fileID: -8519824076351962209}
   _attackSound: {fileID: -2066807517096520736}
-  _startSpeed: 2.2
-  _pursuitDistance: 7
+  _minStartSpeed: 2.3
+  _maxStartSpeed: 2.7
+  _pursuitDistance: 9
   _attackDistance: 2.5
   _rechargeTime: 1.5
   _enemyBullet: {fileID: 3397415953168034966, guid: 1e90eee0f32c088449f83941e8b558d2, type: 3}

@@ -12,12 +12,10 @@ public class LeaderboardButton : MonoBehaviour, IPointerDownHandler
     {
         if (PlayerAccount.IsAuthorized)
         {
-            PlayerAccount.RequestPersonalProfileDataPermission();
             _leaderboardScreen.gameObject.SetActive(true);
             _yandexLeaderboard.Fill();
         }
-
-        if (PlayerAccount.IsAuthorized == false)
+        else
         {
             _authorizationRequestScreen.gameObject.SetActive(true);
         }

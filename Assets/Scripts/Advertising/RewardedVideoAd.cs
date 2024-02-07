@@ -2,14 +2,24 @@ using System;
 using UnityEngine;
 using UnityEngine.UI;
 
+[RequireComponent(typeof(VolumeChecker))]
 public class RewardedVideoAd : MonoBehaviour
 {
     [SerializeField] private Button _startWithFullClipButton;
     [SerializeField] private Button _doubleResultButton;
     [SerializeField] private AudioSource _vidoeAdCloseSound;
 
+    private VolumeChecker _volumeChecker;
+    private int _maxSoundVolume = 1;
+    private int _minSoundVolume = 0;
+
     public static event Action RewardAdFullClipViewed;
     public static event Action RewardAdDoubleResultViewed;
+
+    private void Awake()
+    {
+        _volumeChecker = GetComponent<VolumeChecker>();
+    }
 
     private void OnEnable()
     {
@@ -25,7 +35,7 @@ public class RewardedVideoAd : MonoBehaviour
 
     private void OnStartWithFullClipButtonClick()
     {
-        Agava.YandexGames.VideoAd.Show(OnOpenCallback, OnRewardFullClipCallback, OnCloseCallback);
+        Agava.YandexGames.VideoAd.Show(OnOpenCallback, null, OnCloseRewardFullClipCallback);
     }
 
     private void OnDoubleResultButtonClick()
@@ -35,20 +45,25 @@ public class RewardedVideoAd : MonoBehaviour
 
     private void OnOpenCallback()
     {
+        _volumeChecker.SetSoundVolume();
         Time.timeScale = 0;
-        AudioListener.volume = 0;
+        AudioListener.volume = _minSoundVolume;
     }
 
     private void OnCloseCallback()
     {
-        AudioListener.volume = 1;
+        if(_volumeChecker.IsSoundOn)
+        {
+            AudioListener.volume = _maxSoundVolume;
+        }
+
         _vidoeAdCloseSound.PlayDelayed(0);
     }
 
-    private void OnRewardFullClipCallback()
+    private void OnCloseRewardFullClipCallback()
     {
+        OnCloseCallback();
         RewardAdFullClipViewed?.Invoke();
-        Time.timeScale = 0;
     }
 
     private void OnRewardDoubleResultCallback()

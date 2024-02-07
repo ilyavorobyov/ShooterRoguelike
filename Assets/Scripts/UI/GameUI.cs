@@ -23,6 +23,8 @@ public class GameUI : MonoBehaviour
     [SerializeField] private WaveSlider _waveSlider;
     [SerializeField] private AudioSource _lossSound;
 
+    private const string AlreadyPlayedKeyName = "AlreadyPlayed";
+
     private UIElementsAnimation _uiElementsAnimation;
 
     public static event Action GameBeguned;
@@ -74,19 +76,27 @@ public class GameUI : MonoBehaviour
 
     private void OnStartButtonClick()
     {
-        GameBeguned?.Invoke();
-        GameReseted?.Invoke();
-        Time.timeScale = 1f;
+        if (PlayerPrefs.HasKey(AlreadyPlayedKeyName))
+        {
+            Time.timeScale = 1;
+        }
+        else
+        {
+            Time.timeScale = 0;
+        }
+
+        _uiElementsAnimation.Appear(_pauseButton.gameObject);
         _uiElementsAnimation.Disappear(_startButton.gameObject);
         _uiElementsAnimation.Disappear(_startWithFullClipButton.gameObject);
         _uiElementsAnimation.Disappear(_leaderboardButton.gameObject);
-        _uiElementsAnimation.Appear(_pauseButton.gameObject);
         _uiElementsAnimation.Disappear(_soundSwitchButton.gameObject);
         _gameOverScreen.gameObject.SetActive(false);
         _pauseScreen.gameObject.SetActive(false);
         _shootingRangeIndicator.gameObject.SetActive(true);
         _playerHealthBar.gameObject.SetActive(true);
         _uiElementsAnimation.Appear(_waveSlider.gameObject);
+        GameBeguned?.Invoke();
+        GameReseted?.Invoke();
     }
 
     private void OnMenuButtonClick()

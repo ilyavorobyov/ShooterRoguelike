@@ -32,7 +32,7 @@ public class WindowState : MonoBehaviour
             && !_adShowFullScreen.isActiveAndEnabled 
             && !_trainingPanel.isActiveAndEnabled)
         {
-            Time.timeScale = !value ? 1 : 0;
+                Time.timeScale = !value ? 1 : 0;
         }
     }
 

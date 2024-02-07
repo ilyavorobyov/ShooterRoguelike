@@ -713,7 +713,6 @@ GameObject:
   - component: {fileID: 5227817434828655248}
   - component: {fileID: 3076823236462688221}
   - component: {fileID: 377528470428553658}
-  - component: {fileID: 1645187183383836919}
   - component: {fileID: 6947744150373268173}
   - component: {fileID: 9086200102403723230}
   - component: {fileID: 4768531361594865927}
@@ -803,8 +802,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.9103981, y: 2.8827784, z: 0.65902245}
-  m_Center: {x: 0.044800982, y: 1.5, z: -0.0026555147}
+  m_Size: {x: 0.90000004, y: 3.2164786, z: 0.90000004}
+  m_Center: {x: 0, y: 1.5581114, z: 0}
 --- !u!54 &377528470428553658
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -832,18 +831,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 116
   m_CollisionDetection: 0
---- !u!114 &1645187183383836919
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4651544357168016374}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7070ae4e0174ac349b5945ddbe900885, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &6947744150373268173
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -859,8 +846,9 @@ MonoBehaviour:
   Damage: 10
   _appearanceSound: {fileID: 3802694573222075054}
   _attackSound: {fileID: 7875673315207691558}
-  _startSpeed: 2
-  _pursuitDistance: 5
+  _minStartSpeed: 2.8
+  _maxStartSpeed: 3.2
+  _pursuitDistance: 7
   _attackDistance: 1
   _rechargeTime: 2
 --- !u!114 &9086200102403723230

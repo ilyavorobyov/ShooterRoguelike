@@ -1,3 +1,4 @@
+using Agava.YandexGames;
 using UnityEngine;
 
 public class ScoreSaver : MonoBehaviour
@@ -7,6 +8,10 @@ public class ScoreSaver : MonoBehaviour
     public void SaveNewBestResult(string saveKey, int result)
     {
         PlayerPrefs.SetInt(saveKey, result);
-        _yandexLeaderboard.SetPlayerScore(result);
+
+        if (PlayerAccount.IsAuthorized)
+        {
+            _yandexLeaderboard.SetPlayerScore(result);
+        }
     }
 }

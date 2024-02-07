@@ -22,6 +22,12 @@ public class AuthorizationRequestScreen : MonoBehaviour
     private void OnLoginButtonClick()
     {
         PlayerAccount.Authorize();
+
+        if (PlayerAccount.IsAuthorized)
+        {
+            PlayerAccount.RequestPersonalProfileDataPermission();
+            gameObject.SetActive(false);
+        }
     }
 
     private void OnCancelButtonClick()

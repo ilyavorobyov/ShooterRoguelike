@@ -1,5 +1,4 @@
 using Agava.WebUtility;
-using System;
 using UnityEngine;
 
 [RequireComponent(typeof(PlayerAnimatorStateMachine))]
@@ -70,6 +69,22 @@ public class PlayerMover : MonoBehaviour
         }
     }
 
+    private void EnablePlayerInput()
+    {
+        if (_playerInput != null)
+        {
+            _playerInput.Enable();
+        }
+    }
+
+    private void DisablePlayerInput()
+    {
+        if (_playerInput != null)
+        {
+            _playerInput.Disable();
+        }
+    }
+
     private void JoystickControl()
     {
         if (_joystick.Horizontal != 0 || _joystick.Vertical != 0)
@@ -98,22 +113,6 @@ public class PlayerMover : MonoBehaviour
         else
         {
             _animator.PlayIdleAnimation();
-        }
-    }
-
-    private void EnablePlayerInput()
-    {
-        if (_playerInput != null)
-        {
-            _playerInput.Enable();
-        }
-    }
-
-    private void DisablePlayerInput()
-    {
-        if (_playerInput != null)
-        {
-            _playerInput.Disable();
         }
     }
 

@@ -2,7 +2,9 @@ using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using Agava.WebUtility;
 
+[RequireComponent(typeof(VolumeChecker))]
 public class TimerFullScreenAdvertisingDemonstrator : MonoBehaviour
 {
     [SerializeField] private AdShowFullScreen _fullScreenAdPanel;
@@ -11,7 +13,15 @@ public class TimerFullScreenAdvertisingDemonstrator : MonoBehaviour
     [SerializeField] private TMP_Text _timerText;
     [SerializeField] private int adShowInterval;
 
+    private VolumeChecker _volumeChecker;
+    private int _maxSoundVolume = 1;
+    private int _minSoundVolume = 0;
     private Coroutine _countTime;
+
+    private void Awake()
+    {
+        _volumeChecker = GetComponent<VolumeChecker>();
+    }
 
     private void OnEnable()
     {
@@ -37,12 +47,16 @@ public class TimerFullScreenAdvertisingDemonstrator : MonoBehaviour
         while (_isCounterOn)
         {
             yield return waitForSeconds;
+            Time.timeScale = 0;
             _fullScreenAdPanel.gameObject.SetActive(true);
-            _joystick.gameObject.SetActive(false);
+
+            if (Device.IsMobile)
+            {
+                _joystick.gameObject.SetActive(false);
+            }
+
             _pauseButton.gameObject.SetActive(false);
             tempTimerValue = startTimerValue;
-            Time.timeScale = 0;
-            AudioListener.volume = 0;
 
             while (tempTimerValue > 0)
             {
@@ -57,7 +71,7 @@ public class TimerFullScreenAdvertisingDemonstrator : MonoBehaviour
 
     private void ShowFullScreenAd()
     {
-        Agava.YandexGames.InterstitialAd.Show(null, OnCloseCallback, null, null);
+        Agava.YandexGames.InterstitialAd.Show(OnOpenCallback, OnCloseCallback, null, null);
     }
 
     private void OnGameBegun()
@@ -75,12 +89,28 @@ public class TimerFullScreenAdvertisingDemonstrator : MonoBehaviour
         StopCoroutine(_countTime);
     }
 
+    private void OnOpenCallback()
+    {
+        _volumeChecker.SetSoundVolume();
+        Time.timeScale = 0;
+        AudioListener.volume = _minSoundVolume;
+    }
+
     private void OnCloseCallback(bool isClosed)
     {
-        AudioListener.volume = 1;
-        Time.timeScale = 1;
         _fullScreenAdPanel.gameObject.SetActive(false);
-        _joystick.gameObject.SetActive(true);
+
+        if (_volumeChecker.IsSoundOn)
+        {
+            AudioListener.volume = _maxSoundVolume;
+        }
+
+        if (Device.IsMobile)
+        {
+            _joystick.gameObject.SetActive(true);
+        }
+
+        Time.timeScale = 1;
         _pauseButton.gameObject.SetActive(true);
     }
 }

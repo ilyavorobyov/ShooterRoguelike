@@ -9,7 +9,7 @@ public class Scanner : MonoBehaviour
     [SerializeField] private WeaponPlacement _weaponPlacement;
 
     private Rotator _rotator;
-    private float _range = 3;
+    private float _range = 3f;
     private Coroutine _searchEnemy;
 
     private void Awake()
@@ -36,7 +36,7 @@ public class Scanner : MonoBehaviour
 
     private IEnumerator TrySearchEnemy()
     {
-        float iterationTime = 0.5f;
+        float iterationTime = 0.3f;
         var waitForSeconds = new WaitForSeconds(iterationTime);
         bool isScanning = true;
         Enemy enemy;

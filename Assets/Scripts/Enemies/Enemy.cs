@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 [RequireComponent(typeof(EnemyPointer))]
 [RequireComponent(typeof(EnemyAnimatorStateMachine))]
@@ -9,7 +10,8 @@ public abstract class Enemy : MonoBehaviour
     [SerializeField] protected float Damage;
     [SerializeField] private AudioSource _appearanceSound;
     [SerializeField] private AudioSource _attackSound;
-    [SerializeField] private float _startSpeed;
+    [SerializeField] private float _minStartSpeed;
+    [SerializeField] private float _maxStartSpeed;
     [SerializeField] private float _pursuitDistance;
     [SerializeField] private float _attackDistance;
     [SerializeField] private float _rechargeTime;
@@ -21,6 +23,7 @@ public abstract class Enemy : MonoBehaviour
     private EnemyAnimatorStateMachine _animationMachine;
     private float _currentSpeed;
     private float _currentDistance;
+    private float _startSpeed;
     private Coroutine _trackPlayer;
 
     public static event Action Spawned;
@@ -28,6 +31,7 @@ public abstract class Enemy : MonoBehaviour
 
     private void Start()
     {
+        _startSpeed = Random.Range(_minStartSpeed, _maxStartSpeed);
         _animationMachine = GetComponent<EnemyAnimatorStateMachine>();
         _currentSpeed = _startSpeed;
         GameUI.GameReseted += OnReset;
