@@ -8,19 +8,21 @@ using Agava.WebUtility;
 public class TimerFullScreenAdvertisingDemonstrator : MonoBehaviour
 {
     [SerializeField] private AdShowFullScreen _fullScreenAdPanel;
-    [SerializeField] private Canvas _joystick;
     [SerializeField] private Button _pauseButton;
     [SerializeField] private TMP_Text _timerText;
-    [SerializeField] private int adShowInterval;
+    [SerializeField] private int _adShowInterval;
+    [SerializeField] private PlayerMover _mover;
 
     private VolumeChecker _volumeChecker;
     private int _maxSoundVolume = 1;
     private int _minSoundVolume = 0;
     private Coroutine _countTime;
+    private bool _isMobile;
 
     private void Awake()
     {
         _volumeChecker = GetComponent<VolumeChecker>();
+        _isMobile = Device.IsMobile;
     }
 
     private void OnEnable()
@@ -37,7 +39,7 @@ public class TimerFullScreenAdvertisingDemonstrator : MonoBehaviour
 
     private IEnumerator CountTime()
     {
-        var waitForSeconds = new WaitForSeconds(adShowInterval);
+        var waitForSeconds = new WaitForSeconds(_adShowInterval);
         int startTimerValue = 3;
         int tempTimerValue;
         int timerIterationTime = 1;
@@ -47,14 +49,14 @@ public class TimerFullScreenAdvertisingDemonstrator : MonoBehaviour
         while (_isCounterOn)
         {
             yield return waitForSeconds;
-            Time.timeScale = 0;
-            _fullScreenAdPanel.gameObject.SetActive(true);
 
-            if (Device.IsMobile)
+            if (_isMobile)
             {
-                _joystick.gameObject.SetActive(false);
+                _mover.DisableJoystick();
             }
 
+            Time.timeScale = 0;
+            _fullScreenAdPanel.gameObject.SetActive(true);
             _pauseButton.gameObject.SetActive(false);
             tempTimerValue = startTimerValue;
 
@@ -105,9 +107,9 @@ public class TimerFullScreenAdvertisingDemonstrator : MonoBehaviour
             AudioListener.volume = _maxSoundVolume;
         }
 
-        if (Device.IsMobile)
+        if (_isMobile)
         {
-            _joystick.gameObject.SetActive(true);
+            _mover.EnableJoystick();
         }
 
         Time.timeScale = 1;

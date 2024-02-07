@@ -7,7 +7,7 @@ public class LavaDamage : MonoBehaviour
     [SerializeField] private TMP_Text _lavaInfoText;
     [SerializeField] private AudioSource _hitPlayerSound;
 
-    private float _damage = 40;
+    private float _damage = 50;
     private PlayerHealth _playerHealth;
     private Coroutine _hitPlayer;
 

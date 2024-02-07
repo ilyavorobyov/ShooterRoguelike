@@ -9,6 +9,8 @@ public class DynamicJoystick : Joystick
 
     [SerializeField] private float moveThreshold = 1;
 
+    public Vector2 Difference;
+
     protected override void Start()
     {
         MoveThreshold = moveThreshold;
@@ -29,12 +31,17 @@ public class DynamicJoystick : Joystick
         base.OnPointerUp(eventData);
     }
 
+    public void Reset()
+    {
+        background.gameObject.SetActive(false);
+    }
+
     protected override void HandleInput(float magnitude, Vector2 normalised, Vector2 radius, Camera cam)
     {
         if (magnitude > moveThreshold)
         {
-            Vector2 difference = normalised * (magnitude - moveThreshold) * radius;
-            background.anchoredPosition += difference;
+            Difference = normalised * (magnitude - moveThreshold) * radius;
+            background.anchoredPosition += Difference;
         }
         base.HandleInput(magnitude, normalised, radius, cam);
     }

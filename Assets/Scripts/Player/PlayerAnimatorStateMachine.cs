@@ -8,7 +8,7 @@ public class PlayerAnimatorStateMachine : MonoBehaviour
 
     private Animator _animator;
     private bool _isIdle = true;
-    private bool _isRunning;
+    private bool _isRunning = false;
 
     private void Awake()
     {

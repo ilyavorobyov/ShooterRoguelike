@@ -5,18 +5,18 @@ using UnityEngine;
 public class PlayerMover : MonoBehaviour
 {
     [SerializeField] private float _startSpeed;
-    [SerializeField] private DynamicJoystick _joystick;
+    [SerializeField] private JoystickMovement _joystickMovement;
 
     private float _offSpeed = 0;
     private float _currentSpeed;
     private float _tempSpeed;
-    private float _minSqrMagnitude = 0.1f;
     private bool _isMobile;
     private bool _isPlaying = false;
     private Vector3 _moveDirection;
     private Vector3 _startPosition = new Vector3(0, -0.18f, 0);
     private PlayerAnimatorStateMachine _animator;
     private PlayerInput _playerInput;
+
     public Vector3 MoveDirection => _moveDirection;
 
     private void Awake()
@@ -33,6 +33,11 @@ public class PlayerMover : MonoBehaviour
 
     private void OnEnable()
     {
+        if (_isMobile)
+        {
+            JoystickMovement.Moving += OnJoystickMovng;
+        }
+
         Backpack.TokenBroughted += OnTokenBrought;
         Booster.BoosterSelected += OnBoosterSelected;
         AddPlayerMoveSpeedBooster.SpeedAdded += OnSpeedAdded;
@@ -44,6 +49,11 @@ public class PlayerMover : MonoBehaviour
 
     private void OnDisable()
     {
+        if (_isMobile)
+        {
+            JoystickMovement.Moving -= OnJoystickMovng;
+        }
+
         Backpack.TokenBroughted -= OnTokenBrought;
         Booster.BoosterSelected -= OnBoosterSelected;
         AddPlayerMoveSpeedBooster.SpeedAdded += OnSpeedAdded;
@@ -58,13 +68,22 @@ public class PlayerMover : MonoBehaviour
     {
         if (_isPlaying)
         {
-            if(_isMobile)
+            if (_isMobile)
             {
-                JoystickControl();
+                transform.Translate(_moveDirection * _currentSpeed * Time.deltaTime, Space.World);
             }
             else
             {
                 KeyboardControl();
+            }
+
+            if (_moveDirection == Vector3.zero)
+            {
+                _animator.PlayIdleAnimation();
+            }
+            else
+            {
+                _animator.PlayRunAnimation();
             }
         }
     }
@@ -85,35 +104,16 @@ public class PlayerMover : MonoBehaviour
         }
     }
 
-    private void JoystickControl()
-    {
-        if (_joystick.Horizontal != 0 || _joystick.Vertical != 0)
-        {
-            _moveDirection = new Vector3(-_joystick.Horizontal, 0, -_joystick.Vertical);
-            _moveDirection.Normalize();
-            transform.Translate(_moveDirection * _currentSpeed * Time.deltaTime, Space.World);
-            _animator.PlayRunAnimation();
-        }
-        else
-        {
-            _animator.PlayIdleAnimation();
-        }
-    }
-
     private void KeyboardControl()
     {
         _moveDirection = _playerInput.Player.Move.ReadValue<Vector3>();
         _moveDirection.Normalize();
         transform.Translate(_moveDirection * _currentSpeed * Time.deltaTime, Space.World);
+    }
 
-        if (_moveDirection.sqrMagnitude > _minSqrMagnitude)
-        {
-            _animator.PlayRunAnimation();
-        }
-        else
-        {
-            _animator.PlayIdleAnimation();
-        }
+    private void OnJoystickMovng(Vector3 moveDirection)
+    {
+        _moveDirection = moveDirection;
     }
 
     private void OnSpeedAdded(int additionalSpeed)
@@ -144,9 +144,9 @@ public class PlayerMover : MonoBehaviour
     {
         _isPlaying = true;
 
-        if(_isMobile)
+        if (_isMobile)
         {
-            _joystick.gameObject.SetActive(true);
+            _joystickMovement.gameObject.SetActive(true);
         }
     }
 
@@ -156,7 +156,19 @@ public class PlayerMover : MonoBehaviour
 
         if (_isMobile)
         {
-            _joystick.gameObject.SetActive(false);
+            _joystickMovement.gameObject.SetActive(false);
         }
+    }
+
+    public void DisableJoystick()
+    {
+        _joystickMovement.gameObject.SetActive(false);
+        _joystickMovement.Reset();
+        _animator.PlayIdleAnimation();
+    }
+
+    public void EnableJoystick()
+    {
+        _joystickMovement.gameObject.SetActive(true);
     }
 }
