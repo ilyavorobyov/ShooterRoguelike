@@ -9,13 +9,25 @@ public abstract class Bullet : MonoBehaviour
 
     private void Update()
     {
-        transform.position = Vector3.MoveTowards(transform.position,
-            _target.position, _speed * Time.deltaTime);
+        if (_target != null && _target.gameObject.activeSelf)
+        {
+            transform.position = Vector3.MoveTowards(transform.position,
+                _target.position, _speed * Time.deltaTime);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
     }
 
     public void Init(float damage, Transform target)
     {
         Damage = damage;
         _target = target;
+    }
+
+    protected void StopMovement()
+    {
+        _speed = 0;
     }
 }

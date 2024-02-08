@@ -6,6 +6,7 @@ public class PlayerBullet : Bullet
     {
         if (collision.TryGetComponent(out EnemyHealth enemyHealth))
         {
+            StopMovement();
             enemyHealth.TakeDamage(Damage);
             Destroy(gameObject);
         }

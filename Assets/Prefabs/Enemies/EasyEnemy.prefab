@@ -802,8 +802,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.90000004, y: 3.2164786, z: 0.90000004}
-  m_Center: {x: 0, y: 1.5581114, z: 0}
+  m_Size: {x: 1, y: 3, z: 1}
+  m_Center: {x: 0, y: 1.5, z: 0}
 --- !u!54 &377528470428553658
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -846,7 +846,7 @@ MonoBehaviour:
   Damage: 10
   _appearanceSound: {fileID: 3802694573222075054}
   _attackSound: {fileID: 7875673315207691558}
-  _minStartSpeed: 2.8
+  _minStartSpeed: 2.7
   _maxStartSpeed: 3.2
   _pursuitDistance: 7
   _attackDistance: 1

@@ -44,7 +44,6 @@ GameObject:
   - component: {fileID: 5626025928304374946}
   - component: {fileID: 5244392097129056681}
   - component: {fileID: 4684903735725320750}
-  - component: {fileID: 8507810354117897654}
   - component: {fileID: 1324534542040197234}
   - component: {fileID: 666679689578091807}
   - component: {fileID: 7742559429519019915}
@@ -54,6 +53,7 @@ GameObject:
   - component: {fileID: -1394405904753149902}
   - component: {fileID: 3988379629879604598}
   - component: {fileID: 975064977229440445}
+  - component: {fileID: 968230451274027478}
   m_Layer: 0
   m_Name: MediumEnemy
   m_TagString: Untagged
@@ -70,7 +70,7 @@ Transform:
   m_GameObject: {fileID: 223276076432761825}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -0.043, z: 0}
   m_LocalScale: {x: 0.7, y: 0.7, z: 0.7}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -159,27 +159,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &8507810354117897654
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 223276076432761825}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.9103981, y: 2.8827784, z: 0.65902245}
-  m_Center: {x: 0.044800982, y: 1.5, z: -0.0026555147}
 --- !u!54 &1324534542040197234
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -276,8 +255,8 @@ MonoBehaviour:
   Damage: 10
   _appearanceSound: {fileID: 3988379629879604598}
   _attackSound: {fileID: 975064977229440445}
-  _minStartSpeed: 2.2
-  _maxStartSpeed: 2.4
+  _minStartSpeed: 2.1
+  _maxStartSpeed: 2.5
   _pursuitDistance: 8
   _attackDistance: 2.5
   _rechargeTime: 2
@@ -571,6 +550,27 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!65 &968230451274027478
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 223276076432761825}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 3, z: 1}
+  m_Center: {x: 0, y: 1.5, z: 0}
 --- !u!1 &463807097445551473
 GameObject:
   m_ObjectHideFlags: 0

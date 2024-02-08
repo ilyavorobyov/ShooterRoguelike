@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 4481122502268353008}
   - component: {fileID: 5546853334780628961}
   - component: {fileID: 476117424111114499}
-  - component: {fileID: 3343833187534865699}
   - component: {fileID: 5795014423462280769}
+  - component: {fileID: 2766333714671132230}
   m_Layer: 0
   m_Name: PistolBullet
   m_TagString: Untagged
@@ -27,6 +27,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2071320714427048026}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 1.84}
   m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
@@ -34,7 +35,6 @@ Transform:
   m_Children:
   - {fileID: 4877857635465368187}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &5546853334780628961
 MeshFilter:
@@ -86,7 +86,19 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!135 &3343833187534865699
+--- !u!114 &5795014423462280769
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2071320714427048026}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 205f21409034d4c4194fbd69d059fa62, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!135 &2766333714671132230
 SphereCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -105,20 +117,8 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 0.5
+  m_Radius: 0.3
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &5795014423462280769
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2071320714427048026}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 205f21409034d4c4194fbd69d059fa62, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &5465911700710497480
 GameObject:
   m_ObjectHideFlags: 0
@@ -144,13 +144,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5465911700710497480}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.3, y: 0.3, z: 0.4}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4481122502268353008}
-  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!198 &6995173643071564393
 ParticleSystem:
