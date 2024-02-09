@@ -16,13 +16,17 @@ public class TimerFullScreenAdvertisingDemonstrator : MonoBehaviour
     private VolumeChecker _volumeChecker;
     private int _maxSoundVolume = 1;
     private int _minSoundVolume = 0;
+    private bool _isMobile = false;
     private Coroutine _countTime;
-    private bool _isMobile;
 
     private void Awake()
     {
         _volumeChecker = GetComponent<VolumeChecker>();
-        _isMobile = Device.IsMobile;
+
+        if(Device.IsMobile)
+        {
+            _isMobile = true;
+        }
     }
 
     private void OnEnable()

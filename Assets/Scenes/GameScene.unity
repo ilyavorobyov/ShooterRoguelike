@@ -15174,6 +15174,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 17ac4cd875993a6459db599411078058, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _gameOverScreen: {fileID: 3028230106591331748}
 --- !u!1 &1480388338
 GameObject:
   m_ObjectHideFlags: 0
@@ -19845,7 +19846,7 @@ MonoBehaviour:
     m_HighlightedSprite: {fileID: 21300000, guid: 1484503fdc7465d458513c055a441c8a, type: 3}
     m_PressedSprite: {fileID: 21300000, guid: eace413ef45a8be4bbc3e47d470d503e, type: 3}
     m_SelectedSprite: {fileID: 21300000, guid: 8e698823bf64baf48b633533dd51a7f2, type: 3}
-    m_DisabledSprite: {fileID: 21300000, guid: 06e45b40b3d96104e9c295c414b1d6c1, type: 3}
+    m_DisabledSprite: {fileID: 0}
   m_AnimationTriggers:
     m_NormalTrigger: Normal
     m_HighlightedTrigger: Highlighted
@@ -22245,7 +22246,7 @@ MonoBehaviour:
   _buttons:
   - {fileID: 9184134031470129167}
   - {fileID: 1077912594}
-  - {fileID: 2117994559}
+  _doubleResultAdButton: {fileID: 2117994559}
   _uiElementsAnimation: {fileID: 4846124952043312892}
 --- !u!114 &3085052446154916355
 MonoBehaviour:

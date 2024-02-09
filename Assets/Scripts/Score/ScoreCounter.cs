@@ -4,6 +4,8 @@ using UnityEngine;
 [RequireComponent(typeof(ScoreSaver))]
 public class ScoreCounter : MonoBehaviour
 {
+    [SerializeField] private GameOverScreen _gameOverScreen;
+
     private const string RecordKeyName = "MaxScore";
 
     private ScoreView _scoreView;
@@ -72,6 +74,8 @@ public class ScoreCounter : MonoBehaviour
         {
             _scoreView.SetGameOverPanelText(_currentScore, isBestScore);
         }
+
+        _gameOverScreen.SetIsGreaterThanZero(_currentScore > 0);
     }
 
     private void OnDoubleResult()

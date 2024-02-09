@@ -10,8 +10,8 @@ public class PlayerMover : MonoBehaviour
     private float _offSpeed = 0;
     private float _currentSpeed;
     private float _tempSpeed;
-    private bool _isMobile;
     private bool _isPlaying = false;
+    private bool _isMobile = false;
     private Vector3 _moveDirection;
     private Vector3 _startPosition = new Vector3(0, -0.18f, 0);
     private PlayerAnimatorStateMachine _animator;
@@ -21,11 +21,14 @@ public class PlayerMover : MonoBehaviour
 
     private void Awake()
     {
+        _isMobile = Device.IsMobile;
         _currentSpeed = _startSpeed;
         _animator = GetComponent<PlayerAnimatorStateMachine>();
-        _isMobile = Device.IsMobile;
+    }
 
-        if (!_isMobile)
+    private void Start()
+    {
+        if(!_isMobile)
         {
             _playerInput = new PlayerInput();
         }
@@ -146,6 +149,8 @@ public class PlayerMover : MonoBehaviour
 
         if (_isMobile)
         {
+            _joystickMovement.Reset();
+            _animator.PlayIdleAnimation();
             _joystickMovement.gameObject.SetActive(true);
         }
     }

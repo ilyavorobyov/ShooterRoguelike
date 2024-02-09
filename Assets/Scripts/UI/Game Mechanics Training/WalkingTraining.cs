@@ -9,16 +9,9 @@ public class WalkingTraining : MonoBehaviour
     [SerializeField] private Image _mobileTrainingImage;
     [SerializeField] private Image _desktopTrainingImage;
 
-    private bool _isMobile;
-
-    private void Awake()
-    {
-        _isMobile = Device.IsMobile;
-    }
-
     private void OnEnable()
     {
-        if (_isMobile)
+        if (Device.IsMobile)
         {
             _mobileTrainingTexts.gameObject.SetActive(true);
             _mobileTrainingImage.gameObject.SetActive(true);

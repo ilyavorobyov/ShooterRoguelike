@@ -19,12 +19,6 @@ public sealed class SDKInitializer : MonoBehaviour
 
     private void OnInitialized()
     {
-        OnCallGameReadyButtonClick();
         SceneManager.LoadScene(GameSceneName);
-    }
-
-    private void OnCallGameReadyButtonClick()
-    {
-        YandexGamesSdk.GameReady();
     }
 }

@@ -5,9 +5,11 @@ using UnityEngine.UI;
 public class GameOverScreen : MonoBehaviour
 {
     [SerializeField] private Button[] _buttons;
+    [SerializeField] private Button _doubleResultAdButton;
     [SerializeField] private UIElementsAnimation _uiElementsAnimation;
 
-    private float _showButtonsDelay = 0.6f;
+    private float _showButtonsDelay = 0.5f;
+    private bool _isAboveZero;
     private Coroutine _showButtons;
 
     private void OnEnable()
@@ -26,6 +28,13 @@ public class GameOverScreen : MonoBehaviour
         {
             button.gameObject.SetActive(false);
         }
+
+        _doubleResultAdButton.gameObject.SetActive(false);
+    }
+
+    public void SetIsGreaterThanZero(bool aboveZero)
+    {
+        _isAboveZero = aboveZero;
     }
 
     private IEnumerator ShowButtons()
@@ -36,6 +45,11 @@ public class GameOverScreen : MonoBehaviour
         foreach (var button in _buttons)
         {
             _uiElementsAnimation.Appear(button.gameObject);
+        }
+
+        if (_isAboveZero)
+        {
+            _uiElementsAnimation.Appear(_doubleResultAdButton.gameObject);
         }
 
         StopCoroutine(_showButtons);

@@ -11,12 +11,14 @@ public class JoystickMovement : MonoBehaviour
 
     private DynamicJoystick _joystick;
     private Vector3 _moveDirection;
-
+    private bool _isMobile;
     public static event Action<Vector3> Moving;
 
     private void Awake()
     {
-        if (Device.IsMobile)
+        _isMobile = Device.IsMobile;
+
+        if (_isMobile)
         {
             _joystick = GetComponent<DynamicJoystick>();
         }

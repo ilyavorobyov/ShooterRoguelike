@@ -2,6 +2,7 @@ using System;
 using UnityEngine;
 using UnityEngine.UI;
 using Agava.WebUtility;
+using Agava.YandexGames;
 
 [RequireComponent(typeof(UIElementsAnimation))]
 public class GameUI : MonoBehaviour
@@ -33,6 +34,7 @@ public class GameUI : MonoBehaviour
 
     private void Awake()
     {
+        YandexGamesSdk.GameReady();
         _uiElementsAnimation = GetComponent<UIElementsAnimation>();
     }
 
