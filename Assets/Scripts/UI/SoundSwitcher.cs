@@ -15,17 +15,17 @@ public class SoundSwitcher : MonoBehaviour
 
     private void OnEnable()
     {
-        _soundSwitchMenuButton.onClick.AddListener(ChangeSoundState);
-        _soundSwitchPausePanelButton.onClick.AddListener(ChangeSoundState);
+        _soundSwitchMenuButton.onClick.AddListener(OnChangeSoundState);
+        _soundSwitchPausePanelButton.onClick.AddListener(OnChangeSoundState);
     }
 
     private void OnDisable()
     {
-        _soundSwitchMenuButton.onClick.RemoveListener(ChangeSoundState);
-        _soundSwitchPausePanelButton.onClick.RemoveListener(ChangeSoundState);
+        _soundSwitchMenuButton.onClick.RemoveListener(OnChangeSoundState);
+        _soundSwitchPausePanelButton.onClick.RemoveListener(OnChangeSoundState);
     }
 
-    public void ChangeSoundState()
+    private void OnChangeSoundState()
     {
         if (AudioListener.volume == _maxVolume)
         {

@@ -23,7 +23,7 @@ public class TimerFullScreenAdvertisingDemonstrator : MonoBehaviour
     {
         _volumeChecker = GetComponent<VolumeChecker>();
 
-        if(Device.IsMobile)
+        if (Device.IsMobile)
         {
             _isMobile = true;
         }

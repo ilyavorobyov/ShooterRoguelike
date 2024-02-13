@@ -1,7 +1,7 @@
 using UnityEngine;
 
 [RequireComponent(typeof(Animator))]
-public class EnemyAnimatorStateMachine : MonoBehaviour
+public class EnemyAnimator : MonoBehaviour
 {
     private const string AttackAnimationName = "Attack";
 

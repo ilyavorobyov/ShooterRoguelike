@@ -54,7 +54,7 @@ public class GameUI : MonoBehaviour
     private void OnDisable()
     {
         PlayerHealth.GameOvered -= OnGameOver;
-        RewardedVideoAd.RewardAdFullClipViewed += OnStartButtonClick;
+        RewardedVideoAd.RewardAdFullClipViewed -= OnStartButtonClick;
         _startButton.onClick.RemoveListener(OnStartButtonClick);
         _gameOverScreenRestartButton.onClick.RemoveListener(OnStartButtonClick);
         _gameOverScreenMenuButton.onClick.RemoveListener(OnMenuButtonClick);
@@ -63,14 +63,14 @@ public class GameUI : MonoBehaviour
         _pauseScreenContinueButton.onClick.RemoveListener(OnContinueButtonClick);
     }
 
-    public void OnPauseButtonClick()
+    private void OnPauseButtonClick()
     {
         Time.timeScale = 0f;
         _uiElementsAnimation.Disappear(_pauseButton.gameObject);
         _uiElementsAnimation.Appear(_pauseScreen.gameObject);
         _uiElementsAnimation.Disappear(_waveSlider.gameObject);
 
-        if(_joystick.gameObject.activeSelf)
+        if (_joystick.gameObject.activeSelf)
         {
             _joystick.gameObject.SetActive(false);
         }

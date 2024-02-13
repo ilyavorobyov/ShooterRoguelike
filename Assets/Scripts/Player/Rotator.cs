@@ -47,7 +47,7 @@ public class Rotator : MonoBehaviour
     {
         if (_isEnemyVisible)
             transform.LookAt(_target);
-        else if(_moveDirection != Vector3.zero)
+        else if (_moveDirection != Vector3.zero)
             transform.forward = _moveDirection;
     }
 

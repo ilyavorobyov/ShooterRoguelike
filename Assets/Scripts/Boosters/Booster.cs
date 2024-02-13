@@ -20,22 +20,26 @@ public abstract class Booster : MonoBehaviour, IPointerClickHandler
         GameUI.GameReseted -= OnReset;
     }
 
+    public bool MayShown()
+    {
+        if (_isSelectedOnce && _isChosenBefore)
+        {
+            return false;
+        }
+        else
+        {
+            return true;
+        }
+    }
+
+    public abstract void Activate();
+
     public void OnPointerClick(PointerEventData eventData)
     {
         Activate();
         _isChosenBefore = true;
         BoosterSelected?.Invoke();
     }
-
-    public bool CanBeShow()
-    {
-        if (_isSelectedOnce && _isChosenBefore)
-            return false;
-        else
-            return true;
-    }
-
-    public abstract void Activate();
 
     private void OnReset()
     {

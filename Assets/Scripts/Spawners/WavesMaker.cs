@@ -132,7 +132,7 @@ public class WavesMaker : MonoBehaviour
 
     public void OnStartNextWave()
     {
-        _currentWaveEnemiesNumber += Random.Range(_minIncreaseEnemiesNumber, _maxIncreaseEnemiesNumber); 
+        _currentWaveEnemiesNumber += Random.Range(_minIncreaseEnemiesNumber, _maxIncreaseEnemiesNumber);
         _currentWaveNumber++;
         _currentEasyEnemyChance -= _reducingChanceOfEasyEnemy;
         _currentHardEnemyChance += _increasingChanceOfHardEnemy;
@@ -146,7 +146,7 @@ public class WavesMaker : MonoBehaviour
         _currentWaveEnemiesNumber = Random.Range(_minIncreaseEnemiesNumber, _maxIncreaseEnemiesNumber); ;
         _currentEasyEnemyChance = _startEasyEnemyChance;
         _currentHardEnemyChance = _startHardEnemyChance;
-        _currentWaveNumber = _startWaveNumber; 
+        _currentWaveNumber = _startWaveNumber;
         _isSpawning = true;
 
         if (_makeWaves != null)
@@ -168,7 +168,7 @@ public class WavesMaker : MonoBehaviour
         if (_makeWaves != null)
             StopCoroutine(_makeWaves);
 
-        if(_currentToken != null)
+        if (_currentToken != null)
             Destroy(_currentToken.gameObject);
 
         _bulletSpawner.Stop();

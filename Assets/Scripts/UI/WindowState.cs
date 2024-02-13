@@ -16,8 +16,8 @@ public class WindowState : MonoBehaviour
 
     private void OnDisable()
     {
-        Application.focusChanged += OnInBackgroundChangeApp;
-        WebApplication.InBackgroundChangeEvent += OnInBackgroundChangeWeb;
+        Application.focusChanged -= OnInBackgroundChangeApp;
+        WebApplication.InBackgroundChangeEvent -= OnInBackgroundChangeWeb;
     }
 
     private void MuteAudio(bool value)

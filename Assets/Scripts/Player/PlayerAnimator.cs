@@ -1,7 +1,7 @@
 using UnityEngine;
 
 [RequireComponent(typeof(Animator))]
-public class PlayerAnimatorStateMachine : MonoBehaviour
+public class PlayerAnimator : MonoBehaviour
 {
     private const string IdleAnimationName = "Idle";
     private const string RunAnimationName = "Run";

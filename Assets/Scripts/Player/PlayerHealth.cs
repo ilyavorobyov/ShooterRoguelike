@@ -93,7 +93,6 @@ public class PlayerHealth : Health
         }
     }
 
-
     private void OnCompletelyCured()
     {
         AddHealth(CurrentMaxHealth);

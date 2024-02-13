@@ -6,7 +6,6 @@ public class ScoreView : MonoBehaviour
     [SerializeField] private ScorePlate _scorePlate;
     [SerializeField] private TMP_Text _recordText;
     [SerializeField] private TMP_Text _currentScoreText;
-
     [SerializeField] private TMP_Text _gameOverPanelScoreValueText;
     [SerializeField] private GameOverPanelText _gameOverNewRecord;
     [SerializeField] private GameOverPanelText _gameOverResult;

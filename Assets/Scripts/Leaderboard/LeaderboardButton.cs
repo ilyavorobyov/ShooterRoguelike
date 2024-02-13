@@ -8,6 +8,11 @@ public class LeaderboardButton : MonoBehaviour, IPointerDownHandler
     [SerializeField] private LeaderboardScreen _leaderboardScreen;
     [SerializeField] private AuthorizationRequestScreen _authorizationRequestScreen;
 
+    public void OnPointerDown(PointerEventData eventData)
+    {
+        OnLeaderboardButtonClick();
+    }
+
     public void OnLeaderboardButtonClick()
     {
         if (PlayerAccount.IsAuthorized)
@@ -19,10 +24,5 @@ public class LeaderboardButton : MonoBehaviour, IPointerDownHandler
         {
             _authorizationRequestScreen.gameObject.SetActive(true);
         }
-    }
-
-    public void OnPointerDown(PointerEventData eventData)
-    {
-        OnLeaderboardButtonClick();
     }
 }

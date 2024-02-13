@@ -19,7 +19,7 @@ public abstract class Weapon : MonoBehaviour
 
     public void StartShoot(Transform target, PlayerHealth playerHealth)
     {
-        if(_shoot != null)
+        if (_shoot != null)
         {
             StopCoroutine(_shoot);
         }

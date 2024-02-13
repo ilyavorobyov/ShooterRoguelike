@@ -4,7 +4,9 @@ public class GameOverPanelText : MonoBehaviour
 {
     private void OnDisable()
     {
-        if(gameObject.activeSelf)
+        if (gameObject.activeSelf)
+        {
             gameObject.SetActive(false);
+        }
     }
 }

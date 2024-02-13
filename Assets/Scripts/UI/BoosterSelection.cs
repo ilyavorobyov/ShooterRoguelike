@@ -48,7 +48,7 @@ public class BoosterSelection : MonoBehaviour
     {
         foreach (Booster booster in _boosters)
         {
-            if (!booster.CanBeShow())
+            if (!booster.MayShown())
             {
                 _boosters.Remove(booster);
                 break;
@@ -60,7 +60,9 @@ public class BoosterSelection : MonoBehaviour
             int boosterNumber = Random.Range(0, _boosters.Count);
 
             while (_boosters[boosterNumber].gameObject.activeSelf)
+            {
                 boosterNumber = Random.Range(0, _boosters.Count);
+            }
 
             _boosters[boosterNumber].gameObject.SetActive(true);
             _boosters[boosterNumber].gameObject.transform.position = _spawnPoints[i].transform.position;
@@ -91,6 +93,8 @@ public class BoosterSelection : MonoBehaviour
         Time.timeScale = 1;
 
         foreach (Booster booster in _boosters)
+        {
             booster.gameObject.SetActive(false);
+        }
     }
 }

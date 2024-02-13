@@ -52,7 +52,7 @@ public class RewardedVideoAd : MonoBehaviour
 
     private void OnCloseCallback()
     {
-        if(_volumeChecker.IsSoundOn)
+        if (_volumeChecker.IsSoundOn)
         {
             AudioListener.volume = _maxSoundVolume;
         }

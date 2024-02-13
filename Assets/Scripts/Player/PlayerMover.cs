@@ -1,7 +1,7 @@
 using Agava.WebUtility;
 using UnityEngine;
 
-[RequireComponent(typeof(PlayerAnimatorStateMachine))]
+[RequireComponent(typeof(PlayerAnimator))]
 public class PlayerMover : MonoBehaviour
 {
     [SerializeField] private float _startSpeed;
@@ -14,7 +14,7 @@ public class PlayerMover : MonoBehaviour
     private bool _isMobile = false;
     private Vector3 _moveDirection;
     private Vector3 _startPosition = new Vector3(0, -0.18f, 0);
-    private PlayerAnimatorStateMachine _animator;
+    private PlayerAnimator _animator;
     private PlayerInput _playerInput;
 
     public Vector3 MoveDirection => _moveDirection;
@@ -23,12 +23,12 @@ public class PlayerMover : MonoBehaviour
     {
         _isMobile = Device.IsMobile;
         _currentSpeed = _startSpeed;
-        _animator = GetComponent<PlayerAnimatorStateMachine>();
+        _animator = GetComponent<PlayerAnimator>();
     }
 
     private void Start()
     {
-        if(!_isMobile)
+        if (!_isMobile)
         {
             _playerInput = new PlayerInput();
         }

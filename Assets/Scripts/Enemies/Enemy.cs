@@ -4,7 +4,7 @@ using UnityEngine;
 using Random = UnityEngine.Random;
 
 [RequireComponent(typeof(EnemyPointer))]
-[RequireComponent(typeof(EnemyAnimatorStateMachine))]
+[RequireComponent(typeof(EnemyAnimator))]
 public abstract class Enemy : MonoBehaviour
 {
     [SerializeField] protected float Damage;
@@ -20,7 +20,7 @@ public abstract class Enemy : MonoBehaviour
     protected PlayerHealth PlayerHealth;
 
     private EnemyPointer _enemyPointer;
-    private EnemyAnimatorStateMachine _animationMachine;
+    private EnemyAnimator _animatior;
     private float _currentSpeed;
     private float _currentDistance;
     private float _startSpeed;
@@ -32,7 +32,7 @@ public abstract class Enemy : MonoBehaviour
     private void Start()
     {
         _startSpeed = Random.Range(_minStartSpeed, _maxStartSpeed);
-        _animationMachine = GetComponent<EnemyAnimatorStateMachine>();
+        _animatior = GetComponent<EnemyAnimator>();
         _currentSpeed = _startSpeed;
         GameUI.GameReseted += OnReset;
         SlowDownEnemiesBooster.EnemiesSlowed += OnSlowed;
@@ -100,10 +100,10 @@ public abstract class Enemy : MonoBehaviour
             if (_currentDistance < _attackDistance)
             {
                 Attack();
-                _animationMachine.PlayAttackAnimation();
+                _animatior.PlayAttackAnimation();
                 yield return waitForSeconds;
             }
-            
+
             if (_currentDistance <= _pursuitDistance)
             {
                 transform.LookAt(Player.transform);

@@ -10,8 +10,12 @@ public class VolumeChecker : MonoBehaviour
     public void SetSoundVolume()
     {
         if (AudioListener.volume == _maxSoundVolume)
+        {
             _isSoundOn = true;
+        }
         else
+        {
             _isSoundOn = false;
+        }
     }
 }

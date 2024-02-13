@@ -30,21 +30,18 @@ public class PlayerCollisionHandler : MonoBehaviour
                 liftableBullet.Hide();
             }
         }
-
-        if (collider.TryGetComponent(out Token token))
+        else if (collider.TryGetComponent(out Token token))
         {
             _tookTokenSound.PlayDelayed(0);
             Destroy(token.gameObject);
             _backpack.AddToken();
             TokenTaked?.Invoke();
         }
-
-        if (collider.TryGetComponent(out BoosterSelectionLocation boosterSelectionLocation))
+        else if (collider.TryGetComponent(out BoosterSelectionLocation boosterSelectionLocation))
         {
             _backpack.RemoveToken();
         }
-
-        if (collider.TryGetComponent(out EnemyBullet enemyBullet))
+        else if (collider.TryGetComponent(out EnemyBullet enemyBullet))
         {
             _playerHealth.TakeDamage(enemyBullet.Damage);
             Destroy(enemyBullet.gameObject);

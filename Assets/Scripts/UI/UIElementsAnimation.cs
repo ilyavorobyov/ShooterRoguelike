@@ -3,19 +3,7 @@ using UnityEngine;
 
 public class UIElementsAnimation : MonoBehaviour
 {
-    [SerializeField] private float _effectDuration;
-
-    private void OnValidate()
-    {
-        float minDuration = 0.2f;
-        float maxDuration = 1f;
-
-        if (_effectDuration > maxDuration)
-            _effectDuration = maxDuration;
-
-        if (_effectDuration < minDuration)
-            _effectDuration = minDuration;
-    }
+    private float _effectDuration = 0.2f;
 
     public void Appear(GameObject uiElement)
     {
