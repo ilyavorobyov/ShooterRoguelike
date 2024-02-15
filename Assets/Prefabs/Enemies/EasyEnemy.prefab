@@ -723,6 +723,8 @@ GameObject:
   - component: {fileID: 3802694573222075054}
   - component: {fileID: 4275610478361277876}
   - component: {fileID: 7875673315207691558}
+  - component: {fileID: 4006246841528233929}
+  - component: {fileID: 4913580159121298413}
   m_Layer: 0
   m_Name: EasyEnemy
   m_TagString: Untagged
@@ -846,11 +848,6 @@ MonoBehaviour:
   Damage: 10
   _appearanceSound: {fileID: 3802694573222075054}
   _attackSound: {fileID: 7875673315207691558}
-  _minStartSpeed: 2.7
-  _maxStartSpeed: 3.2
-  _pursuitDistance: 7
-  _attackDistance: 1
-  _rechargeTime: 2
 --- !u!114 &9086200102403723230
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1331,6 +1328,34 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &4006246841528233929
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4651544357168016374}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5bb418c6d6eca3f44b2989407ef2f02a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _rechargeTime: 2
+  _pursuitDistance: 6
+  _attackDistance: 1
+--- !u!114 &4913580159121298413
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4651544357168016374}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 286036f785d6b4140bf7f254f72439eb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _startSpeed: 2
 --- !u!1 &4858849870529427842
 GameObject:
   m_ObjectHideFlags: 0

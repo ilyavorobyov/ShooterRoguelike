@@ -3,13 +3,13 @@ using UnityEngine;
 
 public abstract class Spawner : MonoBehaviour
 {
-    [SerializeField] protected SpawnableObject SpawnableObject;
+    [SerializeField] private SpawnableObject SpawnableObject;
     [SerializeField] private Player _player;
     [SerializeField] private float _minDistance;
 
     protected List<SpawnableObject> Pool = new List<SpawnableObject>();
-    protected Vector3 _spawnPosition;
 
+    private Vector3 _spawnPosition;
     private int _capacity = 4;
     private float _spawnPositionY = -0.18f;
     private float _minAdditionToPosition = 6;
@@ -33,8 +33,8 @@ public abstract class Spawner : MonoBehaviour
     {
         for (int i = 0; i < _capacity; i++)
         {
-            SpawnableObject spawnableObject = Instantiate(SpawnableObject,
-                gameObject.transform);
+            SpawnableObject spawnableObject = Instantiate
+                (SpawnableObject, gameObject.transform);
             spawnableObject.Hide();
             Pool.Add(spawnableObject);
 
@@ -49,7 +49,7 @@ public abstract class Spawner : MonoBehaviour
     {
         foreach (SpawnableObject spawnableObject in Pool)
         {
-            if (!spawnableObject.gameObject.activeSelf && TryGetNewSpawnPosition())
+            if (!spawnableObject.gameObject.activeSelf && TryNewSpawnPosition())
             {
                 spawnableObject.transform.position = _spawnPosition;
                 spawnableObject.gameObject.SetActive(true);
@@ -58,12 +58,11 @@ public abstract class Spawner : MonoBehaviour
         }
     }
 
-    protected bool TryGetNewSpawnPosition()
+    protected bool TryNewSpawnPosition()
     {
         _spawnPosition = new Vector3(_player.transform.position.x + Random.Range
             (_minAdditionToPosition, _maxAdditionToPosition), _spawnPositionY,
-            _player.transform.position.z + Random.Range(_minAdditionToPosition,
-            _maxAdditionToPosition));
+            _player.transform.position.z + Random.Range(_minAdditionToPosition, _maxAdditionToPosition));
         Ray ray = new Ray(_spawnPosition, Vector3.down);
 
         if (Physics.Raycast(ray, out RaycastHit hit))

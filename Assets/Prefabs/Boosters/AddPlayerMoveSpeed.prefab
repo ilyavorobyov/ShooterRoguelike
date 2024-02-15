@@ -372,5 +372,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef0dec1fccd2dc8439d4b1fccea94642, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _isSelectedOnce: 0
+  _isSelectedOnce: 1
   _additionalSpeed: 1

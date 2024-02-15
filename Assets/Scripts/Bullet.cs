@@ -11,8 +11,8 @@ public abstract class Bullet : MonoBehaviour
     {
         if (_target != null && _target.gameObject.activeSelf)
         {
-            transform.position = Vector3.MoveTowards(transform.position,
-                _target.position, _speed * Time.deltaTime);
+            transform.position = Vector3.MoveTowards
+                (transform.position, _target.position, _speed * Time.deltaTime);
         }
         else
         {

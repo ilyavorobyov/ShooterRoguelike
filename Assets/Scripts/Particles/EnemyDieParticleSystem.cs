@@ -6,12 +6,12 @@ public class EnemyDieParticleSystem : ParticleSystemEffect
 
     private void OnEnable()
     {
-        EnemyHealth.DiePositionSented += OnPlay;
+        EnemyHealth.DeathPositionSented += OnPlay;
     }
 
     private void OnDisable()
     {
-        EnemyHealth.DiePositionSented -= OnPlay;
+        EnemyHealth.DeathPositionSented -= OnPlay;
     }
 
     protected override void OnPlay(Vector3 targetPosition)

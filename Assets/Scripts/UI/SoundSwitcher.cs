@@ -27,7 +27,7 @@ public class SoundSwitcher : MonoBehaviour
 
     private void OnChangeSoundState()
     {
-        if (AudioListener.volume == _maxVolume)
+        if (AudioListener.volume != _minVolume)
         {
             AudioListener.volume = _minVolume;
             _soundStateViewImageMenuButton.sprite = _soundOffImage;

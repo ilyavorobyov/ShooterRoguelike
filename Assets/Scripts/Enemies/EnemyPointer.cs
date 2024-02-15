@@ -3,18 +3,19 @@ using UnityEngine;
 
 public class EnemyPointer : MonoBehaviour
 {
+    private const int LeftSideIndex = 0;
+    private const int RightSideIndex = 1;
+    private const int DownSideIndex = 2;
+    private const int UpSideIndex = 3;
+
     [SerializeField] private PointerIcon _pointIconSample;
     [SerializeField] private Canvas _canvasPointerIcon;
-
-    const int LeftSideIndex = 0;
-    const int RightSideIndex = 1;
-    const int DownSideIndex = 2;
-    const int UpSideIndex = 3;
 
     private Player _player;
     private Camera _camera;
     private Coroutine _pointArrow;
     private PointerIcon _pointIcon;
+    private bool _isRenderedIcon = true;
     private Vector3 _leftSideRotation = new Vector3(0, 0, 90);
     private Vector3 _rightSideRotation = new Vector3(0, 0, -90);
     private Vector3 _downSideRotation = new Vector3(0, 0, 180);
@@ -28,10 +29,14 @@ public class EnemyPointer : MonoBehaviour
 
     private void OnEnable()
     {
+        _isRenderedIcon = true;
+
         if (_player != null)
         {
             if (_pointArrow != null)
+            {
                 StopCoroutine(_pointArrow);
+            }
 
             _pointArrow = StartCoroutine(PointArrow());
         }
@@ -39,8 +44,12 @@ public class EnemyPointer : MonoBehaviour
 
     private void OnDisable()
     {
+        _isRenderedIcon = false;
+
         if (_pointArrow != null)
+        {
             StopCoroutine(_pointArrow);
+        }
     }
 
     private void OnBecameInvisible()
@@ -84,9 +93,8 @@ public class EnemyPointer : MonoBehaviour
         Vector3 worldPosition;
         Plane[] planes;
         Ray ray;
-        bool isRenderIcon = true;
 
-        while (isRenderIcon)
+        while (_isRenderedIcon)
         {
             if (_pointIcon.isActiveAndEnabled)
             {

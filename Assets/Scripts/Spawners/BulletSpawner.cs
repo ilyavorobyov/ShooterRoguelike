@@ -3,6 +3,8 @@ using UnityEngine;
 
 public class BulletSpawner : Spawner
 {
+    [SerializeField] private float _spawnInterval;
+
     private Coroutine _spawnBullets;
     private bool _isSpawning;
 
@@ -14,23 +16,21 @@ public class BulletSpawner : Spawner
 
     public void Stop()
     {
-        foreach (var bullet in Pool)
-        {
-            bullet.Hide();
-        }
-
-        _isSpawning = false;
-
         if (_spawnBullets != null)
         {
+            _isSpawning = false;
             StopCoroutine(_spawnBullets);
+
+            foreach (var bullet in Pool)
+            {
+                bullet.Hide();
+            }
         }
     }
 
     private IEnumerator SpawnBullets()
     {
-        float spawnTime = 3f;
-        var waitForSeconds = new WaitForSeconds(spawnTime);
+        var waitForSeconds = new WaitForSeconds(_spawnInterval);
 
         while (_isSpawning)
         {

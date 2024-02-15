@@ -3,15 +3,17 @@ using UnityEngine;
 [RequireComponent(typeof(HealthView))]
 public abstract class Health : MonoBehaviour
 {
-    [SerializeField] protected float _startMaxHealth;
+    [SerializeField] private float _startMaxHealth;
     [SerializeField] private AudioSource _hitSound;
 
+    private float _currentHealth;
+
     private HealthView _healthView;
-    protected float _currentHealth;
     private float _minHealth = 0;
     private float _currentMaxHealth;
 
     public float CurrentMaxHealth => _currentMaxHealth;
+
     public float CurrentHealth => _currentHealth;
 
     private void Awake()
@@ -47,7 +49,7 @@ public abstract class Health : MonoBehaviour
         }
     }
 
-    public virtual void AddHealth(float addingHealth)
+    public virtual void Add(float addingHealth)
     {
         if (_currentHealth + addingHealth <= _currentMaxHealth)
         {
@@ -63,17 +65,17 @@ public abstract class Health : MonoBehaviour
 
     public abstract void Die();
 
-    protected void IncreaseMaxHealth(int addedHealth)
-    {
-        _currentMaxHealth += addedHealth;
-        AddHealth(addedHealth);
-        _healthView.SetInfo();
-    }
-
     public virtual void OnReset()
     {
         _currentMaxHealth = _startMaxHealth;
         _currentHealth = _startMaxHealth;
+        _healthView.SetInfo();
+    }
+
+    protected void IncreaseMax(int addedHealth)
+    {
+        _currentMaxHealth += addedHealth;
+        Add(addedHealth);
         _healthView.SetInfo();
     }
 }

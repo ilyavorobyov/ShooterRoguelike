@@ -2,6 +2,7 @@ using System;
 using UnityEngine;
 
 [RequireComponent(typeof(Animator))]
+[RequireComponent(typeof(LiftableBullet))]
 public class LiftableBullet : MonoBehaviour
 {
     [SerializeField] private float _idleDuration;

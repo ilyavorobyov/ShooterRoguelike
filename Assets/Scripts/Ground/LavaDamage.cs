@@ -10,6 +10,7 @@ public class LavaDamage : MonoBehaviour
     private float _damage = 50;
     private PlayerHealth _playerHealth;
     private Coroutine _hitPlayer;
+    private bool _isHitting = false;
 
     private void OnEnable()
     {
@@ -31,6 +32,7 @@ public class LavaDamage : MonoBehaviour
             }
 
             _lavaInfoText.gameObject.SetActive(true);
+            _isHitting = true;
             _hitPlayer = StartCoroutine(HitPlayer());
         }
     }
@@ -39,6 +41,7 @@ public class LavaDamage : MonoBehaviour
     {
         if (collider.gameObject.TryGetComponent(out PlayerHealth playerHealth))
         {
+            _isHitting = false;
             StopHitPlayer();
 
             if (_lavaInfoText.isActiveAndEnabled)
@@ -60,9 +63,8 @@ public class LavaDamage : MonoBehaviour
     {
         int iterationTime = 1;
         var waitForSeconds = new WaitForSeconds(iterationTime);
-        bool isHitting = true;
 
-        while (isHitting)
+        while (_isHitting)
         {
             _playerHealth.TakeDamage(_damage);
             _hitPlayerSound.PlayDelayed(0);

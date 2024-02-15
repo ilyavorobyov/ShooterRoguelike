@@ -6,6 +6,7 @@ public class PointingArrow : MonoBehaviour
     [SerializeField] private Image _arrow;
     [SerializeField] private Transform _perkChoisePlace;
 
+    private int _decreasingAngleValue = 90;
     private Transform _target;
     private Camera _camera;
 
@@ -34,7 +35,8 @@ public class PointingArrow : MonoBehaviour
         if (_target != null)
         {
             var targetPosLocal = _camera.transform.InverseTransformPoint(_target.position);
-            var targetAngle = -Mathf.Atan2(targetPosLocal.x, targetPosLocal.y) * Mathf.Rad2Deg - 90;
+            var targetAngle = -Mathf.Atan2(targetPosLocal.x, targetPosLocal.y) * Mathf.Rad2Deg;
+            targetAngle -= _decreasingAngleValue;
             _arrow.transform.eulerAngles = new Vector3(0, 0, targetAngle);
         }
     }

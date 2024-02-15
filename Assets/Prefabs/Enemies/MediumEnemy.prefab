@@ -54,6 +54,8 @@ GameObject:
   - component: {fileID: 3988379629879604598}
   - component: {fileID: 975064977229440445}
   - component: {fileID: 968230451274027478}
+  - component: {fileID: 4783498936060614368}
+  - component: {fileID: 8336450019708509060}
   m_Layer: 0
   m_Name: MediumEnemy
   m_TagString: Untagged
@@ -255,11 +257,6 @@ MonoBehaviour:
   Damage: 10
   _appearanceSound: {fileID: 3988379629879604598}
   _attackSound: {fileID: 975064977229440445}
-  _minStartSpeed: 2.1
-  _maxStartSpeed: 2.5
-  _pursuitDistance: 8
-  _attackDistance: 2.5
-  _rechargeTime: 2
   _enemyBullet: {fileID: 3397415953168034966, guid: 1e90eee0f32c088449f83941e8b558d2, type: 3}
   _shootPoint: {fileID: 4585883245390431501}
 --- !u!82 &-1394405904753149902
@@ -571,6 +568,34 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 3, z: 1}
   m_Center: {x: 0, y: 1.5, z: 0}
+--- !u!114 &4783498936060614368
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 223276076432761825}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5bb418c6d6eca3f44b2989407ef2f02a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _rechargeTime: 2
+  _pursuitDistance: 7
+  _attackDistance: 2.7
+--- !u!114 &8336450019708509060
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 223276076432761825}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 286036f785d6b4140bf7f254f72439eb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _startSpeed: 2.2
 --- !u!1 &463807097445551473
 GameObject:
   m_ObjectHideFlags: 0

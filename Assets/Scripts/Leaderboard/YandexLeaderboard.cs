@@ -1,19 +1,19 @@
-using Agava.YandexGames;
 using System.Collections.Generic;
+using Agava.YandexGames;
 using UnityEngine;
 
 public class YandexLeaderboard : MonoBehaviour
 {
-    [SerializeField] private LeaderboardView _leaderboardView;
-
     private const string LeaderboardName = "Leaderboard";
     private const string English = "en";
     private const string Russian = "ru";
     private const string Turkish = "tr";
 
+    [SerializeField] private LeaderboardView _leaderboardView;
+
     private readonly List<LeaderboardPlayer> _leaderboardPlayers = new List<LeaderboardPlayer>();
 
-    private string _anonymousName = "";
+    private string _anonymousName = string.Empty;
 
     public void SetPlayerScore(int score)
     {
@@ -49,7 +49,7 @@ public class YandexLeaderboard : MonoBehaviour
                 _leaderboardPlayers.Add(new LeaderboardPlayer(rank, name, score));
             }
 
-            _leaderboardView.ConstructLeaderboard(_leaderboardPlayers);
+            _leaderboardView.Construct(_leaderboardPlayers);
         });
     }
 

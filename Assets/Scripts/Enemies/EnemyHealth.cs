@@ -3,13 +3,14 @@ using UnityEngine;
 
 public class EnemyHealth : Health
 {
-    public static event Action EnemyDied;
-    public static event Action<Vector3> DiePositionSented;
+    public static event Action Died;
+
+    public static event Action<Vector3> DeathPositionSented;
 
     public override void Die()
     {
-        EnemyDied?.Invoke();
-        DiePositionSented?.Invoke(transform.position);
+        Died?.Invoke();
+        DeathPositionSented?.Invoke(transform.position);
         gameObject.SetActive(false);
     }
 }

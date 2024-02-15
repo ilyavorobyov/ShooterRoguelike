@@ -1,6 +1,6 @@
 using System;
-using UnityEngine;
 using Agava.WebUtility;
+using UnityEngine;
 using UnityEngine.UI;
 
 [RequireComponent(typeof(DynamicJoystick))]
@@ -12,6 +12,7 @@ public class JoystickMovement : MonoBehaviour
     private DynamicJoystick _joystick;
     private Vector3 _moveDirection;
     private bool _isMobile;
+
     public static event Action<Vector3> Moving;
 
     private void Awake()

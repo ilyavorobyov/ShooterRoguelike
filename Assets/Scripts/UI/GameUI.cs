@@ -1,12 +1,14 @@
 using System;
-using UnityEngine;
-using UnityEngine.UI;
 using Agava.WebUtility;
 using Agava.YandexGames;
+using UnityEngine;
+using UnityEngine.UI;
 
 [RequireComponent(typeof(UIElementsAnimation))]
 public class GameUI : MonoBehaviour
 {
+    private const string AlreadyPlayedKeyName = "AlreadyPlayed";
+
     [SerializeField] private DynamicJoystick _joystick;
     [SerializeField] private Button _startButton;
     [SerializeField] private Button _startWithFullClipButton;
@@ -20,21 +22,21 @@ public class GameUI : MonoBehaviour
     [SerializeField] private Button _pauseScreenRestartButton;
     [SerializeField] private Button _soundSwitchButton;
     [SerializeField] private ShootingRangeIndicator _shootingRangeIndicator;
-    [SerializeField] private PlayerHealthbar _playerHealthBar;
+    [SerializeField] private Healthbar _playerHealthBar;
     [SerializeField] private WaveSlider _waveSlider;
     [SerializeField] private AudioSource _lossSound;
-
-    private const string AlreadyPlayedKeyName = "AlreadyPlayed";
 
     private UIElementsAnimation _uiElementsAnimation;
 
     public static event Action GameBeguned;
+
     public static event Action GameReseted;
+
     public static event Action MenuWented;
 
     private void Awake()
     {
-        YandexGamesSdk.GameReady();
+       // YandexGamesSdk.GameReady();
         _uiElementsAnimation = GetComponent<UIElementsAnimation>();
     }
 

@@ -43,9 +43,9 @@ public class PlayerHealth : Health
         _playerHealthText.SetHealthText();
     }
 
-    public override void AddHealth(float addingHealth)
+    public override void Add(float addingHealth)
     {
-        base.AddHealth(addingHealth);
+        base.Add(addingHealth);
         _playerHealthText.SetHealthText();
     }
 
@@ -68,7 +68,7 @@ public class PlayerHealth : Health
     {
         if (_isVampirismEnabled)
         {
-            AddHealth(damage * _currentVampirismValue);
+            Add(damage * _currentVampirismValue);
         }
     }
 
@@ -84,18 +84,18 @@ public class PlayerHealth : Health
     {
         int iterationTime = 1;
         var waitForSeconds = new WaitForSeconds(iterationTime);
-        bool _isRegenerate = true;
+        bool isRegenerate = true;
 
-        while (_isRegenerate)
+        while (isRegenerate)
         {
-            AddHealth(_currentRegenerationPerSecond);
+            Add(_currentRegenerationPerSecond);
             yield return waitForSeconds;
         }
     }
 
     private void OnCompletelyCured()
     {
-        AddHealth(CurrentMaxHealth);
+        Add(CurrentMaxHealth);
         _healSound.PlayDelayed(0);
     }
 
@@ -114,7 +114,7 @@ public class PlayerHealth : Health
 
     private void OnAddMaxHealth(int addedHealth)
     {
-        IncreaseMaxHealth(addedHealth);
+        IncreaseMax(addedHealth);
         _playerHealthText.SetHealthText();
         _healSound.PlayDelayed(0);
     }

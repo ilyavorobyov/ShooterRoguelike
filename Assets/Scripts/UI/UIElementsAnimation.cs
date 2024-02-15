@@ -16,6 +16,6 @@ public class UIElementsAnimation : MonoBehaviour
     public void Disappear(GameObject uiElement)
     {
         uiElement.transform.DOScale(Vector3.zero, _effectDuration).SetLoops(1, LoopType.Yoyo).
-            SetUpdate(true).OnComplete(() => uiElement.gameObject.SetActive(false)); ;
+            SetUpdate(true).OnComplete(() => uiElement.gameObject.SetActive(false));
     }
 }

@@ -17,7 +17,7 @@ public class PlayerAnimator : MonoBehaviour
 
     public void PlayIdleAnimation()
     {
-        if(!_isIdle)
+        if (_isRunning)
         {
             _animator.SetTrigger(IdleAnimationName);
             _isIdle = true;
@@ -27,7 +27,7 @@ public class PlayerAnimator : MonoBehaviour
 
     public void PlayRunAnimation()
     {
-        if(!_isRunning)
+        if (_isIdle)
         {
             _animator.SetTrigger(RunAnimationName);
             _isIdle = false;

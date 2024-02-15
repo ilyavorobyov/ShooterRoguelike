@@ -8,9 +8,9 @@ public class LeaderboardView : MonoBehaviour
 
     private List<LeaderboardElement> _spawnedElements = new List<LeaderboardElement>();
 
-    public void ConstructLeaderboard(List<LeaderboardPlayer> leaderboardPlayers)
+    public void Construct(List<LeaderboardPlayer> leaderboardPlayers)
     {
-        ClearLeaderboard();
+        Clear();
 
         foreach (LeaderboardPlayer player in leaderboardPlayers)
         {
@@ -20,7 +20,7 @@ public class LeaderboardView : MonoBehaviour
         }
     }
 
-    private void ClearLeaderboard()
+    private void Clear()
     {
         foreach (var element in _spawnedElements)
         {

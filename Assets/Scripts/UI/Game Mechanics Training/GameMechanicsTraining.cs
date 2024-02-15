@@ -4,6 +4,8 @@ using UnityEngine.UI;
 
 public class GameMechanicsTraining : MonoBehaviour
 {
+    private const string AlreadyPlayedKeyName = "AlreadyPlayed";
+
     [SerializeField] private Button _gameMechanicsTrainingButton;
     [SerializeField] private DynamicJoystick _dynamicJoystick;
     [SerializeField] private UIElementsAnimation _uiElementsAnimation;
@@ -11,8 +13,6 @@ public class GameMechanicsTraining : MonoBehaviour
     [SerializeField] private Training[] _trainings;
     [SerializeField] private RectTransform[] _menuUiElements;
     [SerializeField] private RectTransform[] _gameUiElements;
-
-    private const string AlreadyPlayedKeyName = "AlreadyPlayed";
 
     private bool _isPlaying = false;
     private float _readingDuration = 2.8f;

@@ -7,13 +7,14 @@ public class RewardedVideoAd : MonoBehaviour
 {
     [SerializeField] private Button _startWithFullClipButton;
     [SerializeField] private Button _doubleResultButton;
-    [SerializeField] private AudioSource _vidoeAdCloseSound;
+    [SerializeField] private AudioSource _videoAdCloseSound;
 
     private VolumeChecker _volumeChecker;
     private int _maxSoundVolume = 1;
     private int _minSoundVolume = 0;
 
     public static event Action RewardAdFullClipViewed;
+
     public static event Action RewardAdDoubleResultViewed;
 
     private void Awake()
@@ -57,7 +58,7 @@ public class RewardedVideoAd : MonoBehaviour
             AudioListener.volume = _maxSoundVolume;
         }
 
-        _vidoeAdCloseSound.PlayDelayed(0);
+        _videoAdCloseSound.PlayDelayed(0);
     }
 
     private void OnCloseRewardFullClipCallback()

@@ -1,41 +1,33 @@
 using System;
-using System.Collections;
 using UnityEngine;
-using Random = UnityEngine.Random;
 
 [RequireComponent(typeof(EnemyPointer))]
 [RequireComponent(typeof(EnemyAnimator))]
+[RequireComponent(typeof(Tracker))]
 public abstract class Enemy : MonoBehaviour
 {
     [SerializeField] protected float Damage;
     [SerializeField] private AudioSource _appearanceSound;
     [SerializeField] private AudioSource _attackSound;
-    [SerializeField] private float _minStartSpeed;
-    [SerializeField] private float _maxStartSpeed;
-    [SerializeField] private float _pursuitDistance;
-    [SerializeField] private float _attackDistance;
-    [SerializeField] private float _rechargeTime;
 
     protected Player Player;
     protected PlayerHealth PlayerHealth;
 
     private EnemyPointer _enemyPointer;
     private EnemyAnimator _animatior;
-    private float _currentSpeed;
-    private float _currentDistance;
-    private float _startSpeed;
-    private Coroutine _trackPlayer;
+    private Tracker _tracker;
 
     public static event Action Spawned;
+
     public static event Action<Vector3> SpawnPositionSented;
+
+    private void Awake()
+    {
+        _animatior = GetComponent<EnemyAnimator>();
+    }
 
     private void Start()
     {
-        _startSpeed = Random.Range(_minStartSpeed, _maxStartSpeed);
-        _animatior = GetComponent<EnemyAnimator>();
-        _currentSpeed = _startSpeed;
-        GameUI.GameReseted += OnReset;
-        SlowDownEnemiesBooster.EnemiesSlowed += OnSlowed;
         PlayerHealth = Player.GetComponent<PlayerHealth>();
     }
 
@@ -43,22 +35,10 @@ public abstract class Enemy : MonoBehaviour
     {
         if (Player != null)
         {
-            StartTrackPlayer();
             Spawned?.Invoke();
             SpawnPositionSented?.Invoke(transform.position);
             _appearanceSound.PlayDelayed(0);
         }
-    }
-
-    private void OnDisable()
-    {
-        StopTrackPlayer();
-    }
-
-    private void OnDestroy()
-    {
-        GameUI.GameReseted -= OnReset;
-        SlowDownEnemiesBooster.EnemiesSlowed -= OnSlowed;
     }
 
     public virtual void Init(Player player)
@@ -67,62 +47,13 @@ public abstract class Enemy : MonoBehaviour
         PlayerHealth = Player.GetComponent<PlayerHealth>();
         _enemyPointer = GetComponent<EnemyPointer>();
         _enemyPointer.Init(Player);
+        _tracker = GetComponent<Tracker>();
+        _tracker.Init(Player);
     }
 
     public virtual void Attack()
     {
+        _animatior.PlayAttackAnimation();
         _attackSound.PlayDelayed(0);
-    }
-
-    private void StartTrackPlayer()
-    {
-        _trackPlayer = StartCoroutine(TrackPlayer());
-    }
-
-    private void StopTrackPlayer()
-    {
-        if (_trackPlayer != null)
-        {
-            StopCoroutine(_trackPlayer);
-        }
-    }
-
-    private IEnumerator TrackPlayer()
-    {
-        bool isPlayerTracked = true;
-        var waitForSeconds = new WaitForSeconds(_rechargeTime);
-        var waitForFixedUpdate = new WaitForFixedUpdate();
-
-        while (isPlayerTracked)
-        {
-            _currentDistance = Vector3.Distance(Player.transform.position, transform.position);
-
-            if (_currentDistance < _attackDistance)
-            {
-                Attack();
-                _animatior.PlayAttackAnimation();
-                yield return waitForSeconds;
-            }
-
-            if (_currentDistance <= _pursuitDistance)
-            {
-                transform.LookAt(Player.transform);
-                transform.position = Vector3.MoveTowards(transform.position,
-                    Player.transform.position, _currentSpeed * Time.deltaTime);
-                yield return waitForFixedUpdate;
-            }
-
-            yield return waitForFixedUpdate;
-        }
-    }
-
-    private void OnSlowed(float reductionFactor)
-    {
-        _currentSpeed *= reductionFactor;
-    }
-
-    private void OnReset()
-    {
-        _currentSpeed = _startSpeed;
     }
 }

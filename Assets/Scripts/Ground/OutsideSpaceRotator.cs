@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class LavaRotator : MonoBehaviour
+public class OutsideSpaceRotator : MonoBehaviour
 {
     private Vector3 _rotationDirection = new Vector3(0, 3, 0);
 

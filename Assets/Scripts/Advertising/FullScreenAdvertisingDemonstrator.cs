@@ -1,23 +1,27 @@
+using System;
 using System.Collections;
+using Agava.WebUtility;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using Agava.WebUtility;
 
 [RequireComponent(typeof(VolumeChecker))]
-public class TimerFullScreenAdvertisingDemonstrator : MonoBehaviour
+public class FullScreenAdvertisingDemonstrator : MonoBehaviour
 {
     [SerializeField] private AdShowFullScreen _fullScreenAdPanel;
     [SerializeField] private Button _pauseButton;
     [SerializeField] private TMP_Text _timerText;
     [SerializeField] private int _adShowInterval;
-    [SerializeField] private PlayerMover _mover;
 
     private VolumeChecker _volumeChecker;
     private int _maxSoundVolume = 1;
     private int _minSoundVolume = 0;
     private bool _isMobile = false;
     private Coroutine _countTime;
+
+    public event Action FullScreenAdOpened;
+
+    public event Action FullScreenAdClosed;
 
     private void Awake()
     {
@@ -48,15 +52,15 @@ public class TimerFullScreenAdvertisingDemonstrator : MonoBehaviour
         int tempTimerValue;
         int timerIterationTime = 1;
         var waitForSecondsTimer = new WaitForSecondsRealtime(timerIterationTime);
-        bool _isCounterOn = true;
+        bool isCounterOn = true;
 
-        while (_isCounterOn)
+        while (isCounterOn)
         {
             yield return waitForSeconds;
 
             if (_isMobile)
             {
-                _mover.DisableJoystick();
+                FullScreenAdOpened.Invoke();
             }
 
             Time.timeScale = 0;
@@ -113,7 +117,7 @@ public class TimerFullScreenAdvertisingDemonstrator : MonoBehaviour
 
         if (_isMobile)
         {
-            _mover.EnableJoystick();
+            FullScreenAdClosed.Invoke();
         }
 
         Time.timeScale = 1;

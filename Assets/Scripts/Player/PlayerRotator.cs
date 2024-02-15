@@ -1,7 +1,7 @@
 using UnityEngine;
 
 [RequireComponent(typeof(PlayerMover))]
-public class Rotator : MonoBehaviour
+public class PlayerRotator : MonoBehaviour
 {
     private PlayerMover _mover;
     private Transform _target;

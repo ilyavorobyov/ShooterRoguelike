@@ -28,15 +28,8 @@ public class ScoreView : MonoBehaviour
 
     public void SetGameOverPanelText(int score, bool isBestScore)
     {
-        if(isBestScore)
-        {
-            _gameOverNewRecord.gameObject.SetActive(true);
-        }
-        else
-        {
-            _gameOverResult.gameObject.SetActive(true);
-        }
-
+        _gameOverNewRecord.gameObject.SetActive(isBestScore);
+        _gameOverResult.gameObject.SetActive(!isBestScore);
         _gameOverPanelScoreValueText.text = score.ToString();
     }
 

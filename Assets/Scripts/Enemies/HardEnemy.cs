@@ -14,6 +14,6 @@ public class HardEnemy : ShootingEnemy
     public override void Attack()
     {
         base.Attack();
-        _enemyHealth.AddHealth(Damage / _healthRecoveryDivisor);
+        _enemyHealth.Add(Damage / _healthRecoveryDivisor);
     }
 }

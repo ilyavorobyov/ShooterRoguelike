@@ -8,7 +8,6 @@ public class BoosterSelection : MonoBehaviour
     [SerializeField] private Booster[] _boosterSamples;
     [SerializeField] private RectTransform[] _spawnPoints;
     [SerializeField] private GameObject _pool;
-    [SerializeField] private Canvas _canvasJoystick;
     [SerializeField] private BoosterSelectionScreen _boosterSelectionScreen;
     [SerializeField] private Button _pauseButton;
 
@@ -37,8 +36,8 @@ public class BoosterSelection : MonoBehaviour
     {
         for (int i = 0; i < _boosterSamples.Length; i++)
         {
-            Booster booster = Instantiate(_boosterSamples[i],
-                _pool.transform);
+            Booster booster = Instantiate
+                (_boosterSamples[i], _pool.transform);
             booster.gameObject.SetActive(false);
             _boosters.Add(booster);
         }
@@ -48,7 +47,7 @@ public class BoosterSelection : MonoBehaviour
     {
         foreach (Booster booster in _boosters)
         {
-            if (!booster.MayShown())
+            if (!booster.IsAvailable)
             {
                 _boosters.Remove(booster);
                 break;

@@ -6,13 +6,13 @@ public class PlayerCollisionHandler : MonoBehaviour
 {
     [SerializeField] private BulletClip _bulletClip;
     [SerializeField] private Backpack _backpack;
-    [SerializeField] private WavesMaker _waveMaker;
+    [SerializeField] private WavesSpawner _waveMaker;
     [SerializeField] private AudioSource _tookBulletSound;
     [SerializeField] private AudioSource _tookTokenSound;
 
     private PlayerHealth _playerHealth;
 
-    public static Action TokenTaked;
+    public static event Action TokenTaked;
 
     private void Awake()
     {

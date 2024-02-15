@@ -1,13 +1,19 @@
-public class LeaderboardPlayer 
+public class LeaderboardPlayer
 {
-    public LeaderboardPlayer(int rank, string name, int score) 
+    private int _rank;
+    private string _name;
+    private int _score;
+
+    public LeaderboardPlayer(int rank, string name, int score)
     {
-        Rank = rank;
-        Name = name;
-        Score = score;
+        _rank = rank;
+        _name = name;
+        _score = score;
     }
 
-    public int Rank { get; private set; }
-    public string Name { get; private set; }
-    public int Score { get; private set; }
+    public int Rank => _rank;
+
+    public string Name => _name;
+
+    public int Score => _score;
 }

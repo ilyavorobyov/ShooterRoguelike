@@ -1,10 +1,9 @@
-using System;
 using System.Collections;
 using TMPro;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-public class WavesMaker : MonoBehaviour
+public class WavesSpawner : MonoBehaviour
 {
     [SerializeField] private TMP_Text _currentWaveText;
     [SerializeField] private TMP_Text _waveDefeatedText;
@@ -25,7 +24,7 @@ public class WavesMaker : MonoBehaviour
     private float _currentEasyEnemyChance;
     private float _currentHardEnemyChance;
     private int _currentWaveNumber;
-    private int _currentWaveEnemiesNumber;
+    private int _currentWaveEnemiesNumber = 0;
     private int _minIncreaseEnemiesNumber = 2;
     private int _maxIncreaseEnemiesNumber = 4;
     private int _reducingChanceOfEasyEnemy = 6;
@@ -36,15 +35,13 @@ public class WavesMaker : MonoBehaviour
     private Token _currentToken;
     private Coroutine _makeWaves;
 
-    public static event Action<int> WavePassed;
-
     private void OnEnable()
     {
         GameUI.GameBeguned += OnStartGame;
         GameUI.MenuWented += OnGameOver;
         PlayerHealth.GameOvered += OnGameOver;
         Enemy.Spawned += OnEnemySpawned;
-        EnemyHealth.EnemyDied += OnEnemyDied;
+        EnemyHealth.Died += OnEnemyDied;
         Booster.BoosterSelected += OnStartNextWave;
     }
 
@@ -54,8 +51,19 @@ public class WavesMaker : MonoBehaviour
         GameUI.MenuWented -= OnGameOver;
         PlayerHealth.GameOvered -= OnGameOver;
         Enemy.Spawned -= OnEnemySpawned;
-        EnemyHealth.EnemyDied -= OnEnemyDied;
+        EnemyHealth.Died -= OnEnemyDied;
         Booster.BoosterSelected -= OnStartNextWave;
+    }
+
+    public void OnStartNextWave()
+    {
+        _currentWaveEnemiesNumber += Random.Range(_minIncreaseEnemiesNumber, _maxIncreaseEnemiesNumber);
+        _currentWaveNumber++;
+        _currentEasyEnemyChance -= _reducingChanceOfEasyEnemy;
+        _currentHardEnemyChance += _increasingChanceOfHardEnemy;
+        _makeWaves = StartCoroutine(MakeWaves());
+        _pointingArrow.OnHide();
+        _waveSlider.SetValues(_currentWaveEnemiesNumber, _currentWaveNumber);
     }
 
     private void ShowWaveText()
@@ -120,7 +128,6 @@ public class WavesMaker : MonoBehaviour
             Transform tokenSpawnPoint = SelectTokenSpawnPoint();
             _pointingArrow.PointTokenSpawn(tokenSpawnPoint);
             _currentToken = Instantiate(_token, tokenSpawnPoint);
-            WavePassed?.Invoke(_currentWaveNumber);
             _wavePassedSound.PlayDelayed(0);
         }
     }
@@ -130,20 +137,9 @@ public class WavesMaker : MonoBehaviour
         _spawnedEnemiesNumber++;
     }
 
-    public void OnStartNextWave()
-    {
-        _currentWaveEnemiesNumber += Random.Range(_minIncreaseEnemiesNumber, _maxIncreaseEnemiesNumber);
-        _currentWaveNumber++;
-        _currentEasyEnemyChance -= _reducingChanceOfEasyEnemy;
-        _currentHardEnemyChance += _increasingChanceOfHardEnemy;
-        _makeWaves = StartCoroutine(MakeWaves());
-        _pointingArrow.OnHide();
-        _waveSlider.SetValues(_currentWaveEnemiesNumber, _currentWaveNumber);
-    }
-
     private void OnStartGame()
     {
-        _currentWaveEnemiesNumber = Random.Range(_minIncreaseEnemiesNumber, _maxIncreaseEnemiesNumber); ;
+        _currentWaveEnemiesNumber = Random.Range(_minIncreaseEnemiesNumber, _maxIncreaseEnemiesNumber);
         _currentEasyEnemyChance = _startEasyEnemyChance;
         _currentHardEnemyChance = _startHardEnemyChance;
         _currentWaveNumber = _startWaveNumber;
@@ -158,7 +154,9 @@ public class WavesMaker : MonoBehaviour
         _waveSlider.SetValues(_currentWaveEnemiesNumber, _currentWaveNumber);
 
         if (_currentToken != null)
+        {
             Destroy(_currentToken.gameObject);
+        }
     }
 
     private void OnGameOver()
@@ -166,10 +164,14 @@ public class WavesMaker : MonoBehaviour
         _isSpawning = false;
 
         if (_makeWaves != null)
+        {
             StopCoroutine(_makeWaves);
+        }
 
         if (_currentToken != null)
+        {
             Destroy(_currentToken.gameObject);
+        }
 
         _bulletSpawner.Stop();
     }

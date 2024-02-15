@@ -299,7 +299,7 @@ GameObject:
   - component: {fileID: 31830226}
   - component: {fileID: 31830225}
   - component: {fileID: 31830224}
-  - component: {fileID: 31830228}
+  - component: {fileID: 31830227}
   m_Layer: 0
   m_Name: Lava
   m_TagString: Untagged
@@ -373,7 +373,7 @@ Transform:
   - {fileID: 2082024734}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &31830228
+--- !u!114 &31830227
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -3410,7 +3410,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 567265503}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b8a66e986a0352e4ea6dee234c0e1474, type: 3}
+  m_Script: {fileID: 11500000, guid: 849a7745f05ea7b4c92f5946ce1b2710, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &574987346
@@ -9358,14 +9358,14 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1293714246}
-  - component: {fileID: 1293714245}
+  - component: {fileID: 1293714249}
   - component: {fileID: 1293714243}
   - component: {fileID: 1293714242}
   - component: {fileID: 1293714241}
   - component: {fileID: 1293714247}
   - component: {fileID: 1293714248}
   m_Layer: 0
-  m_Name: WavesMaker
+  m_Name: WavesSpawner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9416,34 +9416,6 @@ MonoBehaviour:
   SpawnableObject: {fileID: 9213972658074774375, guid: f32acc90f982666408c6e6390a5ab7dd, type: 3}
   _player: {fileID: 2981183530719638600}
   _minDistance: 3
---- !u!114 &1293714245
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1293714239}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ebe42b70ef178e048b788eed1f594091, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _currentWaveText: {fileID: 1346980670}
-  _waveDefeatedText: {fileID: 1012644010}
-  _currentWaveNumberText: {fileID: 416323135}
-  _bulletSpawner: {fileID: 1293714247}
-  _easyEnemySpawner: {fileID: 1293714243}
-  _mediumEnemySpawner: {fileID: 1293714242}
-  _hardEnemySpawner: {fileID: 1293714241}
-  _pointingArrow: {fileID: 1486917033}
-  _waveSlider: {fileID: 401190013}
-  _token: {fileID: 1700651279484078459, guid: a080f856f3d39ba4dafe4bb91f466c17, type: 3}
-  _wavePassedSound: {fileID: 1293714248}
-  _tokenSpawnPoints:
-  - {fileID: 1697696329}
-  - {fileID: 1896749168}
-  - {fileID: 1955764853}
-  - {fileID: 1109782243}
 --- !u!4 &1293714246
 Transform:
   m_ObjectHideFlags: 0
@@ -9478,6 +9450,7 @@ MonoBehaviour:
   SpawnableObject: {fileID: 8998630431123731132, guid: de1dd7d259570ad41b4f09088b8d5332, type: 3}
   _player: {fileID: 2981183530719638600}
   _minDistance: 2
+  _spawnInterval: 3
 --- !u!82 &1293714248
 AudioSource:
   m_ObjectHideFlags: 0
@@ -9574,6 +9547,34 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &1293714249
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1293714239}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8f4b1510d8a013d469b597333fcdda7d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _currentWaveText: {fileID: 1346980670}
+  _waveDefeatedText: {fileID: 1012644010}
+  _currentWaveNumberText: {fileID: 416323135}
+  _bulletSpawner: {fileID: 1293714247}
+  _easyEnemySpawner: {fileID: 1293714243}
+  _mediumEnemySpawner: {fileID: 1293714242}
+  _hardEnemySpawner: {fileID: 1293714241}
+  _pointingArrow: {fileID: 1486917033}
+  _waveSlider: {fileID: 401190013}
+  _token: {fileID: 1700651279484078459, guid: a080f856f3d39ba4dafe4bb91f466c17, type: 3}
+  _wavePassedSound: {fileID: 1293714248}
+  _tokenSpawnPoints:
+  - {fileID: 1697696329}
+  - {fileID: 1896749168}
+  - {fileID: 1955764853}
+  - {fileID: 1109782243}
 --- !u!1 &1303662363
 GameObject:
   m_ObjectHideFlags: 0
@@ -16822,7 +16823,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _closeButton: {fileID: 294066680}
-  _yandexLeaderboard: {fileID: 1909661995}
 --- !u!1 &1766208544
 GameObject:
   m_ObjectHideFlags: 0
@@ -16873,8 +16873,7 @@ MonoBehaviour:
   _fullScreenAdPanel: {fileID: 1514015067}
   _pauseButton: {fileID: 8582558751084732828}
   _timerText: {fileID: 912595443}
-  _adShowInterval: 140
-  _mover: {fileID: 2981183530719638601}
+  _adShowInterval: 20
 --- !u!114 &1766208548
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16889,7 +16888,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _startWithFullClipButton: {fileID: 295601632}
   _doubleResultButton: {fileID: 2117994559}
-  _vidoeAdCloseSound: {fileID: 1766208549}
+  _videoAdCloseSound: {fileID: 1766208549}
 --- !u!82 &1766208549
 AudioSource:
   m_ObjectHideFlags: 0
@@ -22112,6 +22111,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _startSpeed: 4
   _joystickMovement: {fileID: 2109257931}
+  _fullScreenAdDemonstrator: {fileID: 1766208547}
 --- !u!114 &2981183530719638602
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -22126,7 +22126,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _bulletClip: {fileID: 1035437365}
   _backpack: {fileID: 658695157}
-  _waveMaker: {fileID: 1293714245}
+  _waveMaker: {fileID: 0}
   _tookBulletSound: {fileID: 2981183530719638596}
   _tookTokenSound: {fileID: 2981183530719638595}
 --- !u!114 &2981183530719638603
@@ -27579,7 +27579,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b95de1e06faa844f9ee24e586c2bd41, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _effectDuration: 0.2
 --- !u!114 &4846124952043312893
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -27606,7 +27605,6 @@ MonoBehaviour:
   - {fileID: 1750822234}
   - {fileID: 719961153}
   _pool: {fileID: 712416471}
-  _canvasJoystick: {fileID: 652597702}
   _boosterSelectionScreen: {fileID: 780319802}
   _pauseButton: {fileID: 8582558751084732828}
 --- !u!82 &4846124952043312894

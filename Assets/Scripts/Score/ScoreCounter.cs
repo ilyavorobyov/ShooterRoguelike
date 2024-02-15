@@ -4,9 +4,9 @@ using UnityEngine;
 [RequireComponent(typeof(ScoreSaver))]
 public class ScoreCounter : MonoBehaviour
 {
-    [SerializeField] private GameOverScreen _gameOverScreen;
-
     private const string RecordKeyName = "MaxScore";
+
+    [SerializeField] private GameOverScreen _gameOverScreen;
 
     private ScoreView _scoreView;
     private ScoreSaver _saver;
@@ -18,27 +18,27 @@ public class ScoreCounter : MonoBehaviour
     private void OnEnable()
     {
         RewardedVideoAd.RewardAdDoubleResultViewed += OnDoubleResult;
-        EnemyHealth.EnemyDied += OnEnemyDied;
+        EnemyHealth.Died += OnEnemyDied;
         PlayerHealth.GameOvered += OnGameOver;
-        GameUI.GameReseted += OnTryGetBestScore;
+        GameUI.GameReseted += OnCheckBestScore;
     }
 
     private void OnDisable()
     {
         RewardedVideoAd.RewardAdDoubleResultViewed -= OnDoubleResult;
-        EnemyHealth.EnemyDied -= OnEnemyDied;
+        EnemyHealth.Died -= OnEnemyDied;
         PlayerHealth.GameOvered -= OnGameOver;
-        GameUI.GameReseted -= OnTryGetBestScore;
+        GameUI.GameReseted -= OnCheckBestScore;
     }
 
     private void Awake()
     {
         _scoreView = GetComponent<ScoreView>();
         _saver = GetComponent<ScoreSaver>();
-        OnTryGetBestScore();
+        OnCheckBestScore();
     }
 
-    private void OnTryGetBestScore()
+    private void OnCheckBestScore()
     {
         if (PlayerPrefs.HasKey(RecordKeyName))
         {

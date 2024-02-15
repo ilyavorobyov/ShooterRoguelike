@@ -1,4 +1,5 @@
 using Agava.WebUtility;
+using Unity.VisualScripting;
 using UnityEngine;
 
 [RequireComponent(typeof(PlayerAnimator))]
@@ -6,6 +7,7 @@ public class PlayerMover : MonoBehaviour
 {
     [SerializeField] private float _startSpeed;
     [SerializeField] private JoystickMovement _joystickMovement;
+    [SerializeField] private FullScreenAdvertisingDemonstrator _fullScreenAdDemonstrator;
 
     private float _offSpeed = 0;
     private float _currentSpeed;
@@ -38,7 +40,7 @@ public class PlayerMover : MonoBehaviour
     {
         if (_isMobile)
         {
-            JoystickMovement.Moving += OnJoystickMovng;
+            JoystickMovement.Moving += OnJoystickMoving;
         }
 
         Backpack.TokenBroughted += OnTokenBrought;
@@ -48,13 +50,15 @@ public class PlayerMover : MonoBehaviour
         GameUI.GameReseted += OnGameReseted;
         GameUI.GameBeguned += OnTurnOn;
         PlayerHealth.GameOvered += OnTurnOff;
+        _fullScreenAdDemonstrator.FullScreenAdOpened += OnFullScreenAdOpened;
+        _fullScreenAdDemonstrator.FullScreenAdClosed += OnFullScreenAdClosed;
     }
 
     private void OnDisable()
     {
         if (_isMobile)
         {
-            JoystickMovement.Moving -= OnJoystickMovng;
+            JoystickMovement.Moving -= OnJoystickMoving;
         }
 
         Backpack.TokenBroughted -= OnTokenBrought;
@@ -65,6 +69,8 @@ public class PlayerMover : MonoBehaviour
         PlayerHealth.GameOvered -= OnTurnOff;
         GameUI.GameBeguned -= OnTurnOn;
         DisablePlayerInput();
+        _fullScreenAdDemonstrator.FullScreenAdOpened -= OnFullScreenAdOpened;
+        _fullScreenAdDemonstrator.FullScreenAdClosed -= OnFullScreenAdClosed;
     }
 
     private void FixedUpdate()
@@ -114,7 +120,7 @@ public class PlayerMover : MonoBehaviour
         transform.Translate(_moveDirection * _currentSpeed * Time.deltaTime, Space.World);
     }
 
-    private void OnJoystickMovng(Vector3 moveDirection)
+    private void OnJoystickMoving(Vector3 moveDirection)
     {
         _moveDirection = moveDirection;
     }
@@ -165,14 +171,14 @@ public class PlayerMover : MonoBehaviour
         }
     }
 
-    public void DisableJoystick()
+    private void OnFullScreenAdOpened()
     {
         _joystickMovement.gameObject.SetActive(false);
         _joystickMovement.Reset();
         _animator.PlayIdleAnimation();
     }
 
-    public void EnableJoystick()
+    private void OnFullScreenAdClosed()
     {
         _joystickMovement.gameObject.SetActive(true);
     }

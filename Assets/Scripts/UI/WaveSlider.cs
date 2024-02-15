@@ -13,12 +13,12 @@ public class WaveSlider : MonoBehaviour
 
     private void OnEnable()
     {
-        EnemyHealth.EnemyDied += OnEnemyDied;
+        EnemyHealth.Died += OnEnemyDied;
     }
 
     private void OnDisable()
     {
-        EnemyHealth.EnemyDied -= OnEnemyDied;
+        EnemyHealth.Died -= OnEnemyDied;
     }
 
     public void SetValues(int enemiesNumber, int currentWaveNumber)
@@ -45,8 +45,8 @@ public class WaveSlider : MonoBehaviour
 
         while (isChangeSliderValue)
         {
-            _smoothWaveSlider.value = Mathf.MoveTowards(_smoothWaveSlider.value, _deadEnemies,
-                _handleSpeed * Time.deltaTime);
+            _smoothWaveSlider.value = Mathf.MoveTowards
+                (_smoothWaveSlider.value, _deadEnemies, _handleSpeed * Time.deltaTime);
 
             if (_smoothWaveSlider.value == _deadEnemies)
             {

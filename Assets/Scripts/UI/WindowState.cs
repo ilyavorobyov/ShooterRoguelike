@@ -27,9 +27,9 @@ public class WindowState : MonoBehaviour
 
     private void PauseGame(bool value)
     {
-        if (_pauseScreen != null && !_pauseScreen.isActiveAndEnabled 
+        if (_pauseScreen != null && !_pauseScreen.isActiveAndEnabled
             && !_gameOverScreen.isActiveAndEnabled
-            && !_adShowFullScreen.isActiveAndEnabled 
+            && !_adShowFullScreen.isActiveAndEnabled
             && !_trainingPanel.isActiveAndEnabled)
         {
                 Time.timeScale = !value ? 1 : 0;

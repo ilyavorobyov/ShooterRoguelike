@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class SightOnCamera : MonoBehaviour
+public class CameraWatcher : MonoBehaviour
 {
     private Camera _camera;
 

@@ -4,14 +4,14 @@ using UnityEngine;
 
 public class Localization : MonoBehaviour
 {
-    [SerializeField] private LeanLocalization _leanLanguage;
-
     private const string EnglishCode = "English";
     private const string RussianCode = "Russian";
     private const string TurkishCode = "Turkish";
     private const string English = "en";
     private const string Russian = "ru";
     private const string Turkish = "tr";
+
+    [SerializeField] private LeanLocalization _leanLanguage;
 
     private void Awake()
     {
@@ -27,7 +27,7 @@ public class Localization : MonoBehaviour
         switch (languageCode)
         {
             case English:
-                _leanLanguage.SetCurrentLanguage(EnglishCode); 
+                _leanLanguage.SetCurrentLanguage(EnglishCode);
                 break;
             case Russian:
                 _leanLanguage.SetCurrentLanguage(RussianCode);

@@ -1,5 +1,5 @@
-using UnityEngine;
 using Agava.WebUtility;
+using UnityEngine;
 using UnityEngine.UI;
 
 public class WalkingTraining : MonoBehaviour

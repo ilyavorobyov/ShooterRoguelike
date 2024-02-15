@@ -3,18 +3,18 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-[RequireComponent(typeof(Rotator))]
+[RequireComponent(typeof(PlayerRotator))]
 public class Scanner : MonoBehaviour
 {
     [SerializeField] private WeaponPlacement _weaponPlacement;
 
-    private Rotator _rotator;
+    private PlayerRotator _rotator;
     private float _range = 3f;
     private Coroutine _searchEnemy;
 
     private void Awake()
     {
-        _rotator = GetComponent<Rotator>();
+        _rotator = GetComponent<PlayerRotator>();
     }
 
     private void Start()

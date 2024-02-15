@@ -1,5 +1,5 @@
-using Agava.YandexGames;
 using System.Collections;
+using Agava.YandexGames;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
