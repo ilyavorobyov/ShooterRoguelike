@@ -38,7 +38,7 @@ public class GameUI : MonoBehaviour
 
     private void Awake()
     {
-       // YandexGamesSdk.GameReady();
+        YandexGamesSdk.GameReady();
         _uiElementsAnimation = GetComponent<UIElementsAnimation>();
     }
 
