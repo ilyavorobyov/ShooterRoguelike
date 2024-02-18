@@ -8,6 +8,7 @@ public abstract class Spawner : MonoBehaviour
     [SerializeField] private float _minDistance;
     [SerializeField] private GameUI _gameUI;
     [SerializeField] private PlayerHealth _playerHealth;
+    [SerializeField] private SlowDownEnemiesBooster _slowDownEnemiesBooster;
 
     protected List<SpawnableObject> Pool = new List<SpawnableObject>();
 
@@ -42,7 +43,7 @@ public abstract class Spawner : MonoBehaviour
 
             if (spawnableObject.TryGetComponent(out Enemy enemy))
             {
-                enemy.Init(_player, _gameUI);
+                enemy.Init(_player, _gameUI, _slowDownEnemiesBooster);
             }
         }
     }

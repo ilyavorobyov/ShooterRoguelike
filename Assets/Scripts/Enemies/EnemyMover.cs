@@ -8,17 +8,21 @@ public class EnemyMover : MonoBehaviour
     private Player _player;
     private float _currentSpeed;
     private bool _isMoving = false;
+    private SlowDownEnemiesBooster _slowDownEnemiesBooster;
 
     private void Awake()
     {
         _currentSpeed = _startSpeed;
     }
 
+    private void Start()
+    {
+        _slowDownEnemiesBooster.EnemiesSlowed += OnSlowed;
+    }
+
     private void OnEnable()
     {
-        SlowDownEnemiesBooster.EnemiesSlowed += OnSlowed;
-
-        if(_gameUI !=  null)
+        if (_gameUI != null)
             _gameUI.GameReseted += OnReset;
     }
 
@@ -30,7 +34,7 @@ public class EnemyMover : MonoBehaviour
 
     private void OnDestroy()
     {
-        SlowDownEnemiesBooster.EnemiesSlowed -= OnSlowed;
+        _slowDownEnemiesBooster.EnemiesSlowed -= OnSlowed;
     }
 
     private void Update()
@@ -43,10 +47,12 @@ public class EnemyMover : MonoBehaviour
         }
     }
 
-    public void Init(Player player, GameUI gameUI)
+    public void Init
+        (Player player, GameUI gameUI, SlowDownEnemiesBooster slowDownEnemiesBooster)
     {
         _player = player;
         _gameUI = gameUI;
+        _slowDownEnemiesBooster = slowDownEnemiesBooster;
     }
 
     public void StartChasing()
