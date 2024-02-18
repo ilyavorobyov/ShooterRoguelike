@@ -3,8 +3,10 @@ using UnityEngine.UI;
 
 public class PointingArrow : MonoBehaviour
 {
+    [SerializeField] private PlayerCollisionHandler _playerCollisionHandler;
     [SerializeField] private Image _arrow;
     [SerializeField] private Transform _perkChoisePlace;
+    [SerializeField] private GameUI _gameUI;
 
     private int _decreasingAngleValue = 90;
     private Transform _target;
@@ -12,16 +14,16 @@ public class PointingArrow : MonoBehaviour
 
     private void OnEnable()
     {
-        PlayerCollisionHandler.TokenTaked += OnTokenTaked;
-        GameUI.GameReseted += OnHide;
-        GameUI.MenuWented += OnHide;
+        _playerCollisionHandler.TokenTaked += OnTokenTaked;
+        _gameUI.GameReseted += OnHide;
+        _gameUI.MenuWented += OnHide;
     }
 
     private void OnDisable()
     {
-        PlayerCollisionHandler.TokenTaked -= OnTokenTaked;
-        GameUI.GameReseted -= OnHide;
-        GameUI.MenuWented -= OnHide;
+        _playerCollisionHandler.TokenTaked -= OnTokenTaked;
+        _gameUI.GameReseted -= OnHide;
+        _gameUI.MenuWented -= OnHide;
     }
 
     private void Awake()

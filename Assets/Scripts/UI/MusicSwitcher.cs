@@ -4,6 +4,8 @@ public class MusicSwitcher : MonoBehaviour
 {
     [SerializeField] private AudioSource _gameMusic;
     [SerializeField] private AudioSource _menuMusic;
+    [SerializeField] private GameUI _gameUI;
+    [SerializeField] private PlayerHealth _playerHealth;
 
     private void Start()
     {
@@ -12,16 +14,16 @@ public class MusicSwitcher : MonoBehaviour
 
     private void OnEnable()
     {
-        GameUI.GameBeguned += OnGameBeguned;
-        GameUI.MenuWented += OnMenuWented;
-        PlayerHealth.GameOvered += OnGameOver;
+        _gameUI.GameBeguned += OnGameBeguned;
+        _gameUI.MenuWented += OnMenuWented;
+        _playerHealth.GameOvered += OnGameOver;
     }
 
     private void OnDisable()
     {
-        GameUI.GameBeguned -= OnGameBeguned;
-        GameUI.MenuWented -= OnMenuWented;
-        PlayerHealth.GameOvered -= OnGameOver;
+        _gameUI.GameBeguned -= OnGameBeguned;
+        _gameUI.MenuWented -= OnMenuWented;
+        _playerHealth.GameOvered -= OnGameOver;
     }
 
     private void OnGameBeguned()

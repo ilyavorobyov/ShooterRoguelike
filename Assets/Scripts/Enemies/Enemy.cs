@@ -16,6 +16,7 @@ public abstract class Enemy : MonoBehaviour
     private EnemyPointer _enemyPointer;
     private EnemyAnimator _animatior;
     private Tracker _tracker;
+    private GameUI _gameUI;
 
     public static event Action Spawned;
 
@@ -41,14 +42,15 @@ public abstract class Enemy : MonoBehaviour
         }
     }
 
-    public virtual void Init(Player player)
+    public virtual void Init(Player player, GameUI gameUI)
     {
         Player = player;
         PlayerHealth = Player.GetComponent<PlayerHealth>();
         _enemyPointer = GetComponent<EnemyPointer>();
         _enemyPointer.Init(Player);
         _tracker = GetComponent<Tracker>();
-        _tracker.Init(Player);
+        _gameUI = gameUI;
+        _tracker.Init(Player, _gameUI);
     }
 
     public virtual void Attack()

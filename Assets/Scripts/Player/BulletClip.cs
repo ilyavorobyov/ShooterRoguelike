@@ -5,6 +5,9 @@ public class BulletClip : MonoBehaviour
 {
     [SerializeField] private Backpack _backpack;
     [SerializeField] private TMP_Text _bulletsInfoText;
+    [SerializeField] private GameUI _gameUI;
+    [SerializeField] private RewardedVideoAd _rewardedVideoAd;
+    [SerializeField] private IncreaseMaxBulletsNumberBooster _increaseMaxBulletsNumberBooster;
 
     private int _startCurrentBulletsNumber = 0;
     private int _currentBulletsNumber;
@@ -15,16 +18,16 @@ public class BulletClip : MonoBehaviour
 
     private void OnEnable()
     {
-        GameUI.GameReseted += OnReset;
-        IncreaseMaxBulletsNumberBooster.AdditionalBulletAdded += OnAdditionalBulletAdded;
-        RewardedVideoAd.RewardAdFullClipViewed += OnStartFillingClip;
+        _gameUI.GameReseted += OnReset;
+        _increaseMaxBulletsNumberBooster.AdditionalBulletAdded += OnAdditionalBulletAdded;
+        _rewardedVideoAd.RewardAdFullClipViewed += OnStartFillingClip;
     }
 
     private void OnDisable()
     {
-        GameUI.GameReseted -= OnReset;
-        IncreaseMaxBulletsNumberBooster.AdditionalBulletAdded -= OnAdditionalBulletAdded;
-        RewardedVideoAd.RewardAdFullClipViewed -= OnStartFillingClip;
+        _gameUI.GameReseted -= OnReset;
+        _increaseMaxBulletsNumberBooster.AdditionalBulletAdded -= OnAdditionalBulletAdded;
+        _rewardedVideoAd.RewardAdFullClipViewed -= OnStartFillingClip;
     }
 
     private void Awake()

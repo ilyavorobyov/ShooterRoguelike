@@ -8,6 +8,11 @@ public class PlayerMover : MonoBehaviour
     [SerializeField] private float _startSpeed;
     [SerializeField] private JoystickMovement _joystickMovement;
     [SerializeField] private FullScreenAdvertisingDemonstrator _fullScreenAdDemonstrator;
+    [SerializeField] private GameUI _gameUI;
+    [SerializeField] private PlayerHealth _playerHealth;
+    [SerializeField] private Backpack _backpack;
+    [SerializeField] private BoosterSelection _boosterSelection;
+    [SerializeField] private AddPlayerMoveSpeedBooster _addPlayerMoveSpeedBooster;
 
     private float _offSpeed = 0;
     private float _currentSpeed;
@@ -40,16 +45,16 @@ public class PlayerMover : MonoBehaviour
     {
         if (_isMobile)
         {
-            JoystickMovement.Moving += OnJoystickMoving;
+            _joystickMovement.Moving += OnJoystickMoving;
         }
 
-        Backpack.TokenBroughted += OnTokenBrought;
-        Booster.BoosterSelected += OnBoosterSelected;
-        AddPlayerMoveSpeedBooster.SpeedAdded += OnSpeedAdded;
-        GameUI.MenuWented += OnTurnOff;
-        GameUI.GameReseted += OnGameReseted;
-        GameUI.GameBeguned += OnTurnOn;
-        PlayerHealth.GameOvered += OnTurnOff;
+        _backpack.TokenBroughted += OnTokenBrought;
+        _boosterSelection.BoosterSelected += OnBoosterSelected;
+        _addPlayerMoveSpeedBooster.SpeedAdded += OnSpeedAdded;
+        _gameUI.MenuWented += OnTurnOff;
+        _gameUI.GameReseted += OnGameReseted;
+        _gameUI.GameBeguned += OnTurnOn;
+        _playerHealth.GameOvered += OnTurnOff;
         _fullScreenAdDemonstrator.FullScreenAdOpened += OnFullScreenAdOpened;
         _fullScreenAdDemonstrator.FullScreenAdClosed += OnFullScreenAdClosed;
     }
@@ -58,16 +63,16 @@ public class PlayerMover : MonoBehaviour
     {
         if (_isMobile)
         {
-            JoystickMovement.Moving -= OnJoystickMoving;
+            _joystickMovement.Moving -= OnJoystickMoving;
         }
 
-        Backpack.TokenBroughted -= OnTokenBrought;
-        Booster.BoosterSelected -= OnBoosterSelected;
-        AddPlayerMoveSpeedBooster.SpeedAdded += OnSpeedAdded;
-        GameUI.MenuWented -= OnTurnOff;
-        GameUI.GameReseted -= OnGameReseted;
-        PlayerHealth.GameOvered -= OnTurnOff;
-        GameUI.GameBeguned -= OnTurnOn;
+        _backpack.TokenBroughted -= OnTokenBrought;
+        _boosterSelection.BoosterSelected -= OnBoosterSelected;
+        _addPlayerMoveSpeedBooster.SpeedAdded += OnSpeedAdded;
+        _gameUI.MenuWented -= OnTurnOff;
+        _gameUI.GameReseted -= OnGameReseted;
+        _playerHealth.GameOvered -= OnTurnOff;
+        _gameUI.GameBeguned -= OnTurnOn;
         DisablePlayerInput();
         _fullScreenAdDemonstrator.FullScreenAdOpened -= OnFullScreenAdOpened;
         _fullScreenAdDemonstrator.FullScreenAdClosed -= OnFullScreenAdClosed;

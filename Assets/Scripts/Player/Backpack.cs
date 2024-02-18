@@ -7,6 +7,7 @@ public class Backpack : MonoBehaviour
     [SerializeField] private DisplayedBullet _displayedBulletSample;
     [SerializeField] private DisplayedToken _displayedTokenSample;
     [SerializeField] private AudioSource _removeTokenSound;
+    [SerializeField] private GameUI _gameUI;
 
     private List<DisplayedBullet> _displayedBullets = new List<DisplayedBullet>();
     private Vector3 _startCurrentPosition = Vector3.zero;
@@ -16,7 +17,7 @@ public class Backpack : MonoBehaviour
     private DisplayedToken _currentToken;
     private bool _isHaveToken;
 
-    public static event Action TokenBroughted;
+    public event Action TokenBroughted;
 
     private void Awake()
     {
@@ -25,12 +26,12 @@ public class Backpack : MonoBehaviour
 
     private void OnEnable()
     {
-        GameUI.GameReseted += OnReset;
+        _gameUI.GameReseted += OnReset;
     }
 
     private void OnDisable()
     {
-        GameUI.GameReseted -= OnReset;
+        _gameUI.GameReseted -= OnReset;
     }
 
     public void AddBullet()

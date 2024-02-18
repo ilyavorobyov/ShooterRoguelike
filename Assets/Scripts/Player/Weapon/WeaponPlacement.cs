@@ -6,19 +6,21 @@ public class WeaponPlacement : MonoBehaviour
     [SerializeField] private Weapon _startingWeapon;
     [SerializeField] private BulletClip _bulletClip;
     [SerializeField] private Transform _weaponPoint;
+    [SerializeField] private GameUI _gameUI;
+    [SerializeField] private NewWeaponBooster _newWeaponBooster;
 
     private Weapon _currentWeapon;
 
     private void OnEnable()
     {
-        NewWeaponBooster.NewWeaponTaked += OnNewWeaponTaked;
-        GameUI.GameReseted += OnReset;
+        _newWeaponBooster.NewWeaponTaked += OnNewWeaponTaked;
+        _gameUI.GameReseted += OnReset;
     }
 
     private void OnDisable()
     {
-        NewWeaponBooster.NewWeaponTaked -= OnNewWeaponTaked;
-        GameUI.GameReseted -= OnReset;
+        _newWeaponBooster.NewWeaponTaked -= OnNewWeaponTaked;
+        _gameUI.GameReseted -= OnReset;
     }
 
     private void Awake()

@@ -5,7 +5,7 @@ public class AddPlayerMoveSpeedBooster : Booster
 {
     [SerializeField] private int _additionalSpeed;
 
-    public static event Action<int> SpeedAdded;
+    public event Action<int> SpeedAdded;
 
     public override void Activate()
     {

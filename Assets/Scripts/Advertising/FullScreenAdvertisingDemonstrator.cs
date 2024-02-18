@@ -12,6 +12,8 @@ public class FullScreenAdvertisingDemonstrator : MonoBehaviour
     [SerializeField] private Button _pauseButton;
     [SerializeField] private TMP_Text _timerText;
     [SerializeField] private int _adShowInterval;
+    [SerializeField] private GameUI _gameUI;
+    [SerializeField] private PlayerHealth _playerHealth;
 
     private VolumeChecker _volumeChecker;
     private int _maxSoundVolume = 1;
@@ -35,14 +37,14 @@ public class FullScreenAdvertisingDemonstrator : MonoBehaviour
 
     private void OnEnable()
     {
-        GameUI.GameBeguned += OnGameBegun;
-        PlayerHealth.GameOvered += OnGameOver;
+        _gameUI.GameBeguned += OnGameBegun;
+        _playerHealth.GameOvered += OnGameOver;
     }
 
     private void OnDisable()
     {
-        GameUI.GameBeguned -= OnGameBegun;
-        PlayerHealth.GameOvered -= OnGameOver;
+        _gameUI.GameBeguned -= OnGameBegun;
+        _playerHealth.GameOvered -= OnGameOver;
     }
 
     private IEnumerator CountTime()

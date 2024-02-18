@@ -5,21 +5,22 @@ using UnityEngine.EventSystems;
 public abstract class Booster : MonoBehaviour, IPointerClickHandler
 {
     [SerializeField] private bool _isSelectedOnce;
+    [SerializeField] private GameUI _gameUI;
 
     private bool _isChosenBefore = false;
 
-    public static event Action BoosterSelected;
+    public event Action BoosterSelected;
 
     public bool IsAvailable => MayShown();
 
-    private void OnEnable()
+    private void Awake()
     {
-        GameUI.GameReseted += OnReset;
+        _gameUI.GameReseted += OnReset;
     }
 
-    private void OnDisable()
+    private void OnDestroy()
     {
-        GameUI.GameReseted -= OnReset;
+        _gameUI.GameReseted -= OnReset;
     }
 
     public abstract void Activate();

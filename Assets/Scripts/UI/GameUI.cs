@@ -25,14 +25,16 @@ public class GameUI : MonoBehaviour
     [SerializeField] private Healthbar _playerHealthBar;
     [SerializeField] private WaveSlider _waveSlider;
     [SerializeField] private AudioSource _lossSound;
+    [SerializeField] private PlayerHealth _playerHealth;
+    [SerializeField] private RewardedVideoAd _rewardedVideoAd;
 
     private UIElementsAnimation _uiElementsAnimation;
 
-    public static event Action GameBeguned;
+    public event Action GameBeguned;
 
-    public static event Action GameReseted;
+    public event Action GameReseted;
 
-    public static event Action MenuWented;
+    public event Action MenuWented;
 
     private void Awake()
     {
@@ -42,8 +44,8 @@ public class GameUI : MonoBehaviour
 
     private void OnEnable()
     {
-        PlayerHealth.GameOvered += OnGameOver;
-        RewardedVideoAd.RewardAdFullClipViewed += OnStartButtonClick;
+        _playerHealth.GameOvered += OnGameOver;
+        _rewardedVideoAd.RewardAdFullClipViewed += OnStartButtonClick;
         _startButton.onClick.AddListener(OnStartButtonClick);
         _gameOverScreenRestartButton.onClick.AddListener(OnStartButtonClick);
         _gameOverScreenMenuButton.onClick.AddListener(OnMenuButtonClick);
@@ -55,8 +57,8 @@ public class GameUI : MonoBehaviour
 
     private void OnDisable()
     {
-        PlayerHealth.GameOvered -= OnGameOver;
-        RewardedVideoAd.RewardAdFullClipViewed -= OnStartButtonClick;
+        _playerHealth.GameOvered -= OnGameOver;
+        _rewardedVideoAd.RewardAdFullClipViewed -= OnStartButtonClick;
         _startButton.onClick.RemoveListener(OnStartButtonClick);
         _gameOverScreenRestartButton.onClick.RemoveListener(OnStartButtonClick);
         _gameOverScreenMenuButton.onClick.RemoveListener(OnMenuButtonClick);

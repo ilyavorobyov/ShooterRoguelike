@@ -13,7 +13,7 @@ public class JoystickMovement : MonoBehaviour
     private Vector3 _moveDirection;
     private bool _isMobile;
 
-    public static event Action<Vector3> Moving;
+    public event Action<Vector3> Moving;
 
     private void Awake()
     {

@@ -7,6 +7,9 @@ public class ScoreCounter : MonoBehaviour
     private const string RecordKeyName = "MaxScore";
 
     [SerializeField] private GameOverScreen _gameOverScreen;
+    [SerializeField] private GameUI _gameUI;
+    [SerializeField] private PlayerHealth _playerHealth;
+    [SerializeField] private RewardedVideoAd _rewardedVideoAd;
 
     private ScoreView _scoreView;
     private ScoreSaver _saver;
@@ -17,18 +20,18 @@ public class ScoreCounter : MonoBehaviour
 
     private void OnEnable()
     {
-        RewardedVideoAd.RewardAdDoubleResultViewed += OnDoubleResult;
+        _rewardedVideoAd.RewardAdDoubleResultViewed += OnDoubleResult;
         EnemyHealth.Died += OnEnemyDied;
-        PlayerHealth.GameOvered += OnGameOver;
-        GameUI.GameReseted += OnCheckBestScore;
+        _playerHealth.GameOvered += OnGameOver;
+        _gameUI.GameReseted += OnCheckBestScore;
     }
 
     private void OnDisable()
     {
-        RewardedVideoAd.RewardAdDoubleResultViewed -= OnDoubleResult;
+        _rewardedVideoAd.RewardAdDoubleResultViewed -= OnDoubleResult;
         EnemyHealth.Died -= OnEnemyDied;
-        PlayerHealth.GameOvered -= OnGameOver;
-        GameUI.GameReseted -= OnCheckBestScore;
+        _playerHealth.GameOvered -= OnGameOver;
+        _gameUI.GameReseted -= OnCheckBestScore;
     }
 
     private void Awake()

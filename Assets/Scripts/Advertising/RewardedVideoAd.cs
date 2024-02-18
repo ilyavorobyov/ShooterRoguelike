@@ -13,9 +13,9 @@ public class RewardedVideoAd : MonoBehaviour
     private int _maxSoundVolume = 1;
     private int _minSoundVolume = 0;
 
-    public static event Action RewardAdFullClipViewed;
+    public event Action RewardAdFullClipViewed;
 
-    public static event Action RewardAdDoubleResultViewed;
+    public event Action RewardAdDoubleResultViewed;
 
     private void Awake()
     {

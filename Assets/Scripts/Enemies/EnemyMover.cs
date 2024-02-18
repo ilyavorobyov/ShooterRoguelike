@@ -4,6 +4,7 @@ public class EnemyMover : MonoBehaviour
 {
     [SerializeField] private float _startSpeed;
 
+    private GameUI _gameUI;
     private Player _player;
     private float _currentSpeed;
     private bool _isMoving = false;
@@ -15,13 +16,16 @@ public class EnemyMover : MonoBehaviour
 
     private void OnEnable()
     {
-        GameUI.GameReseted += OnReset;
         SlowDownEnemiesBooster.EnemiesSlowed += OnSlowed;
+
+        if(_gameUI !=  null)
+            _gameUI.GameReseted += OnReset;
     }
 
     private void OnDisable()
     {
-        GameUI.GameReseted -= OnReset;
+        if (_gameUI != null)
+            _gameUI.GameReseted -= OnReset;
     }
 
     private void OnDestroy()
@@ -39,9 +43,10 @@ public class EnemyMover : MonoBehaviour
         }
     }
 
-    public void Init(Player player)
+    public void Init(Player player, GameUI gameUI)
     {
         _player = player;
+        _gameUI = gameUI;
     }
 
     public void StartChasing()

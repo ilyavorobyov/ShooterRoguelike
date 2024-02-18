@@ -5,7 +5,7 @@ public class AddMaxHealthBooster : Booster
 {
     [SerializeField] private int _addedHealth;
 
-    public static event Action<int> MaxHealthAdded;
+    public event Action<int> MaxHealthAdded;
 
     public override void Activate()
     {

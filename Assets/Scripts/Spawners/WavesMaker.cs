@@ -3,7 +3,7 @@ using TMPro;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-public class WavesSpawner : MonoBehaviour
+public class WavesMaker : MonoBehaviour
 {
     [SerializeField] private TMP_Text _currentWaveText;
     [SerializeField] private TMP_Text _waveDefeatedText;
@@ -17,6 +17,9 @@ public class WavesSpawner : MonoBehaviour
     [SerializeField] private Token _token;
     [SerializeField] private AudioSource _wavePassedSound;
     [SerializeField] private Transform[] _tokenSpawnPoints;
+    [SerializeField] private GameUI _gameUI;
+    [SerializeField] private PlayerHealth _playerHealth;
+    [SerializeField] private BoosterSelection _boosterSelection;
 
     private int _startWaveNumber = 1;
     private float _startEasyEnemyChance = 90;
@@ -37,22 +40,22 @@ public class WavesSpawner : MonoBehaviour
 
     private void OnEnable()
     {
-        GameUI.GameBeguned += OnStartGame;
-        GameUI.MenuWented += OnGameOver;
-        PlayerHealth.GameOvered += OnGameOver;
+        _gameUI.GameBeguned += OnStartGame;
+        _gameUI.MenuWented += OnGameOver;
+        _playerHealth.GameOvered += OnGameOver;
         Enemy.Spawned += OnEnemySpawned;
         EnemyHealth.Died += OnEnemyDied;
-        Booster.BoosterSelected += OnStartNextWave;
+        _boosterSelection.BoosterSelected += OnStartNextWave;
     }
 
     private void OnDisable()
     {
-        GameUI.GameBeguned -= OnStartGame;
-        GameUI.MenuWented -= OnGameOver;
-        PlayerHealth.GameOvered -= OnGameOver;
+        _gameUI.GameBeguned -= OnStartGame;
+        _gameUI.MenuWented -= OnGameOver;
+        _playerHealth.GameOvered -= OnGameOver;
         Enemy.Spawned -= OnEnemySpawned;
         EnemyHealth.Died -= OnEnemyDied;
-        Booster.BoosterSelected -= OnStartNextWave;
+        _boosterSelection.BoosterSelected -= OnStartNextWave;
     }
 
     public void OnStartNextWave()

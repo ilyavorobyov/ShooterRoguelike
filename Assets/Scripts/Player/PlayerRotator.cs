@@ -3,6 +3,8 @@ using UnityEngine;
 [RequireComponent(typeof(PlayerMover))]
 public class PlayerRotator : MonoBehaviour
 {
+    [SerializeField] private GameUI _gameUI;
+
     private PlayerMover _mover;
     private Transform _target;
     private bool _isEnemyVisible;
@@ -16,14 +18,14 @@ public class PlayerRotator : MonoBehaviour
 
     private void OnEnable()
     {
-        GameUI.GameBeguned += OnReset;
-        GameUI.GameReseted += OnReset;
+        _gameUI.GameBeguned += OnReset;
+        _gameUI.GameReseted += OnReset;
     }
 
     private void OnDisable()
     {
-        GameUI.GameBeguned -= OnReset;
-        GameUI.GameReseted -= OnReset;
+        _gameUI.GameBeguned -= OnReset;
+        _gameUI.GameReseted -= OnReset;
     }
 
     private void FixedUpdate()

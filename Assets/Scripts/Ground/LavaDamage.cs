@@ -6,6 +6,7 @@ public class LavaDamage : MonoBehaviour
 {
     [SerializeField] private TMP_Text _lavaInfoText;
     [SerializeField] private AudioSource _hitPlayerSound;
+    [SerializeField] private GameUI _gameUI;
 
     private float _damage = 50;
     private PlayerHealth _playerHealth;
@@ -14,12 +15,12 @@ public class LavaDamage : MonoBehaviour
 
     private void OnEnable()
     {
-        GameUI.GameReseted += OnReset;
+        _gameUI.GameReseted += OnReset;
     }
 
     private void OnDisable()
     {
-        GameUI.GameReseted -= OnReset;
+        _gameUI.GameReseted -= OnReset;
     }
 
     private void OnTriggerExit(Collider collider)

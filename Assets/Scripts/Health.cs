@@ -26,14 +26,11 @@ public abstract class Health : MonoBehaviour
     {
         _currentHealth = _currentMaxHealth;
         _healthView.SetInfo();
-        GameUI.GameReseted += OnReset;
-        GameUI.GameBeguned += OnReset;
     }
 
     private void OnDisable()
     {
-        GameUI.GameReseted -= OnReset;
-        GameUI.GameBeguned -= OnReset;
+        OnReset();
     }
 
     public virtual void TakeDamage(float damage)

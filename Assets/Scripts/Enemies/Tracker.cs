@@ -34,10 +34,10 @@ public class Tracker : MonoBehaviour
         StopTrackPlayer();
     }
 
-    public void Init(Player player)
+    public void Init(Player player, GameUI gameUI)
     {
         _player = player;
-        _enemyMover.Init(player);
+        _enemyMover.Init(player, gameUI);
     }
 
     private void StartTrackPlayer()

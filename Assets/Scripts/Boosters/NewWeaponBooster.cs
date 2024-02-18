@@ -5,7 +5,7 @@ public class NewWeaponBooster : Booster
 {
     [SerializeField] private Weapon _newWeapon;
 
-    public static event Action<Weapon> NewWeaponTaked;
+    public event Action<Weapon> NewWeaponTaked;
 
     public override void Activate()
     {

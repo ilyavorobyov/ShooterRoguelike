@@ -6,6 +6,8 @@ public abstract class Spawner : MonoBehaviour
     [SerializeField] private SpawnableObject SpawnableObject;
     [SerializeField] private Player _player;
     [SerializeField] private float _minDistance;
+    [SerializeField] private GameUI _gameUI;
+    [SerializeField] private PlayerHealth _playerHealth;
 
     protected List<SpawnableObject> Pool = new List<SpawnableObject>();
 
@@ -17,16 +19,16 @@ public abstract class Spawner : MonoBehaviour
 
     private void OnEnable()
     {
-        GameUI.GameBeguned += OnHideAll;
-        GameUI.MenuWented += OnHideAll;
-        PlayerHealth.GameOvered += OnHideAll;
+        _gameUI.GameBeguned += OnHideAll;
+        _gameUI.MenuWented += OnHideAll;
+        _playerHealth.GameOvered += OnHideAll;
     }
 
     private void OnDisable()
     {
-        GameUI.GameBeguned -= OnHideAll;
-        GameUI.MenuWented -= OnHideAll;
-        PlayerHealth.GameOvered -= OnHideAll;
+        _gameUI.GameBeguned -= OnHideAll;
+        _gameUI.MenuWented -= OnHideAll;
+        _playerHealth.GameOvered -= OnHideAll;
     }
 
     private void Awake()
@@ -40,7 +42,7 @@ public abstract class Spawner : MonoBehaviour
 
             if (spawnableObject.TryGetComponent(out Enemy enemy))
             {
-                enemy.Init(_player);
+                enemy.Init(_player, _gameUI);
             }
         }
     }

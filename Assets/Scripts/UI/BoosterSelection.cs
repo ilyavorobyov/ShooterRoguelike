@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -10,55 +11,51 @@ public class BoosterSelection : MonoBehaviour
     [SerializeField] private GameObject _pool;
     [SerializeField] private BoosterSelectionScreen _boosterSelectionScreen;
     [SerializeField] private Button _pauseButton;
+    [SerializeField] private Backpack _backpack;
+    [SerializeField] private List<Booster> _boosters;
 
-    private List<Booster> _boosters = new List<Booster>();
+    public event Action BoosterSelected;
 
     private void Awake()
     {
-        AddBoosters();
+        InitBoosters();
     }
 
     private void OnEnable()
     {
-        Backpack.TokenBroughted += OnTokenBroughted;
-        Booster.BoosterSelected += OnBoosterSelected;
-        GameUI.GameReseted += OnReset;
+        _backpack.TokenBroughted += OnTokenBroughted;
+
+        foreach (var booster in _boosters)
+        {
+            booster.BoosterSelected += OnBoosterSelected;
+        }
     }
 
     private void OnDisable()
     {
-        Backpack.TokenBroughted -= OnTokenBroughted;
-        Booster.BoosterSelected -= OnBoosterSelected;
-        GameUI.GameReseted -= OnReset;
+        _backpack.TokenBroughted -= OnTokenBroughted;
+
+        foreach (var booster in _boosters)
+        {
+            booster.BoosterSelected -= OnBoosterSelected;
+        }
     }
 
-    private void AddBoosters()
+    private void InitBoosters()
     {
-        for (int i = 0; i < _boosterSamples.Length; i++)
+        foreach (var booster in _boosters)
         {
-            Booster booster = Instantiate
-                (_boosterSamples[i], _pool.transform);
             booster.gameObject.SetActive(false);
-            _boosters.Add(booster);
         }
     }
 
     private void ShowBoosters()
     {
-        foreach (Booster booster in _boosters)
-        {
-            if (!booster.IsAvailable)
-            {
-                _boosters.Remove(booster);
-                break;
-            }
-        }
-
         for (int i = 0; i < _spawnPoints.Length; i++)
         {
             int boosterNumber = Random.Range(0, _boosters.Count);
 
-            while (_boosters[boosterNumber].gameObject.activeSelf)
+            while (_boosters[boosterNumber].gameObject.activeSelf && !_boosters[boosterNumber].IsAvailable)
             {
                 boosterNumber = Random.Range(0, _boosters.Count);
             }
@@ -66,15 +63,6 @@ public class BoosterSelection : MonoBehaviour
             _boosters[boosterNumber].gameObject.SetActive(true);
             _boosters[boosterNumber].gameObject.transform.position = _spawnPoints[i].transform.position;
         }
-    }
-
-    private void OnReset()
-    {
-        foreach (Booster booster in _boosters)
-            Destroy(booster.gameObject);
-
-        _boosters.Clear();
-        AddBoosters();
     }
 
     private void OnTokenBroughted()
@@ -95,5 +83,7 @@ public class BoosterSelection : MonoBehaviour
         {
             booster.gameObject.SetActive(false);
         }
+
+        BoosterSelected.Invoke();
     }
 }

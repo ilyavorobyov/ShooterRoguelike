@@ -13,6 +13,7 @@ public class GameMechanicsTraining : MonoBehaviour
     [SerializeField] private Training[] _trainings;
     [SerializeField] private RectTransform[] _menuUiElements;
     [SerializeField] private RectTransform[] _gameUiElements;
+    [SerializeField] private GameUI _gameUI;
 
     private bool _isPlaying = false;
     private float _readingDuration = 2.8f;
@@ -21,15 +22,15 @@ public class GameMechanicsTraining : MonoBehaviour
     private void OnEnable()
     {
         _gameMechanicsTrainingButton.onClick.AddListener(OnShowTraining);
-        GameUI.GameBeguned += OnGameBeguned;
-        GameUI.MenuWented += OnMenuWented;
+        _gameUI.GameBeguned += OnGameBeguned;
+        _gameUI.MenuWented += OnMenuWented;
     }
 
     private void OnDisable()
     {
         _gameMechanicsTrainingButton.onClick.RemoveListener(OnShowTraining);
-        GameUI.GameBeguned -= OnGameBeguned;
-        GameUI.MenuWented -= OnMenuWented;
+        _gameUI.GameBeguned -= OnGameBeguned;
+        _gameUI.MenuWented -= OnMenuWented;
     }
 
     private void Awake()

@@ -4,7 +4,7 @@ public class AddVampirismBooster : Booster
 {
     private float _addedVampirismValue = 0.05f;
 
-    public static event Action<float> VampirismAdded;
+    public event Action<float> VampirismAdded;
 
     public override void Activate()
     {

@@ -6,6 +6,11 @@ using UnityEngine;
 public class PlayerHealth : Health
 {
     [SerializeField] private AudioSource _healSound;
+    [SerializeField] private GameUI _gameUI;
+    [SerializeField] private AddMaxHealthBooster _addMaxHealthBooster;
+    [SerializeField] private AddRegenerationBooster _addRegenerationBooster;
+    [SerializeField] private AddVampirismBooster _addVampirismBooster;
+    [SerializeField] private FullHealthBooster _fullHealthBooster;
 
     private PlayerHealthText _playerHealthText;
     private float _startRegenerationPerSecond = 0;
@@ -16,14 +21,15 @@ public class PlayerHealth : Health
     private bool _isVampirismEnabled = false;
     private Coroutine _regenerate;
 
-    public static event Action GameOvered;
+    public event Action GameOvered;
 
     private void OnDestroy()
     {
-        FullHealthBooster.CompletelyCured -= OnCompletelyCured;
-        AddMaxHealthBooster.MaxHealthAdded -= OnAddMaxHealth;
-        AddRegenerationBooster.RegenerationAdded -= OnRegenerationAdded;
-        AddVampirismBooster.VampirismAdded -= OnVampirismAdded;
+        _fullHealthBooster.CompletelyCured -= OnCompletelyCured;
+        _addMaxHealthBooster.MaxHealthAdded -= OnAddMaxHealth;
+        _addRegenerationBooster.RegenerationAdded -= OnRegenerationAdded;
+        _addVampirismBooster.VampirismAdded -= OnVampirismAdded;
+        _gameUI.GameBeguned -= OnReset;
     }
 
     private void Start()
@@ -31,10 +37,11 @@ public class PlayerHealth : Health
         _currentVampirismValue = _startVampirismValue;
         _currentRegenerationPerSecond = _startRegenerationPerSecond;
         _playerHealthText = GetComponent<PlayerHealthText>();
-        FullHealthBooster.CompletelyCured += OnCompletelyCured;
-        AddMaxHealthBooster.MaxHealthAdded += OnAddMaxHealth;
-        AddRegenerationBooster.RegenerationAdded += OnRegenerationAdded;
-        AddVampirismBooster.VampirismAdded += OnVampirismAdded;
+        _fullHealthBooster.CompletelyCured += OnCompletelyCured;
+        _addMaxHealthBooster.MaxHealthAdded += OnAddMaxHealth;
+        _addRegenerationBooster.RegenerationAdded += OnRegenerationAdded;
+        _addVampirismBooster.VampirismAdded += OnVampirismAdded;
+        _gameUI.GameBeguned += OnReset;
     }
 
     public override void TakeDamage(float damage)
