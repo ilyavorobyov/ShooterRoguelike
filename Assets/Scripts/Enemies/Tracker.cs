@@ -1,4 +1,5 @@
 using System.Collections;
+using Player;
 using UnityEngine;
 
 namespace Enemies
@@ -11,7 +12,7 @@ namespace Enemies
         [SerializeField] private float _pursuitDistance;
         [SerializeField] private float _attackDistance;
 
-        private Player _player;
+        private PlayerCharacter _player;
         private Enemy _enemy;
         private EnemyMover _enemyMover;
         private Coroutine _trackPlayer;
@@ -36,7 +37,7 @@ namespace Enemies
             StopTrackPlayer();
         }
 
-        public void Init(Player player)
+        public void Init(PlayerCharacter player)
         {
             _player = player;
         }

@@ -1,3 +1,6 @@
-public class MediumEnemySpawner : Spawner
+namespace Spawners
 {
+    public class MediumEnemySpawner : Spawner
+    {
+    }
 }

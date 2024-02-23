@@ -1,9 +1,12 @@
 using UnityEngine;
 
-public class SpawnableObject : MonoBehaviour
+namespace Spawners
 {
-    public void Hide()
+    public class SpawnableObject : MonoBehaviour
     {
-        gameObject.SetActive(false);
+        public void Hide()
+        {
+            gameObject.SetActive(false);
+        }
     }
 }

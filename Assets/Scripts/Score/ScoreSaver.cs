@@ -1,17 +1,21 @@
 using Agava.YandexGames;
+using LeaderboardYG;
 using UnityEngine;
 
-public class ScoreSaver : MonoBehaviour
+namespace Score
 {
-    [SerializeField] private YandexLeaderboard _yandexLeaderboard;
-
-    public void SaveNewBestResult(string saveKey, int result)
+    public class ScoreSaver : MonoBehaviour
     {
-        PlayerPrefs.SetInt(saveKey, result);
+        [SerializeField] private YandexLeaderboard _yandexLeaderboard;
 
-        if (PlayerAccount.IsAuthorized)
+        public void SaveNewBestResult(string saveKey, int result)
         {
-            _yandexLeaderboard.SetPlayerScore(result);
+            PlayerPrefs.SetInt(saveKey, result);
+
+            if (PlayerAccount.IsAuthorized)
+            {
+                _yandexLeaderboard.SetPlayerScore(result);
+            }
         }
     }
 }

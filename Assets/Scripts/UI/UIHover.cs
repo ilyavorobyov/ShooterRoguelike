@@ -1,17 +1,20 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class UIHover : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
+namespace UI
 {
-    private Vector3 _hoverSize = new Vector3(1.05f, 1.05f, 1.05f);
-
-    public void OnPointerEnter(PointerEventData eventData)
+    public class UIHover : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     {
-        transform.localScale = _hoverSize;
-    }
+        private Vector3 _hoverSize = new Vector3(1.05f, 1.05f, 1.05f);
 
-    public void OnPointerExit(PointerEventData eventData)
-    {
-        transform.localScale = Vector3.one;
+        public void OnPointerEnter(PointerEventData eventData)
+        {
+            transform.localScale = _hoverSize;
+        }
+
+        public void OnPointerExit(PointerEventData eventData)
+        {
+            transform.localScale = Vector3.one;
+        }
     }
 }

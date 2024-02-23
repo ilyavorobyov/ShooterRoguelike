@@ -1,13 +1,19 @@
 using UnityEngine;
 
-public class ShootingRangeIndicator : MonoBehaviour
+namespace Player
 {
-    [SerializeField] private Transform _player;
-
-    private float _yPosition = 1f;
-
-    private void LateUpdate()
+    public class ShootingRangeIndicator : MonoBehaviour
     {
-        transform.position = new Vector3(_player.position.x, _yPosition, _player.position.z);
+        [SerializeField] private Transform _player;
+
+        private float _yPosition = 1f;
+
+        private void LateUpdate()
+        {
+            transform.position = new Vector3(
+                _player.position.x,
+                _yPosition,
+                _player.position.z);
+        }
     }
 }

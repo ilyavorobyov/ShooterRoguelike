@@ -1,12 +1,15 @@
 using UnityEngine;
 
-public class EnemyDieParticleSystem : ParticleSystemEffect
+namespace Particles
 {
-    [SerializeField] private AudioSource _enemyDeadSound;
-
-    public override void Play(Vector3 targetPosition)
+    public class EnemyDieParticleSystem : ParticleSystemEffect
     {
-        base.Play(targetPosition);
-        _enemyDeadSound.PlayDelayed(0);
+        [SerializeField] private AudioSource _enemyDeadSound;
+
+        public override void Play(Vector3 targetPosition)
+        {
+            base.Play(targetPosition);
+            _enemyDeadSound.PlayDelayed(0);
+        }
     }
 }

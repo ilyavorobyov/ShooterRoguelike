@@ -1,43 +1,50 @@
 using UnityEngine;
 
-public class MissingWarningLiftableBulletState : State
+namespace LiftableBullet
 {
-    private const string MissingWarning = nameof(MissingWarning);
-
-    public readonly int MissingWarningAnimationHash = Animator.StringToHash(nameof(MissingWarning));
-
-    private Animator _animator;
-    private float _missingWarningDuration;
-    private float _timer;
-    private float _resetTimer = 0;
-    private LiftableBullet _liftableBullet;
-
-    public MissingWarningLiftableBulletState(Animator animator, float missingWarningDuration, LiftableBullet liftableBullet)
+    public class MissingWarningLiftableBulletState : State
     {
-        _animator = animator;
-        _missingWarningDuration = missingWarningDuration;
-        _liftableBullet = liftableBullet;
-    }
+        private const string MissingWarning = nameof(MissingWarning);
 
-    public override void Enter()
-    {
-        _timer = _resetTimer;
-        _animator.StopPlayback();
-        _animator.SetTrigger(MissingWarningAnimationHash);
-    }
+        public readonly int MissingWarningAnimationHash = Animator.StringToHash(
+            nameof(MissingWarning));
 
-    public override void Exit()
-    {
-        _animator.StopPlayback();
-    }
+        private Animator _animator;
+        private float _missingWarningDuration;
+        private float _timer;
+        private float _resetTimer = 0;
+        private LiftableBulletObject _liftableBullet;
 
-    public override void Update()
-    {
-        _timer += Time.deltaTime;
-
-        if (_timer >= _missingWarningDuration)
+        public MissingWarningLiftableBulletState(
+            Animator animator,
+            float missingWarningDuration,
+            LiftableBulletObject liftableBullet)
         {
-            _liftableBullet.Hide();
+            _animator = animator;
+            _missingWarningDuration = missingWarningDuration;
+            _liftableBullet = liftableBullet;
+        }
+
+        public override void Enter()
+        {
+            _timer = _resetTimer;
+            _animator.StopPlayback();
+            _animator.SetTrigger(MissingWarningAnimationHash);
+        }
+
+        public override void Exit()
+        {
+            _animator.StopPlayback();
+        }
+
+        public override void Update()
+        {
+            _timer += Time.deltaTime;
+
+            if (_timer >= _missingWarningDuration)
+            {
+                _liftableBullet.Hide();
+            }
         }
     }
 }

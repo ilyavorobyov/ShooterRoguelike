@@ -1,18 +1,21 @@
 using UnityEngine;
 
-[RequireComponent(typeof(ParticleSystem))]
-public abstract class ParticleSystemEffect : MonoBehaviour
+namespace Particles
 {
-    private ParticleSystem _particleSystem;
-
-    private void Awake()
+    [RequireComponent(typeof(ParticleSystem))]
+    public abstract class ParticleSystemEffect : MonoBehaviour
     {
-        _particleSystem = GetComponent<ParticleSystem>();
-    }
+        private ParticleSystem _particleSystem;
 
-    public virtual void Play(Vector3 targetPosition)
-    {
-        _particleSystem.Play();
-        transform.position = targetPosition;
+        private void Awake()
+        {
+            _particleSystem = GetComponent<ParticleSystem>();
+        }
+
+        public virtual void Play(Vector3 targetPosition)
+        {
+            _particleSystem.Play();
+            transform.position = targetPosition;
+        }
     }
 }

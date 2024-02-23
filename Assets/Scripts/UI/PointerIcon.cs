@@ -1,5 +1,8 @@
 using UnityEngine;
 
-public class PointerIcon : MonoBehaviour
+namespace UI
 {
+    public class PointerIcon : MonoBehaviour
+    {
+    }
 }

@@ -1,5 +1,8 @@
 using UnityEngine;
 
-public class BoosterSelectionScreen : MonoBehaviour
+namespace UI
 {
+    public class BoosterSelectionScreen : MonoBehaviour
+    {
+    }
 }

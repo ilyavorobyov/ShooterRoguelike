@@ -1,3 +1,6 @@
-public class HardEnemySpawner : Spawner
+namespace Spawners
 {
+    public class HardEnemySpawner : Spawner
+    {
+    }
 }

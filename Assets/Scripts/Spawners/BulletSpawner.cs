@@ -1,41 +1,44 @@
 using System.Collections;
 using UnityEngine;
 
-public class BulletSpawner : Spawner
+namespace Spawners
 {
-    [SerializeField] private float _spawnInterval;
-
-    private Coroutine _spawnBullets;
-    private bool _isSpawning;
-
-    public void Begin()
+    public class BulletSpawner : Spawner
     {
-        _isSpawning = true;
-        _spawnBullets = StartCoroutine(SpawnBullets());
-    }
+        [SerializeField] private float _spawnInterval;
 
-    public void Stop()
-    {
-        if (_spawnBullets != null)
+        private Coroutine _spawnBullets;
+        private bool _isSpawning;
+
+        public void Begin()
         {
-            _isSpawning = false;
-            StopCoroutine(_spawnBullets);
+            _isSpawning = true;
+            _spawnBullets = StartCoroutine(SpawnBullets());
+        }
 
-            foreach (var bullet in Pool)
+        public void Stop()
+        {
+            if (_spawnBullets != null)
             {
-                bullet.Hide();
+                _isSpawning = false;
+                StopCoroutine(_spawnBullets);
+
+                foreach (var bullet in Pool)
+                {
+                    bullet.Hide();
+                }
             }
         }
-    }
 
-    private IEnumerator SpawnBullets()
-    {
-        var waitForSeconds = new WaitForSeconds(_spawnInterval);
-
-        while (_isSpawning)
+        private IEnumerator SpawnBullets()
         {
-            yield return waitForSeconds;
-            Show();
+            var waitForSeconds = new WaitForSeconds(_spawnInterval);
+
+            while (_isSpawning)
+            {
+                yield return waitForSeconds;
+                Show();
+            }
         }
     }
 }

@@ -1,22 +1,25 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class LeaderboardScreen : MonoBehaviour
+namespace UI
 {
-    [SerializeField] private Button _closeButton;
-
-    private void OnEnable()
+    public class LeaderboardScreen : MonoBehaviour
     {
-        _closeButton.onClick.AddListener(OnCloseButtonClick);
-    }
+        [SerializeField] private Button _closeButton;
 
-    private void OnDisable()
-    {
-        _closeButton.onClick.RemoveListener(OnCloseButtonClick);
-    }
+        private void OnEnable()
+        {
+            _closeButton.onClick.AddListener(OnCloseButtonClick);
+        }
 
-    private void OnCloseButtonClick()
-    {
-        gameObject.SetActive(false);
+        private void OnDisable()
+        {
+            _closeButton.onClick.RemoveListener(OnCloseButtonClick);
+        }
+
+        private void OnCloseButtonClick()
+        {
+            gameObject.SetActive(false);
+        }
     }
 }

@@ -1,43 +1,46 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class SoundSwitcher : MonoBehaviour
+namespace UI
 {
-    [SerializeField] private Button _soundSwitchMenuButton;
-    [SerializeField] private Button _soundSwitchPausePanelButton;
-    [SerializeField] private Image _soundStateViewImageMenuButton;
-    [SerializeField] private Image _soundStateViewImagePausePanelButton;
-    [SerializeField] private Sprite _soundOnImage;
-    [SerializeField] private Sprite _soundOffImage;
-
-    private float _maxVolume = 1.0f;
-    private float _minVolume = 0;
-
-    private void OnEnable()
+    public class SoundSwitcher : MonoBehaviour
     {
-        _soundSwitchMenuButton.onClick.AddListener(OnChangeSoundState);
-        _soundSwitchPausePanelButton.onClick.AddListener(OnChangeSoundState);
-    }
+        [SerializeField] private Button _soundSwitchMenuButton;
+        [SerializeField] private Button _soundSwitchPausePanelButton;
+        [SerializeField] private Image _soundStateViewImageMenuButton;
+        [SerializeField] private Image _soundStateViewImagePausePanelButton;
+        [SerializeField] private Sprite _soundOnImage;
+        [SerializeField] private Sprite _soundOffImage;
 
-    private void OnDisable()
-    {
-        _soundSwitchMenuButton.onClick.RemoveListener(OnChangeSoundState);
-        _soundSwitchPausePanelButton.onClick.RemoveListener(OnChangeSoundState);
-    }
+        private float _maxVolume = 1.0f;
+        private float _minVolume = 0;
 
-    private void OnChangeSoundState()
-    {
-        if (!Mathf.Approximately(AudioListener.volume, _minVolume))
+        private void OnEnable()
         {
-            AudioListener.volume = _minVolume;
-            _soundStateViewImageMenuButton.sprite = _soundOffImage;
-            _soundStateViewImagePausePanelButton.sprite = _soundOffImage;
+            _soundSwitchMenuButton.onClick.AddListener(OnChangeSoundState);
+            _soundSwitchPausePanelButton.onClick.AddListener(OnChangeSoundState);
         }
-        else
+
+        private void OnDisable()
         {
-            AudioListener.volume = _maxVolume;
-            _soundStateViewImageMenuButton.sprite = _soundOnImage;
-            _soundStateViewImagePausePanelButton.sprite = _soundOnImage;
+            _soundSwitchMenuButton.onClick.RemoveListener(OnChangeSoundState);
+            _soundSwitchPausePanelButton.onClick.RemoveListener(OnChangeSoundState);
+        }
+
+        private void OnChangeSoundState()
+        {
+            if (!Mathf.Approximately(AudioListener.volume, _minVolume))
+            {
+                AudioListener.volume = _minVolume;
+                _soundStateViewImageMenuButton.sprite = _soundOffImage;
+                _soundStateViewImagePausePanelButton.sprite = _soundOffImage;
+            }
+            else
+            {
+                AudioListener.volume = _maxVolume;
+                _soundStateViewImageMenuButton.sprite = _soundOnImage;
+                _soundStateViewImagePausePanelButton.sprite = _soundOnImage;
+            }
         }
     }
 }

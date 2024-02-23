@@ -2,58 +2,61 @@ using System.Collections;
 using TMPro;
 using UnityEngine;
 
-public class WaveSlider : MonoBehaviour
+namespace UI
 {
-    [SerializeField] private TMP_Text _nextWaveText;
-    [SerializeField] private UnityEngine.UI.Slider _smoothWaveSlider;
-    [SerializeField] private float _handleSpeed;
-
-    private int _deadEnemies = 0;
-    private Coroutine _changeValue;
-
-    public void SetValues(int enemiesNumber, int currentWaveNumber)
+    public class WaveSlider : MonoBehaviour
     {
-        _deadEnemies = 0;
-        _smoothWaveSlider.maxValue = enemiesNumber;
-        _smoothWaveSlider.value = _deadEnemies;
-        int nextWaveNumber = ++currentWaveNumber;
-        _nextWaveText.text = nextWaveNumber.ToString();
-    }
+        [SerializeField] private TMP_Text _nextWaveText;
+        [SerializeField] private UnityEngine.UI.Slider _smoothWaveSlider;
+        [SerializeField] private float _handleSpeed;
 
-    public void DetectEnemyDeath()
-    {
-        _deadEnemies++;
-        ChangeSliderValue();
-    }
+        private int _deadEnemies = 0;
+        private Coroutine _changeValue;
 
-    private void ChangeSliderValue()
-    {
-        if (_changeValue != null)
-            StopCoroutine(_changeValue);
-
-        _changeValue = StartCoroutine(ChangeValue());
-    }
-
-    private IEnumerator ChangeValue()
-    {
-        var waitForFixedUpdate = new WaitForFixedUpdate();
-        bool isChangeSliderValue = true;
-
-        while (isChangeSliderValue)
+        public void SetValues(int enemiesNumber, int currentWaveNumber)
         {
-            _smoothWaveSlider.value = Mathf.MoveTowards(
-                _smoothWaveSlider.value,
-                _deadEnemies,
-                _handleSpeed *
-                Time.deltaTime);
+            _deadEnemies = 0;
+            _smoothWaveSlider.maxValue = enemiesNumber;
+            _smoothWaveSlider.value = _deadEnemies;
+            int nextWaveNumber = ++currentWaveNumber;
+            _nextWaveText.text = nextWaveNumber.ToString();
+        }
 
-            if (_smoothWaveSlider.value == _deadEnemies)
-            {
-                isChangeSliderValue = false;
+        public void DetectEnemyDeath()
+        {
+            _deadEnemies++;
+            ChangeSliderValue();
+        }
+
+        private void ChangeSliderValue()
+        {
+            if (_changeValue != null)
                 StopCoroutine(_changeValue);
-            }
 
-            yield return waitForFixedUpdate;
+            _changeValue = StartCoroutine(ChangeValue());
+        }
+
+        private IEnumerator ChangeValue()
+        {
+            var waitForFixedUpdate = new WaitForFixedUpdate();
+            bool isChangeSliderValue = true;
+
+            while (isChangeSliderValue)
+            {
+                _smoothWaveSlider.value = Mathf.MoveTowards(
+                    _smoothWaveSlider.value,
+                    _deadEnemies,
+                    _handleSpeed *
+                    Time.deltaTime);
+
+                if (_smoothWaveSlider.value == _deadEnemies)
+                {
+                    isChangeSliderValue = false;
+                    StopCoroutine(_changeValue);
+                }
+
+                yield return waitForFixedUpdate;
+            }
         }
     }
 }

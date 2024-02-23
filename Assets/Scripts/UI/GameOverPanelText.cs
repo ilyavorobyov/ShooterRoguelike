@@ -1,12 +1,15 @@
 using UnityEngine;
 
-public class GameOverPanelText : MonoBehaviour
+namespace UI
 {
-    private void OnDisable()
+    public class GameOverPanelText : MonoBehaviour
     {
-        if (gameObject.activeSelf)
+        private void OnDisable()
         {
-            gameObject.SetActive(false);
+            if (gameObject.activeSelf)
+            {
+                gameObject.SetActive(false);
+            }
         }
     }
 }

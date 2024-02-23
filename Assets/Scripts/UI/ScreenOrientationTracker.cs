@@ -1,30 +1,33 @@
 using UnityEngine;
 
-public class ScreenOrientationTracker : MonoBehaviour
+namespace UI
 {
-    private Camera _camera;
-    private float _landscapeFieldOfViewValue = 40;
-    private float _portraitFieldOfViewValue = 50;
-
-    private void Awake()
+    public class ScreenOrientationTracker : MonoBehaviour
     {
-        _camera = Camera.main;
-    }
+        private Camera _camera;
+        private float _landscapeFieldOfViewValue = 40;
+        private float _portraitFieldOfViewValue = 50;
 
-    private void OnRectTransformDimensionsChange()
-    {
-        if (_camera == null)
+        private void Awake()
         {
             _camera = Camera.main;
         }
 
-        if (Screen.width > Screen.height)
+        private void OnRectTransformDimensionsChange()
         {
-            _camera.fieldOfView = _landscapeFieldOfViewValue;
-        }
-        else
-        {
-            _camera.fieldOfView = _portraitFieldOfViewValue;
+            if (_camera == null)
+            {
+                _camera = Camera.main;
+            }
+
+            if (Screen.width > Screen.height)
+            {
+                _camera.fieldOfView = _landscapeFieldOfViewValue;
+            }
+            else
+            {
+                _camera.fieldOfView = _portraitFieldOfViewValue;
+            }
         }
     }
 }

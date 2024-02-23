@@ -1,4 +1,6 @@
 using Boosters;
+using Player;
+using UI;
 using UnityEngine;
 
 namespace Enemies
@@ -8,7 +10,7 @@ namespace Enemies
         [SerializeField] private float _startSpeed;
 
         private GameUI _gameUI;
-        private Player _player;
+        private PlayerCharacter _player;
         private float _currentSpeed;
         private bool _isMoving = false;
         private SlowDownEnemiesBooster _slowDownEnemiesBooster;
@@ -52,7 +54,7 @@ namespace Enemies
         }
 
         public void Init(
-            Player player,
+            PlayerCharacter player,
             GameUI gameUI,
             SlowDownEnemiesBooster slowDownEnemiesBooster)
         {

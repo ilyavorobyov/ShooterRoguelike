@@ -1,45 +1,49 @@
+using Health;
 using UnityEngine;
 
-public class MusicSwitcher : MonoBehaviour
+namespace UI
 {
-    [SerializeField] private AudioSource _gameMusic;
-    [SerializeField] private AudioSource _menuMusic;
-    [SerializeField] private GameUI _gameUI;
-    [SerializeField] private PlayerHealth _playerHealth;
-
-    private void Start()
+    public class MusicSwitcher : MonoBehaviour
     {
-        _menuMusic.PlayDelayed(0);
-    }
+        [SerializeField] private AudioSource _gameMusic;
+        [SerializeField] private AudioSource _menuMusic;
+        [SerializeField] private GameUI _gameUI;
+        [SerializeField] private PlayerHealth _playerHealth;
 
-    private void OnEnable()
-    {
-        _gameUI.GameBeguned += OnGameBeguned;
-        _gameUI.MenuWented += OnMenuWented;
-        _playerHealth.PlayerDied += OnPlayerDied;
-    }
+        private void Start()
+        {
+            _menuMusic.PlayDelayed(0);
+        }
 
-    private void OnDisable()
-    {
-        _gameUI.GameBeguned -= OnGameBeguned;
-        _gameUI.MenuWented -= OnMenuWented;
-        _playerHealth.PlayerDied -= OnPlayerDied;
-    }
+        private void OnEnable()
+        {
+            _gameUI.GameBeguned += OnGameBeguned;
+            _gameUI.MenuWented += OnMenuWented;
+            _playerHealth.PlayerDied += OnPlayerDied;
+        }
 
-    private void OnGameBeguned()
-    {
-        _menuMusic.Stop();
-        _gameMusic.PlayDelayed(0);
-    }
+        private void OnDisable()
+        {
+            _gameUI.GameBeguned -= OnGameBeguned;
+            _gameUI.MenuWented -= OnMenuWented;
+            _playerHealth.PlayerDied -= OnPlayerDied;
+        }
 
-    private void OnMenuWented()
-    {
-        _gameMusic.Stop();
-        _menuMusic.PlayDelayed(0);
-    }
+        private void OnGameBeguned()
+        {
+            _menuMusic.Stop();
+            _gameMusic.PlayDelayed(0);
+        }
 
-    private void OnPlayerDied()
-    {
-        _gameMusic.Stop();
+        private void OnMenuWented()
+        {
+            _gameMusic.Stop();
+            _menuMusic.PlayDelayed(0);
+        }
+
+        private void OnPlayerDied()
+        {
+            _gameMusic.Stop();
+        }
     }
 }

@@ -1,3 +1,6 @@
-public class EnemySpawnParticleSystem : ParticleSystemEffect
+namespace Particles
 {
+    public class EnemySpawnParticleSystem : ParticleSystemEffect
+    {
+    }
 }

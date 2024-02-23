@@ -1,4 +1,6 @@
 using System.Collections;
+using Player;
+using UI;
 using UnityEngine;
 
 namespace Enemies
@@ -13,7 +15,7 @@ namespace Enemies
         [SerializeField] private PointerIcon _pointIconSample;
         [SerializeField] private Canvas _canvasPointerIcon;
 
-        private Player _player;
+        private PlayerCharacter _player;
         private Camera _camera;
         private Coroutine _pointArrow;
         private PointerIcon _pointIcon;
@@ -64,7 +66,7 @@ namespace Enemies
             _pointIcon.gameObject.SetActive(false);
         }
 
-        public void Init(Player player)
+        public void Init(PlayerCharacter player)
         {
             _player = player;
         }

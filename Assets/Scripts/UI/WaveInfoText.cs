@@ -1,16 +1,19 @@
 using UnityEngine;
 
-public class WaveInfoText : MonoBehaviour
+namespace UI
 {
-    private float _duration = 2.5f;
-
-    private void OnEnable()
+    public class WaveInfoText : MonoBehaviour
     {
-        Invoke(nameof(Hide), _duration);
-    }
+        private float _duration = 2.5f;
 
-    private void Hide()
-    {
-        gameObject.SetActive(false);
+        private void OnEnable()
+        {
+            Invoke(nameof(Hide), _duration);
+        }
+
+        private void Hide()
+        {
+            gameObject.SetActive(false);
+        }
     }
 }

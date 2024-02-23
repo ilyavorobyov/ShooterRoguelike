@@ -1,14 +1,17 @@
-public class HideLiftableBulletState : State
+namespace LiftableBullet
 {
-    private LiftableBullet _liftableBullet;
-
-    public HideLiftableBulletState(LiftableBullet liftableBullet)
+    public class HideLiftableBulletState : State
     {
-        _liftableBullet = liftableBullet;
-    }
+        private LiftableBulletObject _liftableBullet;
 
-    public override void Enter()
-    {
-        _liftableBullet.gameObject.SetActive(false);
+        public HideLiftableBulletState(LiftableBulletObject liftableBullet)
+        {
+            _liftableBullet = liftableBullet;
+        }
+
+        public override void Enter()
+        {
+            _liftableBullet.gameObject.SetActive(false);
+        }
     }
 }

@@ -1,15 +1,20 @@
+using Particles;
+using Score;
+using UI;
+using WavesMaker;
+
 namespace Health
 {
     public class EnemyHealth : Health
     {
         private ParticleSystemEffect _dieParticleSystemEffect;
-        private WavesMaker _wavesMaker;
+        private WavesMakerLogic _wavesMaker;
         private WaveSlider _waveSlider;
         private ScoreCounter _scoreCounter;
 
         public void Init(
             ParticleSystemEffect dieParticleSystemEffect,
-            WavesMaker wavesMaker,
+            WavesMakerLogic wavesMaker,
             WaveSlider waveSlider,
             ScoreCounter scoreCounter)
         {

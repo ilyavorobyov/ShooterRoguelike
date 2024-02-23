@@ -1,3 +1,6 @@
-public class HeavyPistol : Weapon
+namespace Player.Weapon
 {
+    public class HeavyPistol : Weapon
+    {
+    }
 }

@@ -1,5 +1,8 @@
 using UnityEngine;
 
-public class AdShowFullScreen : MonoBehaviour
+namespace UI
 {
+    public class AdShowFullScreen : MonoBehaviour
+    {
+    }
 }

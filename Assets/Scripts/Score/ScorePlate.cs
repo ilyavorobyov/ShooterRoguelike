@@ -1,5 +1,8 @@
 using UnityEngine;
 
-public class ScorePlate : MonoBehaviour
+namespace Score
 {
+    public class ScorePlate : MonoBehaviour
+    {
+    }
 }

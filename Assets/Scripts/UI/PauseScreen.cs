@@ -1,5 +1,8 @@
 using UnityEngine;
 
-public class PauseScreen : MonoBehaviour
+namespace UI
 {
+    public class PauseScreen : MonoBehaviour
+    {
+    }
 }

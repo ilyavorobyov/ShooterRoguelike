@@ -1,17 +1,20 @@
 using UnityEngine;
 
-public class CameraWatcher : MonoBehaviour
+namespace UI
 {
-    private Camera _camera;
-
-    private void Awake()
+    public class CameraWatcher : MonoBehaviour
     {
-        _camera = Camera.main;
-    }
+        private Camera _camera;
 
-    private void LateUpdate()
-    {
-        transform.LookAt(_camera.transform.position);
-        transform.rotation = _camera.transform.rotation;
+        private void Awake()
+        {
+            _camera = Camera.main;
+        }
+
+        private void LateUpdate()
+        {
+            transform.LookAt(_camera.transform.position);
+            transform.rotation = _camera.transform.rotation;
+        }
     }
 }

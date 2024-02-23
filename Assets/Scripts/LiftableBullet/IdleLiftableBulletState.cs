@@ -1,42 +1,45 @@
 using UnityEngine;
 
-public class IdleLiftableBulletState : State
+namespace LiftableBullet
 {
-    private const string Idle = nameof(Idle);
-
-    public readonly int IdleAnimationHash = Animator.StringToHash(nameof(Idle));
-
-    private float _idleDuration;
-    private float _resetTimer = 0;
-    private float _timer;
-    private Animator _animator;
-    private LiftableBullet _liftableBullet;
-
-    public IdleLiftableBulletState(Animator animator, float idleDuration, LiftableBullet liftableBullet)
+    public class IdleLiftableBulletState : State
     {
-        _animator = animator;
-        _idleDuration = idleDuration;
-        _liftableBullet = liftableBullet;
-    }
+        private const string Idle = nameof(Idle);
 
-    public override void Enter()
-    {
-        _timer = _resetTimer;
-        _animator.SetTrigger(IdleAnimationHash);
-    }
+        public readonly int IdleAnimationHash = Animator.StringToHash(nameof(Idle));
 
-    public override void Exit()
-    {
-        _animator.StopPlayback();
-    }
+        private float _idleDuration;
+        private float _resetTimer = 0;
+        private float _timer;
+        private Animator _animator;
+        private LiftableBulletObject _liftableBullet;
 
-    public override void Update()
-    {
-        _timer += Time.deltaTime;
-
-        if (_timer >= _idleDuration)
+        public IdleLiftableBulletState(Animator animator, float idleDuration, LiftableBulletObject liftableBullet)
         {
-            _liftableBullet.StartHidingWarning();
+            _animator = animator;
+            _idleDuration = idleDuration;
+            _liftableBullet = liftableBullet;
+        }
+
+        public override void Enter()
+        {
+            _timer = _resetTimer;
+            _animator.SetTrigger(IdleAnimationHash);
+        }
+
+        public override void Exit()
+        {
+            _animator.StopPlayback();
+        }
+
+        public override void Update()
+        {
+            _timer += Time.deltaTime;
+
+            if (_timer >= _idleDuration)
+            {
+                _liftableBullet.StartHidingWarning();
+            }
         }
     }
 }

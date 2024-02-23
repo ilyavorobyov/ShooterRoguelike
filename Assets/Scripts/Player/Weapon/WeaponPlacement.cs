@@ -1,61 +1,67 @@
+using Boosters;
+using Health;
+using UI;
 using UnityEngine;
 
-public class WeaponPlacement : MonoBehaviour
+namespace Player.Weapon
 {
-    [SerializeField] private PlayerHealth _playerHealth;
-    [SerializeField] private Weapon _startingWeapon;
-    [SerializeField] private BulletClip _bulletClip;
-    [SerializeField] private Transform _weaponPoint;
-    [SerializeField] private GameUI _gameUI;
-    [SerializeField] private NewWeaponBooster _newWeaponBooster;
-
-    private Weapon _currentWeapon;
-
-    private void OnEnable()
+    public class WeaponPlacement : MonoBehaviour
     {
-        _newWeaponBooster.NewWeaponTaked += OnNewWeaponTaked;
-        _gameUI.GameReseted += OnReset;
-    }
+        [SerializeField] private PlayerHealth _playerHealth;
+        [SerializeField] private Weapon _startingWeapon;
+        [SerializeField] private BulletClip _bulletClip;
+        [SerializeField] private Transform _weaponPoint;
+        [SerializeField] private GameUI _gameUI;
+        [SerializeField] private NewWeaponBooster _newWeaponBooster;
 
-    private void OnDisable()
-    {
-        _newWeaponBooster.NewWeaponTaked -= OnNewWeaponTaked;
-        _gameUI.GameReseted -= OnReset;
-    }
+        private Weapon _currentWeapon;
 
-    private void Awake()
-    {
-        SetWeapon(_startingWeapon);
-    }
-
-    public void TryShoot(Transform target)
-    {
-        if (_currentWeapon.IsCanShoot && _bulletClip.TryShoot())
+        private void OnEnable()
         {
+            _newWeaponBooster.NewWeaponTaked += OnNewWeaponTaked;
+            _gameUI.GameReseted += OnReset;
+        }
+
+        private void OnDisable()
+        {
+            _newWeaponBooster.NewWeaponTaked -= OnNewWeaponTaked;
+            _gameUI.GameReseted -= OnReset;
+        }
+
+        private void Awake()
+        {
+            SetWeapon(_startingWeapon);
+        }
+
+        public void TryShoot(Transform target)
+        {
+            if (_currentWeapon.IsCanShoot && _bulletClip.TryShoot())
             {
-                _currentWeapon.StartShoot(target, _playerHealth);
+                {
+                    _currentWeapon.StartShoot(target, _playerHealth);
+                }
             }
         }
-    }
 
-    private void SetWeapon(Weapon weapon)
-    {
-        if (_currentWeapon != null)
+        private void SetWeapon(Weapon weapon)
         {
-            Destroy(_currentWeapon.gameObject);
+            if (_currentWeapon != null)
+            {
+                Destroy(_currentWeapon.gameObject);
+            }
+
+            _currentWeapon = Instantiate(weapon, _weaponPoint);
+            _currentWeapon.transform.SetParent(transform);
         }
 
-        _currentWeapon = Instantiate(weapon, _weaponPoint);
-        _currentWeapon.transform.SetParent(transform);
-    }
+        private void OnNewWeaponTaked(Weapon weapon)
+        {
+            SetWeapon(weapon);
+        }
 
-    private void OnNewWeaponTaked(Weapon weapon)
-    {
-        SetWeapon(weapon);
-    }
-
-    private void OnReset()
-    {
-        SetWeapon(_startingWeapon);
+        private void OnReset()
+        {
+            SetWeapon(_startingWeapon);
+        }
     }
 }

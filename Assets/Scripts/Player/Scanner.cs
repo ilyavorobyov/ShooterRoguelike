@@ -1,72 +1,82 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Enemies;
+using Player.Weapon;
 using UnityEngine;
 
-[RequireComponent(typeof(PlayerRotator))]
-public class Scanner : MonoBehaviour
+namespace Player
 {
-    [SerializeField] private WeaponPlacement _weaponPlacement;
-
-    private PlayerRotator _rotator;
-    private float _range = 3f;
-    private Coroutine _searchEnemy;
-
-    private void Awake()
+    [RequireComponent(typeof(PlayerRotator))]
+    public class Scanner : MonoBehaviour
     {
-        _rotator = GetComponent<PlayerRotator>();
-    }
+        [SerializeField] private WeaponPlacement _weaponPlacement;
 
-    private void Start()
-    {
-        StopSearchEnemy();
-        _searchEnemy = StartCoroutine(TrySearchEnemy());
-    }
+        private PlayerRotator _rotator;
+        private float _range = 3f;
+        private Coroutine _searchEnemy;
 
-    private void OnDestroy()
-    {
-        StopSearchEnemy();
-    }
-
-    private void StopSearchEnemy()
-    {
-        if (_searchEnemy != null)
-            StopCoroutine(_searchEnemy);
-    }
-
-    private IEnumerator TrySearchEnemy()
-    {
-        float iterationTime = 0.3f;
-        var waitForSeconds = new WaitForSeconds(iterationTime);
-        bool isScanning = true;
-        Enemy enemy;
-
-        while (isScanning)
+        private void Awake()
         {
-            Collider[] hitColliders = Physics.OverlapSphere(transform.position, _range);
-            List<Enemy> enemiesWithinAbilityRange = new List<Enemy>();
+            _rotator = GetComponent<PlayerRotator>();
+        }
 
-            foreach (var hitCollider in hitColliders)
+        private void Start()
+        {
+            StopSearchEnemy();
+            _searchEnemy = StartCoroutine(TrySearchEnemy());
+        }
+
+        private void OnDestroy()
+        {
+            StopSearchEnemy();
+        }
+
+        private void StopSearchEnemy()
+        {
+            if (_searchEnemy != null)
+                StopCoroutine(_searchEnemy);
+        }
+
+        private IEnumerator TrySearchEnemy()
+        {
+            float iterationTime = 0.3f;
+            var waitForSeconds = new WaitForSeconds(iterationTime);
+            bool isScanning = true;
+            Enemy enemy;
+
+            while (isScanning)
             {
-                if (hitCollider.transform.TryGetComponent(out Enemy enemyTemplate))
+                Collider[] hitColliders = Physics.OverlapSphere(
+                    transform.position,
+                    _range);
+                List<Enemy> enemiesWithinAbilityRange = new List<Enemy>();
+
+                foreach (var hitCollider in hitColliders)
                 {
-                    enemiesWithinAbilityRange.Add(enemyTemplate);
+                    if (hitCollider.transform.TryGetComponent(out Enemy enemyTemplate))
+                    {
+                        enemiesWithinAbilityRange.Add(enemyTemplate);
+                    }
                 }
-            }
 
-            if (enemiesWithinAbilityRange.Count > 0)
-            {
-                enemy = enemiesWithinAbilityRange.OrderBy(enemy =>
-                Vector3.Distance(enemy.transform.position, transform.position)).FirstOrDefault();
-                _rotator.SetRotationTarget(enemy.transform);
-                _weaponPlacement.TryShoot(enemy.transform);
-            }
-            else
-            {
-                _rotator.SetMoveDirectionRotation();
-            }
+                if (enemiesWithinAbilityRange.Count > 0)
+                {
+                    enemy = enemiesWithinAbilityRange.OrderBy(enemy =>
+                    Vector3.Distance(
+                        enemy.transform.position,
+                        transform.position)).
+                        FirstOrDefault();
+                    _rotator.SetRotationTarget(enemy.transform);
+                    _weaponPlacement.TryShoot(enemy.transform);
+                }
+                else
+                {
+                    _rotator.SetMoveDirectionRotation();
+                }
 
-            yield return waitForSeconds;
+                yield return waitForSeconds;
+            }
         }
     }
 }

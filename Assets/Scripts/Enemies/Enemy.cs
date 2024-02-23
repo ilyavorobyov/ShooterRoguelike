@@ -1,5 +1,11 @@
 using Boosters;
+using Health;
+using Particles;
+using Player;
+using Score;
+using UI;
 using UnityEngine;
+using WavesMaker;
 
 namespace Enemies
 {
@@ -14,7 +20,7 @@ namespace Enemies
         [SerializeField] private AudioSource _appearanceSound;
         [SerializeField] private AudioSource _attackSound;
 
-        protected Player Player;
+        protected PlayerCharacter Player;
         protected PlayerHealth PlayerHealth;
         protected EnemyHealth EnemyHealth;
 
@@ -25,7 +31,7 @@ namespace Enemies
         private GameUI _gameUI;
         private SlowDownEnemiesBooster _slowDownEnemiesBooster;
         private ParticleSystemEffect _dieParticleSystemEffect;
-        private WavesMaker _wavesMaker;
+        private WavesMakerLogic _wavesMaker;
 
         private void Start()
         {
@@ -43,11 +49,11 @@ namespace Enemies
         }
 
         public virtual void Init(
-            Player player,
+            PlayerCharacter player,
             GameUI gameUI,
             SlowDownEnemiesBooster slowDownEnemiesBooster,
             ParticleSystemEffect dieParticleSystemEffect,
-            WavesMaker wavesMaker,
+            WavesMakerLogic wavesMaker,
             WaveSlider waveSlider,
             ScoreCounter scoreCounter)
         {

@@ -1,20 +1,23 @@
-public class FiniteStateMachine
+namespace LiftableBullet
 {
-    public State CurrentState { get; private set; }
-
-    public void Initialize(State startState)
+    public class FiniteStateMachine
     {
-        CurrentState = startState;
-        CurrentState.Enter();
-    }
+        public State CurrentState { get; private set; }
 
-    public void ChangeState(State newState)
-    {
-        if (newState != CurrentState)
+        public void Initialize(State startState)
         {
-            CurrentState.Exit();
-            CurrentState = newState;
+            CurrentState = startState;
             CurrentState.Enter();
+        }
+
+        public void ChangeState(State newState)
+        {
+            if (newState != CurrentState)
+            {
+                CurrentState.Exit();
+                CurrentState = newState;
+                CurrentState.Enter();
+            }
         }
     }
 }
