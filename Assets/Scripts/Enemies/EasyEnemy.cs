@@ -1,8 +1,11 @@
-public class EasyEnemy : Enemy
+namespace Enemies
 {
-    public override void Attack()
+    public class EasyEnemy : Enemy
     {
-        base.Attack();
-        PlayerHealth.TakeDamage(Damage);
+        public override void Attack()
+        {
+            base.Attack();
+            PlayerHealth.TakeDamage(Damage);
+        }
     }
 }

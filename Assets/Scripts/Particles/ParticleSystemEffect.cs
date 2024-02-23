@@ -10,7 +10,7 @@ public abstract class ParticleSystemEffect : MonoBehaviour
         _particleSystem = GetComponent<ParticleSystem>();
     }
 
-    protected virtual void OnPlay(Vector3 targetPosition)
+    public virtual void Play(Vector3 targetPosition)
     {
         _particleSystem.Play();
         transform.position = targetPosition;

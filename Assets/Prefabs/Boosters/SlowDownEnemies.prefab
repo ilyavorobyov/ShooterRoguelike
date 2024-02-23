@@ -372,5 +372,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 12aaff01853c3be42aed39a54a6bbbfe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _isSelectedOnce: 0
+  _isSelectedOnce: 1
   _gameUI: {fileID: 0}

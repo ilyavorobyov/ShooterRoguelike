@@ -1,16 +1,19 @@
 using TMPro;
 using UnityEngine;
 
-public class LeaderboardElement : MonoBehaviour
+namespace Leaderboard
 {
-    [SerializeField] private TMP_Text _playerName;
-    [SerializeField] private TMP_Text _playerRank;
-    [SerializeField] private TMP_Text _playerScore;
-
-    public void Initialize(string name, int rank, int score)
+    public class LeaderboardElement : MonoBehaviour
     {
-        _playerName.text = name;
-        _playerRank.text = rank.ToString();
-        _playerScore.text = score.ToString();
+        [SerializeField] private TMP_Text _playerName;
+        [SerializeField] private TMP_Text _playerRank;
+        [SerializeField] private TMP_Text _playerScore;
+
+        public void Initialize(string name, int rank, int score)
+        {
+            _playerName.text = name;
+            _playerRank.text = rank.ToString();
+            _playerScore.text = score.ToString();
+        }
     }
 }

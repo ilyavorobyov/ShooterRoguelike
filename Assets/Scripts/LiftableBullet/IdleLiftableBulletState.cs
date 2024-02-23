@@ -2,7 +2,9 @@ using UnityEngine;
 
 public class IdleLiftableBulletState : State
 {
-    private const string IdleAnimationName = "Idle";
+    private const string Idle = nameof(Idle);
+
+    public readonly int IdleAnimationHash = Animator.StringToHash(nameof(Idle));
 
     private float _idleDuration;
     private float _resetTimer = 0;
@@ -20,7 +22,7 @@ public class IdleLiftableBulletState : State
     public override void Enter()
     {
         _timer = _resetTimer;
-        _animator.SetTrigger(IdleAnimationName);
+        _animator.SetTrigger(IdleAnimationHash);
     }
 
     public override void Exit()

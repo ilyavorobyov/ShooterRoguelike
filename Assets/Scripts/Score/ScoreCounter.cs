@@ -21,27 +21,31 @@ public class ScoreCounter : MonoBehaviour
     private void OnEnable()
     {
         _rewardedVideoAd.RewardAdDoubleResultViewed += OnDoubleResult;
-        EnemyHealth.Died += OnEnemyDied;
-        _playerHealth.GameOvered += OnGameOver;
-        _gameUI.GameReseted += OnCheckBestScore;
+        _playerHealth.PlayerDied += OnPlayerDied;
+        _gameUI.GameReseted += OnGameReseted;
     }
 
     private void OnDisable()
     {
         _rewardedVideoAd.RewardAdDoubleResultViewed -= OnDoubleResult;
-        EnemyHealth.Died -= OnEnemyDied;
-        _playerHealth.GameOvered -= OnGameOver;
-        _gameUI.GameReseted -= OnCheckBestScore;
+        _playerHealth.PlayerDied -= OnPlayerDied;
+        _gameUI.GameReseted -= OnGameReseted;
     }
 
     private void Awake()
     {
         _scoreView = GetComponent<ScoreView>();
         _saver = GetComponent<ScoreSaver>();
-        OnCheckBestScore();
+        OnGameReseted();
     }
 
-    private void OnCheckBestScore()
+    public void DetectEnemyDeath()
+    {
+        _currentScore++;
+        _scoreView.SetCurrentScoreText(_currentScore);
+    }
+
+    private void OnGameReseted()
     {
         if (PlayerPrefs.HasKey(RecordKeyName))
         {
@@ -57,13 +61,7 @@ public class ScoreCounter : MonoBehaviour
         _scoreView.SetCurrentScoreText(_currentScore);
     }
 
-    private void OnEnemyDied()
-    {
-        _currentScore++;
-        _scoreView.SetCurrentScoreText(_currentScore);
-    }
-
-    private void OnGameOver()
+    private void OnPlayerDied()
     {
         bool isBestScore = _currentScore > _bestScore;
 
@@ -85,6 +83,6 @@ public class ScoreCounter : MonoBehaviour
     {
         _scoreView.HideTexts();
         _currentScore *= _scoreMultiplier;
-        OnGameOver();
+        OnPlayerDied();
     }
 }

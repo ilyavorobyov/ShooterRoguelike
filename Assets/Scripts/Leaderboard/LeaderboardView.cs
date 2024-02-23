@@ -1,32 +1,35 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LeaderboardView : MonoBehaviour
+namespace Leaderboard
 {
-    [SerializeField] private Transform _container;
-    [SerializeField] private LeaderboardElement _leaderboardElementPrefab;
-
-    private List<LeaderboardElement> _spawnedElements = new List<LeaderboardElement>();
-
-    public void Construct(List<LeaderboardPlayer> leaderboardPlayers)
+    public class LeaderboardView : MonoBehaviour
     {
-        Clear();
+        [SerializeField] private Transform _container;
+        [SerializeField] private LeaderboardElement _leaderboardElementPrefab;
 
-        foreach (LeaderboardPlayer player in leaderboardPlayers)
-        {
-            LeaderboardElement leaderboardElementInstance = Instantiate(_leaderboardElementPrefab, _container.transform);
-            leaderboardElementInstance.Initialize(player.Name, player.Rank, player.Score);
-            _spawnedElements.Add(leaderboardElementInstance);
-        }
-    }
+        private List<LeaderboardElement> _spawnedElements = new List<LeaderboardElement>();
 
-    private void Clear()
-    {
-        foreach (var element in _spawnedElements)
+        public void Construct(List<LeaderboardPlayer> leaderboardPlayers)
         {
-            Destroy(element.gameObject);
+            Clear();
+
+            foreach (LeaderboardPlayer player in leaderboardPlayers)
+            {
+                LeaderboardElement leaderboardElementInstance = Instantiate(_leaderboardElementPrefab, _container.transform);
+                leaderboardElementInstance.Initialize(player.Name, player.Rank, player.Score);
+                _spawnedElements.Add(leaderboardElementInstance);
+            }
         }
 
-        _spawnedElements = new List<LeaderboardElement>();
+        private void Clear()
+        {
+            foreach (var element in _spawnedElements)
+            {
+                Destroy(element.gameObject);
+            }
+
+            _spawnedElements = new List<LeaderboardElement>();
+        }
     }
 }

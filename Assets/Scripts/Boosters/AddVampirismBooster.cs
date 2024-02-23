@@ -1,13 +1,16 @@
 using System;
 
-public class AddVampirismBooster : Booster
+namespace Boosters
 {
-    private float _addedVampirismValue = 0.05f;
-
-    public event Action<float> VampirismAdded;
-
-    public override void Activate()
+    public class AddVampirismBooster : Booster
     {
-        VampirismAdded?.Invoke(_addedVampirismValue);
+        private float _addedVampirismValue = 0.05f;
+
+        public event Action<float> VampirismAdded;
+
+        public override void Activate()
+        {
+            VampirismAdded?.Invoke(_addedVampirismValue);
+        }
     }
 }

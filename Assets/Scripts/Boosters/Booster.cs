@@ -2,50 +2,41 @@ using System;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public abstract class Booster : MonoBehaviour, IPointerClickHandler
+namespace Boosters
 {
-    [SerializeField] private bool _isSelectedOnce;
-    [SerializeField] private GameUI _gameUI;
-
-    private bool _isChosenBefore = false;
-
-    public event Action BoosterSelected;
-
-    public bool IsAvailable => MayShown();
-
-    private void Awake()
+    public abstract class Booster : MonoBehaviour, IPointerClickHandler
     {
-        _gameUI.GameReseted += OnReset;
-    }
+        [SerializeField] private bool _isSelectedOnce;
+        [SerializeField] private GameUI _gameUI;
 
-    private void OnDestroy()
-    {
-        _gameUI.GameReseted -= OnReset;
-    }
+        private bool _isChosenBefore = false;
 
-    public abstract void Activate();
+        public event Action BoosterSelected;
 
-    private bool MayShown()
-    {
-        if (_isSelectedOnce && _isChosenBefore)
+        public bool IsAvailable => !_isSelectedOnce || !_isChosenBefore;
+
+        private void Awake()
         {
-            return false;
+            _gameUI.GameReseted += OnReset;
         }
-        else
+
+        private void OnDestroy()
         {
-            return true;
+            _gameUI.GameReseted -= OnReset;
         }
-    }
 
-    public void OnPointerClick(PointerEventData eventData)
-    {
-        Activate();
-        _isChosenBefore = true;
-        BoosterSelected?.Invoke();
-    }
+        public void OnPointerClick(PointerEventData eventData)
+        {
+            Activate();
+            _isChosenBefore = true;
+            BoosterSelected?.Invoke();
+        }
 
-    private void OnReset()
-    {
-        _isChosenBefore = false;
+        public abstract void Activate();
+
+        private void OnReset()
+        {
+            _isChosenBefore = false;
+        }
     }
 }

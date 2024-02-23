@@ -1,14 +1,21 @@
+using Bullet;
 using UnityEngine;
 
-public abstract class ShootingEnemy : Enemy
+namespace Enemies
 {
-    [SerializeField] private EnemyBullet _enemyBullet;
-    [SerializeField] private Transform _shootPoint;
-
-    public override void Attack()
+    public abstract class ShootingEnemy : Enemy
     {
-        base.Attack();
-        EnemyBullet enemyBullet = Instantiate(_enemyBullet, _shootPoint.transform.position, Quaternion.identity);
-        enemyBullet.Init(Damage, Player.transform);
+        [SerializeField] private EnemyBullet _enemyBullet;
+        [SerializeField] private Transform _shootPoint;
+
+        public override void Attack()
+        {
+            base.Attack();
+            EnemyBullet enemyBullet = Instantiate(
+                _enemyBullet,
+                _shootPoint.transform.position,
+                Quaternion.identity);
+            enemyBullet.Init(Damage, Player.transform);
+        }
     }
 }

@@ -9,6 +9,11 @@ public abstract class Spawner : MonoBehaviour
     [SerializeField] private GameUI _gameUI;
     [SerializeField] private PlayerHealth _playerHealth;
     [SerializeField] private SlowDownEnemiesBooster _slowDownEnemiesBooster;
+    [SerializeField] private ParticleSystemEffect _appearParticleSystemEffect;
+    [SerializeField] private EnemyDieParticleSystem _enemyDieParticleSystem;
+    [SerializeField] private WavesMaker _wavesMaker;
+    [SerializeField] private WaveSlider _waveSlider;
+    [SerializeField] private ScoreCounter _scoreCounter;
 
     protected List<SpawnableObject> Pool = new List<SpawnableObject>();
 
@@ -20,30 +25,38 @@ public abstract class Spawner : MonoBehaviour
 
     private void OnEnable()
     {
-        _gameUI.GameBeguned += OnHideAll;
-        _gameUI.MenuWented += OnHideAll;
-        _playerHealth.GameOvered += OnHideAll;
+        _gameUI.GameBeguned += HideAll;
+        _gameUI.MenuWented += HideAll;
+        _playerHealth.PlayerDied += HideAll;
     }
 
     private void OnDisable()
     {
-        _gameUI.GameBeguned -= OnHideAll;
-        _gameUI.MenuWented -= OnHideAll;
-        _playerHealth.GameOvered -= OnHideAll;
+        _gameUI.GameBeguned -= HideAll;
+        _gameUI.MenuWented -= HideAll;
+        _playerHealth.PlayerDied -= HideAll;
     }
 
     private void Awake()
     {
         for (int i = 0; i < _capacity; i++)
         {
-            SpawnableObject spawnableObject = Instantiate
-                (SpawnableObject, gameObject.transform);
+            SpawnableObject spawnableObject = Instantiate(
+                SpawnableObject,
+                gameObject.transform);
             spawnableObject.Hide();
             Pool.Add(spawnableObject);
 
             if (spawnableObject.TryGetComponent(out Enemy enemy))
             {
-                enemy.Init(_player, _gameUI, _slowDownEnemiesBooster);
+                enemy.Init(
+                    _player,
+                    _gameUI,
+                    _slowDownEnemiesBooster,
+                    _enemyDieParticleSystem,
+                    _wavesMaker,
+                    _waveSlider,
+                    _scoreCounter);
             }
         }
     }
@@ -56,6 +69,7 @@ public abstract class Spawner : MonoBehaviour
             {
                 spawnableObject.transform.position = _spawnPosition;
                 spawnableObject.gameObject.SetActive(true);
+                _appearParticleSystemEffect.Play(_spawnPosition);
                 break;
             }
         }
@@ -63,9 +77,12 @@ public abstract class Spawner : MonoBehaviour
 
     protected bool TryNewSpawnPosition()
     {
-        _spawnPosition = new Vector3(_player.transform.position.x + Random.Range
-            (_minAdditionToPosition, _maxAdditionToPosition), _spawnPositionY,
-            _player.transform.position.z + Random.Range(_minAdditionToPosition, _maxAdditionToPosition));
+        _spawnPosition = new Vector3(
+            _player.transform.position.x +
+            Random.Range(_minAdditionToPosition, _maxAdditionToPosition),
+            _spawnPositionY,
+            _player.transform.position.z +
+            Random.Range(_minAdditionToPosition, _maxAdditionToPosition));
         Ray ray = new Ray(_spawnPosition, Vector3.down);
 
         if (Physics.Raycast(ray, out RaycastHit hit))
@@ -82,7 +99,7 @@ public abstract class Spawner : MonoBehaviour
         return false;
     }
 
-    private void OnHideAll()
+    private void HideAll()
     {
         foreach (SpawnableObject spawnableObject in Pool)
         {

@@ -16,14 +16,14 @@ public class MusicSwitcher : MonoBehaviour
     {
         _gameUI.GameBeguned += OnGameBeguned;
         _gameUI.MenuWented += OnMenuWented;
-        _playerHealth.GameOvered += OnGameOver;
+        _playerHealth.PlayerDied += OnPlayerDied;
     }
 
     private void OnDisable()
     {
         _gameUI.GameBeguned -= OnGameBeguned;
         _gameUI.MenuWented -= OnMenuWented;
-        _playerHealth.GameOvered -= OnGameOver;
+        _playerHealth.PlayerDied -= OnPlayerDied;
     }
 
     private void OnGameBeguned()
@@ -38,7 +38,7 @@ public class MusicSwitcher : MonoBehaviour
         _menuMusic.PlayDelayed(0);
     }
 
-    private void OnGameOver()
+    private void OnPlayerDied()
     {
         _gameMusic.Stop();
     }

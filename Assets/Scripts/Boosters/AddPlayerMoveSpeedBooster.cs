@@ -1,14 +1,17 @@
 using System;
 using UnityEngine;
 
-public class AddPlayerMoveSpeedBooster : Booster
+namespace Boosters
 {
-    [SerializeField] private int _additionalSpeed;
-
-    public event Action<int> SpeedAdded;
-
-    public override void Activate()
+    public class AddPlayerMoveSpeedBooster : Booster
     {
-        SpeedAdded?.Invoke(_additionalSpeed);
+        [SerializeField] private int _additionalSpeed;
+
+        public event Action<int> SpeedAdded;
+
+        public override void Activate()
+        {
+            SpeedAdded?.Invoke(_additionalSpeed);
+        }
     }
 }

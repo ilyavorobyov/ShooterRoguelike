@@ -2,27 +2,30 @@ using Agava.YandexGames;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class LeaderboardButton : MonoBehaviour, IPointerDownHandler
+namespace Leaderboard
 {
-    [SerializeField] private YandexLeaderboard _yandexLeaderboard;
-    [SerializeField] private LeaderboardScreen _leaderboardScreen;
-    [SerializeField] private AuthorizationRequestScreen _authorizationRequestScreen;
-
-    public void OnPointerDown(PointerEventData eventData)
+    public class LeaderboardButton : MonoBehaviour, IPointerDownHandler
     {
-        OnLeaderboardButtonClick();
-    }
+        [SerializeField] private YandexLeaderboard _yandexLeaderboard;
+        [SerializeField] private LeaderboardScreen _leaderboardScreen;
+        [SerializeField] private AuthorizationRequestScreen _authorizationRequestScreen;
 
-    public void OnLeaderboardButtonClick()
-    {
-        if (PlayerAccount.IsAuthorized)
+        public void OnPointerDown(PointerEventData eventData)
         {
-            _leaderboardScreen.gameObject.SetActive(true);
-            _yandexLeaderboard.Fill();
+            OnLeaderboardButtonClick();
         }
-        else
+
+        public void OnLeaderboardButtonClick()
         {
-            _authorizationRequestScreen.gameObject.SetActive(true);
+            if (PlayerAccount.IsAuthorized)
+            {
+                _leaderboardScreen.gameObject.SetActive(true);
+                _yandexLeaderboard.Fill();
+            }
+            else
+            {
+                _authorizationRequestScreen.gameObject.SetActive(true);
+            }
         }
     }
 }

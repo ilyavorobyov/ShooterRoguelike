@@ -1,11 +1,14 @@
 using System;
 
-public class AddRegenerationBooster : Booster
+namespace Boosters
 {
-    public event Action RegenerationAdded;
-
-    public override void Activate()
+    public class AddRegenerationBooster : Booster
     {
-        RegenerationAdded?.Invoke();
+        public event Action RegenerationAdded;
+
+        public override void Activate()
+        {
+            RegenerationAdded?.Invoke();
+        }
     }
 }

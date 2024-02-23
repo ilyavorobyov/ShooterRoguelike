@@ -2,36 +2,39 @@ using Agava.YandexGames;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class AuthorizationRequestScreen : MonoBehaviour
+namespace Leaderboard
 {
-    [SerializeField] private Button _loginButton;
-    [SerializeField] private Button _cancelButton;
-
-    private void OnEnable()
+    public class AuthorizationRequestScreen : MonoBehaviour
     {
-        _cancelButton.onClick.AddListener(OnCancelButtonClick);
-        _loginButton.onClick.AddListener(OnLoginButtonClick);
-    }
+        [SerializeField] private Button _loginButton;
+        [SerializeField] private Button _cancelButton;
 
-    private void OnDisable()
-    {
-        _cancelButton.onClick.RemoveListener(OnCancelButtonClick);
-        _loginButton.onClick.RemoveListener(OnLoginButtonClick);
-    }
-
-    private void OnLoginButtonClick()
-    {
-        PlayerAccount.Authorize();
-
-        if (PlayerAccount.IsAuthorized)
+        private void OnEnable()
         {
-            PlayerAccount.RequestPersonalProfileDataPermission();
+            _cancelButton.onClick.AddListener(OnCancelButtonClick);
+            _loginButton.onClick.AddListener(OnLoginButtonClick);
+        }
+
+        private void OnDisable()
+        {
+            _cancelButton.onClick.RemoveListener(OnCancelButtonClick);
+            _loginButton.onClick.RemoveListener(OnLoginButtonClick);
+        }
+
+        private void OnLoginButtonClick()
+        {
+            PlayerAccount.Authorize();
+
+            if (PlayerAccount.IsAuthorized)
+            {
+                PlayerAccount.RequestPersonalProfileDataPermission();
+                gameObject.SetActive(false);
+            }
+        }
+
+        private void OnCancelButtonClick()
+        {
             gameObject.SetActive(false);
         }
-    }
-
-    private void OnCancelButtonClick()
-    {
-        gameObject.SetActive(false);
     }
 }

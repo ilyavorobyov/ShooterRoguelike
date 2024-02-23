@@ -1,11 +1,14 @@
 using System;
 
-public class FullHealthBooster : Booster
+namespace Boosters
 {
-    public event Action CompletelyCured;
-
-    public override void Activate()
+    public class FullHealthBooster : Booster
     {
-        CompletelyCured?.Invoke();
+        public event Action CompletelyCured;
+
+        public override void Activate()
+        {
+            CompletelyCured?.Invoke();
+        }
     }
 }

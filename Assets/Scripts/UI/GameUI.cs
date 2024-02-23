@@ -38,13 +38,13 @@ public class GameUI : MonoBehaviour
 
     private void Awake()
     {
-        YandexGamesSdk.GameReady();
+      //  YandexGamesSdk.GameReady();
         _uiElementsAnimation = GetComponent<UIElementsAnimation>();
     }
 
     private void OnEnable()
     {
-        _playerHealth.GameOvered += OnGameOver;
+        _playerHealth.PlayerDied += OnPlayerDied;
         _rewardedVideoAd.RewardAdFullClipViewed += OnStartButtonClick;
         _startButton.onClick.AddListener(OnStartButtonClick);
         _gameOverScreenRestartButton.onClick.AddListener(OnStartButtonClick);
@@ -57,7 +57,7 @@ public class GameUI : MonoBehaviour
 
     private void OnDisable()
     {
-        _playerHealth.GameOvered -= OnGameOver;
+        _playerHealth.PlayerDied -= OnPlayerDied;
         _rewardedVideoAd.RewardAdFullClipViewed -= OnStartButtonClick;
         _startButton.onClick.RemoveListener(OnStartButtonClick);
         _gameOverScreenRestartButton.onClick.RemoveListener(OnStartButtonClick);
@@ -134,7 +134,7 @@ public class GameUI : MonoBehaviour
         }
     }
 
-    private void OnGameOver()
+    private void OnPlayerDied()
     {
         _uiElementsAnimation.Appear(_gameOverScreen.gameObject);
         _uiElementsAnimation.Disappear(_pauseButton.gameObject);

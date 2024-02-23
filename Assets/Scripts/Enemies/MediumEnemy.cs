@@ -1,3 +1,6 @@
-public class MediumEnemy : ShootingEnemy
+namespace Enemies
 {
+    public class MediumEnemy : ShootingEnemy
+    {
+    }
 }

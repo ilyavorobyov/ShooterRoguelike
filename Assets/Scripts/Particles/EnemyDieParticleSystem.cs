@@ -4,19 +4,9 @@ public class EnemyDieParticleSystem : ParticleSystemEffect
 {
     [SerializeField] private AudioSource _enemyDeadSound;
 
-    private void OnEnable()
+    public override void Play(Vector3 targetPosition)
     {
-        EnemyHealth.DeathPositionSented += OnPlay;
-    }
-
-    private void OnDisable()
-    {
-        EnemyHealth.DeathPositionSented -= OnPlay;
-    }
-
-    protected override void OnPlay(Vector3 targetPosition)
-    {
-        base.OnPlay(targetPosition);
+        base.Play(targetPosition);
         _enemyDeadSound.PlayDelayed(0);
     }
 }

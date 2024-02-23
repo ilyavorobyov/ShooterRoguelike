@@ -11,16 +11,6 @@ public class WaveSlider : MonoBehaviour
     private int _deadEnemies = 0;
     private Coroutine _changeValue;
 
-    private void OnEnable()
-    {
-        EnemyHealth.Died += OnEnemyDied;
-    }
-
-    private void OnDisable()
-    {
-        EnemyHealth.Died -= OnEnemyDied;
-    }
-
     public void SetValues(int enemiesNumber, int currentWaveNumber)
     {
         _deadEnemies = 0;
@@ -28,6 +18,12 @@ public class WaveSlider : MonoBehaviour
         _smoothWaveSlider.value = _deadEnemies;
         int nextWaveNumber = ++currentWaveNumber;
         _nextWaveText.text = nextWaveNumber.ToString();
+    }
+
+    public void DetectEnemyDeath()
+    {
+        _deadEnemies++;
+        ChangeSliderValue();
     }
 
     private void ChangeSliderValue()
@@ -45,8 +41,11 @@ public class WaveSlider : MonoBehaviour
 
         while (isChangeSliderValue)
         {
-            _smoothWaveSlider.value = Mathf.MoveTowards
-                (_smoothWaveSlider.value, _deadEnemies, _handleSpeed * Time.deltaTime);
+            _smoothWaveSlider.value = Mathf.MoveTowards(
+                _smoothWaveSlider.value,
+                _deadEnemies,
+                _handleSpeed *
+                Time.deltaTime);
 
             if (_smoothWaveSlider.value == _deadEnemies)
             {
@@ -56,11 +55,5 @@ public class WaveSlider : MonoBehaviour
 
             yield return waitForFixedUpdate;
         }
-    }
-
-    private void OnEnemyDied()
-    {
-        _deadEnemies++;
-        ChangeSliderValue();
     }
 }

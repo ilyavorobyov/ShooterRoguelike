@@ -1,5 +1,8 @@
 using UnityEngine;
 
-public class EnvironmentSpawnPoint : MonoBehaviour
+namespace Ground
 {
+    public class EnvironmentSpawnPoint : MonoBehaviour
+    {
+    }
 }

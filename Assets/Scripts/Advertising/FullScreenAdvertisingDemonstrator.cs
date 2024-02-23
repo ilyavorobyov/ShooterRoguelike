@@ -5,124 +5,127 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-[RequireComponent(typeof(VolumeChecker))]
-public class FullScreenAdvertisingDemonstrator : MonoBehaviour
+namespace Advertising
 {
-    [SerializeField] private AdShowFullScreen _fullScreenAdPanel;
-    [SerializeField] private Button _pauseButton;
-    [SerializeField] private TMP_Text _timerText;
-    [SerializeField] private int _adShowInterval;
-    [SerializeField] private GameUI _gameUI;
-    [SerializeField] private PlayerHealth _playerHealth;
-
-    private VolumeChecker _volumeChecker;
-    private int _maxSoundVolume = 1;
-    private int _minSoundVolume = 0;
-    private bool _isMobile = false;
-    private Coroutine _countTime;
-
-    public event Action FullScreenAdOpened;
-
-    public event Action FullScreenAdClosed;
-
-    private void Awake()
+    [RequireComponent(typeof(VolumeChecker))]
+    public class FullScreenAdvertisingDemonstrator : MonoBehaviour
     {
-        _volumeChecker = GetComponent<VolumeChecker>();
+        [SerializeField] private AdShowFullScreen _fullScreenAdPanel;
+        [SerializeField] private Button _pauseButton;
+        [SerializeField] private TMP_Text _timerText;
+        [SerializeField] private int _adShowInterval;
+        [SerializeField] private GameUI _gameUI;
+        [SerializeField] private PlayerHealth _playerHealth;
 
-        if (Device.IsMobile)
+        private VolumeChecker _volumeChecker;
+        private int _maxSoundVolume = 1;
+        private int _minSoundVolume = 0;
+        private bool _isMobile = false;
+        private Coroutine _countTime;
+
+        public event Action FullScreenAdOpened;
+
+        public event Action FullScreenAdClosed;
+
+        private void Awake()
         {
-            _isMobile = true;
-        }
-    }
+            _volumeChecker = GetComponent<VolumeChecker>();
 
-    private void OnEnable()
-    {
-        _gameUI.GameBeguned += OnGameBegun;
-        _playerHealth.GameOvered += OnGameOver;
-    }
-
-    private void OnDisable()
-    {
-        _gameUI.GameBeguned -= OnGameBegun;
-        _playerHealth.GameOvered -= OnGameOver;
-    }
-
-    private IEnumerator CountTime()
-    {
-        var waitForSeconds = new WaitForSeconds(_adShowInterval);
-        int startTimerValue = 3;
-        int tempTimerValue;
-        int timerIterationTime = 1;
-        var waitForSecondsTimer = new WaitForSecondsRealtime(timerIterationTime);
-        bool isCounterOn = true;
-
-        while (isCounterOn)
-        {
-            yield return waitForSeconds;
-
-            if (_isMobile)
+            if (Device.IsMobile)
             {
-                FullScreenAdOpened.Invoke();
+                _isMobile = true;
+            }
+        }
+
+        private void OnEnable()
+        {
+            _gameUI.GameBeguned += OnGameBegun;
+            _playerHealth.PlayerDied += OnPlayerDied;
+        }
+
+        private void OnDisable()
+        {
+            _gameUI.GameBeguned -= OnGameBegun;
+            _playerHealth.PlayerDied -= OnPlayerDied;
+        }
+
+        private IEnumerator CountTime()
+        {
+            var waitForSeconds = new WaitForSeconds(_adShowInterval);
+            int startTimerValue = 3;
+            int tempTimerValue;
+            int timerIterationTime = 1;
+            var waitForSecondsTimer = new WaitForSecondsRealtime(timerIterationTime);
+            bool isCounterOn = true;
+
+            while (isCounterOn)
+            {
+                yield return waitForSeconds;
+
+                if (_isMobile)
+                {
+                    FullScreenAdOpened?.Invoke();
+                }
+
+                Time.timeScale = 0;
+                _fullScreenAdPanel.gameObject.SetActive(true);
+                _pauseButton.gameObject.SetActive(false);
+                tempTimerValue = startTimerValue;
+
+                while (tempTimerValue > 0)
+                {
+                    _timerText.text = tempTimerValue.ToString();
+                    yield return waitForSecondsTimer;
+                    tempTimerValue--;
+                }
+
+                ShowFullScreenAd();
+            }
+        }
+
+        private void ShowFullScreenAd()
+        {
+            Agava.YandexGames.InterstitialAd.Show(OnOpenCallback, OnCloseCallback, null, null);
+        }
+
+        private void OnGameBegun()
+        {
+            if (_countTime != null)
+            {
+                StopCoroutine(_countTime);
             }
 
-            Time.timeScale = 0;
-            _fullScreenAdPanel.gameObject.SetActive(true);
-            _pauseButton.gameObject.SetActive(false);
-            tempTimerValue = startTimerValue;
-
-            while (tempTimerValue > 0)
-            {
-                _timerText.text = tempTimerValue.ToString();
-                yield return waitForSecondsTimer;
-                tempTimerValue--;
-            }
-
-            ShowFullScreenAd();
+            _countTime = StartCoroutine(CountTime());
         }
-    }
 
-    private void ShowFullScreenAd()
-    {
-        Agava.YandexGames.InterstitialAd.Show(OnOpenCallback, OnCloseCallback, null, null);
-    }
-
-    private void OnGameBegun()
-    {
-        if (_countTime != null)
+        private void OnPlayerDied()
         {
             StopCoroutine(_countTime);
         }
 
-        _countTime = StartCoroutine(CountTime());
-    }
-
-    private void OnGameOver()
-    {
-        StopCoroutine(_countTime);
-    }
-
-    private void OnOpenCallback()
-    {
-        _volumeChecker.SetSoundVolume();
-        Time.timeScale = 0;
-        AudioListener.volume = _minSoundVolume;
-    }
-
-    private void OnCloseCallback(bool isClosed)
-    {
-        _fullScreenAdPanel.gameObject.SetActive(false);
-
-        if (_volumeChecker.IsSoundOn)
+        private void OnOpenCallback()
         {
-            AudioListener.volume = _maxSoundVolume;
+            _volumeChecker.SetSoundVolume();
+            Time.timeScale = 0;
+            AudioListener.volume = _minSoundVolume;
         }
 
-        if (_isMobile)
+        private void OnCloseCallback(bool isClosed)
         {
-            FullScreenAdClosed.Invoke();
-        }
+            _fullScreenAdPanel.gameObject.SetActive(false);
 
-        Time.timeScale = 1;
-        _pauseButton.gameObject.SetActive(true);
+            if (_volumeChecker.IsSoundOn)
+            {
+                AudioListener.volume = _maxSoundVolume;
+            }
+
+            if (_isMobile)
+            {
+                FullScreenAdClosed?.Invoke();
+            }
+
+            Time.timeScale = 1;
+            _pauseButton.gameObject.SetActive(true);
+        }
     }
 }

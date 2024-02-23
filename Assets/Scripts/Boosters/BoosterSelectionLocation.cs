@@ -1,5 +1,8 @@
 using UnityEngine;
 
-public class BoosterSelectionLocation : MonoBehaviour
+namespace Boosters
 {
+    public class BoosterSelectionLocation : MonoBehaviour
+    {
+    }
 }

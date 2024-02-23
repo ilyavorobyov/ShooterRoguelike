@@ -1,11 +1,14 @@
 using System;
 
-public class IncreaseMaxBulletsNumberBooster : Booster
+namespace Boosters
 {
-    public event Action AdditionalBulletAdded;
-
-    public override void Activate()
+    public class IncreaseMaxBulletsNumberBooster : Booster
     {
-        AdditionalBulletAdded?.Invoke();
+        public event Action AdditionalBulletAdded;
+
+        public override void Activate()
+        {
+            AdditionalBulletAdded?.Invoke();
+        }
     }
 }

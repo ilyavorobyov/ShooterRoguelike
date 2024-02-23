@@ -9961,8 +9961,9 @@ GameObject:
   - component: {fileID: 1293714241}
   - component: {fileID: 1293714247}
   - component: {fileID: 1293714248}
+  - component: {fileID: 1293714250}
   m_Layer: 0
-  m_Name: WavesSpawner
+  m_Name: WavesMaker
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9985,6 +9986,12 @@ MonoBehaviour:
   _minDistance: 3
   _gameUI: {fileID: 2686107634750034430}
   _playerHealth: {fileID: 2981183530719638603}
+  _slowDownEnemiesBooster: {fileID: 1130139177}
+  _appearParticleSystemEffect: {fileID: 1362075281}
+  _enemyDieParticleSystem: {fileID: 7143947259598729616}
+  _wavesMaker: {fileID: 1293714249}
+  _waveSlider: {fileID: 401190013}
+  _scoreCounter: {fileID: 1441863823}
 --- !u!114 &1293714242
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10002,6 +10009,12 @@ MonoBehaviour:
   _minDistance: 3
   _gameUI: {fileID: 2686107634750034430}
   _playerHealth: {fileID: 2981183530719638603}
+  _slowDownEnemiesBooster: {fileID: 1130139177}
+  _appearParticleSystemEffect: {fileID: 1362075281}
+  _enemyDieParticleSystem: {fileID: 7143947259598729616}
+  _wavesMaker: {fileID: 1293714249}
+  _waveSlider: {fileID: 401190013}
+  _scoreCounter: {fileID: 1441863823}
 --- !u!114 &1293714243
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10019,6 +10032,12 @@ MonoBehaviour:
   _minDistance: 3
   _gameUI: {fileID: 2686107634750034430}
   _playerHealth: {fileID: 2981183530719638603}
+  _slowDownEnemiesBooster: {fileID: 1130139177}
+  _appearParticleSystemEffect: {fileID: 1362075281}
+  _enemyDieParticleSystem: {fileID: 7143947259598729616}
+  _wavesMaker: {fileID: 1293714249}
+  _waveSlider: {fileID: 401190013}
+  _scoreCounter: {fileID: 1441863823}
 --- !u!4 &1293714246
 Transform:
   m_ObjectHideFlags: 0
@@ -10055,6 +10074,12 @@ MonoBehaviour:
   _minDistance: 2
   _gameUI: {fileID: 2686107634750034430}
   _playerHealth: {fileID: 2981183530719638603}
+  _slowDownEnemiesBooster: {fileID: 1130139177}
+  _appearParticleSystemEffect: {fileID: 3086523372369462480}
+  _enemyDieParticleSystem: {fileID: 7143947259598729616}
+  _wavesMaker: {fileID: 1293714249}
+  _waveSlider: {fileID: 401190013}
+  _scoreCounter: {fileID: 1441863823}
   _spawnInterval: 3
 --- !u!82 &1293714248
 AudioSource:
@@ -10164,9 +10189,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f4b1510d8a013d469b597333fcdda7d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _currentWaveText: {fileID: 1346980670}
-  _waveDefeatedText: {fileID: 1012644010}
-  _currentWaveNumberText: {fileID: 416323135}
   _bulletSpawner: {fileID: 1293714247}
   _easyEnemySpawner: {fileID: 1293714243}
   _mediumEnemySpawner: {fileID: 1293714242}
@@ -10183,6 +10205,21 @@ MonoBehaviour:
   _gameUI: {fileID: 2686107634750034430}
   _playerHealth: {fileID: 2981183530719638603}
   _boosterSelection: {fileID: 4846124952043312893}
+--- !u!114 &1293714250
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1293714239}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9c4d2a153a61a8478af2990d04d9d4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _currentWaveText: {fileID: 1346980670}
+  _currentWaveNumberText: {fileID: 416323135}
+  _waveDefeatedText: {fileID: 1012644010}
 --- !u!1 &1303662363
 GameObject:
   m_ObjectHideFlags: 0
@@ -16767,7 +16804,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _gameMechanicsTrainingButton: {fileID: 1821384417}
-  _dynamicJoystick: {fileID: 2109257928}
   _uiElementsAnimation: {fileID: 4846124952043312892}
   _trainingPanel: {fileID: 2123621498}
   _trainings:
@@ -28608,20 +28644,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5a1e13fe076031468d83e2e0842d29e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _boosterSamples:
-  - {fileID: 9140688439603345666, guid: 19e876b8fb4952d45851857aea889c41, type: 3}
-  - {fileID: 3293206053130351444, guid: cbd92d5f484a360449f43e4b9c3e5233, type: 3}
-  - {fileID: 6720385639397294517, guid: 79497ed97cf3dea469ac868c3f30dd28, type: 3}
-  - {fileID: 4520558323844918063, guid: d798234f40f9bf74bbfc4200defc566c, type: 3}
-  - {fileID: 7062474415473677796, guid: cc25e9254d567004f8dd8aa4bf14696b, type: 3}
-  - {fileID: 6963622014431733230, guid: fcfcc9133e98ea948a910a0daa238f46, type: 3}
-  - {fileID: 3940051356087125589, guid: 8bb650ece3ec45942a65bd476d95cd7d, type: 3}
-  - {fileID: 3484862334033951140, guid: 10763eb6f44538647a4aa597eac24bd6, type: 3}
   _spawnPoints:
   - {fileID: 831396056}
   - {fileID: 1750822234}
   - {fileID: 719961153}
-  _pool: {fileID: 712416471}
   _boosterSelectionScreen: {fileID: 780319802}
   _pauseButton: {fileID: 8582558751084732828}
   _backpack: {fileID: 658695157}

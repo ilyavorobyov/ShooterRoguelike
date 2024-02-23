@@ -54,7 +54,7 @@ public class PlayerMover : MonoBehaviour
         _gameUI.MenuWented += OnTurnOff;
         _gameUI.GameReseted += OnGameReseted;
         _gameUI.GameBeguned += OnTurnOn;
-        _playerHealth.GameOvered += OnTurnOff;
+        _playerHealth.PlayerDied += OnTurnOff;
         _fullScreenAdDemonstrator.FullScreenAdOpened += OnFullScreenAdOpened;
         _fullScreenAdDemonstrator.FullScreenAdClosed += OnFullScreenAdClosed;
     }
@@ -71,7 +71,7 @@ public class PlayerMover : MonoBehaviour
         _addPlayerMoveSpeedBooster.SpeedAdded += OnSpeedAdded;
         _gameUI.MenuWented -= OnTurnOff;
         _gameUI.GameReseted -= OnGameReseted;
-        _playerHealth.GameOvered -= OnTurnOff;
+        _playerHealth.PlayerDied -= OnTurnOff;
         _gameUI.GameBeguned -= OnTurnOn;
         DisablePlayerInput();
         _fullScreenAdDemonstrator.FullScreenAdOpened -= OnFullScreenAdOpened;

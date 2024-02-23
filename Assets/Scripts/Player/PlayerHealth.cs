@@ -21,7 +21,7 @@ public class PlayerHealth : Health
     private bool _isVampirismEnabled = false;
     private Coroutine _regenerate;
 
-    public event Action GameOvered;
+    public event Action PlayerDied;
 
     private void OnDestroy()
     {
@@ -68,7 +68,7 @@ public class PlayerHealth : Health
 
     public override void Die()
     {
-        GameOvered?.Invoke();
+        PlayerDied?.Invoke();
     }
 
     public void TryHealWithVampirism(float damage)

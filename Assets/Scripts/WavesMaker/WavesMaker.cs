@@ -1,13 +1,10 @@
 using System.Collections;
-using TMPro;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
+[RequireComponent(typeof(WavesMakerView))]
 public class WavesMaker : MonoBehaviour
 {
-    [SerializeField] private TMP_Text _currentWaveText;
-    [SerializeField] private TMP_Text _waveDefeatedText;
-    [SerializeField] private TMP_Text _currentWaveNumberText;
     [SerializeField] private BulletSpawner _bulletSpawner;
     [SerializeField] private EasyEnemySpawner _easyEnemySpawner;
     [SerializeField] private MediumEnemySpawner _mediumEnemySpawner;
@@ -37,14 +34,13 @@ public class WavesMaker : MonoBehaviour
     private bool _isSpawning = true;
     private Token _currentToken;
     private Coroutine _makeWaves;
+    private WavesMakerView _waveMakerView;
 
     private void OnEnable()
     {
         _gameUI.GameBeguned += OnStartGame;
         _gameUI.MenuWented += OnGameOver;
-        _playerHealth.GameOvered += OnGameOver;
-        Enemy.Spawned += OnEnemySpawned;
-        EnemyHealth.Died += OnEnemyDied;
+        _playerHealth.PlayerDied += OnGameOver;
         _boosterSelection.BoosterSelected += OnStartNextWave;
     }
 
@@ -52,10 +48,13 @@ public class WavesMaker : MonoBehaviour
     {
         _gameUI.GameBeguned -= OnStartGame;
         _gameUI.MenuWented -= OnGameOver;
-        _playerHealth.GameOvered -= OnGameOver;
-        Enemy.Spawned -= OnEnemySpawned;
-        EnemyHealth.Died -= OnEnemyDied;
+        _playerHealth.PlayerDied -= OnGameOver;
         _boosterSelection.BoosterSelected -= OnStartNextWave;
+    }
+
+    private void Awake()
+    {
+        _waveMakerView = GetComponent<WavesMakerView>();
     }
 
     public void OnStartNextWave()
@@ -69,11 +68,24 @@ public class WavesMaker : MonoBehaviour
         _waveSlider.SetValues(_currentWaveEnemiesNumber, _currentWaveNumber);
     }
 
-    private void ShowWaveText()
+    public void DetectEnemySpawn()
     {
-        _currentWaveText.gameObject.SetActive(true);
-        _currentWaveNumberText.gameObject.SetActive(true);
-        _currentWaveNumberText.text = _currentWaveNumber.ToString();
+        _spawnedEnemiesNumber++;
+    }
+
+    public void DetectEnemyDeath()
+    {
+        _killedEnemiesNumber++;
+
+        if (_killedEnemiesNumber == _currentWaveEnemiesNumber)
+        {
+            _waveMakerView.ShowWaveDefeatedText();
+            _bulletSpawner.Stop();
+            Transform tokenSpawnPoint = SelectTokenSpawnPoint();
+            _pointingArrow.PointTokenSpawn(tokenSpawnPoint);
+            _currentToken = Instantiate(_token, tokenSpawnPoint);
+            _wavePassedSound.PlayDelayed(0);
+        }
     }
 
     private bool GetChance(float chanceValue)
@@ -91,7 +103,7 @@ public class WavesMaker : MonoBehaviour
     private IEnumerator MakeWaves()
     {
         _bulletSpawner.Begin();
-        ShowWaveText();
+        _waveMakerView.ShowWaveText(_currentWaveNumber);
         _spawnedEnemiesNumber = 0;
         _killedEnemiesNumber = 0;
         float minSpawnTime = 2;
@@ -118,26 +130,6 @@ public class WavesMaker : MonoBehaviour
         }
 
         StopCoroutine(_makeWaves);
-    }
-
-    private void OnEnemyDied()
-    {
-        _killedEnemiesNumber++;
-
-        if (_killedEnemiesNumber == _currentWaveEnemiesNumber)
-        {
-            _waveDefeatedText.gameObject.SetActive(true);
-            _bulletSpawner.Stop();
-            Transform tokenSpawnPoint = SelectTokenSpawnPoint();
-            _pointingArrow.PointTokenSpawn(tokenSpawnPoint);
-            _currentToken = Instantiate(_token, tokenSpawnPoint);
-            _wavePassedSound.PlayDelayed(0);
-        }
-    }
-
-    private void OnEnemySpawned()
-    {
-        _spawnedEnemiesNumber++;
     }
 
     private void OnStartGame()

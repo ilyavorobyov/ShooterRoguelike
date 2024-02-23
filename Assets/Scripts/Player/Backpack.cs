@@ -36,9 +36,11 @@ public class Backpack : MonoBehaviour
 
     public void AddBullet()
     {
-        DisplayedBullet displayedBullet = Instantiate
-            (_displayedBulletSample, transform.position + _currentPosition,
-            Quaternion.identity, gameObject.transform);
+        DisplayedBullet displayedBullet = Instantiate(
+            _displayedBulletSample,
+            transform.position + _currentPosition,
+            Quaternion.identity,
+            gameObject.transform);
         displayedBullet.transform.localRotation = Quaternion.Euler(_addedObjectsRotation);
         _displayedBullets.Add(displayedBullet);
         _currentPosition += _additionPosition;
@@ -60,9 +62,11 @@ public class Backpack : MonoBehaviour
         if (!_isHaveToken)
         {
             _isHaveToken = true;
-            _currentToken = Instantiate
-                (_displayedTokenSample, transform.position + _currentPosition, 
-                Quaternion.identity, gameObject.transform);
+            _currentToken = Instantiate(
+                _displayedTokenSample,
+                transform.position + _currentPosition,
+                Quaternion.identity,
+                gameObject.transform);
             _currentToken.transform.localRotation = Quaternion.Euler(_addedObjectsRotation);
             _currentPosition += _additionPosition;
         }

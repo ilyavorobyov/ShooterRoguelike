@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class ButtonOnHover : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
+public class UIHover : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     private Vector3 _hoverSize = new Vector3(1.05f, 1.05f, 1.05f);
 

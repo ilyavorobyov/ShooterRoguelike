@@ -3,8 +3,11 @@ using UnityEngine;
 [RequireComponent(typeof(Animator))]
 public class PlayerAnimator : MonoBehaviour
 {
-    private const string IdleAnimationName = "Idle";
-    private const string RunAnimationName = "Run";
+    private const string Idle = nameof(Idle);
+    private const string Run = nameof(Run);
+
+    public readonly int IdleAnimationHash = Animator.StringToHash(nameof(Idle));
+    public readonly int RunAnimationHash = Animator.StringToHash(nameof(Run));
 
     private Animator _animator;
     private bool _isIdle = true;
@@ -19,7 +22,7 @@ public class PlayerAnimator : MonoBehaviour
     {
         if (_isRunning)
         {
-            _animator.SetTrigger(IdleAnimationName);
+            _animator.SetTrigger(IdleAnimationHash);
             _isIdle = true;
             _isRunning = false;
         }
@@ -29,7 +32,7 @@ public class PlayerAnimator : MonoBehaviour
     {
         if (_isIdle)
         {
-            _animator.SetTrigger(RunAnimationName);
+            _animator.SetTrigger(RunAnimationHash);
             _isIdle = false;
             _isRunning = true;
         }

@@ -1,14 +1,17 @@
 using System;
 using UnityEngine;
 
-public class AddMaxHealthBooster : Booster
+namespace Boosters
 {
-    [SerializeField] private int _addedHealth;
-
-    public event Action<int> MaxHealthAdded;
-
-    public override void Activate()
+    public class AddMaxHealthBooster : Booster
     {
-        MaxHealthAdded?.Invoke(_addedHealth);
+        [SerializeField] private int _addedHealth;
+
+        public event Action<int> MaxHealthAdded;
+
+        public override void Activate()
+        {
+            MaxHealthAdded?.Invoke(_addedHealth);
+        }
     }
 }

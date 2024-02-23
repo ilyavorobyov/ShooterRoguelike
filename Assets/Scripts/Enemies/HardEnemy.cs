@@ -1,19 +1,16 @@
 using UnityEngine;
 
-[RequireComponent(typeof(EnemyHealth))]
-public class HardEnemy : ShootingEnemy
+namespace Enemies
 {
-    private EnemyHealth _enemyHealth;
-    private int _healthRecoveryDivisor = 3;
-
-    private void Awake()
+    [RequireComponent(typeof(EnemyHealth))]
+    public class HardEnemy : ShootingEnemy
     {
-        _enemyHealth = GetComponent<EnemyHealth>();
-    }
+        private int _healthRecoveryDivisor = 3;
 
-    public override void Attack()
-    {
-        base.Attack();
-        _enemyHealth.Add(Damage / _healthRecoveryDivisor);
+        public override void Attack()
+        {
+            base.Attack();
+            EnemyHealth.Add(Damage / _healthRecoveryDivisor);
+        }
     }
 }

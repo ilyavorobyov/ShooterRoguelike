@@ -6,9 +6,7 @@ using Random = UnityEngine.Random;
 
 public class BoosterSelection : MonoBehaviour
 {
-    [SerializeField] private Booster[] _boosterSamples;
     [SerializeField] private RectTransform[] _spawnPoints;
-    [SerializeField] private GameObject _pool;
     [SerializeField] private BoosterSelectionScreen _boosterSelectionScreen;
     [SerializeField] private Button _pauseButton;
     [SerializeField] private Backpack _backpack;

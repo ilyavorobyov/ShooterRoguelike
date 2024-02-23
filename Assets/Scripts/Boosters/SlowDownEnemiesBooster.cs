@@ -1,13 +1,16 @@
 using System;
 
-public class SlowDownEnemiesBooster : Booster
+namespace Boosters
 {
-    private float _reductionFactor = 0.6f;
-
-    public event Action<float> EnemiesSlowed;
-
-    public override void Activate()
+    public class SlowDownEnemiesBooster : Booster
     {
-        EnemiesSlowed?.Invoke(_reductionFactor);
+        private float _reductionFactor = 0.6f;
+
+        public event Action<float> EnemiesSlowed;
+
+        public override void Activate()
+        {
+            EnemiesSlowed?.Invoke(_reductionFactor);
+        }
     }
 }

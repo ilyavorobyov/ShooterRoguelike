@@ -1,14 +1,17 @@
 using UnityEngine;
 
-public class VolumeChecker : MonoBehaviour
+namespace Advertising
 {
-    private float _maxSoundVolume = 1;
-    private bool _isSoundOn = true;
-
-    public bool IsSoundOn => _isSoundOn;
-
-    public void SetSoundVolume()
+    public class VolumeChecker : MonoBehaviour
     {
-        _isSoundOn = AudioListener.volume == _maxSoundVolume;
+        private float _maxSoundVolume = 1;
+        private bool _isSoundOn = true;
+
+        public bool IsSoundOn => _isSoundOn;
+
+        public void SetSoundVolume()
+        {
+            _isSoundOn = Mathf.Approximately(AudioListener.volume, _maxSoundVolume);
+        }
     }
 }

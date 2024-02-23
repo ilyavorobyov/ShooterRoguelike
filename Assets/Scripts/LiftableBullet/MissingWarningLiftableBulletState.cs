@@ -2,7 +2,9 @@ using UnityEngine;
 
 public class MissingWarningLiftableBulletState : State
 {
-    private const string MissingWarningAnimationName = "MissingWarning";
+    private const string MissingWarning = nameof(MissingWarning);
+
+    public readonly int MissingWarningAnimationHash = Animator.StringToHash(nameof(MissingWarning));
 
     private Animator _animator;
     private float _missingWarningDuration;
@@ -21,7 +23,7 @@ public class MissingWarningLiftableBulletState : State
     {
         _timer = _resetTimer;
         _animator.StopPlayback();
-        _animator.SetTrigger(MissingWarningAnimationName);
+        _animator.SetTrigger(MissingWarningAnimationHash);
     }
 
     public override void Exit()

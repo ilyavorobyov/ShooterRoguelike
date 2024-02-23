@@ -7,7 +7,6 @@ public class GameMechanicsTraining : MonoBehaviour
     private const string AlreadyPlayedKeyName = "AlreadyPlayed";
 
     [SerializeField] private Button _gameMechanicsTrainingButton;
-    [SerializeField] private DynamicJoystick _dynamicJoystick;
     [SerializeField] private UIElementsAnimation _uiElementsAnimation;
     [SerializeField] private TrainingPanel _trainingPanel;
     [SerializeField] private Training[] _trainings;
