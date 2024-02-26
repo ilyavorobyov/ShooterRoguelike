@@ -24,6 +24,7 @@ namespace Enemies
         private Vector3 _rightSideRotation = new Vector3(0, 0, -90);
         private Vector3 _downSideRotation = new Vector3(0, 0, 180);
         private Vector3 _upSideRotation = new Vector3(0, 0, 0);
+        private int _sidesNumber = 4;
 
         private void Awake()
         {
@@ -92,7 +93,6 @@ namespace Enemies
         {
             var waitForFixedUpdate = new WaitForFixedUpdate();
             int planeIndex = 0;
-            int sidesNumber = 4;
             Vector3 directionFromPlayer;
             Vector3 worldPosition;
             Plane[] planes;
@@ -107,7 +107,7 @@ namespace Enemies
                     planes = GeometryUtility.CalculateFrustumPlanes(_camera);
                     float minDistance = Mathf.Infinity;
 
-                    for (int i = 0; i < sidesNumber; i++)
+                    for (int i = 0; i < _sidesNumber; i++)
                     {
                         if (planes[i].Raycast(ray, out float distance))
                         {

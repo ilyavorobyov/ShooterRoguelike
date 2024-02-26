@@ -6,7 +6,7 @@ namespace LiftableBullet
     {
         private const string MissingWarning = nameof(MissingWarning);
 
-        public readonly int MissingWarningAnimationHash = Animator.StringToHash(
+        private readonly int MissingWarningAnimationHash = Animator.StringToHash(
             nameof(MissingWarning));
 
         private Animator _animator;

@@ -7,7 +7,7 @@ namespace Enemies
     {
         private const string Attack = nameof(Attack);
 
-        public readonly int AttackAnimationHash = Animator.StringToHash(nameof(Attack));
+        private readonly int AttackAnimationHash = Animator.StringToHash(nameof(Attack));
 
         private Animator _animator;
 

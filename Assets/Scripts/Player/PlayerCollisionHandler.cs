@@ -5,7 +5,7 @@ using Health;
 using LiftableBullet;
 using Tokens;
 using UnityEngine;
-using WavesMaker;
+using WavesMaker.Logic;
 
 namespace Player
 {

@@ -1,12 +1,13 @@
-using Health;
 using Spawners;
 using System.Collections;
-using Random = UnityEngine.Random;
+using Health;
 using Tokens;
 using UI;
 using UnityEngine;
+using WavesMaker.View;
+using Random = UnityEngine.Random;
 
-namespace WavesMaker
+namespace WavesMaker.Logic
 {
     [RequireComponent(typeof(WavesMakerView))]
     public class WavesMakerLogic : MonoBehaviour

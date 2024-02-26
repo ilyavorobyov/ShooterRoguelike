@@ -14,6 +14,7 @@ namespace Player
         [SerializeField] private RewardedVideoAd _rewardedVideoAd;
         [SerializeField] private IncreaseMaxBulletsNumberBooster _increaseMaxBulletsNumberBooster;
 
+        private float _delay = 0.1f;
         private int _startCurrentBulletsNumber = 0;
         private int _currentBulletsNumber;
         private int _startMaxBulletsNumber = 5;
@@ -92,8 +93,7 @@ namespace Player
 
         private void OnStartFillingClip()
         {
-            float delay = 0.1f;
-            Invoke(nameof(FillClip), delay);
+            Invoke(nameof(FillClip), _delay);
         }
 
         private void OnReset()

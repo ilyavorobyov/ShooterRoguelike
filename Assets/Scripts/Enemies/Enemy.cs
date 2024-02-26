@@ -5,7 +5,7 @@ using Player;
 using Score;
 using UI;
 using UnityEngine;
-using WavesMaker;
+using WavesMaker.Logic;
 
 namespace Enemies
 {

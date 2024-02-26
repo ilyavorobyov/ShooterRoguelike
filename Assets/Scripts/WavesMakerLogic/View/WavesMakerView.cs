@@ -1,7 +1,7 @@
 using TMPro;
 using UnityEngine;
 
-namespace WavesMaker
+namespace WavesMaker.View
 {
     public class WavesMakerView : MonoBehaviour
     {

@@ -17,6 +17,7 @@ namespace Enemies
         private EnemyMover _enemyMover;
         private Coroutine _trackPlayer;
         private float _currentDistance;
+        private bool _isPlayerTracked = false;
 
         private void Awake()
         {
@@ -44,6 +45,7 @@ namespace Enemies
 
         private void StartTrackPlayer()
         {
+            _isPlayerTracked = true;
             _trackPlayer = StartCoroutine(TrackPlayer());
         }
 
@@ -51,17 +53,17 @@ namespace Enemies
         {
             if (_trackPlayer != null)
             {
+                _isPlayerTracked = false;
                 StopCoroutine(_trackPlayer);
             }
         }
 
         private IEnumerator TrackPlayer()
         {
-            bool isPlayerTracked = true;
             var waitForSeconds = new WaitForSeconds(_rechargeTime);
             var waitForFixedUpdate = new WaitForFixedUpdate();
 
-            while (isPlayerTracked)
+            while (_isPlayerTracked)
             {
                 _currentDistance = Vector3.Distance(
                     _player.transform.position,

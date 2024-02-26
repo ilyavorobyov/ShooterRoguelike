@@ -22,7 +22,10 @@ namespace Advertising
         private VolumeChecker _volumeChecker;
         private int _maxSoundVolume = 1;
         private int _minSoundVolume = 0;
+        private int _startTimerValue = 3;
+        private int _timerIterationTime = 1;
         private bool _isMobile = false;
+        private bool _isCounterOn = false;
         private Coroutine _countTime;
 
         public event Action FullScreenAdOpened;
@@ -54,13 +57,10 @@ namespace Advertising
         private IEnumerator CountTime()
         {
             var waitForSeconds = new WaitForSeconds(_adShowInterval);
-            int startTimerValue = 3;
             int tempTimerValue;
-            int timerIterationTime = 1;
-            var waitForSecondsTimer = new WaitForSecondsRealtime(timerIterationTime);
-            bool isCounterOn = true;
+            var waitForSecondsTimer = new WaitForSecondsRealtime(_timerIterationTime);
 
-            while (isCounterOn)
+            while (_isCounterOn)
             {
                 yield return waitForSeconds;
 
@@ -72,7 +72,7 @@ namespace Advertising
                 Time.timeScale = 0;
                 _fullScreenAdPanel.gameObject.SetActive(true);
                 _pauseButton.gameObject.SetActive(false);
-                tempTimerValue = startTimerValue;
+                tempTimerValue = _startTimerValue;
 
                 while (tempTimerValue > 0)
                 {
@@ -97,11 +97,13 @@ namespace Advertising
                 StopCoroutine(_countTime);
             }
 
+            _isCounterOn = true;
             _countTime = StartCoroutine(CountTime());
         }
 
         private void OnPlayerDied()
         {
+            _isCounterOn = false;
             StopCoroutine(_countTime);
         }
 

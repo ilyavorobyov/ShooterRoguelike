@@ -1,7 +1,7 @@
 using Particles;
 using Score;
 using UI;
-using WavesMaker;
+using WavesMaker.Logic;
 
 namespace Health
 {

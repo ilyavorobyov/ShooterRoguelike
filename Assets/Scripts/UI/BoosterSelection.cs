@@ -2,9 +2,9 @@ using System;
 using System.Collections.Generic;
 using Boosters;
 using Player;
-using Random = UnityEngine.Random;
 using UnityEngine;
 using UnityEngine.UI;
+using Random = UnityEngine.Random;
 
 namespace UI
 {
@@ -88,7 +88,7 @@ namespace UI
                 booster.gameObject.SetActive(false);
             }
 
-            BoosterSelected.Invoke();
+            BoosterSelected?.Invoke();
         }
     }
 }

@@ -16,6 +16,13 @@ namespace Boosters
 
         public bool IsAvailable => !_isSelectedOnce || !_isChosenBefore;
 
+        public void OnPointerClick(PointerEventData eventData)
+        {
+            Activate();
+            _isChosenBefore = true;
+            BoosterSelected?.Invoke();
+        }
+
         private void Awake()
         {
             _gameUI.GameReseted += OnReset;
@@ -24,13 +31,6 @@ namespace Boosters
         private void OnDestroy()
         {
             _gameUI.GameReseted -= OnReset;
-        }
-
-        public void OnPointerClick(PointerEventData eventData)
-        {
-            Activate();
-            _isChosenBefore = true;
-            BoosterSelected?.Invoke();
         }
 
         public abstract void Activate();

@@ -8,8 +8,8 @@ namespace Player
         private const string Idle = nameof(Idle);
         private const string Run = nameof(Run);
 
-        public readonly int IdleAnimationHash = Animator.StringToHash(nameof(Idle));
-        public readonly int RunAnimationHash = Animator.StringToHash(nameof(Run));
+        private readonly int IdleAnimationHash = Animator.StringToHash(nameof(Idle));
+        private readonly int RunAnimationHash = Animator.StringToHash(nameof(Run));
 
         private Animator _animator;
         private bool _isIdle = true;

@@ -14,6 +14,8 @@ namespace Player
 
         private PlayerRotator _rotator;
         private float _range = 3f;
+        private float _iterationTime = 0.3f;
+        private bool _isScanning = false;
         private Coroutine _searchEnemy;
 
         private void Awake()
@@ -24,6 +26,7 @@ namespace Player
         private void Start()
         {
             StopSearchEnemy();
+            _isScanning = true;
             _searchEnemy = StartCoroutine(TrySearchEnemy());
         }
 
@@ -35,17 +38,18 @@ namespace Player
         private void StopSearchEnemy()
         {
             if (_searchEnemy != null)
+            {
+                _isScanning = false;
                 StopCoroutine(_searchEnemy);
+            }
         }
 
         private IEnumerator TrySearchEnemy()
         {
-            float iterationTime = 0.3f;
-            var waitForSeconds = new WaitForSeconds(iterationTime);
-            bool isScanning = true;
+            var waitForSeconds = new WaitForSeconds(_iterationTime);
             Enemy enemy;
 
-            while (isScanning)
+            while (_isScanning)
             {
                 Collider[] hitColliders = Physics.OverlapSphere(
                     transform.position,

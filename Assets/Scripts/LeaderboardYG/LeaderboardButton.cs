@@ -16,7 +16,7 @@ namespace LeaderboardYG
             OnLeaderboardButtonClick();
         }
 
-        public void OnLeaderboardButtonClick()
+        private void OnLeaderboardButtonClick()
         {
             if (PlayerAccount.IsAuthorized)
             {
