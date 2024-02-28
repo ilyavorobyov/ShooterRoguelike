@@ -9955,7 +9955,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1293714246}
-  - component: {fileID: 1293714249}
+  - component: {fileID: 1293714251}
   - component: {fileID: 1293714243}
   - component: {fileID: 1293714242}
   - component: {fileID: 1293714241}
@@ -9989,7 +9989,7 @@ MonoBehaviour:
   _slowDownEnemiesBooster: {fileID: 1130139177}
   _appearParticleSystemEffect: {fileID: 1362075281}
   _enemyDieParticleSystem: {fileID: 7143947259598729616}
-  _wavesMaker: {fileID: 1293714249}
+  _wavesMakerLogic: {fileID: 1293714251}
   _waveSlider: {fileID: 401190013}
   _scoreCounter: {fileID: 1441863823}
 --- !u!114 &1293714242
@@ -10012,7 +10012,7 @@ MonoBehaviour:
   _slowDownEnemiesBooster: {fileID: 1130139177}
   _appearParticleSystemEffect: {fileID: 1362075281}
   _enemyDieParticleSystem: {fileID: 7143947259598729616}
-  _wavesMaker: {fileID: 1293714249}
+  _wavesMakerLogic: {fileID: 1293714251}
   _waveSlider: {fileID: 401190013}
   _scoreCounter: {fileID: 1441863823}
 --- !u!114 &1293714243
@@ -10035,7 +10035,7 @@ MonoBehaviour:
   _slowDownEnemiesBooster: {fileID: 1130139177}
   _appearParticleSystemEffect: {fileID: 1362075281}
   _enemyDieParticleSystem: {fileID: 7143947259598729616}
-  _wavesMaker: {fileID: 1293714249}
+  _wavesMakerLogic: {fileID: 1293714251}
   _waveSlider: {fileID: 401190013}
   _scoreCounter: {fileID: 1441863823}
 --- !u!4 &1293714246
@@ -10077,7 +10077,7 @@ MonoBehaviour:
   _slowDownEnemiesBooster: {fileID: 1130139177}
   _appearParticleSystemEffect: {fileID: 3086523372369462480}
   _enemyDieParticleSystem: {fileID: 7143947259598729616}
-  _wavesMaker: {fileID: 1293714249}
+  _wavesMakerLogic: {fileID: 1293714251}
   _waveSlider: {fileID: 401190013}
   _scoreCounter: {fileID: 1441863823}
   _spawnInterval: 3
@@ -10177,7 +10177,7 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &1293714249
+--- !u!114 &1293714250
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -10186,7 +10186,22 @@ MonoBehaviour:
   m_GameObject: {fileID: 1293714239}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8f4b1510d8a013d469b597333fcdda7d, type: 3}
+  m_Script: {fileID: 11500000, guid: e9c4d2a153a61a8478af2990d04d9d4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _currentWaveText: {fileID: 1346980670}
+  _currentWaveNumberText: {fileID: 416323135}
+  _waveDefeatedText: {fileID: 1012644010}
+--- !u!114 &1293714251
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1293714239}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ef49b95ae6ed9a4a8acbe5815c89509, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _bulletSpawner: {fileID: 1293714247}
@@ -10205,21 +10220,6 @@ MonoBehaviour:
   _gameUI: {fileID: 2686107634750034430}
   _playerHealth: {fileID: 2981183530719638603}
   _boosterSelection: {fileID: 4846124952043312893}
---- !u!114 &1293714250
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1293714239}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e9c4d2a153a61a8478af2990d04d9d4d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _currentWaveText: {fileID: 1346980670}
-  _currentWaveNumberText: {fileID: 416323135}
-  _waveDefeatedText: {fileID: 1012644010}
 --- !u!1 &1303662363
 GameObject:
   m_ObjectHideFlags: 0
@@ -23162,7 +23162,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _bulletClip: {fileID: 1035437365}
   _backpack: {fileID: 658695157}
-  _waveMaker: {fileID: 0}
+  _waveMakerLogic: {fileID: 0}
   _tookBulletSound: {fileID: 2981183530719638596}
   _tookTokenSound: {fileID: 2981183530719638595}
 --- !u!114 &2981183530719638603
