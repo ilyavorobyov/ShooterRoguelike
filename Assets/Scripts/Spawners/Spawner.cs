@@ -88,12 +88,11 @@ namespace Spawners
 
         protected bool TryNewSpawnPosition()
         {
-            _spawnPosition = new Vector3(
-                _player.transform.position.x +
-                Random.Range(_minAdditionToPosition, _maxAdditionToPosition),
-                _spawnPositionY,
-                _player.transform.position.z +
-                Random.Range(_minAdditionToPosition, _maxAdditionToPosition));
+            float spawnPositionX = _player.transform.position.x +
+                Random.Range(_minAdditionToPosition, _maxAdditionToPosition);
+            float spawnPositionZ = _player.transform.position.z +
+                Random.Range(_minAdditionToPosition, _maxAdditionToPosition);
+            _spawnPosition = new Vector3(spawnPositionX, _spawnPositionY, spawnPositionZ);
             Ray ray = new Ray(_spawnPosition, Vector3.down);
 
             if (Physics.Raycast(ray, out RaycastHit hit))
