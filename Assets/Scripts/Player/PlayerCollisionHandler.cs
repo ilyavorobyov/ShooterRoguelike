@@ -14,7 +14,7 @@ namespace Player
     {
         [SerializeField] private BulletClip _bulletClip;
         [SerializeField] private Backpack _backpack;
-        [SerializeField] private WavesMakerLogic _waveMaker;
+        [SerializeField] private WavesMakerLogic _waveMakerLogic;
         [SerializeField] private AudioSource _tookBulletSound;
         [SerializeField] private AudioSource _tookTokenSound;
 

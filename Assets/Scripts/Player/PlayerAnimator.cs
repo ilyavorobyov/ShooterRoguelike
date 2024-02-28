@@ -8,8 +8,8 @@ namespace Player
         private const string Idle = nameof(Idle);
         private const string Run = nameof(Run);
 
-        private readonly int IdleAnimationHash = Animator.StringToHash(nameof(Idle));
-        private readonly int RunAnimationHash = Animator.StringToHash(nameof(Run));
+        private readonly int _idleAnimationHash = Animator.StringToHash(nameof(Idle));
+        private readonly int _runAnimationHash = Animator.StringToHash(nameof(Run));
 
         private Animator _animator;
         private bool _isIdle = true;
@@ -24,7 +24,7 @@ namespace Player
         {
             if (_isRunning)
             {
-                _animator.SetTrigger(IdleAnimationHash);
+                _animator.SetTrigger(_idleAnimationHash);
                 _isIdle = true;
                 _isRunning = false;
             }
@@ -34,7 +34,7 @@ namespace Player
         {
             if (_isIdle)
             {
-                _animator.SetTrigger(RunAnimationHash);
+                _animator.SetTrigger(_runAnimationHash);
                 _isIdle = false;
                 _isRunning = true;
             }

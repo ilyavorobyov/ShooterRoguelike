@@ -43,11 +43,11 @@ namespace UI
 
             while (isChangeSliderValue)
             {
+                float maxDelta = _handleSpeed * Time.deltaTime;
                 _smoothWaveSlider.value = Mathf.MoveTowards(
                     _smoothWaveSlider.value,
                     _deadEnemies,
-                    _handleSpeed *
-                    Time.deltaTime);
+                    maxDelta);
 
                 if (_smoothWaveSlider.value == _deadEnemies)
                 {

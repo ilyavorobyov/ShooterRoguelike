@@ -22,7 +22,7 @@ namespace Spawners
         [SerializeField] private SlowDownEnemiesBooster _slowDownEnemiesBooster;
         [SerializeField] private ParticleSystemEffect _appearParticleSystemEffect;
         [SerializeField] private EnemyDieParticleSystem _enemyDieParticleSystem;
-        [SerializeField] private WavesMakerLogic _wavesMaker;
+        [SerializeField] private WavesMakerLogic _wavesMakerLogic;
         [SerializeField] private WaveSlider _waveSlider;
         [SerializeField] private ScoreCounter _scoreCounter;
 
@@ -65,7 +65,7 @@ namespace Spawners
                         _gameUI,
                         _slowDownEnemiesBooster,
                         _enemyDieParticleSystem,
-                        _wavesMaker,
+                        _wavesMakerLogic,
                         _waveSlider,
                         _scoreCounter);
                 }

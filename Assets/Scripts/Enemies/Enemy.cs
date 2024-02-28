@@ -31,7 +31,7 @@ namespace Enemies
         private GameUI _gameUI;
         private SlowDownEnemiesBooster _slowDownEnemiesBooster;
         private ParticleSystemEffect _dieParticleSystemEffect;
-        private WavesMakerLogic _wavesMaker;
+        private WavesMakerLogic _wavesMakerLogic;
 
         private void Start()
         {
@@ -43,7 +43,7 @@ namespace Enemies
         {
             if (Player != null)
             {
-                _wavesMaker.DetectEnemySpawn();
+                _wavesMakerLogic.DetectEnemySpawn();
                 _appearanceSound.PlayDelayed(0);
             }
         }
@@ -53,7 +53,7 @@ namespace Enemies
             GameUI gameUI,
             SlowDownEnemiesBooster slowDownEnemiesBooster,
             ParticleSystemEffect dieParticleSystemEffect,
-            WavesMakerLogic wavesMaker,
+            WavesMakerLogic wavesMakerLogic,
             WaveSlider waveSlider,
             ScoreCounter scoreCounter)
         {
@@ -68,11 +68,11 @@ namespace Enemies
             _mover = GetComponent<EnemyMover>();
             _mover.Init(Player, _gameUI, _slowDownEnemiesBooster);
             _dieParticleSystemEffect = dieParticleSystemEffect;
-            _wavesMaker = wavesMaker;
+            _wavesMakerLogic = wavesMakerLogic;
             EnemyHealth = GetComponent<EnemyHealth>();
             EnemyHealth.Init(
                 _dieParticleSystemEffect,
-                _wavesMaker,
+                _wavesMakerLogic,
                 waveSlider,
                 scoreCounter);
         }

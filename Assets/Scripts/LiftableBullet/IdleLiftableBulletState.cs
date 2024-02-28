@@ -6,7 +6,7 @@ namespace LiftableBullet
     {
         private const string Idle = nameof(Idle);
 
-        private readonly int IdleAnimationHash = Animator.StringToHash(nameof(Idle));
+        private readonly int _idleAnimationHash = Animator.StringToHash(nameof(Idle));
 
         private float _idleDuration;
         private float _resetTimer = 0;
@@ -24,7 +24,7 @@ namespace LiftableBullet
         public override void Enter()
         {
             _timer = _resetTimer;
-            _animator.SetTrigger(IdleAnimationHash);
+            _animator.SetTrigger(_idleAnimationHash);
         }
 
         public override void Exit()

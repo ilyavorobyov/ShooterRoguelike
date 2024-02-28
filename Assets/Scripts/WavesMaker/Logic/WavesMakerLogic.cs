@@ -1,6 +1,6 @@
-using Spawners;
 using System.Collections;
 using Health;
+using Spawners;
 using Tokens;
 using UI;
 using UnityEngine;
@@ -41,7 +41,7 @@ namespace WavesMaker.Logic
         private bool _isSpawning = true;
         private Token _currentToken;
         private Coroutine _makeWaves;
-        private WavesMakerView _waveMakerView;
+        private WavesMakerView _wavesMakerView;
 
         private void OnEnable()
         {
@@ -61,7 +61,7 @@ namespace WavesMaker.Logic
 
         private void Awake()
         {
-            _waveMakerView = GetComponent<WavesMakerView>();
+            _wavesMakerView = GetComponent<WavesMakerView>();
         }
 
         public void OnStartNextWave()
@@ -86,7 +86,7 @@ namespace WavesMaker.Logic
 
             if (_killedEnemiesNumber == _currentWaveEnemiesNumber)
             {
-                _waveMakerView.ShowWaveDefeatedText();
+                _wavesMakerView.ShowWaveDefeatedText();
                 _bulletSpawner.Stop();
                 Transform tokenSpawnPoint = SelectTokenSpawnPoint();
                 _pointingArrow.PointTokenSpawn(tokenSpawnPoint);
@@ -110,7 +110,7 @@ namespace WavesMaker.Logic
         private IEnumerator MakeWaves()
         {
             _bulletSpawner.Begin();
-            _waveMakerView.ShowWaveText(_currentWaveNumber);
+            _wavesMakerView.ShowWaveText(_currentWaveNumber);
             _spawnedEnemiesNumber = 0;
             _killedEnemiesNumber = 0;
             float minSpawnTime = 2;

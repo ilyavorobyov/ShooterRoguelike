@@ -6,7 +6,7 @@ namespace LiftableBullet
     {
         private const string MissingWarning = nameof(MissingWarning);
 
-        private readonly int MissingWarningAnimationHash = Animator.StringToHash(
+        private readonly int _missingWarningAnimationHash = Animator.StringToHash(
             nameof(MissingWarning));
 
         private Animator _animator;
@@ -29,7 +29,7 @@ namespace LiftableBullet
         {
             _timer = _resetTimer;
             _animator.StopPlayback();
-            _animator.SetTrigger(MissingWarningAnimationHash);
+            _animator.SetTrigger(_missingWarningAnimationHash);
         }
 
         public override void Exit()
