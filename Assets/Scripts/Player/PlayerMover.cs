@@ -1,9 +1,9 @@
 using Advertising;
-using Agava.WebUtility;
 using Boosters;
 using Health;
 using UI;
 using UnityEngine;
+using YG;
 
 namespace Player
 {
@@ -33,7 +33,7 @@ namespace Player
 
         private void Awake()
         {
-            _isMobile = Device.IsMobile;
+            _isMobile = YandexGame.EnvironmentData.isMobile;
             _currentSpeed = _startSpeed;
             _animator = GetComponent<PlayerAnimator>();
         }
@@ -169,9 +169,9 @@ namespace Player
 
             if (_isMobile)
             {
+                _joystickMovement.gameObject.SetActive(true);
                 _joystickMovement.Reset();
                 _animator.PlayIdleAnimation();
-                _joystickMovement.gameObject.SetActive(true);
             }
         }
 

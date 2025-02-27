@@ -1,17 +1,5 @@
 {
   "dependencies": {
-    "com.agava.webutility": {
-      "version": "file:C:/Users/ilyav/Desktop/Новая папка/web util/com.agava.webutility-master",
-      "depth": 0,
-      "source": "local",
-      "dependencies": {}
-    },
-    "com.agava.yandexgames": {
-      "version": "file:C:/Users/ilyav/Desktop/Новая папка/com.agava.yandexgames-master",
-      "depth": 0,
-      "source": "local",
-      "dependencies": {}
-    },
     "com.unity.2d.sprite": {
       "version": "1.0.0",
       "depth": 0,

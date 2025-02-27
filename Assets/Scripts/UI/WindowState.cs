@@ -1,4 +1,3 @@
-using Agava.WebUtility;
 using UI.MechanicsTraining;
 using UnityEngine;
 
@@ -14,13 +13,11 @@ namespace UI
         private void OnEnable()
         {
             Application.focusChanged += OnInBackgroundChangeApp;
-            WebApplication.InBackgroundChangeEvent += OnInBackgroundChangeWeb;
         }
 
         private void OnDisable()
         {
             Application.focusChanged -= OnInBackgroundChangeApp;
-            WebApplication.InBackgroundChangeEvent -= OnInBackgroundChangeWeb;
         }
 
         private void MuteAudio(bool value)

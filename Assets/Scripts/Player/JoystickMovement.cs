@@ -1,7 +1,7 @@
 using System;
-using Agava.WebUtility;
 using UnityEngine;
 using UnityEngine.UI;
+using YG;
 
 namespace Player
 {
@@ -19,11 +19,12 @@ namespace Player
 
         private void Awake()
         {
-            _isMobile = Device.IsMobile;
+            _isMobile = YandexGame.EnvironmentData.isMobile;
 
             if (_isMobile)
             {
                 _joystick = GetComponent<DynamicJoystick>();
+                _joystick.gameObject.SetActive(true);
             }
         }
 

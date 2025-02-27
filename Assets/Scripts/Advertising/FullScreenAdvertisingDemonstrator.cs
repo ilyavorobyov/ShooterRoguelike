@@ -1,11 +1,11 @@
 using System;
 using System.Collections;
-using Agava.WebUtility;
 using Health;
 using TMPro;
 using UI;
 using UnityEngine;
 using UnityEngine.UI;
+using YG;
 
 namespace Advertising
 {
@@ -20,8 +20,6 @@ namespace Advertising
         [SerializeField] private PlayerHealth _playerHealth;
 
         private VolumeChecker _volumeChecker;
-        private int _maxSoundVolume = 1;
-        private int _minSoundVolume = 0;
         private int _startTimerValue = 3;
         private int _timerIterationTime = 1;
         private bool _isMobile = false;
@@ -36,7 +34,7 @@ namespace Advertising
         {
             _volumeChecker = GetComponent<VolumeChecker>();
 
-            if (Device.IsMobile)
+            if (YandexGame.EnvironmentData.isMobile)
             {
                 _isMobile = true;
             }
@@ -87,7 +85,8 @@ namespace Advertising
 
         private void ShowFullScreenAd()
         {
-            Agava.YandexGames.InterstitialAd.Show(OnOpenCallback, OnCloseCallback, null, null);
+            _fullScreenAdPanel.gameObject.SetActive(false);
+            YandexGame.FullscreenShow();
         }
 
         private void OnGameBegun()
@@ -105,31 +104,6 @@ namespace Advertising
         {
             _isCounterOn = false;
             StopCoroutine(_countTime);
-        }
-
-        private void OnOpenCallback()
-        {
-            _volumeChecker.SetSoundVolume();
-            Time.timeScale = 0;
-            AudioListener.volume = _minSoundVolume;
-        }
-
-        private void OnCloseCallback(bool isClosed)
-        {
-            _fullScreenAdPanel.gameObject.SetActive(false);
-
-            if (_volumeChecker.IsSoundOn)
-            {
-                AudioListener.volume = _maxSoundVolume;
-            }
-
-            if (_isMobile)
-            {
-                FullScreenAdClosed?.Invoke();
-            }
-
-            Time.timeScale = 1;
-            _pauseButton.gameObject.SetActive(true);
         }
     }
 }

@@ -1,7 +1,7 @@
 using System;
 using Advertising;
-using Agava.WebUtility;
-using Agava.YandexGames;
+//using Agava.WebUtility;
+//using Agava.YandexGames;
 using Health;
 using Player;
 using UnityEngine;
@@ -17,7 +17,6 @@ namespace UI
         [SerializeField] private DynamicJoystick _joystick;
         [SerializeField] private Button _startButton;
         [SerializeField] private Button _startWithFullClipButton;
-        [SerializeField] private Button _leaderboardButton;
         [SerializeField] private Button _gameOverScreenRestartButton;
         [SerializeField] private Button _gameOverScreenMenuButton;
         [SerializeField] private GameOverScreen _gameOverScreen;
@@ -43,7 +42,7 @@ namespace UI
 
         private void Awake()
         {
-            YandexGamesSdk.GameReady();
+         //   YandexGamesSdk.GameReady();
             _uiElementsAnimation = GetComponent<UIElementsAnimation>();
         }
 
@@ -99,7 +98,6 @@ namespace UI
             _uiElementsAnimation.Appear(_pauseButton.gameObject);
             _uiElementsAnimation.Disappear(_startButton.gameObject);
             _uiElementsAnimation.Disappear(_startWithFullClipButton.gameObject);
-            _uiElementsAnimation.Disappear(_leaderboardButton.gameObject);
             _uiElementsAnimation.Disappear(_soundSwitchButton.gameObject);
             _gameOverScreen.gameObject.SetActive(false);
             _pauseScreen.gameObject.SetActive(false);
@@ -116,7 +114,6 @@ namespace UI
             GameReseted?.Invoke();
             _uiElementsAnimation.Appear(_startButton.gameObject);
             _uiElementsAnimation.Appear(_startWithFullClipButton.gameObject);
-            _uiElementsAnimation.Appear(_leaderboardButton.gameObject);
             _uiElementsAnimation.Disappear(_pauseButton.gameObject);
             _uiElementsAnimation.Appear(_soundSwitchButton.gameObject);
             _gameOverScreen.gameObject.SetActive(false);
@@ -133,10 +130,10 @@ namespace UI
             _uiElementsAnimation.Appear(_pauseButton.gameObject);
             _uiElementsAnimation.Appear(_waveSlider.gameObject);
 
-            if (Device.IsMobile)
-            {
+           // if (Device.IsMobile)
+          //  {
                 _joystick.gameObject.SetActive(true);
-            }
+         //   }
         }
 
         private void OnPlayerDied()

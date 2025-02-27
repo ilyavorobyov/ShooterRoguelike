@@ -1,6 +1,6 @@
-using Agava.YandexGames;
 using UnityEngine;
 using UnityEngine.UI;
+using YG;
 
 namespace LeaderboardYG
 {
@@ -23,11 +23,8 @@ namespace LeaderboardYG
 
         private void OnLoginButtonClick()
         {
-            PlayerAccount.Authorize();
-
-            if (PlayerAccount.IsAuthorized)
+            if (YandexGame.auth)
             {
-                PlayerAccount.RequestPersonalProfileDataPermission();
                 gameObject.SetActive(false);
             }
         }

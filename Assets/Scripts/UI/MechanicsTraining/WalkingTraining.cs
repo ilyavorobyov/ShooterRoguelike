@@ -1,6 +1,6 @@
-using Agava.WebUtility;
 using UnityEngine;
 using UnityEngine.UI;
+using YG;
 
 namespace UI.MechanicsTraining
 {
@@ -13,7 +13,7 @@ namespace UI.MechanicsTraining
 
         private void OnEnable()
         {
-            if (Device.IsMobile)
+            if (YandexGame.EnvironmentData.isMobile)
             {
                 _mobileTrainingTexts.gameObject.SetActive(true);
                 _mobileTrainingImage.gameObject.SetActive(true);
